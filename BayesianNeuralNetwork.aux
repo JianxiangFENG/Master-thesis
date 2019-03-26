@@ -1,0 +1,124 @@
+\relax 
+\citation{gal2016dropout}
+\citation{ritter2018scalable}
+\citation{gal2017concrete}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Bayesian neural network}{8}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Introduction}{9}}
+\newlabel{2.1}{{2.1}{9}}
+\newlabel{2.2}{{2.2}{9}}
+\newlabel{2.3}{{2.3}{9}}
+\newlabel{2.4}{{2.4}{9}}
+\newlabel{2.5}{{2.5}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Difference between parameter estimation of deterministic neural network and Bayesian neural network.}}{10}}
+\newlabel{fig:dnn_bnn}{{2.1}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Variational inference}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Introduction}{10}}
+\citation{graves2011practical}
+\newlabel{2.6}{{2.6}{11}}
+\newlabel{2.7}{{2.7}{11}}
+\newlabel{2.8}{{2.8}{11}}
+\newlabel{2.9}{{2.9}{11}}
+\citation{srivastava2014dropout}
+\citation{srivastava2014dropout}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Dropout variational inference}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{Dropout}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{Bayesian interpretation of dropout}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces How dropout works\cite  {srivastava2014dropout}.}}{13}}
+\newlabel{fig:dropout}{{2.2}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{13}}
+\newlabel{fig:dropout_inference}{{2.3}{13}}
+\@writefile{toc}{\contentsline {paragraph}{Approximate distribution}{14}}
+\newlabel{dropout_form}{{2.10}{14}}
+\newlabel{appro_dist_form}{{2.11}{15}}
+\newlabel{appro_cond_dist_form}{{2.12}{15}}
+\newlabel{appr_expectation}{{2.13}{15}}
+\newlabel{appr_covariance}{{2.14}{15}}
+\@writefile{toc}{\contentsline {paragraph}{Training objective}{16}}
+\newlabel{dropout_loss}{{2.15}{16}}
+\newlabel{dropout_grad}{{2.16}{16}}
+\citation{kingma2013auto}
+\citation{gal2016uncertainty}
+\citation{williams1992simple}
+\citation{kingma2013auto}
+\citation{kingma2013auto}
+\newlabel{elbo_grad}{{2.17}{17}}
+\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization trick:}{17}}
+\newlabel{repa}{{2.18}{17}}
+\newlabel{repa1}{{2.19}{18}}
+\@writefile{toc}{\contentsline {subparagraph}{KL condition:}{18}}
+\newlabel{appro_dist_guassian}{{2.20}{19}}
+\newlabel{kl_condition}{{2.21}{19}}
+\newlabel{KL_grad}{{2.22}{19}}
+\@writefile{toc}{\contentsline {paragraph}{Marginalization in testing}{19}}
+\citation{srivastava2014dropout}
+\citation{gal2017concrete}
+\citation{kingma2013auto}
+\citation{maddison2016concrete}
+\newlabel{marginalization_test}{{2.23}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Concrete dropout and Multi-Drop}{20}}
+\@writefile{toc}{\contentsline {paragraph}{Concrete dropout}{20}}
+\citation{jang2016categorical}
+\citation{maddison2016concrete}
+\citation{maddison2014sampling}
+\citation{maddison2016concrete}
+\citation{maddison2016concrete}
+\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization of Bernoulli distribution}{21}}
+\newlabel{gumbel_max}{{2.2.3}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite  {maddison2016concrete}.}}{21}}
+\newlabel{fig:gumbel_max}{{2.4}{21}}
+\citation{maddison2016concrete}
+\citation{maddison2016concrete}
+\newlabel{gumbel_softmax}{{2.24}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite  {maddison2016concrete}.}}{22}}
+\newlabel{fig:gumbel_softmax}{{2.5}{22}}
+\newlabel{bern_repa}{{2.25}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}}{23}}
+\newlabel{fig:bern_repa}{{2.6}{23}}
+\@writefile{toc}{\contentsline {subparagraph}{Dropout regularization}{23}}
+\newlabel{KL_grad_concrete}{{2.26}{24}}
+\@writefile{toc}{\contentsline {paragraph}{Multi-Drop}{24}}
+\newlabel{KL_grad_multi}{{2.27}{24}}
+\citation{he2016deep}
+\citation{srivastava2014dropout}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Different dropout rates for different hidden units in multi-drop.}}{25}}
+\newlabel{fig:multi-drop}{{2.7}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Modified network architecture}{25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Modified network architecture.}}{26}}
+\newlabel{fig:modified_net}{{2.8}{26}}
+\citation{bishop2006pattern}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Laplace approximation}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Introduction}{27}}
+\newlabel{point estimate}{{2.28}{27}}
+\newlabel{taylor expansion}{{2.29}{27}}
+\newlabel{gaussian form}{{2.30}{28}}
+\newlabel{expected hessian}{{2.31}{28}}
+\citation{ritter2018scalable}
+\citation{martens2015optimizing}
+\@writefile{toc}{\contentsline {paragraph}{Fisher information matrix}{29}}
+\newlabel{Fisher}{{2.32}{29}}
+\newlabel{fisher hessian}{{2.33}{29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Scalable Laplace approximation for neural network}{29}}
+\@setckpt{BayesianNeuralNetwork}{
+\setcounter{page}{30}
+\setcounter{equation}{33}
+\setcounter{enumi}{0}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{2}
+\setcounter{section}{3}
+\setcounter{subsection}{2}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{8}
+\setcounter{table}{0}
+\setcounter{StandardModuleDepth}{0}
+\setcounter{NAT@ctr}{0}
+\setcounter{parentequation}{0}
+}

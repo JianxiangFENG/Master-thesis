@@ -1,0 +1,395 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{LSVDHR16}
+
+\bibitem[AOS{\etalchar{+}}16]{amodei2016concrete}
+Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and
+  Dan Man{\'e}.
+\newblock Concrete problems in ai safety.
+\newblock {\em arXiv preprint arXiv:1606.06565}, 2016.
+
+\bibitem[BCKW15]{blundell2015weight}
+Charles Blundell, Julien Cornebise, Koray Kavukcuoglu, and Daan Wierstra.
+\newblock Weight uncertainty in neural networks.
+\newblock {\em arXiv preprint arXiv:1505.05424}, 2015.
+
+\bibitem[Bis06]{bishop2006pattern}
+Christopher~M Bishop.
+\newblock {\em Pattern recognition and machine learning}.
+\newblock springer, 2006.
+
+\bibitem[BRMW15]{balan2015bayesian}
+Anoop~Korattikara Balan, Vivek Rathod, Kevin~P Murphy, and Max Welling.
+\newblock Bayesian dark knowledge.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  3438--3446, 2015.
+
+\bibitem[DKD09]{der2009aleatory}
+Armen Der~Kiureghian and Ove Ditlevsen.
+\newblock Aleatory or epistemic? does it matter?
+\newblock {\em Structural Safety}, 31(2):105--112, 2009.
+
+\bibitem[DL91]{denker1991transforming}
+John~S Denker and Yann Lecun.
+\newblock Transforming neural-net output levels to probability distributions.
+\newblock In {\em Advances in neural information processing systems}, pages
+  853--859, 1991.
+
+\bibitem[DT18]{devries2018learning}
+Terrance DeVries and Graham~W Taylor.
+\newblock Learning confidence for out-of-distribution detection in neural
+  networks.
+\newblock {\em arXiv preprint arXiv:1802.04865}, 2018.
+
+\bibitem[FCSG17]{feinman2017detecting}
+Reuben Feinman, Ryan~R Curtin, Saurabh Shintre, and Andrew~B Gardner.
+\newblock Detecting adversarial samples from artifacts.
+\newblock {\em arXiv preprint arXiv:1703.00410}, 2017.
+
+\bibitem[FRD18]{feng2018towards}
+Di~Feng, Lars Rosenbaum, and Klaus Dietmayer.
+\newblock Towards safe autonomous driving: Capture uncertainty in the deep
+  neural network for lidar 3d vehicle detection.
+\newblock {\em arXiv preprint arXiv:1804.05132}, 2018.
+
+\bibitem[Gal]{gal2016uncertainty}
+Yarin Gal.
+\newblock {\em Uncertainty in deep learning}.
+\newblock PhD thesis.
+
+\bibitem[GBR07]{gneiting2007probabilistic}
+Tilmann Gneiting, Fadoua Balabdaoui, and Adrian~E Raftery.
+\newblock Probabilistic forecasts, calibration and sharpness.
+\newblock {\em Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 69(2):243--268, 2007.
+
+\bibitem[GG16]{gal2016dropout}
+Yarin Gal and Zoubin Ghahramani.
+\newblock Dropout as a bayesian approximation: Representing model uncertainty
+  in deep learning.
+\newblock In {\em international conference on machine learning}, pages
+  1050--1059, 2016.
+
+\bibitem[GHK17]{gal2017concrete}
+Yarin Gal, Jiri Hron, and Alex Kendall.
+\newblock Concrete dropout.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  3581--3590, 2017.
+
+\bibitem[GIG17]{gal2017deep}
+Yarin Gal, Riashat Islam, and Zoubin Ghahramani.
+\newblock Deep bayesian active learning with image data.
+\newblock {\em arXiv preprint arXiv:1703.02910}, 2017.
+
+\bibitem[GMR]{gal2016improving}
+Yarin Gal, Rowan McAllister, and Carl~Edward Rasmussen.
+\newblock Improving pilco with bayesian neural network dynamics models.
+
+\bibitem[GPSW17]{guo2017calibration}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock {\em arXiv preprint arXiv:1706.04599}, 2017.
+
+\bibitem[GR07]{gneiting2007strictly}
+Tilmann Gneiting and Adrian~E Raftery.
+\newblock Strictly proper scoring rules, prediction, and estimation.
+\newblock {\em Journal of the American Statistical Association},
+  102(477):359--378, 2007.
+
+\bibitem[Gra11]{graves2011practical}
+Alex Graves.
+\newblock Practical variational inference for neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  2348--2356, 2011.
+
+\bibitem[GRB08]{galleguillos2008object}
+Carolina Galleguillos, Andrew Rabinovich, and Serge Belongie.
+\newblock Object categorization using co-occurrence, location and appearance.
+\newblock In {\em Computer Vision and Pattern Recognition, 2008. CVPR 2008.
+  IEEE Conference on}, pages 1--8. IEEE, 2008.
+
+\bibitem[HG16]{hendrycks2016baseline}
+Dan Hendrycks and Kevin Gimpel.
+\newblock A baseline for detecting misclassified and out-of-distribution
+  examples in neural networks.
+\newblock {\em arXiv preprint arXiv:1610.02136}, 2016.
+
+\bibitem[HHGL11]{houlsby2011bayesian}
+Neil Houlsby, Ferenc Husz{\'a}r, Zoubin Ghahramani, and M{\'a}t{\'e} Lengyel.
+\newblock Bayesian active learning for classification and preference learning.
+\newblock {\em arXiv preprint arXiv:1112.5745}, 2011.
+
+\bibitem[HHO{\etalchar{+}}17]{hodan2017tless}
+Tom{\'a}{\v{s}} Hoda{\v{n}}, Pavel Haluza, {\v{S}}t{\v{e}}p{\'a}n
+  Obdr{\v{z}}{\'a}lek, Ji{\v{r}}{\'\i} Matas, Manolis Lourakis, and Xenophon
+  Zabulis.
+\newblock {T-LESS}: An {RGB-D} dataset for {6D} pose estimation of texture-less
+  objects.
+\newblock {\em IEEE Winter Conference on Applications of Computer Vision
+  (WACV)}, 2017.
+
+\bibitem[HLA15]{hernandez2015probabilistic}
+Jos{\'e}~Miguel Hern{\'a}ndez-Lobato and Ryan Adams.
+\newblock Probabilistic backpropagation for scalable learning of bayesian
+  neural networks.
+\newblock In {\em International Conference on Machine Learning}, pages
+  1861--1869, 2015.
+
+\bibitem[HVC93]{hinton1993keeping}
+Geoffrey~E Hinton and Drew Van~Camp.
+\newblock Keeping the neural networks simple by minimizing the description
+  length of the weights.
+\newblock In {\em Proceedings of the sixth annual conference on Computational
+  learning theory}, pages 5--13. ACM, 1993.
+
+\bibitem[HZRS16]{he2016deep}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 770--778, 2016.
+
+\bibitem[JGP16]{jang2016categorical}
+Eric Jang, Shixiang Gu, and Ben Poole.
+\newblock Categorical reparameterization with gumbel-softmax.
+\newblock {\em arXiv preprint arXiv:1611.01144}, 2016.
+
+\bibitem[KC16]{kendall2016modelling}
+Alex Kendall and Roberto Cipolla.
+\newblock Modelling uncertainty in deep learning for camera relocalization.
+\newblock In {\em 2016 IEEE international conference on Robotics and Automation
+  (ICRA)}, pages 4762--4769. IEEE, 2016.
+
+\bibitem[KFB09]{koller2009probabilistic}
+Daphne Koller, Nir Friedman, and Francis Bach.
+\newblock {\em Probabilistic graphical models: principles and techniques}.
+\newblock 2009.
+
+\bibitem[KG17]{kendall2017uncertainties}
+Alex Kendall and Yarin Gal.
+\newblock What uncertainties do we need in bayesian deep learning for computer
+  vision?
+\newblock In {\em Advances in neural information processing systems}, pages
+  5574--5584, 2017.
+
+\bibitem[KGB16]{kurakin2016adversarial}
+Alexey Kurakin, Ian Goodfellow, and Samy Bengio.
+\newblock Adversarial machine learning at scale.
+\newblock {\em arXiv preprint arXiv:1611.01236}, 2016.
+
+\bibitem[KGC]{kendall2017multi}
+Alex Kendall, Yarin Gal, and Roberto Cipolla.
+\newblock Multi-task learning using uncertainty to weigh losses for scene
+  geometry and semantics.
+
+\bibitem[KK11]{krahenbuhl2011efficient}
+Philipp Kr{\"a}henb{\"u}hl and Vladlen Koltun.
+\newblock Efficient inference in fully connected crfs with gaussian edge
+  potentials.
+\newblock In {\em Advances in neural information processing systems}, pages
+  109--117, 2011.
+
+\bibitem[KSW15]{kingma2015variational}
+Durk~P Kingma, Tim Salimans, and Max Welling.
+\newblock Variational dropout and the local reparameterization trick.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  2575--2583, 2015.
+
+\bibitem[KW13]{kingma2013auto}
+Diederik~P Kingma and Max Welling.
+\newblock Auto-encoding variational bayes.
+\newblock {\em arXiv preprint arXiv:1312.6114}, 2013.
+
+\bibitem[LAA{\etalchar{+}}17]{leibig2017leveraging}
+Christian Leibig, Vaneeda Allken, Murat~Se{\c{c}}kin Ayhan, Philipp Berens, and
+  Siegfried Wahl.
+\newblock Leveraging uncertainty information from deep neural networks for
+  disease detection.
+\newblock {\em Scientific reports}, 7(1):17816, 2017.
+
+\bibitem[LBRF11]{lai2011large}
+Kevin Lai, Liefeng Bo, Xiaofeng Ren, and Dieter Fox.
+\newblock A large-scale hierarchical multi-view rgb-d object dataset.
+\newblock In {\em 2011 IEEE international conference on robotics and
+  automation}, pages 1817--1824. IEEE, 2011.
+
+\bibitem[LLLS17]{lee2017training}
+Kimin Lee, Honglak Lee, Kibok Lee, and Jinwoo Shin.
+\newblock Training confidence-calibrated classifiers for detecting
+  out-of-distribution samples.
+\newblock {\em arXiv preprint arXiv:1711.09325}, 2017.
+
+\bibitem[LLS17]{liang2017enhancing}
+Shiyu Liang, Yixuan Li, and R~Srikant.
+\newblock Enhancing the reliability of out-of-distribution image detection in
+  neural networks.
+\newblock {\em arXiv preprint arXiv:1706.02690}, 2017.
+
+\bibitem[LMP01]{lafferty2001conditional}
+John Lafferty, Andrew McCallum, and Fernando~CN Pereira.
+\newblock Conditional random fields: Probabilistic models for segmenting and
+  labeling sequence data.
+\newblock 2001.
+
+\bibitem[LPB17]{lakshminarayanan2017simple}
+Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell.
+\newblock Simple and scalable predictive uncertainty estimation using deep
+  ensembles.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  6402--6413, 2017.
+
+\bibitem[LRKT10]{ladicky2010graph}
+Lubor Ladicky, Chris Russell, Pushmeet Kohli, and Philip~HS Torr.
+\newblock Graph cut based inference with co-occurrence statistics.
+\newblock In {\em European Conference on Computer Vision}, pages 239--253.
+  Springer, 2010.
+
+\bibitem[LSVDHR16]{lin2016efficient}
+Guosheng Lin, Chunhua Shen, Anton Van Den~Hengel, and Ian Reid.
+\newblock Efficient piecewise training of deep structured models for semantic
+  segmentation.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 3194--3203, 2016.
+
+\bibitem[LW16]{louizos2016structured}
+Christos Louizos and Max Welling.
+\newblock Structured and efficient variational deep learning with matrix
+  gaussian posteriors.
+\newblock In {\em International Conference on Machine Learning}, pages
+  1708--1716, 2016.
+
+\bibitem[LW17]{louizos2017multiplicative}
+Christos Louizos and Max Welling.
+\newblock Multiplicative normalizing flows for variational bayesian neural
+  networks.
+\newblock {\em arXiv preprint arXiv:1703.01961}, 2017.
+
+\bibitem[Mac92]{mackay1992practical}
+David~JC MacKay.
+\newblock A practical bayesian framework for backpropagation networks.
+\newblock {\em Neural computation}, 4(3):448--472, 1992.
+
+\bibitem[MG15]{martens2015optimizing}
+James Martens and Roger Grosse.
+\newblock Optimizing neural networks with kronecker-factored approximate
+  curvature.
+\newblock In {\em International conference on machine learning}, pages
+  2408--2417, 2015.
+
+\bibitem[MGK{\etalchar{+}}17]{mcallister2017concrete}
+Rowan McAllister, Yarin Gal, Alex Kendall, Mark Van Der~Wilk, Amar Shah,
+  Roberto Cipolla, and Adrian~Vivian Weller.
+\newblock Concrete problems for autonomous vehicle safety: Advantages of
+  bayesian deep learning.
+\newblock International Joint Conferences on Artificial Intelligence, Inc.,
+  2017.
+
+\bibitem[Min01]{minka2001expectation}
+Thomas~P Minka.
+\newblock Expectation propagation for approximate bayesian inference.
+\newblock In {\em Proceedings of the Seventeenth conference on Uncertainty in
+  artificial intelligence}, pages 362--369. Morgan Kaufmann Publishers Inc.,
+  2001.
+
+\bibitem[MMT16]{maddison2016concrete}
+Chris~J Maddison, Andriy Mnih, and Yee~Whye Teh.
+\newblock The concrete distribution: A continuous relaxation of discrete random
+  variables.
+\newblock {\em arXiv preprint arXiv:1611.00712}, 2016.
+
+\bibitem[MTM14]{maddison2014sampling}
+Chris~J Maddison, Daniel Tarlow, and Tom Minka.
+\newblock A* sampling.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  3086--3094, 2014.
+
+\bibitem[Nea12]{neal2012bayesian}
+Radford~M Neal.
+\newblock {\em Bayesian learning for neural networks}, volume 118.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem[OBPVR16]{osband2016deep}
+Ian Osband, Charles Blundell, Alexander Pritzel, and Benjamin Van~Roy.
+\newblock Deep exploration via bootstrapped dqn.
+\newblock In {\em Advances in neural information processing systems}, pages
+  4026--4034, 2016.
+
+\bibitem[QCRS{\etalchar{+}}05]{quinonero2005evaluating}
+Joaquin Quinonero-Candela, Carl~Edward Rasmussen, Fabian Sinz, Olivier
+  Bousquet, and Bernhard Sch{\"o}lkopf.
+\newblock Evaluating predictive uncertainty challenge.
+\newblock In {\em Machine Learning Challenges Workshop}, pages 1--27. Springer,
+  2005.
+
+\bibitem[RBB18]{ritter2018scalable}
+Hippolyt Ritter, Aleksandar Botev, and David Barber.
+\newblock A scalable laplace approximation for neural networks.
+\newblock 2018.
+
+\bibitem[RV09]{rasiwasia2009holistic}
+Nikhil Rasiwasia and Nuno Vasconcelos.
+\newblock Holistic context modeling using semantic co-occurrences.
+\newblock 2009.
+
+\bibitem[RVG{\etalchar{+}}07]{rabinovich2007objects}
+Andrew Rabinovich, Andrea Vedaldi, Carolina Galleguillos, Eric Wiewiora, and
+  Serge Belongie.
+\newblock Objects in context.
+\newblock In {\em Computer vision, 2007. ICCV 2007. IEEE 11th international
+  conference on}, pages 1--8. IEEE, 2007.
+
+\bibitem[SBD{\etalchar{+}}14]{senge2014reliable}
+Robin Senge, Stefan B{\"o}sner, Krzysztof Dembczy{\'n}ski, J{\"o}rg
+  Haasenritter, Oliver Hirsch, Norbert Donner-Banzhoff, and Eyke
+  H{\"u}llermeier.
+\newblock Reliable classification: Learning classifiers that distinguish
+  aleatoric and epistemic uncertainty.
+\newblock {\em Information Sciences}, 255:16--29, 2014.
+
+\bibitem[SCC17]{sun2017learning}
+Shengyang Sun, Changyou Chen, and Lawrence Carin.
+\newblock Learning structured weight uncertainty in bayesian neural networks.
+\newblock In {\em Artificial Intelligence and Statistics}, pages 1283--1292,
+  2017.
+
+\bibitem[SG18]{smith2018understanding}
+Lewis Smith and Yarin Gal.
+\newblock Understanding measures of uncertainty for adversarial example
+  detection.
+\newblock {\em arXiv preprint arXiv:1803.08533}, 2018.
+
+\bibitem[SHK{\etalchar{+}}14]{srivastava2014dropout}
+Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan
+  Salakhutdinov.
+\newblock Dropout: a simple way to prevent neural networks from overfitting.
+\newblock {\em The Journal of Machine Learning Research}, 15(1):1929--1958,
+  2014.
+
+\bibitem[SM{\etalchar{+}}12]{sutton2012introduction}
+Charles Sutton, Andrew McCallum, et~al.
+\newblock An introduction to conditional random fields.
+\newblock {\em Foundations and Trends{\textregistered} in Machine Learning},
+  4(4):267--373, 2012.
+
+\bibitem[Wil92]{williams1992simple}
+Ronald~J Williams.
+\newblock Simple statistical gradient-following algorithms for connectionist
+  reinforcement learning.
+\newblock {\em Machine learning}, 8(3-4):229--256, 1992.
+
+\bibitem[WT11]{welling2011bayesian}
+Max Welling and Yee~W Teh.
+\newblock Bayesian learning via stochastic gradient langevin dynamics.
+\newblock In {\em Proceedings of the 28th international conference on machine
+  learning (ICML-11)}, pages 681--688, 2011.
+
+\bibitem[WVL{\etalchar{+}}18]{wang2018adversarial}
+Kuan-Chieh Wang, Paul Vicol, James Lucas, Li~Gu, Roger Grosse, and Richard
+  Zemel.
+\newblock Adversarial distillation of bayesian neural network posteriors.
+\newblock {\em arXiv preprint arXiv:1806.10317}, 2018.
+
+\bibitem[ZSDG17]{zhang2017noisy}
+Guodong Zhang, Shengyang Sun, David Duvenaud, and Roger Grosse.
+\newblock Noisy natural gradient as variational inference.
+\newblock {\em arXiv preprint arXiv:1712.02390}, 2017.
+
+\end{thebibliography}

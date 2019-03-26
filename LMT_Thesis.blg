@@ -1,0 +1,74 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: LMT_Thesis.aux
+A level-1 auxiliary file: StatementsEN.aux
+A level-1 auxiliary file: Abstract.aux
+A level-1 auxiliary file: Introduction.aux
+A level-1 auxiliary file: BayesianNeuralNetwork.aux
+A level-1 auxiliary file: ConditionalRandomField.aux
+A level-1 auxiliary file: ExperimentsAndDiscussion.aux
+A level-1 auxiliary file: Conclusions.aux
+A level-1 auxiliary file: Appendix.aux
+The style file: alpha.bst
+Database file #1: Bibliography.bib
+Repeated entry---line 89 of file Bibliography.bib
+ : @inproceedings{osband2016deep
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 405 of file Bibliography.bib
+ : @inproceedings{louizos2017multiplicative
+ :                                         ,
+I'm skipping whatever remains of this entry
+Warning--empty school in gal2016uncertainty
+Warning--empty year in gal2016uncertainty
+Warning--empty booktitle in gal2016improving
+Warning--empty year in gal2016improving
+Warning--empty publisher in koller2009probabilistic
+Warning--empty journal in kendall2017multi
+Warning--empty year in kendall2017multi
+Warning--empty journal in lafferty2001conditional
+Warning--empty booktitle in mcallister2017concrete
+Warning--empty journal in ritter2018scalable
+Warning--empty journal in rasiwasia2009holistic
+You've used 65 entries,
+            2543 wiz_defined-function locations,
+            882 strings with 16021 characters,
+and the built_in function-call counts, 30125 in all, are:
+= -- 3025
+> -- 1595
+< -- 34
++ -- 574
+- -- 568
+* -- 2078
+:= -- 4822
+add.period$ -- 201
+call.type$ -- 65
+change.case$ -- 455
+chr.to.int$ -- 65
+cite$ -- 76
+duplicate$ -- 1226
+empty$ -- 2068
+format.name$ -- 630
+if$ -- 6268
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 67
+newline$ -- 327
+num.names$ -- 195
+pop$ -- 503
+preamble$ -- 1
+purify$ -- 524
+quote$ -- 0
+skip$ -- 1112
+stack$ -- 0
+substring$ -- 1578
+swap$ -- 338
+text.length$ -- 34
+text.prefix$ -- 7
+top$ -- 0
+type$ -- 508
+warning$ -- 11
+while$ -- 283
+width$ -- 70
+write$ -- 816
+(There were 2 error messages)

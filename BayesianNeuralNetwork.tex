@@ -1,0 +1,541 @@
+\chapter{Bayesian neural network}
+\thispagestyle{empty}% no page number in chapter title page
+
+As is mentioned in the introduction chapter, we investigate obtaining model uncertainty via Bayesian neural network. Therefore in this chapter, a brief review on theory of Bayesian neural network is given. Since capturing the exact posterior distribution over the parameters of neural network is intractable, we need to have techniques to perform approximate inference. Those techniques could be categorized into two main types, variational inference(VI) and Markov Chain Monte Carlo(MCMC). Brief history and basic idea of these two types of method are introduced. However, since larger dataset and more complex neural network are applied nowadays, traditional approximate inference techniques are difficult to scale to large dataset and complex advanced architectures. Therefore modern approximate inference needs to adopt to obtain model uncertainty. We will introduce and evaluate two modern variational inference methods for neural network, which are dropout inference\cite{gal2016dropout} and scalable Laplace approximation\cite{ritter2018scalable}. Additionally, we investigate improving uncertainty estimation by learning dropout rate from data via concrete dropout \cite{gal2017concrete}, which is introduced following section of dropout inference. Finally, with help of concrete dropout, a new variants of dropout inference is introduced here, which has more flexible approximation distribution family.
+
+
+\newpage
+\section{Introduction}
+
+Let $\mathcal{D}$ denote an observable dataset consisting of a set of input and output pairs, that is $\mathcal{D} = \{\mathbf{X}, \mathbf{Y}\} = \{(x_{i}, y_{i})_{i=1}^{N}\}$, where $x_{i}\in\mathbb{R}^{D}$ and $y_{i}\in\mathbb{Y}$, $\mathbb{Y}$ is set of labels, and $f^{\boldsymbol{\omega}}$ denote one parametric model which is in our case neural network with {\boldmath{$\omega$}} its parameters which are weights $W_{1:L}$ and biases $b_{1:L}$ for $L$ layers.
+
+In supervised learning, our goal is to learn a probabilistic model of conditional distribution of output given input, $p(\mathbf{y}|\mathbf{x})$ that can explain the underlying data distribution instead of just the observables $\mathcal{D}$ very well based on the observables $\mathcal{D}$ which are samples drawn from the underlying data distribution. Then this learned model can be used to make predictions on unobservable data samples under the same data distribution. In classification where output is label represented by discrete integer, the likelihood function is defined based on parametric model, which is softmax score:
+\begin{equation}
+p(y = d|\mathbf{x}, \boldsymbol{\omega}) = \frac{exp(f^{\boldsymbol{\omega}}_{d})}{\sum_{d'}exp(f^{\boldsymbol{\omega}}_{d'})}  \label{2.1}
+\end{equation}
+
+In regression case, the likelihood is Gaussian:
+
+\begin{equation}
+p(\mathbf{y}|\mathbf{x}, \boldsymbol{\omega}) = \mathcal{N}(\mathbf{x}; f^{\boldsymbol{\omega}}(\mathbf{x}), \tau^{-1}\textbf{I}) 
+\label{2.2}
+\end{equation}
+
+with model precision $\tau$, which represents the inverse of noise level of the outputs.
+
+As mentioned above, learning means to find model(s) which is parameterized by a set of parameters that can explain the data well, which means the likelihood should be maximized w.r.t. model parameters over the observables. On the other hand, some prior constraints are imposed on the model via prior distribution of the model parameters $p(\boldsymbol{\omega})$. The probability distribution of model parameters is updated from prior distribution into posterior distribution after observing training dataset $\mathcal{D}$ via Bayes' theorem:
+
+\begin{equation}
+p(\boldsymbol{\omega}|\mathbf{X}, \mathbf{Y}) = \frac{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})p(\boldsymbol{\omega})}{p(\mathbf{Y}|\mathbf{X})}
+\label{2.3}
+\end{equation}
+
+where $p(\mathbf{Y}| \mathbf{X}) = \int p(\mathbf{Y}| \mathbf{X}, \boldsymbol{\omega})p(\boldsymbol{\omega})d\boldsymbol{\omega}$ is so called model evidence or marginal likelihood, whose integration is always intractable.
+
+After obtaining posterior distribution over model parameters, we can make predictions by marginalizing the likelihood of unseen input points such as $x^{\star}$ over model parameters, which leads to predictive distribution over output:
+
+\begin{equation}
+p(y^{\star}|x^{\star}, \mathcal D) = \int p(y^{\star}|x^{\star}, \boldsymbol{\omega})p(\boldsymbol{\omega}|\mathcal D)d\boldsymbol{\omega}
+\label{2.4}
+\end{equation}
+
+To point out the difference between normal deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In figure \ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes normal variable, and circle denotes random variable, while shaded circle denote observed random variable. Plate notation denotes $N$ observed data pairs. As we can see in the figure, parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by Maximum a posterior method:
+
+\begin{equation}
+\boldsymbol{\omega^{\star}} = argmax_{\boldsymbol{\omega}}\{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})\}\label{2.5}
+\end{equation}
+
+On the other hand, in Bayesian neural network, parameters $\boldsymbol{\omega}$ is a random variable which obey the distribution parameterized by $\theta$, distribution over model parameters can be inferred based on Bayes' rule in equation \ref{2.3}. It's worth to note that if we choose the approximate distribution as delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, then we can recover Bayesian neural network into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=15cm]{dnn_bnn}
+		\caption{Difference between parameter estimation of deterministic neural network and Bayesian neural network.}		
+		\label{fig:dnn_bnn}
+	\end{center}
+\end{figure}
+
+\section{Variational inference}
+\subsection{Introduction}
+As is mentioned above, variational inference cast inference into optimization by minimizing the Kullbach-Leibler divergence between approximate posterior distribution and the real posterior distribution. However, there is no analytical definition of this KL divergence between the real posterior distribution is unkown. We can derive a lower bound which is also called evidence lower bound($ELBO$) which bounds the log marginal likelihood with Jensen's inequality. And from that we know marginal likelihood is the sum of $ELBO$ and KL divergence between approximate posterior and real posterior. The derivation is given in the following:
+\begin{equation}\label{2.6}	
+\begin{aligned}
+	\log(p(\bld{Y}|\bld{X})) & = \log(\int p(\bld{Y}| \bld{X}, \bld{\omega})  p(\bld{\omega})d\bld{\omega}) \\	 
+	& = \log(\int{q_{\theta}(\bld{\omega}) \frac{p(\bld{Y}| \boldsymbol{X}, \bld{\omega}) p(\bld{\omega})}{q_{\theta}(\bld{\omega})}d\bld{\omega}}) \\
+	& \geq \int q_{\theta}(\bld{\omega}) \log( \frac{p(\bld{Y}| \bld{X}, \bld{\omega}) p(\bld{\omega})}{q_{\theta}(\bld{\omega})}) d\bld{\omega} \\
+	& = \mathbb E_{q_{\theta}(\bld{\omega})}[\log(p(\bld{Y}| \bld{X}, \bld{\omega}))] -  KL(q_{\theta}(\bld{\omega}||p(\bld{\omega})))\\
+	& = ELBO
+\end{aligned}
+\end{equation}
+
+where $p(\bld Y| \bld X)$ is the likelihood, $p(\bld \omega)$ is the prior distribution over model parameters, $q_{\theta}(\bld \omega)$ is the approximate posterior distribution over parameters which is parameterized by $\theta$.
+
+We can get log$(p(\bld Y) | \bld X)$ by adding $ELBO$ and KL divergence between approximate posterior $q_{\theta}(\bld \omega)$ and real posterior $p(\bld \omega | \bld X, \bld Y)$:
+
+\begin{equation}\label{2.7}	
+\begin{aligned}
+ & ELBO + KL(q_{\theta}(\bld{\omega}) || p(\bld{\omega}|\bld{X}, \bld{Y})) \\ 
+ & = \int q_{\theta}(\bld{\omega}) \log( \frac{p(\bld{Y}| \boldsymbol{X}, \bld{\omega}) p(\bld{\omega})}{q_{\theta}(\bld{\omega})}) d\bld{\omega} + \int q_{\theta}(\bld{\omega}) \log(\frac{q_{\theta}(\bld{\omega})}{p(\bld{\omega}|\bld{X}, \bld{Y})}) d\bld{\omega} \\
+ & = \int q_{\theta}(\bld{\omega}) \log(p(\bld{Y} | \bld{X}))d\bld{\omega}\\
+ & = log(p(\bld{Y}|\bld{X})) 
+\end{aligned}
+\end{equation}
+
+When we maximize the $ELBO$ w.r.t the parameters of approximate posterior $\theta$, it's equivalent to minimizing the KL divergence because the log marginal likelihood is not a function of $\theta$. Then we have a well-defined objective which is the $ELBO$, in which the first term is called expected log likelihood which ensures the model can explain the data well and the second term is called regularization term which ensures the approximate posterior does not deviate too far from the prior distribution.
+Now we have cast an inference problem into an optimization problem:
+
+\begin{equation}\label{2.8}	
+\begin{aligned}
+\theta^{\star} = argmin_{\theta} [KL(q_{\theta}(\bld \omega)||p(\bld \omega | \bld X, \bld Y))]
+\end{aligned}
+\end{equation}
+
+which is equivalent to 
+
+\begin{equation}\label{2.9}	
+\begin{aligned}
+\theta^{\star} = argmax_{\theta} [ELBO]
+\end{aligned}
+\end{equation}
+
+However, there are still some difficulties if we want to solve this optimization with this objective. The first one is to deal with large size dataset, which induces large computation in the expected log likelihood term. \cite{graves2011practical} shows that this can solved by data subsampling which is also called stochastic optimization. Another one is that we need to obtain the derivatives of $ELBO$ w.r.t. approximate parameter $\theta$. Since the model parameters are samples from approximate distribution, good estimator for the derivatives is required which will be introduced in next subsection. 
+
+
+\subsection{Dropout variational inference}
+\subsubsection{Dropout}
+Dropout\cite{srivastava2014dropout} is originally introduced as regularization approach in training deep neural network which can improve the generalization performance. Although the author said this idea is inspired from human beings sexual reproduction, there are different interpretations trying to explain why it can work such as ensemble perspective and Bayesian perspective. In this subsection, the Bayesian interpretation of dropout is introduced and used for improving the uncertainty estimation of neural network. 
+
+The mechanism of dropout is simple, each units of specific layer is multiplied by a random variable under Bernoulli distribution with $1-p$ as its parameter, where $p$ is dropout rate. In each iteration of training, dropout is turned on, which means each unit is multiplied by the sample drawn from Bernoulli distribution in forward propagation which is kept in  derivatives back propagtion during current iteration. In testing, the sampling phase is turned off, only one forward propagation is needed to obtain predictions. Normally, in order to avoid rescaling weights in testing, which is used to keep the output magnitudes in the same scale when dropout is off, rescaling of the output of dropout is always done in training. In figure \ref{fig:dropout}, there are two figures about that dropout is on and off. 
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=13cm]{dropout}
+		\caption{How dropout works\cite{srivastava2014dropout}.}		
+		\label{fig:dropout}
+	\end{center}
+\end{figure}
+
+
+\subsubsection{Bayesian interpretation of dropout}
+As is mentioned in the last subsection, in variational inference, we want to minimize the KL divergence between approximate distribution and the real posterior distribution over the model parameters, which turns out to be maximization of evidence lower bound($ELBO$). When dropout is interpreted in Bayesian way, the distribution over hidden units is reformulated as distribution over weight matrices. The training objectives of neural network with dropout is proved to be similar as the $ELBO$ of Bayesian neural network with Bernoulli distribution factorized over the input dimension of weight matrix. In the following, we will explain this interpretation including key factors such as \textbf{approximate distribution}, \textbf{training objective}, \textbf{marginalization in testing} by using one simple example in {classification} case in \ref{fig:dropout_inference}, in which we define the hidden layer as the first layer and output layer as the second layer and assume that we use L2 regularization and put a prior distribution of fully factorized Gaussian over weights initially, which can be generalized to multi-layer neural network easily.
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=10cm]{dropout_inference}
+		\caption{A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}		
+		\label{fig:dropout_inference}
+	\end{center}
+\end{figure}
+
+\newpage
+\paragraph{Approximate distribution}
+Let's denote $\bld y\in \mathbb R ^{m \times D_{2}}$ as output, $\bld x \in \mathbb R^{m \times D_{0}}$ as input, $\bld h_{1} \in \mathbb R^{D_{1}}$ as the response of hidden layer, where $m$ represents number of data instances, $D_{i}$ is dimensionality of $i$-th layer, where $0$-th layer represents input layer and $i \in \{1,..,L\}$, $L=2$ in this example. Further we define $\bld \omega = \{ (\bld W_{i})_{i=1}^{L}  \}$ as model parameters, and $\bld \epsilon_{i} \in \mathbb R^{D_{i-1}}$ as the Bernoulli distributed random vector parameterized by $\bld p_{i} \in \mathbb R^{D_{i-1}}$, for $i$-th layer. In normal dropout, elements in vector $\bld p_{i}$ have same values $p_{i}$, which means that there is one keep rate or ($1-$dropout rate) for each layer. In the following, we will use $\bld p_{i}$ and $p_{i}$ interchangeably depending on the context if there is no special specification. To note that since weight matrix is treated as random variable, we use $\bld M_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ to denote position of non-zero element in Bernoulli distribution for $\bld W_{i}$. To note that bias $\bld b_{i} \in \mathbb R^{D_{i}}$ is absorbed into $W_{i}$ by appending a new row at the end of weight matrix and 1 at the end of each data input vector, which is also called homogeneous coordinate. We also assume that approximate weight distribution is factorized over layer, which yields
+\[
+q_{\theta}(\bld \omega) = \prod_{i=1}^{L}q_{\theta}(\bld W_{i}). 
+\]
+
+To start with the formulation of dropout, we model likelihood of output conditioned on input with softmax scores of neural network in classification case:
+\begin{equation}
+	\begin{aligned} \label{dropout_form}
+	p(\bld y| \bld x, \bld \omega) & = \sigma((\bld h_{1} \odot \bld \epsilon_{2}) \bld M_{2})\\
+		   & = \sigma(\bld h_{1} (diag(\bld \epsilon_{2}) \bld M_{2})) \\
+		   & = \sigma(\bld h_{1} \bld W_{2}) \\
+		   & = \sigma(a(\bld x (diag(\bld \epsilon_{1}) \bld M_{1})+ \bld b_{1}) \bld W_{2}) \\
+		   & = \sigma(a(\bld x \bld W_{1})\bld W_{2})
+	\end{aligned}
+\end{equation}
+
+where $\odot$ is Hadamard product(element-wise product), $\sigma(a_{j}) = \frac{exp({a_{j}})}{\sum_{k}exp({a^{k}})}$ is softmax function, $a(\cdot)$ is non-linear activation function such as rectified unit function.
+  
+From the equation above, we have 
+
+\[
+\bld W_{i} = g(\bld M_{i}, \bld \epsilon_{i})= diag(\bld \epsilon_{i}) \bld M_{i} 
+\]
+\[ 
+\text{ with } \bld \epsilon_{i} \sim p(\bld \epsilon_{i}) = Bernoulli(\bld p_{i}) 
+\]
+
+which means weight matrix $\bld W_{i}$ is a random variable whose probability density function is parameterized by $\bld p_{i}$ and $\bld M_{i}$, which are denoted by $\theta = \{ (\bld M_{i}, \bld p_{i})_{i=1}^{L} \}$ in equation \ref{2.8}, where $i = {1,..,L}$ denotes $i$-th layer of the network, and $L = 2$ in this example. 
+The expression of approximate posterior distribution is not obvious, but we can define the its form as 
+
+\begin{equation}
+\begin{aligned} \label{appro_dist_form}
+q_{\theta}(\bld \omega) &= \prod_{i=1}^{L} q_{\theta}(\bld W_{i})\\
+&= \prod_{i=1}^{L}\int q_{\theta}(\bld W_{i} | \bld \epsilon_{i})p(\bld \epsilon_{i}) d\bld \epsilon_{i} 
+\end{aligned}
+\end{equation}
+with
+
+\begin{equation}
+\begin{aligned} \label{appro_cond_dist_form}
+q_{\theta}(\bld W_{i}|\bld \epsilon) &= \delta(\bld W_{i} - g(\bld M_{i}, \bld \epsilon_{i}))  \\
+& = \delta(\bld W_{i} - diag(\bld \epsilon_{i})\bld M_{i})
+\end{aligned}
+\end{equation}
+
+As we can see, the approximate posterior distribution over the parameter matrix puts a same Bernoulli distribution over the input dimension of parameter matrix, which is the row dimension in this example.  Meanwhile each element of the same row is multiplied with same realization of the random variable but with different non-zero position, which is corresponding to different expectation of each row element and thus induces correlations between row elements. To make this definition more clear, based on the computation of expectation and variance of Bernoulli distribution, we can write down the first and second moment of the approximate distributed random variables in the following:
+
+\begin{equation}
+\begin{aligned} \label{appr_expectation}
+\mathbb E_{q_{\theta}}(\bld W_{i}) & = \bld M_{i} \odot \bld P_{i}
+\end{aligned}
+\end{equation}
+
+where $\bld P_{i} = [\bld p_{i}, ..., \bld p_{i}] \in \mathbb R^{D_{i-1} \times D_{i}}$.
+
+Covariance matrix of parameter matrix is:
+
+\begin{equation}
+\begin{aligned} \label{appr_covariance}
+ \big[Cov_{q_{\theta}}(vec(\bld W_{i}))\big]_{jk}   = \mathbbm{1} \big[l=m\big] m^{i}_{lq}*m^{i}_{mn}*p_{i}*(1-p_{i})
+\end{aligned}
+\end{equation}
+
+where 
+\[ j = l*D_{i-1} + q\],
+\[ k = m*D_{i-1} + n\],
+which is the linear mapping between element index before and after matrix vectorization. $m^{i}_{lq}$ is the element of $l$-th row and $q$-th column in matrix $\bld M_{i}$, which applies to $m^{i}_{mn}$ as well. $\mathbbm 1 \big[i=j\big]$ denotes indicator function, which is equal to 1 only when $i$ is equal to $j$ and otherwise 0. Because $vec(\cdot)$ operation converts matrix $\bld W_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ into column vector $ vec(\bld W_{i}) \in \mathbb R^{D_{i-1}D_{i} \times 1}$ by stacking the columns of matrix on top of one another. Then it's easy to see that covariance matrix $Cov_{q_{\theta}}(vec(\bld W_{i})) \in \mathbb R^{D_{i-1}D_{i} \times D_{i-1}D_{i}} $. 
+
+From equation \ref{appr_covariance}, we can see that the entire covariance matrix is consisting of $D_{i} \ast D_{i}$ diagonal sub-matrices whose dimensionality are $D_{i-1} \times D_{i-1}$.
+When observing covariance matrix of parameter matrix $\bld W_{i}$ w.r.t. approximate posterior distribution $q_{\theta}({\bld W_{i}})$, we know that samples of row vectors in weight matrix are drawn independently and thus covariance between rows are zero. On the other hand, samples for different weights in the same row are drawn at the same time because they are multiplied by the same realization of $\epsilon_{i}$, from which covariances between weights within the same row are induced. Therefore, by fitting this approximate distribution to the real posterior distribution weights within the same row can be learned. This means that the approximate distribution family have more flexibility to approximate the real posterior distribution when compared with other common approximate posterior distribution family that assumes distribution for each parameter is independent such as fully factorized Gaussian.
+
+
+\paragraph{Training objective} Up to now, we have only analyzed the approximate distribution of dropout inference. As is mentioned in introduction section of this chapter, we know that we perform optimization of $ELBO$ w.r.t. the approximate distribution parameters, in order to obtain a good approximation to the true posterior distribution over parameters, which we can use in testing to obtain more reliable uncertainty estimation. In the following, we will show that training a neural network with dropout is equivalent to optimizing the $ELBO$ w.r.t. approximate distribution parameters.
+
+At first, let's define the training objective of neural network with dropout, which is cross entropy between predictive distribution and target distribution plus L2 regularization:
+
+\begin{equation}
+\begin{aligned} \label{dropout_loss}
+L_{dropout}   = \sum_{i=1}^{N}\big[-log(p(\bld y_{i}| \bld x_{i}, \bld \omega))\big] + \lambda(\sum_{i=1}^{L} ||\bld W_{i}||^{2})
+\end{aligned}
+\end{equation}
+
+where $N$ represents the size of entire dataset, $\lambda$ is L2 regularization coefficient. We want to maximize the likelihood over the entire dataset w.r.t. the model parameter $\bld \omega$, which is known as maximum likelihood estimation. Equipped with L2 regularization and Gaussian prior over parameters, we can obtain a max-a-posterior estimation by minimizing equation \ref{dropout_loss}. 
+
+Normally we use gradient descent to tune our parameters in training, which requires first derivative of objective w.r.t. model parameters $\bld \omega$. Since nowadays large size of dataset is ubiquitous, which means $N$ in equation \ref{dropout_loss} is too large, we could not obtain exact gradient of entire batch with efficient computation. Therefore we use data of mini-batch to estimate gradient, which is so called stochastic gradient descent(SGD). Apart from making computation tractable, noise of gradient estimation in each mini-batch is helpful for optimization procedure to escape the poor local minimum. The expression of gradients required in each iteration of SGD is given in the following:
+
+\begin{equation}
+\begin{aligned} \label{dropout_grad}
+\frac{\partial L_{dropout}}{\partial \bld \omega} &=\frac{1}{K}\sum_{i \in S}\big[-\frac{\partial log(p(\bld y_{i}| \bld x_{i}, \bld \omega))}{\partial \bld \omega}\big] + \lambda\frac{\partial (\sum_{i=1}^{L} ||\bld W_{i}||^{2})}{\partial \bld \omega}
+\end{aligned}
+\end{equation}
+
+where $S$ is one random subset of entire dataset, and $|S| = K$.
+
+On the other hand, let's have a look at $ELBO$ in equation \ref{2.6}, if we want to maximize $ELBO$, which is equivalent to minimize negative $ELBO$ w.r.t. the approximate distribution parameters $\theta$, with SGD. The gradients are computed with the following expression:
+
+\begin{equation}
+\begin{aligned} \label{elbo_grad}
+\frac{\partial (-ELBO)}{\partial \theta} &=\frac{1}{K}\sum_{i \in S}\big[-\frac{\partial \mathbb E_{q_{\theta}(\bld \omega)} \big[log(p(\bld y_{i}| \bld x_{i}, \bld \omega))\big]}{\partial \theta}\big] + \frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta}
+\end{aligned}
+\end{equation}
+
+In order to calculate two terms in equation \ref{elbo_grad}, we need to introduce one technique called re-parameterization trick\cite{kingma2013auto} for the first term and one condition called KL condition\cite{gal2016uncertainty} for the second term in the following.
+
+\subparagraph{Re-parameterization trick:} when we take a close look at the first term in equation \ref{elbo_grad}, we know that we need to compute the gradients of expectation w.r.t. the parameters of distribution to which this expectation is subject. That means, we need to estimate the gradients of those parameters because our objective is generated from these parameters randomly. Fortunately, there are different approaches to estimate the gradients of this kind of parameters such as score function or REINFORCE estimator\cite{williams1992simple}, re-parameterization trick \cite{kingma2013auto} and so on. As is stated in \cite{kingma2013auto}, re-parameterization trick has lower variance than score function estimator and is also unbiased. Let's have a quick recap of this technique and see it's already a built-in part in neural network with dropout.
+
+To identify the problem, we can write a more general form of calculus we want to solve in the following:
+
+\begin{equation}
+\begin{aligned} \label{repa}
+I(\theta) = \frac{\partial}{\partial \theta} \mathbb E_{p_{\theta}(x)} \big[ f(x)\big]= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx
+\end{aligned}
+\end{equation} 
+
+Assume that $p_{\theta}(x)$ can be re-parameterized as $p(\epsilon)$ which is a parameter-free distribution such that random variable $x$ can be generated from a deterministic differentiable function with $\theta$ and $\epsilon$ as arguments, that is
+
+\[
+x = g(\theta, \epsilon)  \text{ with } \epsilon \sim p(\epsilon)
+\]
+
+Then we can derive the estimator of the gradients w.r.t. distribution parameters $\theta$ with $p(x|\epsilon) = \delta(x-g(\theta,\epsilon))$:
+\begin{equation}
+\begin{aligned} \label{repa1}
+I'(\theta) &= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx \\
+&= \frac{\partial}{\partial \theta} \int f(x)(\int p_{\theta}(x|\epsilon)p(\epsilon)d\epsilon) dx \\
+&= \frac{\partial}{\partial \theta} \int (\int f(x) p_{\theta}(x|\epsilon)dx) p(\epsilon) d\epsilon \\
+&= \frac{\partial}{\partial \theta} \int (\int f(x)\delta(x-g(\theta,\epsilon))dx) p(\epsilon) d\epsilon \\ 
+&= \frac{\partial}{\partial \theta} \int f(g(\epsilon, \theta)) p(\epsilon) d\epsilon \\
+&= \int \frac{\partial}{\partial \theta} f(g(\epsilon, \theta)) p(\epsilon) d\epsilon \\
+&= \int f'(g(\epsilon, \theta))\frac{\partial}{\partial \theta}g(\theta, \epsilon) p(\epsilon) d\epsilon \\
+&= \mathbb E_{p(\epsilon)}\big[ f'(g(\epsilon, \theta))\frac{\partial}{\partial \theta}g(\theta, \epsilon)\big] 
+\end{aligned}
+\end{equation} 
+From practical point of view, the expectation of last line in expression \ref{repa1} can be approximated with Monte Carlo integration. In dropout inference, we know that if we fix the dropout rate which is equal to $1- p_{i}$ in equation \ref{appro_cond_dist_form} in training. Then $\bld \epsilon_{i}$ in equation \ref{appro_cond_dist_form} is a parameter free random variable and $g(\cdot)$ is a differentiable function w.r.t. parameter $\bld M_{i}$. And the approximate distribution parameter $\theta$ only contains $\{(\bld M_{i})_{i=1}^{L} \}$, which are exactly the weights to be learned in training neural network with dropout. As a result, if we estimate the gradient of $ELBO$ w.r.t. approximate distribution parameters $\{(\bld M_{i})_{i=1}^{L}\}$, that is the first term in \ref{elbo_grad}, it's equivalent to calculate the gradient of dropout loss w.r.t. model parameters $\bld \omega$ which is the first term in equation \ref{dropout_grad}.
+
+\subparagraph{KL condition:} The second term in equation \ref{elbo_grad} is proved to be equivalent to the second term in equation \ref{dropout_grad}
+for a large enough number of hidden units when we specify the model prior to be a product of independent Gaussian distributions over each weight with prior length scale $l$, that is:
+\[p(\bld \omega) = \prod_{i=1}^{L}(p(\bld W_{i})) \]
+with
+\[
+p(vec(\bld W_{i})) = \mathcal N(0, l^{-2}\bld I_{D_{i-1} D_{i}})
+\]
+
+To establish this condition, we need to make a approximation of the approximate posterior distribution $q_{\theta}(\bld \omega)$ in equation \ref{appro_dist_form}, where we approximate $q_{\theta}(\bld W_{i}|\bld \epsilon_{i})$ in equation \ref{appro_cond_dist_form} as a narrow Gaussian with a very small standard deviation. As we know, $q_{\theta}(\bld W_{i})$ factorizes over each row of the weight matrix. Then that means $q_{\theta}(\bld \omega)$ is a mixture of two Gaussians with small standard deviations, and one component fixed at zero:
+\begin{equation}\label{appro_dist_guassian}
+\begin{aligned}
+	q_{\theta}(\bld \omega) &= \prod_{i=1}^{L}q_{\theta}(\bld W_{i}) \\
+	&=\prod_{i=1}^{L}\prod_{j=1}^{D_{i-1}}q_{\theta}(\textbf{w}_{i,j}) \\
+	&= \prod_{i=1}^{L}\prod_{j=1}^{D_{i-1}} \big[ p_{i} \mathcal N(\textbf{m}_{i,j},\sigma^{2} \bld I_{D_{i}}) + (1-p_{i})\mathcal N(\bld 0, \sigma^{2} \bld I_{D_{i}})\big]
+\end{aligned}
+\end{equation}
+where $\textbf{w}_{i,j} \in \mathbb R^{D_{i}}$ is the $j$-th row of weight matrix $\bld W_{i}$ and $p_{i}$ is the parameter of Bernoulli distributed random variable of $i$-th layer. With this, the KL divergence between approximate posterior and prior is KL divergence between mixture of Gaussian and a single Gaussian. In order to keep this report as self-contained as possible, we attach the derivation of KL divergence between mixture of Gaussian and single Gaussian in appendix \ref{appendix:kl_condition}. Then we have KL condition in the following:
+
+\begin{equation}
+\begin{aligned} \label{kl_condition}
+KL(q_{\theta}(\bld \omega) || p(\bld \omega)) \approx \sum_{i=1}^{L} \sum_{j=1}^{D_{i-1}}
+\big[
+\frac{p_{i}}{2}(l^{2}\bld m_{i,j}^{T} \bld m_{i,j} + D_{i}( \sigma^{2} -\text{log}(\sigma^{2}) -2\text{log} l- 1) - \mathcal H (\bld p_{i}) 
+\big] 
+\end{aligned} 
+\end{equation}
+with 
+\[
+\mathcal H(\bld p_{i}) = D_{i-1}(-p_{i}\text{log}p_{i} - (1-p_{i})\text{log}(1-p_{i}))
+\]
+for large enough $D_{i}$. If we fix dropout rate in training and compute the gradients of KL divergence w.r.t. model parameters $\theta = \{(\bld M_{i})_{i=1}^{L} \}$. We can see that, if we choose $\lambda = \frac{l^{2}p_{i}}{2}$, then it's equivalent to the gradients of regularization term in dropout loss function(cf. \ref{dropout_grad}):
+
+\begin{equation} 
+\begin{aligned}\label{KL_grad}
+\frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta} \approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}}{\partial \theta}
+\end{aligned}
+\end{equation}
+
+With aforementioned re-parameterization trick and KL condition, we know that the computation of gradients of objective function w.r.t. model parameters in equation \ref{dropout_grad} is equivalent to those of $ELBO$ w.r.t. approximate distribution parameters in equation \ref{elbo_grad}. That means if we train a neural network with dropout, we can obtain the approximate posterior distribution over model parameters defined in equation \ref{appro_dist_form}.
+
+\paragraph{Marginalization in testing}
+After we have obtain the parameters $\theta$ of approximate posterior distribution over model parameters $q_{\theta}(\bld \omega)$, we can marginalize all possible parameters over approximate posterior to get final predictive distribution of output, similar to equation \ref{2.4} but with approximate posterior. Because the integration is hard to evaluate analytically. In practice, we always use Monte Carlo integration:
+
+\begin{equation}
+\begin{aligned} \label{marginalization_test}
+p(\bld y^{\star}| \bld x^{\star},\mathcal D) &= \int p(\bld y^{\star} | \bld x^{\star}, \bld \omega) p(\bld \omega |\mathcal D)d\bld \omega \\
+&\approx \int p(\bld y^{\star} | \bld x^{\star}, \bld \omega) q_{\theta}(\bld \omega)d\bld \omega \\
+&\approx \frac{1}{K}\sum_{i=1}^{K} p(\bld y^{\star} | \bld x^{\star}, \bld{\hat \omega_{i}}) 
+\end{aligned}
+\end{equation}
+
+where $\bld \omega \sim q_{\theta}(\bld \omega)$ and $\bld{\hat \omega_{i}}$ is one of $K$ realizations of $\bld \omega$, which is equivalent to turning on dropout in testing time. This is also called \textbf{MC-dropout} in the literatures.
+
+\subsection{Concrete dropout and Multi-Drop}
+\paragraph{Concrete dropout} 
+Based on the aforementioned description of dropout inference, we can see that if we fix dropout rate in training, then parameters of approximate distribution $\theta$ only contains $\{\bld M_{i}\}_{i=1,...,L}$, which is equivalent to $\bld \omega = \{\bld W_{i}\}_{i=1,...,L}$ in neural network with dropout. Therefore optimising any neural network with dropout is equivalent to a form of approximate inference in a probabilistic interpretation of the model. This means that the optimal weights found through the optimization of a neural network with dropout are the same as the optimal variational parameters in a Bayesian neural network with the same structure. 
+
+However, fixing dropout rate in train is not a trivial task for several reasons. Firstly, as is shown in \cite{srivastava2014dropout}, different dropout rates have different impact on model capacity and thus model performance. To choose an optimal dropout rate manually requires repeating tedious experiments and thus waste of time and computation effort. Secondly, if we want our model not only to achieve satisfied performance but also to possess reliable uncertainty estimation, the dropout rate matters a lot because it belongs to variational parameter $\theta$ and further influences the flexibility of approximate distribution family from the perspective of Bayesian interpretation.
+
+Accordingly, one direct counter measure is to learn dropout rate from the data \cite{gal2017concrete}. One major difficulty to learn dropout rate from the data in gradient-based optimization is that it's not trivial to estimate gradients of expectation w.r.t. parameters of the distribution when this distribution is discrete. Before in case of continuous distribution, we estimate this gradient with help of re-parameterization trick. As introduced in the last section, re-parameterization trick requires re-parameterizing model parameters by a differential function with variational parameters and a parameter-free random variable as input arguments. For continuous distribution, this function can be found easily if they have tractable inverse cumulative density function or functional form like Gaussian\cite{kingma2013auto}. For most of discrete distributions such as Bernoulli distribution or categorical distribution, they lack useful reparameterizations
+due to the discontinuous nature of discrete states \cite{maddison2016concrete}. 
+
+Faced with this issue, \cite{jang2016categorical} and \cite{maddison2016concrete} come up with one approach that replaces "max" operation in Gumbel-Max trick with softmax function, which can yields a practical re-parameterization for discrete random variable. With this method, gradients w.r.t. parameters of discrete distribution can be computed and used in gradient-based optimization. In this subsection, a quick recap of this method is given in the following.
+
+\subparagraph{Re-parameterization of Bernoulli distribution}
+Firstly, Gumbel-Max trick\cite{maddison2014sampling} is introduced in figure \ref{gumbel_max}, which is used for drawing samples from a discrete distribution which is parameterized by set of unnormalized probability $\{\alpha_i\}_{i=1}^{n}$ via inverse cumulative distribution function of Gumbel distribution, where $\alpha_i \in \mathbb R_{>0}$ and $n$ denotes the number of class. Assuming that we use one-hot encoding vector for the class representation, that is $\bld d \in \{0,1\}^n $ and $\sum_{i=1}^{n}d_i = 1$. The Gumbel-Max trick proceeds as follows(cf. figure \ref{gumbel_max}):
+\begin{itemize}
+	\item sample $G_i \sim \text{Gumbel}(0,1) = -\text{log}(-\text{log}(\text{Uniform}(0,1)))$, for $i=1,..,n$
+	\item compute $x_i = $log($\alpha_i$) + $G_i$, for $i=1,..,n$
+	\item set $d_k = 1$, where $k=argmax_i\{x_i\}_{i=1,..n}$, and $d_i = 0$ for $i \neq k$
+\end{itemize}
+Then we obtain one sample from this discrete distribution and the probability for specific class.
+
+\begin{figure}[h!]
+	\begin{center} \label{gumbel_max}
+		\includegraphics[width=9cm]{gumbel_max}
+		\caption{Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha_{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite{maddison2016concrete}.}		
+		\label{fig:gumbel_max}
+	\end{center}
+\end{figure}
+
+As observed in Gumbel-Max trick, the sampling step is re-paramterized by one function with distribution parameters and parameter-free random variable as arguments. This function is componentwise addition of two input arguments followed by $argmax$ operation. However, $argmax$ operation is not differential w.r.t. distribution parameter $\alpha_i$. Fortunately, this operation can be approximated by a continuous function, $softmax$, which is also differential w.r.t. distribution parameters. With this replacement, we can obtain a continuous approximation to $\bld d$ on the simplex $\triangle^{n-1} = \{\bld x \in \mathbb R^n | x_k \in [0,1], \sum_{i=1}^{n} x_i = 1 \}$:
+
+\begin{equation} \label{gumbel_softmax}
+\begin{aligned}
+x_{k} = \frac{\text{exp}((\text{log}\alpha_k + G_k)/\lambda)}{\sum_{i=1}^{n}\text{exp}((\text{log}\alpha_i + G_k)/\lambda)}
+\end{aligned}
+\end{equation}
+
+The sampling steps are similar to Gumbel-Max trick, but with smoothed $softmax$ operation instead of $argmax$(cf. figure \ref{fig:gumbel_softmax}). When $\lambda \rightarrow 0$, the $softmax$ function is recovered to $argmax$ operation, when $\lambda \rightarrow \infty$, this operation generates uniform vector instead of one-hot encoded vector.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=9cm]{gumbel_softmax}
+		\caption{Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha_{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite{maddison2016concrete}.}		
+		\label{fig:gumbel_softmax}
+	\end{center}
+\end{figure}
+
+When it comes to Bernoulli discrete distribution in our case, it becomes similar because there are only two states in this distribution and samples live in two dimensional simplex. On the other hand, the difference of two Gumbels distributed random variable is similar to a logistic distributed random variable.  With the probability of state 1 which can be expressed by:
+
+\[
+\begin{aligned}
+\mathbb P(d_1 = 1) &= \mathbb P(\text{log} \alpha_1 + G_1 >\text{log} \alpha_2 + G_2)\\
+&=\mathbb P(\text{log} \alpha_1 - \text{log} \alpha_2 + G_1 - G_2 > 0)
+\end{aligned}
+\] 
+
+where $G_1 - G_2 = \text{log}(\text{Uniform}(0,1)) - \text{log}(1-\text{Uniform}(0,1))$, which is the inverse cumulative density function of Logistic(0,1).
+Then we can infer the re-parameterization of Bernoulli distributed variable with $p$ as parameter as follows:
+
+\begin{equation}\label{bern_repa}
+	\begin{aligned}
+	x_1 = \text{sigmoid}\big(
+	\frac{1}{\lambda} (\text{log}p - \text{log}(1-p) + \text{u} - \text{log}(1-u)) 
+	\big)
+	\end{aligned}
+\end{equation}
+
+where $u \sim \text{Uniform}(0,1)$. 
+
+In order to make explanation more clear and validate this re-parameterization, there is one plot in the following (figure \ref{fig:bern_repa}) showing the relationship between average values of 100 samples drawn from this continuous approximation of Bernoulli distribution with different probability. We can see that the samples drawn from equation \ref{bern_repa} distributed similar to the Bernoulli distribution, while most of samples lie on the boundary of range $[0,1]$ and only few of them lie in the interior.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=7cm, width=13cm]{bern_repa}
+		\caption{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}		
+		\label{fig:bern_repa}
+	\end{center}
+\end{figure}
+
+\subparagraph{Dropout regularization}
+Because keep rate of dropout is optimized now, the parameters of approximate distribution $\theta$ contains both $\{ (\bld M_i)_{i=1}^{L} \}$ and $\{(\bld p_i)_{i=1}^{L} \}$. In order to compute gradients of ELBO in equation \ref{elbo_grad}, we employ categorical re-parameterization to estimate the gradients w.r.t. Bernoulli distribution parameter $\bld p_i$ in the first term, for the second term, we could not ignore the term with $\bld p_i$ in KL condition \ref{kl_condition}, which is the entropy term. Consequently, unlike equation \ref{KL_grad}, the KL divergence term should be:
+
+\begin{equation} 
+\begin{aligned}\label{KL_grad_concrete}
+\frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta} 
+&\approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \mathcal H(\bld p_{i})}{\partial \theta}  \\
+&= \frac{\partial}{\partial \theta} \big( \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- D_{i-1}(-p_{i}\text{log}p_{i} - (1-p_{i})\text{log}(1-p_{i}))\big)
+\end{aligned}
+\end{equation}
+
+From the equation above, we can see that this term maximize the entropy of Bernoulli distribution, which means this term pushes $\bld p_i$ to 0.5. The coefficient of the dropout regularisation term means that large models will push the dropout probability towards 0.5 much more than smaller models, but as the amount of data N increases the dropout probability will be pushed towards 1 because of the expected log likelihood in the first term. One of reasons behind could be pushing $\bld p_i$ to 0.5 would decrease the capacity of the model which will decrease the expected log-likelihood. 
+
+\paragraph{Multi-Drop}
+From figure \ref{fig:dropout} and expression of approximate distribution in equation \ref{appro_dist_form}, we choose one probability of Bernoulli distributed random variable for each layer, therefore random vector $\bld p_i = [p_i]^{D_{i-1}}$. While the dropout regularization term push the probability of Bernoulli to 0.5, the expected likelihood term tries to increase the probability. An equilibrium state between them should be achieved in training. With concrete dropout introduced above, we could extend dropout for each hidden units instead of each layer(cf. figure \ref{fig:multi-drop}), which means random vector $\bld p_i = [p_i^k]_{k=1}^{D_{i-1}}$. While the first term in gradients computation stays the same, the second term should be modified to:
+\begin{equation} 
+\begin{aligned}\label{KL_grad_multi}
+\frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta} 
+&\approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \mathcal H(\bld p_{i})}{\partial \theta}  \\
+&= \frac{\partial}{\partial \theta} \big( \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \sum_{k=1}^{D_{i-1}}(-p_i^k\text{log}p_i^k - (1-p_i^k)\text{log}(1-p_i^k))\big)
+\end{aligned}
+\end{equation}  
+
+The intuition behind multi-drop is that if same dropout rate for all hidden units of each layer is optimal, this can be recovered by training. Otherwise, it's optimal to assign different dropout rate for different hidden units. Thus the flexibility of approximate distribution family is extended.  
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=9cm]{multi-drop}
+		\caption{Different dropout rates for different hidden units in multi-drop.}		
+		\label{fig:multi-drop}
+	\end{center}
+\end{figure}
+
+\newpage
+\subsection{Modified network architecture}
+After introducing dropout and concrete dropout variational inference, we will describe the modified network architecture in this subsection. The fundamental task in this work is object classification. We choose ResNet50\cite{he2016deep} pre-trained on ImageNet as backbone for fine-tuning because of its strong ability to learn powerful representation for images. However, there is no dropout in original version of ResNet50. If we want to employ dropout variational inference to obtain reliable uncertainty estimation, dropout should be inserted into the network. In this work, we add three fully connected layer with 1024 hidden units , which are initialized from scratch, before the output layer whose dimension needs to be set to the number of classes. Then we add concrete dropout at flatten layer, and these three new added fully connected layer, respectively.
+There are three reasons why we modify the network in this way:
+\begin{itemize}
+	\item Because we initialize major parts of network with pre-trained weights, inserting dropout in layers initialized with pre-trained weights would destroy pre-trained features. This would lead to significant drop of performance after fine-tuning. 
+	\item According to the suggestions from \cite{srivastava2014dropout}, insertion of dropout reduces the capacity of the model and thus a model with	dropout should have larger capacity than one without dropout. Therefore we add three more fully connected layers to make sure that our model possesses large enough model capacity.
+	\item As we have introduced in previous sub-sections, weights are major part of variational parameters. Therefore to have more weights can enhance the flexibility and capacity of approximate distribution family, which improves the quality of approximation.  
+\end{itemize}
+
+From figure \ref{fig:modified_net}, we can see the sketch of our modified network architecture. More concretely, we can interpret major parts of network, which do not have dropout inserted, as a deterministic feature extractor. On the other hand, for layers with dropout inserted work as a probabilistic classifier based on aforementioned Bayesian interpretation of dropout. In training, these two parts are trained jointly in order to achieve a better balance and more optimal results. In testing, we need to marginalize possible parameters according to posterior distribution. Layers with dropout should be sampled and run multiple times to produce a predictive distribution of output class.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=7.5cm, width=16cm]{network}
+		\caption{Modified network architecture.}		
+		\label{fig:modified_net}
+	\end{center}
+\end{figure}
+
+
+\newpage
+\section{Laplace approximation}
+\subsection{Introduction}
+In this section, we introduce another method to approximate the real posterior distribution over weights of deep neural nets. This method is called Laplace approximation\cite{bishop2006pattern}, which is one deterministic approximation because only point estimation of model parameters instead of the learned variational parameters is required. The idea behind that is to put a Gaussian approximation on the maximum a posterior point estimate of the model parameters, which is one mode of posterior distribution. The reasons why we consider this method are as following:
+\begin{itemize}
+	\item it has easy compatibility to existing network. To perform Laplace approximation, we only need one point estimation of model parameters which is already available for most of architectures. That also means, we do not need modify the training phase and we can have approximation of the true posterior for all trained models.
+	\item it can capture relationship between model parameters. As is mentioned in the first chapter, most of approximation approaches make assumption that parameters are independent to each other for simplicity and computation burden. That could be a quite strong restrictions on the approximation leading to bad performance.
+\end{itemize}
+
+In the following, we introduce the basic idea of Laplace approximation and further introduce its scalable version for deep neural network based on Kronecker factor approximation.
+
+Assume we have a point estimate of model parameters via maximum a posterior estimation:
+\begin{equation}
+\begin{aligned} \label{point estimate}
+\bld \omega^\star &= argmax_{\bld \omega}\{p(\bld \omega|\bld Y,\bld X)\} \\
+&= argmax_{\bld \omega}\{\frac{p(\bld Y|\bld X, \bld \omega) p(\bld \omega)}{p(\bld Y | \bld X)}\} \\
+&= argmax_{\bld \omega}\{p(\bld Y|\bld X, \bld \omega) p(\bld \omega)\}
+\end{aligned}
+\end{equation}
+
+
+After taking a second order Taylor expansion of the logarithm of of posterior distribution $p(\bld \omega | \bld Y, \bld X)$ around its mode $\bld \omega^\star$, we have:
+
+\begin{equation}
+\begin{aligned} \label{taylor expansion}
+\text{log} p(\bld \omega| \bld Y, \bld X) &\approx 
+\text{log}p(\bld \omega^\star|\bld Y, \bld X) + \\
+&(\bld \omega - \bld \omega^\star)^T\frac{\partial \text{log} p(\bld \omega| \bld Y, \bld X)}{\partial \bld \omega} + \\
+&\frac{1}{2}(\bld \omega - \bld \omega^\star)^T\frac{\partial^2\text{log} p(\bld \omega |\bld Y, \bld X)}{\partial \bld \omega^2}(\bld \omega - \bld \omega^\star)\\
+&= \text{log}p(\bld \omega^\star|\bld Y, \bld X) - \frac{1}{2}(\bld \omega - \bld \omega^\star)^T\bld H(\bld \omega - \bld \omega^\star)
+\end{aligned}
+\end{equation}
+
+
+where 
+\[
+\begin{aligned}
+\bld H &= -\frac{\partial^2\text{log} p(\bld \omega|\bld Y, \bld X)}{\partial \bld \omega^2}\\
+&=-\frac{\partial^2\text{log}\big(p(\bld Y|\bld X, \bld \omega)\big)}{\partial \bld \omega^2} - \frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}
+\end{aligned}
+\]
+
+which is negative Hessian of the log posterior. The first order term in equation \ref{taylor expansion} vanishes because we expand the function around a local maximum $\bld \omega^\star$, where the first derivative is zero. If we exponentiate this equation, we can get the following Gaussian-like functional form: 
+
+\begin{equation}
+\begin{aligned}\label{gaussian form}
+p(\bld \omega | \bld Y, \bld X) \propto p(\bld \omega^\star|\bld Y, \bld X)\exp\{-\frac{1}{2}(\bld \omega - \bld \omega^\star)^T\bld H (\bld \omega - \bld \omega^\star)\}
+\end{aligned}
+\end{equation}
+
+which means $\bld \omega \sim \mathcal N(\bld \omega^\star, \bld H ^{-1})$. Therefore, we can obtain a Gaussian approximate distribution with local maximum $\bld \omega^\star$ as mean and inverse of negative Hessian as covariance matrix.
+
+We assume a Gaussian prior for weights. Then it's easy to know that the second order derivative of prior distribution term $\frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}$ is a identity matrix multiplied by regularization coefficient. And the non-trivial part is the first term, second derivatives of log likelihood. To make the explanation uncluttered, we define the Hessian of log likelihood with $\bld{\hat{H}}$ instead:
+
+\[
+\bld{\hat{H}} = -\frac{\partial^2\text{log}\big(p(\bld Y|\bld X, \bld \omega)\big)}{\partial \bld \omega^2}
+\] 
+
+However, we should note that for a large training set, it's always infeasible to analyze the gradients or Hessian exactly. To resolve this, normally we estimate the expectation of gradients or Hessian in each mini-batch. That means we need to estimate Hessian with empirical average Hessian computed in mini-batches:
+\[
+\bld{\hat H} \approx N\mathbb E_{p(\bld Y, \bld X)}[\bld{\hat{H}}]
+\]
+where $N$ is size of training samples, and 
+\begin{equation} \label{expected hessian}
+\mathbb E_{p(\bld Y, \bld X)}[\bld{\hat{H}}] \approx -\frac{1}{K}\sum_{k}\big[\frac{1}{M}\sum_{i}\frac{\partial^2\text{log}\big(p(y_{ik}|\bld x_{ik}, \bld \omega)\big)}{\partial \bld \omega^2}\big]
+\end{equation}
+
+where $K$ is total number of mini-batch, and $(y_{ik}, \bld x_{ik})$ is the $i$-th training data sample in $k$-th mini-batch. 
+
+\paragraph{Fisher information matrix} is equivalent to the expected negative Hessian of exponential family log probability. Therefore we can use Fisher information matrix as replacement of expected Hessian for the log likelihood term. The derivation of equivalence between expected Hessian and Fisher matrix is straightforward. We define Fisher matrix $\bld F$ in the following:
+\begin{equation}
+\begin{aligned}\label{Fisher}
+\bld F &= \mathbb E_{p(\bld Y, \bld X)}\big[\frac{\partial}{\partial \bld \omega}\text{log}p(\bld Y|\bld X,\bld \omega)\frac{\partial}{\partial \bld \omega}\text{log}p(\bld Y|\bld X,\bld \omega)^T\big] \\
+&\approx \frac{1}{K}\sum_{k}\big[\frac{1}{M}\sum_{i}
+\big(\frac{\partial}{\partial \bld \omega}\text{log}p(y_{ik}|\bld x_{ik},\bld \omega)\frac{\partial}{\partial \bld \omega}\text{log}p(y_{ik}|\bld x_{ik},\bld \omega)^T\big)\big]
+\end{aligned}
+\end{equation}
+
+We include the derivation of equivalence between negative expected Hessian and Fisher matrix for case that parameter is scalar in appendix \ref{appedix:fisher_matrix}, which can be generalized to case for vector.
+Therefore we can obtain 
+
+\begin{equation} \label{fisher hessian}
+\bld{\hat H} \approx N\bld F
+\end{equation}
+
+Actually, to compute outer product of gradients is feasible. But to compute the empirical average of outer product we need to save values with amount quadratic to the number of model parameters which induces large storage overhead. More than that, to inverse this matrix, the computation complexity is cubic of dimensionality of this matrix which is the number of model parameters which is also infeasible because the number of parameters in deep neural nets can reach million easily. Therefore an efficient approximation for Fisher matrix is required. 
+
+\subsection{Scalable Laplace approximation for neural network}
+In order to mitigate the computational burden in Laplace approximation above, \cite{ritter2018scalable} proposes to use Kronecker-factored approximation curve(KFAC) in \cite{martens2015optimizing} to approximate the Fisher matrix and perform Laplace approximation for neural network.
+
+

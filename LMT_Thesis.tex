@@ -1,0 +1,112 @@
+\documentclass[12pt,a4paper]{report}
+
+%------------------------------------------------------------------------
+% PACKAGES:
+
+\usepackage{lmtstyle}
+% Define typearea
+% a) Use automatic:
+\usepackage[BCOR1cm]{typearea}
+% b) Or use fixed:
+%\usepackage{geometry}
+%\geometry{left=1.5cm,textwidth=18.5cm,top=1.5cm,textheight=26.5cm}
+\usepackage[american,ngerman]{babel}
+% Use list of tabels, etc. in table of contents:
+\usepackage{tocbibind}
+% German paragraph skip
+\usepackage{parskip}
+% Encoder:????
+\usepackage[latin1]{inputenc}
+%\usepackage[applemac]{inputenc}
+% Use A4-paper efficiently:
+\usepackage{a4wide}
+% Index-generation
+\usepackage{makeidx}
+% Einbinden von URLs:
+\usepackage{url}
+% Include .eps-files (needed also for the TUM-logo):
+%\usepackage{epsf}
+% Special \LaTex symbols (e.g. \BibTeX):
+\usepackage{doc}
+% Include Graphic-files:
+%\usepackage{graphics}
+% Include Graphic-files:
+\usepackage{graphicx}
+% Include doc++ generated tex-files:
+%\usepackage{docxx}
+% Include PDF links
+%\usepackage[pdftex, bookmarks=true]{hyperref}
+\usepackage{bbm}
+%------------------------------------------------------------------------
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\newcommand{\e}{\mathbb E}
+\newcommand{\bld}{\boldsymbol}
+\graphicspath{{figures/}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%########################################################################
+% CHOOSE DEFAULT LANGUAGE:
+\setlang{en}
+%\setlang{de}
+
+% FILL IN ACCORDINGLY:
+\title{Uncertainty-Based Improvement of a Visual
+	Classification System}
+\type{M} % / M:Master /B:Bachelor / F:Forschungspraxis / I:Ingenieurspraxis
+\author{Jianxiang Feng}
+\matrikelnr{03679926}
+\street{Connollystr. 03/W06	}
+\town{80809 Munich}
+%\supervisor{Prof. Steinbach}
+\advisor{ Dr. Zoltán-Csaba Márton \\ & Maximilian Durner}
+\datebegin{07.05.2018} %11.10.2018
+\dateend{01.04.2019}
+%########################################################################
+
+
+\begin{document}%****************************************************
+\makemtgtitle
+
+% MAIN PART:
+\pagenumbering{roman}
+% German abstract:
+% \include{Kurzfassung}
+% English abstract:
+\include{Abstract}
+% Table of contents:
+\tableofcontents 
+
+% Introduction (Einleitung):
+\include{Introduction}
+
+% Text Body (Hauptteil)
+% Could have multiple chaper-files, e.g.:
+\include{BayesianNeuralNetwork}
+\include{ConditionalRandomField}
+\include{ExperimentsAndDiscussion}
+%\include{Results}
+%  Conclusions (Zusammenfassung):
+\include{Conclusions}
+% Appendix (Anhänge), could have multiple chaper-files:
+\appendix
+\include{Appendix}
+% List of figures (Abbildungsverzeichnis):
+\listoffigures
+% List of tables (Tabellenverzeichnis):
+\listoftables
+% Glossary (Glossar):
+%\include{Glossary}
+% List of formulae (Liste der Formelzeichen):
+%\include{Formulae}
+% Abbreviations (Abkürzungsverzeichnis):
+%\include{Abbreviations}
+
+% References (Literaturverzeichnis):
+% a) Style (with numbers: use unsrt, otherwise:alpha):
+\bibliographystyle{alpha}
+% b) The File:
+\bibliography{Bibliography}
+
+\end{document} %*****************************************************

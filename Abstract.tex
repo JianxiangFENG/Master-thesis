@@ -1,0 +1,11 @@
+\switchlanguage{en} % The abstract is supposed to be in English!
+
+\thispagestyle{plain}
+
+\section*{Abstract}
+
+Classifiers based on deep neural networks have achieved tremendous success in different kinds of vision tasks. However, at the same time, this kind of classifier could not provide reliable uncertainty estimation about their predictions, which can easily lead to seriously overconfident predictions and sub-optimal decision in the following steps. From a systematic perspective, this is undesirable and even hazardous in wide range of safety-critical applications such as robotic deployment, medical diagnosis and so on. On the other hand, in object recognition task, some predictions are uncertain because they have similar appearances and thus ambiguous although their relationship with contextual objects are distinguishable. For example a marker has similar appearance with a toothbrush, when a calculator is recognized nearby, a prediction of marker should have higher probability. This kind of uncertainty from data ambiguity can be considered in order to obtain a more robust classifier.
+
+In this work, regarding the first issue, I investigate applying dropout variational inference in Bayesian neural network to obtain reliable model uncertainty estimation on object recognition task. Predictions with low uncertainty can be used to label observed data automatically, which can decrease manual effort on training a more accurate classifier when robot is confronted with objects in real life, which has a slight domain gap with objects in training set. When it comes to the second issue, object co-occurrence statistics is introduced as scene contextual information via conditional random field to handle the data ambiguity and improve the exiting results. We have conducted experiments to show that reliable uncertainty estimates can be obtained via dropout inference and even improved with proposed variants of dropout inference and its ensemble. Additionally, those improved uncertainty estimation can be used with semantic statistic to train a more accurate domain specific classifier.
+
+\switchlanguage{\lang} % Switch back to the document's default language.
