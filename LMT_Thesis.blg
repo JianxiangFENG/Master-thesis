@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: LMT_Thesis.aux
 A level-1 auxiliary file: StatementsEN.aux
 A level-1 auxiliary file: Abstract.aux
@@ -11,11 +11,11 @@ A level-1 auxiliary file: Conclusions.aux
 A level-1 auxiliary file: Appendix.aux
 The style file: alpha.bst
 Database file #1: Bibliography.bib
-Repeated entry---line 89 of file Bibliography.bib
+Repeated entry---line 99 of file Bibliography.bib
  : @inproceedings{osband2016deep
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 405 of file Bibliography.bib
+Repeated entry---line 415 of file Bibliography.bib
  : @inproceedings{louizos2017multiplicative
  :                                         ,
 I'm skipping whatever remains of this entry
@@ -30,45 +30,45 @@ Warning--empty journal in lafferty2001conditional
 Warning--empty booktitle in mcallister2017concrete
 Warning--empty journal in ritter2018scalable
 Warning--empty journal in rasiwasia2009holistic
-You've used 65 entries,
+You've used 66 entries,
             2543 wiz_defined-function locations,
-            882 strings with 16021 characters,
-and the built_in function-call counts, 30125 in all, are:
-= -- 3025
-> -- 1595
-< -- 34
-+ -- 574
-- -- 568
-* -- 2078
-:= -- 4822
-add.period$ -- 201
-call.type$ -- 65
-change.case$ -- 455
-chr.to.int$ -- 65
-cite$ -- 76
-duplicate$ -- 1226
-empty$ -- 2068
-format.name$ -- 630
-if$ -- 6268
+            889 strings with 16147 characters,
+and the built_in function-call counts, 30483 in all, are:
+= -- 3063
+> -- 1603
+< -- 35
++ -- 577
+- -- 570
+* -- 2105
+:= -- 4878
+add.period$ -- 204
+call.type$ -- 66
+change.case$ -- 460
+chr.to.int$ -- 66
+cite$ -- 77
+duplicate$ -- 1241
+empty$ -- 2098
+format.name$ -- 634
+if$ -- 6340
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 67
-newline$ -- 327
-num.names$ -- 195
-pop$ -- 503
+missing$ -- 68
+newline$ -- 332
+num.names$ -- 198
+pop$ -- 506
 preamble$ -- 1
-purify$ -- 524
+purify$ -- 530
 quote$ -- 0
-skip$ -- 1112
+skip$ -- 1123
 stack$ -- 0
-substring$ -- 1578
-swap$ -- 338
-text.length$ -- 34
-text.prefix$ -- 7
+substring$ -- 1611
+swap$ -- 339
+text.length$ -- 35
+text.prefix$ -- 8
 top$ -- 0
-type$ -- 508
+type$ -- 516
 warning$ -- 11
-while$ -- 283
-width$ -- 70
-write$ -- 816
+while$ -- 287
+width$ -- 71
+write$ -- 829
 (There were 2 error messages)

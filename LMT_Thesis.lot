@@ -1,11 +1,13 @@
-\select@language {ngerman}
-\select@language {american}
-\select@language {american}
-\select@language {american}
+\babel@toc {ngerman}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces results of acc, bs, nll, ece, mce, auroc, aupr}}{43}
+\contentsline {table}{\numberline {4.2}{\ignorespaces results of acc, bs, nll, ece, mce, auroc, aupr}}{49}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Beispiel f\"ur eine Beschriftung. Tabellenbeschriftungen sind \"ublicherweise \"uber der Tabelle platziert.}}{42}
+\contentsline {table}{\numberline {A.1}{\ignorespaces Beispiel f\"ur eine Beschriftung. Tabellenbeschriftungen sind \"ublicherweise \"uber der Tabelle platziert.}}{53}

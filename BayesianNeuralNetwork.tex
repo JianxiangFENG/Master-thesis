@@ -389,7 +389,7 @@ where $u \sim \text{Uniform}(0,1)$.
 In order to make explanation more clear and validate this re-parameterization, there is one plot in the following (figure \ref{fig:bern_repa}) showing the relationship between average values of 100 samples drawn from this continuous approximation of Bernoulli distribution with different probability. We can see that the samples drawn from equation \ref{bern_repa} distributed similar to the Bernoulli distribution, while most of samples lie on the boundary of range $[0,1]$ and only few of them lie in the interior.
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=7cm, width=13cm]{bern_repa}
+		\includegraphics[height=9cm, width=15cm]{bern_repa_1}
 		\caption{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}		
 		\label{fig:bern_repa}
 	\end{center}
@@ -409,7 +409,7 @@ Because keep rate of dropout is optimized now, the parameters of approximate dis
 From the equation above, we can see that this term maximize the entropy of Bernoulli distribution, which means this term pushes $\bld p_i$ to 0.5. The coefficient of the dropout regularisation term means that large models will push the dropout probability towards 0.5 much more than smaller models, but as the amount of data N increases the dropout probability will be pushed towards 1 because of the expected log likelihood in the first term. One of reasons behind could be pushing $\bld p_i$ to 0.5 would decrease the capacity of the model which will decrease the expected log-likelihood. 
 
 \paragraph{Multi-Drop}
-From figure \ref{fig:dropout} and expression of approximate distribution in equation \ref{appro_dist_form}, we choose one probability of Bernoulli distributed random variable for each layer, therefore random vector $\bld p_i = [p_i]^{D_{i-1}}$. While the dropout regularization term push the probability of Bernoulli to 0.5, the expected likelihood term tries to increase the probability. An equilibrium state between them should be achieved in training. With concrete dropout introduced above, we could extend dropout for each hidden units instead of each layer(cf. figure \ref{fig:multi-drop}), which means random vector $\bld p_i = [p_i^k]_{k=1}^{D_{i-1}}$. While the first term in gradients computation stays the same, the second term should be modified to:
+From figure \ref{fig:dropout} and expression of approximate distribution in equation \ref{appro_dist_form}, we choose only one probability of Bernoulli distributed random variable for each layer, therefore random vector $\bld p_i = [p_i]^{D_{i-1}}$ for $i$-th layer, which stacks same value into a vector. While the dropout regularization term pushes the probability of Bernoulli to 0.5 to maximize its entropy, the expected likelihood term tries to increase the probability because decreasing probability will lead to a different model with lower capacity and thus low performance. An equilibrium state between them should be achieved in training. With concrete dropout introduced above, we could extend dropout for each hidden units instead of each layer(cf. figure \ref{fig:multi-drop}), which means random vector $\bld p_i = [p_i^k]_{k=1}^{D_{i-1}}$. While the first term in gradients computation stays the same, the second term should be modified to:
 \begin{equation} 
 \begin{aligned}\label{KL_grad_multi}
 \frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta} 
@@ -418,7 +418,29 @@ From figure \ref{fig:dropout} and expression of approximate distribution in equa
 \end{aligned}
 \end{equation}  
 
-The intuition behind multi-drop is that if same dropout rate for all hidden units of each layer is optimal, this can be recovered by training. Otherwise, it's optimal to assign different dropout rate for different hidden units. Thus the flexibility of approximate distribution family is extended.  
+The intuitions behind multi-drop are as following:
+\begin{itemize}
+\item to increase flexibility of tuning variational parameters. The tunability of parameter of Bernoulli random variable in the likelihood term is low because there is only single parameter controlling the entire layer. As is observed in the experiments(cf.figure \ref{fig:cdp_dropout2}), these parameters are always increased for each layer. The reason for this probably is that reducing it would lead to low capacity and thus low likelihood. 
+
+\item the solution space of concrete dropout should be a subset of the solution space of multi-drop if all of them are achievable. Because if it's optimal to assign same probability for each hidden units, this can be recovered in training with multi-drop. Otherwise, other optimal solutions of assigning different probabilities to different hidden units could be considered.
+
+\item last but not least, multi-drop can extend the flexibility and diversity of the dropout approximate distribution family by adding more parameters.  
+\end{itemize}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=4cm, width=13cm]{cdp_dropout1}	
+		\label{fig:cdp_dropout1}
+	\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=4cm, width=13cm]{cdp_dropout2}	
+		\label{fig:cdp_dropout2}
+		\caption{Changes along epochs of keep probability in training network with concrete dropout layer.}
+	\end{center}
+\end{figure}
 
 \begin{figure}[h!]
 	\begin{center}

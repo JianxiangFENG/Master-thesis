@@ -356,6 +356,11 @@ Lewis Smith and Yarin Gal.
   detection.
 \newblock {\em arXiv preprint arXiv:1803.08533}, 2018.
 
+\bibitem[Sha48]{shannon1948mathematical}
+Claude~Elwood Shannon.
+\newblock A mathematical theory of communication.
+\newblock {\em Bell system technical journal}, 27(3):379--423, 1948.
+
 \bibitem[SHK{\etalchar{+}}14]{srivastava2014dropout}
 Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan
   Salakhutdinov.

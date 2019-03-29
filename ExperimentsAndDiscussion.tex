@@ -11,7 +11,7 @@ In this chapter, we perform different experiments for the following purposes:
 	\item to evaluate performance of classifier including context information via CRF.
 \end{itemize}
 
-Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions.
+Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions. Models were implemented in Tensorflow \textbf{[TODO CITATION]}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and $l$2 regularization with coefficient of $3.5e^{-6}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20.
 
 \subsection{Dataset}
 \paragraph{WRGBD\cite{lai2011large}} This dataset is a large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories, some of categories and their subtrees are showed in figure \ref{fig:wrgbd1}. To note that category level recognition and detection involves classifying previously unseen objects as belonging in the same category as objects that have previously been seen(e.g., coffee
@@ -23,20 +23,26 @@ previously been seen. Therefore the overlapping of features in category classifi
 		\includegraphics[height=7cm, width=14cm]{wrgbd1}
 		\caption{The fruit, device, vegetable, and container subtrees of the RGB-D Object Dataset object hierarchy, the shaded ellipse represent categories and number inside parenthesis denotes the number of instances within this category\cite{lai2011large}.}		
 		\label{fig:wrgbd1}
-	\end{center}
+	\end{center} 
 \end{figure}
  \begin{figure}[h!]
  	\begin{center}
- 		\includegraphics[height=6.5cm, width=12cm]{wrgbd2}
- 		\caption{Example of masked images from subset of objects in WRGBD dataset.}		
+ 		\includegraphics[height=10cm, width=16cm]{domain_diff}
+ 		\caption{Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD}		
  		\label{fig:wrgbd2}
  	\end{center}
  \end{figure}
  
 
+\paragraph{UniHB} To simulate application-specific situation in robotic deployment, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects this way. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$)
 
-\paragraph{UniHB} To simulate application-specific situation in robotic deployment, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects this way. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in a slightly modified feature space, thus yielding a significant drop on classification accuracy. \textbf{[TODO:} add examples of objects in WRGBD and UniHB.] In addition to the existing 51 categories, there are 28 novel objects that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$)
-
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[height=7cm, width=12.5cm]{not_in_wrgbd}
+		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, and we treat them as OOD data.}		
+		\label{fig:not_in_wrgbd}
+	\end{center}
+\end{figure}
 \paragraph{T-LESS\cite{hodan2017tless}}
 
 
@@ -51,7 +57,7 @@ conf = \max_c \big[ p(y=c|x^\star, \mathcal D) \big]
 \end{equation}
 where $conf \in [0,1]$, $c \in \mathcal P = \{0,...,|\mathcal P|-1\}$, and $\mathcal P$ represents output space in which label is expressed as number index which is transformed into one-hot representation in computation of objective function. The larger this quantity is, the less uncertainty the prediction is. 
 
-\paragraph{Predictive entropy} is quantity that captures the average amount information contained in predictive distribution: 
+\paragraph{Predictive entropy} is quantity that captures the average amount information contained in predictive distribution\cite{shannon1948mathematical}: 
 \begin{equation}\label{entropy}	
 \begin{aligned}
 \mathcal H[p(y|x^\star, \mathcal D)] = -\sum_{c}p(y=c|x^\star, \mathcal D)\text{log}p(y=c|x^\star, \mathcal D)
@@ -60,7 +66,7 @@ where $conf \in [0,1]$, $c \in \mathcal P = \{0,...,|\mathcal P|-1\}$, and $\mat
 where $c$ is the possible class $y$ can take, $\mathcal H(\cdot) \in [0, \text{log}{|\mathcal P|}]$, the larger this quantity is, the more uncertainty the prediction is.
 
 \paragraph{Mutual information}
-Mutual information between the prediction $y$ and the weights posterior offers a different uncertainty measure. This measure is widely used in active learning tasks\cite{houlsby2011bayesian}.
+Mutual information between the prediction $y$ and the weights posterior offers a different uncertainty measure. This measure is widely used in active learning tasks\cite{houlsby2011bayesian}, which is also called Bayesian active learning disagreement(BALD).
 \begin{equation}\label{mi}	
 \begin{aligned}
 \mathcal I[y,\bld \omega|x^\star, \mathcal D] &= \mathcal H[y|x^\star, \mathcal D] - \mathbb E_{p(\bld \omega| \mathcal D)}\big[\mathcal H[y|x^\star, \bld \omega] \big] \\
@@ -69,36 +75,50 @@ Mutual information between the prediction $y$ and the weights posterior offers a
 \end{aligned}
 \end{equation}
 where $\mathcal I(\cdot) \in [0,\text{log}{|\mathcal P|}]$.
-This quantity consider the effect of approximate posterior distribution directly. Compared with aforementioned uncertainty measures, this one should be able to capture the model uncertainty more accurately. To think about it intuitively, this quantity measure the information gain between the entropy of predictive output distribution and the expected entropy of output distribution w.r.t. weights posterior. It will be low only if the predictive distribution agrees with most of possible models(weights realizations), which means that the model is sure about its prediction. Otherwise, it will be high because most of possible models do not agree with each other and thus the predictive distribution will be more uniform.
+This quantity consider the effect of approximate posterior distribution directly. Compared with aforementioned uncertainty measures, this one should be able to capture the model uncertainty more accurately. To think about it intuitively, this quantity measure the information gain between the entropy of predictive output distribution and the expected entropy of output distribution marginalized over weights posterior. It will be low only if the predictive distribution agrees with most of possible models(weights realizations), which means that the model is sure about its prediction. Otherwise, it will be high because most of possible models do not agree with each other and thus the predictive distribution will be more uniform.
 
 \subsection{Evaluation metrics}
 As is stated in \cite{gneiting2007probabilistic}, the goal of probabilistic prediction is to maximize the sharpness of predictive prediction subject to calibration. Calibration refers to the statistical consistency between the predictive probability and the occurrence of observations. Therefore we employ different metrics including both the accuracy and other quantities related to calibration as well as summary of accuracy and calibration. Additionally, we also employ histogram and diagram to express the results visually. While the visual one can show us the results more directly, the quantitive one can enable us to evaluate the results more objective. The comparison between them can also help us to examine if visual metrics are corresponding to the numerical metrics and thus provide more insights in evaluating uncertainty estimation. 
 
-\paragraph{Uncertainty histogram} is a intuitive visual representation for analyzing the statistics of the uncertainty estimation. Compared with normal histogram, there is one difference to stress. In order to make visual effect more intuitive, for each type of predictions, the \textbf{normalizer} the total number of this type of predictions instead of the entire dataset. More concretely, we have three types of predictions when plotting the histogram, which are correct predictions, miss-classifications and out-of-distribution. The range of y axis is $[0,1]$  and range of x axis is range of specific uncertainty.
+\paragraph{Uncertainty histogram} is a intuitive visual representation for analyzing the statistics of the uncertainty estimation. Compared with normal histogram, there is one difference to stress. In order to make visual effect more clear, \textbf{normalizer} of each type of prediction is the total number of this type of predictions instead of the entire dataset. More concretely, we have three types of predictions when plotting the histogram, which are:
+ \begin{itemize}
+ 	\item \textbf{correct prediction}
+ 	\item \textbf{miss-classification}
+ 	\item \textbf{out-of-distribution}
+ \end{itemize}The range of y axis is $[0,1]$  and range of x axis is range of specific uncertainty.
 
-\paragraph{Reliability diagram and expectation calibration error} is a visual representation of model \textbf{calibration}\cite{guo2017calibration}, which plot the frequency of success(accuracy of predictions in specific bin) as a function of confidence. If the model is perfectly calibrated, this function should be overlapping with the diagonal line. 
+\paragraph{Reliability diagram(Calibration curve), expectation calibration error and maximal calibration error:} Calibration curve is a visual representation of model \textbf{calibration}\cite{guo2017calibration}, which plot the frequency of success(accuracy of predictions in specific bin) as a function of confidence. If the model is perfectly calibrated, this function should be overlapping with the diagonal line. 
 In order to have this plot, we firstly group the predictions into M interval bins w.r.t. confidence. We use M=20 in this work. Then calculate the accuracy of predictions in each bin.
 
-Furthermore, in order to obtain a more objective measure of calibration quality, we can compute the expected calibration error by computing the weighted average of difference between accuracy and confidence:
+Furthermore, in order to obtain a more objective measure of calibration quality, we can compute the \textbf{expected calibration error} by computing the weighted average of difference between accuracy and confidence:
+
 \begin{equation}
 ECE = \sum_{m=1}^{M}\frac{|B_m|}{n}|acc(B_m) - conf(B_m)|
 \end{equation}
-where $n$ is the number of samples, and $acc(B_m)$ represents the accuracy of samples, $conf(B_m)$ the average predicted confidence of samples in $m$-th bin. We can see that this metric measures the inconsistency between the statistics and predictive distribution. To note that this metric only considers the calibration quality instead of accuracy. 
+where $n$ is the number of samples, and $acc(B_m)$ represents the accuracy of samples, $conf(B_m)$ the average predicted confidence of samples in $m$-th bin. We can see that this metric measures the inconsistency between the statistics and predictive distribution. To note that this metric only considers the calibration quality instead of accuracy. On the other hand, because the weights are computed based on number of samples in each bin, the metric would bias if most of predictions are clustered in few bins. Additionally, in high risk applications where reliable confidence measures are absolutely necessary, we may wish to take the worst case into account. Based on these two points, \textbf{maximum calibration error} should also be evaluated, whose expression is defined as follows:
+
+\begin{equation}
+MCE = \max_m|acc(B_m) - conf(B_m)|
+\end{equation}
 
 
 \paragraph{Proper scoring rules} 
 Scoring rules provides a \textbf{summary} measures for the evaluation of probabilistic forecasts by assigning a numerical score based on the predictive distribution and real distribution of event we want to predict. Because we want to make predictions for the future and also have a suitable measures of the uncertainty associated with them(  see \cite{gneiting2007strictly} for a review). Let's define the scoring rule as a function $\mathcal S(p(y|\bld x), (y|\bld x))$ that evaluates the quality of predictive distribution $p(y|\bld x)$ relative to an event $y|\bld x \sim q(y|\bld x)$ where $q(y|\bld x)$ represents the true distribution over $(y|\bld x)$. Consequently, the expected scoring rule is:
+
 \begin{equation}\label{scoring rule}
 	\mathcal S(p, q) = \int q(y| \bld x) \mathcal S(p,(y|\bld x))dy
 \end{equation}
+
 $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality held if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules:
 \begin{itemize}
-	\item test NLL(test negative log likelihood):NLL is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
+	\item \textbf{test NLL}(test negative log likelihood):NLL is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
+	
 	\begin{equation} \label{nll}
 		NLL = -\frac{1}{|\mathcal D_{test}|}\sum_{i=1}^{|\mathcal D_{test}|}\text{log}(p(y_i = c_i|\bld x_i))
 	\end{equation}
 	where $c_i$ is the ground truth label for $\bld x_i$.	
-	\item Brier score is the mean squared error between the target distribution(one-hot encoding label) and predictive distribution:
+	\item \textbf{Brier score} is the mean squared error between the target distribution(one-hot encoding label) and predictive distribution:
+	
 	\begin{equation} \label{bs}
 	BS = -\frac{1}{|\mathcal D_{test}|}\sum_{i=1}^{|\mathcal D_{test}|}(\bld y^{gt}_i - p(\bld y_i|\bld x_i))^2
 	\end{equation}
@@ -113,23 +133,207 @@ ROC describes the relationship between true positive rate($tpr=\frac{tp}{tp+fn}$
 \paragraph{Area under Precision Recall Curve(AUPR)} Because the normalizers of two rates in ROC have nothing to do with each other, when these two normalizers differs too much. AUROC can provide misleading conclusion. For example, if the number of negative predictions is much higher than positive one, the AUROC could still be high, but in fact there are still many false positives. Therefore another evaluation metric is employed, that is AUPR. AUPR describes the relationship between precision($pr = \frac{tp}{tp+fp}$) and recall($tpr=\frac{tp}{tp+fn}$), which adjusts for these different base numbers. To note that, we treat the correct predictions as positive samples.
 
 \section{Uncertainty estimation experiments}
+
 \subsection{Experiments \RNum{1}}
 In this experiments, we want to evaluate our model on a relatively easy task at first, which means that the appearances of different categories as well as the out-of-distribution categories are highly discriminable. Therefore we separate WRGBD dataset into two subsets based on the instance label. Subset \RNum{1} contains objects with instance label from 0 to 199 (assuming that here we use index to denote the instance label) and Subset \RNum{2} contains objects with instance label from 200 to 299. 
 
 We train our model with objects captured in elevation $30^\circ$ and $60^\circ$ of Subset \RNum{1} (in which we split off 20\% of training set as validation set for model selection in training) and test the model on objects captured in elevation $45^\circ$ of both Subset \RNum{1} and Subset \RNum{2}. In this experiment, the objects in Subset \RNum{2} serve as out-of-distribution samples because they are not present in training.
 
-In the following we can see different evaluation metrics in this experiment from original ResNet50, dropout variational inference and Laplace approximation, respectively.
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/exp1/exp1_histo}
+		\caption{Uncertainty(confidence, predictive entropy, mutual information) histograms of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
+		\label{exp1_histo}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=7cm, width=12.5cm]{uncertainty_estimation/exp1/exp1_reliability}
+		\caption{Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
 
 \subsection{Experiments \RNum{2}}
-In this experiment, we evaluate our model on a more difficult task. The difficulties are expressed in two aspects, firstly, the task is category recognition instead of instance recognition in Experiment \RNum{1}, which means that the model is confronted with classes with more overlaps and thus more abstract concept needed to learn. Second, since we want to simulate robotic deployment situation, the UniHB dataset with slight domain gap to WRGBD is employed to achieve this goal. This means that the uncertainty estimation should not only be able to perform well on dataset with same distribution, but also to generalize well to dataset with domain gap although the accuracy may drop a lot in this situation.
+In this experiment, we evaluate our model on category recognition task. The difficulties are expressed in two aspects, firstly, the task is category recognition instead of instance recognition, which means that the model is confronted with classes with more overlaps and thus more abstract concept needed to learn. Second, since we want to simulate robotic deployment situation, the UniHB dataset with slight domain gap(cf. figure\ref{fig:wrgbd2}) to WRGBD is employed to achieve this goal. This means that the uncertainty estimation should not only be able to perform well on dataset with same distribution, but also to generalize well to dataset with domain gap although the accuracy may drop a lot in this situation.
 
-Accordingly, we use the entire WRBD dataset including all view points to train our model (in which we split off 20\% of training set as validation set for model selection in training). Regarding UniHB dataset, we treat objects captured in elevation $30^\circ$ and $60^\circ$ as adaptation set and test performance of uncertainty estimation on this set. The $45^\circ$ objects are used for final testing after we fine-tune the model with subset of adaptation set to obtain a domain specific model which is experiment in next section.
+Accordingly, we use the entire WRGBD dataset including all view points to train our model (in which we split off 20\% of training set as validation set for model selection in training). Regarding UniHB dataset, we treat objects captured in elevation $30^\circ$ and $60^\circ$ as \textbf{adaptation set} on which we test performance of uncertainty estimation. The $45^\circ$ objects are used for final testing after we fine-tune the model with subset of adaptation set to obtain a domain specific model. This part will be introduced and experimented in next section.
 
-\subsection{Experiments \RNum{3}}
+\subsection{Comparison with Ensemble}
+
+\paragraph{Uncertainty histogram}
+This is uncertainty hitsogram
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=12cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
+		\caption{Uncertainty histogram of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+\paragraph{Reliability diagram}
+This is Reliability diagram
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble}
+		\caption{Calibration curve of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+\paragraph{ROC curve and PR curve}
+This is ROC and PR curve
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/roc_pr_seed3_ensemble}
+		\caption{ROC and PR curve of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{results of acc, bs, nll, ece, mce, auroc, aupr}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		& accuracy     & brier\_score & \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood\end{tabular} \\ \hline
+		ori           & 0.568$\pm$0.008 & 0.722$\pm$0.019 & 3.242$\pm$0.340                                                         \\ \hline
+		cdp           & 0.577$\pm$0.008 & 0.594$\pm$0.013 & 2.088$\pm$0.181                                                         \\ \hline
+		mdp           & 0.599$\pm$0.023 & 0.566$\pm$0.020 & 1.940$\pm$0.064                                                         \\ \hline
+		emsemble\_cdp & 0.604        & 0.534        & 1.452                                                                \\ \hline
+		emsemble\_mdp & 0.645        & 0.496        & 1.389                                                                \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	% \caption{results of ece, mce, auroc, aupr}
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (w/o. OOD/\\ w. OOD)\end{tabular} \\ \hline
+		ori           & \begin{tabular}[c]{@{}l@{}}0.304$\pm$0.016 /\\ 0.633$\pm$0.065\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.461$\pm$0.027 /\\ 0.362$\pm$0.025\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.750$\pm$0.007 /\\ 0.664$\pm$0.011\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.802$\pm$0.008 /\\ 0.751$\pm$0.018\end{tabular}                \\ \hline
+		cdp           & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/\\ 0.288$\pm$0.048\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\ 0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\ 0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\ 0.850$\pm$0.022\end{tabular}                \\ \hline
+		mdp           & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\ 0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\ 0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.780$\pm$0.011/ \\ 0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.838$\pm$0.013/ \\ 0.788$\pm$0.006\end{tabular}                \\ \hline
+		emsemble\_cdp & 0.044/0.042                                                                                      & 0.086/0.093                                                                                     & 0.798/0.811                                                                           & 0.845/0.868                                                                                \\ \hline
+		emsemble\_mdp & 0.032/0.170                                                                                      & 0.058/0.227                                                                                     & 0.789/0.653                                                                           & 0.875/0.754                                                                                \\ \hline
+	\end{tabular}
+\end{table}	
 
 
+\subsection{Comparison with Laplace approximation}
+Because Laplace approximation requires only MAP point estimate of parameter, re-training the model is not needed. Therefore we take the already trained model of different approaches as our MAP point estimate. We set the scale parameter of kronecker factors as $1$ and dump factor as $15$ based on grid search on the validation set.   
+his is uncertainty hitsogram
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=11cm, width=16cm]{uncertainty_estimation/laplace/histo_ood_seed3}
+		\caption{Uncertainty histogram of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+This is Reliability diagram
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3}
+		\caption{Calibration curve of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+This is ROC and PR curve
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/roc_pr_seed3}
+		\caption{ROC and PR curve of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		& accuracy                                                              & brier score                                                           & \begin{tabular}[c]{@{}l@{}}negative \\ log\\ likelihood\end{tabular}  \\ \hline
+		cdp          & 
+		\begin{tabular}[c]{@{}l@{}}0.577$\pm$0.008\end{tabular} & 
+		\begin{tabular}[c]{@{}l@{}}0.594$\pm$0.013\end{tabular} & \begin{tabular}[c]{@{}l@{}}2.088$\pm$0.181\end{tabular} \\ \hline
+		
+		laplace\_cdp & 
+		\begin{tabular}[c]{@{}l@{}}0.576$\pm$0.009\end{tabular}    & \begin{tabular}[c]{@{}l@{}}0.602$\pm$0.011\end{tabular} & \begin{tabular}[c]{@{}l@{}}2.322$\pm$0.350\end{tabular} \\ \hline
+		
+		mdp          & 
+		\begin{tabular}[c]{@{}l@{}}0.599$\pm$0.023\end{tabular} & \begin{tabular}[c]{@{}l@{}}0.566$\pm$0.020\end{tabular} & \begin{tabular}[c]{@{}l@{}}1.940$\pm$0.064\end{tabular} \\ \hline
+		laplace\_mdp & 		\begin{tabular}[c]{@{}l@{}}0.598$\pm$0.024\end{tabular} & \begin{tabular}[c]{@{}l@{}}0.567$\pm$0.018\end{tabular} & \begin{tabular}[c]{@{}l@{}}1.970$\pm$0.117\end{tabular} \\ \hline
+	\end{tabular}
+\end{table}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (w/o. OOD/\\ w. OOD)\end{tabular} \\ \hline
+		
+		cdp          & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/ \\0.288$\pm$0.048\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\0.850$\pm$0.022\end{tabular}                \\ \hline
+		
+		laplace\_cdp & \begin{tabular}[c]{@{}l@{}}0.129$\pm$0.058/ \\0.341$\pm$0.157\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.235$\pm$0.073/ \\0.406$\pm$0.070\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.779$\pm$0.004/ \\0.782$\pm$0.017\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.826$\pm$0.007/ \\0.849$\pm$0.016\end{tabular}                \\ \hline
+		
+		mdp          & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.780$\pm$0.011/ \\0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.838$\pm$0.013/ \\0.788$\pm$0.006\end{tabular}                \\ \hline
+		
+		laplace\_mdp         & \begin{tabular}[c]{@{}l@{}} 0.104$\pm$0.018/ \\0.352$\pm$0.061\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.179$\pm$0.029/ \\0.352$\pm$0.038\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.776$\pm$0.012/ \\0.711$\pm$0.005\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.837$\pm$0.015/ \\0.798$\pm$0.005\end{tabular}                \\ \hline
+	\end{tabular}
+\end{table}
 \subsection{Ablation study}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
+		\caption{Uncertainty histogram of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+This is Reliability diagram
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3.eps}
+		\caption{Calibration curve of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+
+This is ROC and PR curve
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3.eps}
+		\caption{ROC and PR curve of one of three runs.}		
+		\label{exp1_reliability}
+	\end{center}
+\end{figure}
+\begin{table}[H]
+	\centering
+	\caption{results of acc, bs, nll, ece, mce, auroc, aupr}
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		& accuracy     & brier\_score & \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood\end{tabular} \\ \hline
+		ori           &0.532$\pm$0.015 & 0.717$\pm$0.023& 2.383$\pm$0.053                                                        \\ \hline
+		cdp           & 0.521$\pm$0.011&0.655$\pm$0.017 &  2.190$\pm$0.149                                                        \\ \hline
+		mdp           & 0.520$\pm$0.012 &0.641$\pm$0.014 & 1.804$\pm$0.073                                                         \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	% \caption{results of ece, mce, auroc, aupr}
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (w/o. OOD/\\ w. OOD)\end{tabular} \\ \hline
+		ori           & \begin{tabular}[c]{@{}l@{}}0.262$\pm$0.011/ \\0.793$\pm$0.012\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.365$\pm$0.010/ \\0.491$\pm$0.013\end{tabular}                     &
+		\begin{tabular}[c]{@{}l@{}}0.716$\pm$0.005/ \\0.602$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.724$\pm$0.022/ \\0.681$\pm$0.007\end{tabular}                \\ \hline
+		cdp           & \begin{tabular}[c]{@{}l@{}}0.141$\pm$0.022/ \\0.270$\pm$0.037\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.203$\pm$0.053/ \\0.359$\pm$0.056\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.748$\pm$0.002/ \\0.712$\pm$0.006\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.770$\pm$0.002/ \\0.782$\pm$0.004\end{tabular}                \\ \hline
+		
+		mdp           & \begin{tabular}[c]{@{}l@{}}0.068$\pm$0.009/ \\0.158$\pm$0.006\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.134$\pm$0.018/ \\0.311$\pm$0.008\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.730$\pm$0.009/ \\0.674$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.749$\pm$0.009/ \\0.748$\pm$0.010\end{tabular}                \\ \hline
+	\end{tabular}
+\end{table}	
+
 
 \section{Automatic labeling experiments}
 \subsection{Experiments settings}
