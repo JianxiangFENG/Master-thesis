@@ -39,18 +39,18 @@ p(y^{\star}|x^{\star}, \mathcal D) = \int p(y^{\star}|x^{\star}, \boldsymbol{\om
 \label{2.4}
 \end{equation}
 
-To point out the difference between normal deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In figure \ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes normal variable, and circle denotes random variable, while shaded circle denote observed random variable. Plate notation denotes $N$ observed data pairs. As we can see in the figure, parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by Maximum a posterior method:
+To point out the difference between normal deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In figure \ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while shaded circle denote observed random variable which represents training set. Plate notation denotes $N$ observed data pairs. As we can see in the figure, parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by Maximum a posterior method:
 
 \begin{equation}
 \boldsymbol{\omega^{\star}} = argmax_{\boldsymbol{\omega}}\{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})\}\label{2.5}
 \end{equation}
 
-On the other hand, in Bayesian neural network, parameters $\boldsymbol{\omega}$ is a random variable which obey the distribution parameterized by $\theta$, distribution over model parameters can be inferred based on Bayes' rule in equation \ref{2.3}. It's worth to note that if we choose the approximate distribution as delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, then we can recover Bayesian neural network into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
+On the other hand, in Bayesian neural network, the model parameter $\boldsymbol{\omega}$ is random variable which obey the distribution parameterized by $\theta$. To note that for explanation of concept here, we do not make any assumption on the function parameterized by $\theta$, which means it can be arbitrary function. This distribution over model parameters can be inferred based on Bayes' rule in equation \ref{2.3}. However, for model with large number of parameters, it's hard to calculate the integral tractably. Therefore many approximation methods mentioned in the introduction chapter are applied to solve this problem. It's worth to note that if we choose the approximate distribution as delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, then we can recover Bayesian neural network into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=15cm]{dnn_bnn}
+		\includegraphics[height=9.1cm, width=12cm]{dnn_bnn}
 		\caption{Difference between parameter estimation of deterministic neural network and Bayesian neural network.}		
 		\label{fig:dnn_bnn}
 	\end{center}
@@ -122,7 +122,7 @@ As is mentioned in the last subsection, in variational inference, we want to min
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=10cm]{dropout_inference}
+		\includegraphics[width=13cm]{dropout_inference}
 		\caption{A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}		
 		\label{fig:dropout_inference}
 	\end{center}
@@ -389,7 +389,7 @@ where $u \sim \text{Uniform}(0,1)$.
 In order to make explanation more clear and validate this re-parameterization, there is one plot in the following (figure \ref{fig:bern_repa}) showing the relationship between average values of 100 samples drawn from this continuous approximation of Bernoulli distribution with different probability. We can see that the samples drawn from equation \ref{bern_repa} distributed similar to the Bernoulli distribution, while most of samples lie on the boundary of range $[0,1]$ and only few of them lie in the interior.
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=9cm, width=15cm]{bern_repa_1}
+		\includegraphics[height=9cm, width=15cm]{bern_repa_}
 		\caption{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}		
 		\label{fig:bern_repa}
 	\end{center}
@@ -420,11 +420,12 @@ From figure \ref{fig:dropout} and expression of approximate distribution in equa
 
 The intuitions behind multi-drop are as following:
 \begin{itemize}
-\item to increase flexibility of tuning variational parameters. The tunability of parameter of Bernoulli random variable in the likelihood term is low because there is only single parameter controlling the entire layer. As is observed in the experiments(cf.figure \ref{fig:cdp_dropout2}), these parameters are always increased for each layer. The reason for this probably is that reducing it would lead to low capacity and thus low likelihood. 
+\item to increase flexibility in tuning variational parameters. The tunability of parameter of Bernoulli random variable in the likelihood term is low because there is only single parameter controlling the entire layer. As is observed in the experiments(cf.figure \ref{fig:cdp_dropout2}), these parameters are always increased for each layer. The reason for this is probably that reducing it would lead to low capacity and thus low likelihood. 
 
 \item the solution space of concrete dropout should be a subset of the solution space of multi-drop if all of them are achievable. Because if it's optimal to assign same probability for each hidden units, this can be recovered in training with multi-drop. Otherwise, other optimal solutions of assigning different probabilities to different hidden units could be considered.
 
-\item last but not least, multi-drop can extend the flexibility and diversity of the dropout approximate distribution family by adding more parameters.  
+\item last but not least, multi-drop can extend the flexibility and diversity of the dropout approximate distribution family by adding more parameters. Hence the truth posterior can be approximated by the approximate posterior better.
+ 
 \end{itemize}
 
 \begin{figure}[h!]
@@ -444,7 +445,8 @@ The intuitions behind multi-drop are as following:
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=9cm]{multi-drop}
+		\centering
+		\includegraphics[width=13cm]{multi-drop}
 		\caption{Different dropout rates for different hidden units in multi-drop.}		
 		\label{fig:multi-drop}
 	\end{center}
@@ -463,7 +465,7 @@ There are three reasons why we modify the network in this way:
 From figure \ref{fig:modified_net}, we can see the sketch of our modified network architecture. More concretely, we can interpret major parts of network, which do not have dropout inserted, as a deterministic feature extractor. On the other hand, for layers with dropout inserted work as a probabilistic classifier based on aforementioned Bayesian interpretation of dropout. In training, these two parts are trained jointly in order to achieve a better balance and more optimal results. In testing, we need to marginalize possible parameters according to posterior distribution. Layers with dropout should be sampled and run multiple times to produce a predictive distribution of output class.
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=7.5cm, width=16cm]{network}
+		\includegraphics[height=8cm, width=16cm]{network}
 		\caption{Modified network architecture.}		
 		\label{fig:modified_net}
 	\end{center}

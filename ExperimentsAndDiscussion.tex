@@ -18,31 +18,34 @@ Before looking into the results, we need to specify the details of experiments s
 mug). Instance level recognition and detection is identifying
 whether an object is physically the same object that has
 previously been seen. Therefore the overlapping of features in category classification is larger than that in instance classification. The setup of dataset is, that each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}).
+
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=7cm, width=14cm]{wrgbd1}
+		\includegraphics[height=7cm, width=13cm]{wrgbd1_}
 		\caption{The fruit, device, vegetable, and container subtrees of the RGB-D Object Dataset object hierarchy, the shaded ellipse represent categories and number inside parenthesis denotes the number of instances within this category\cite{lai2011large}.}		
 		\label{fig:wrgbd1}
 	\end{center} 
 \end{figure}
- \begin{figure}[h!]
+
+\paragraph{UniHB} To simulate application-specific situation in robotic deployment, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects this way. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$)
+
+
+ \begin{figure}[H]
  	\begin{center}
  		\includegraphics[height=10cm, width=16cm]{domain_diff}
  		\caption{Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD}		
  		\label{fig:wrgbd2}
  	\end{center}
  \end{figure}
- 
 
-\paragraph{UniHB} To simulate application-specific situation in robotic deployment, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects this way. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$)
-
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=7cm, width=12.5cm]{not_in_wrgbd}
-		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, and we treat them as OOD data.}		
+		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
 		\label{fig:not_in_wrgbd}
 	\end{center}
-\end{figure}
+\end{figure} 
+
 \paragraph{T-LESS\cite{hodan2017tless}}
 
 
@@ -78,40 +81,44 @@ where $\mathcal I(\cdot) \in [0,\text{log}{|\mathcal P|}]$.
 This quantity consider the effect of approximate posterior distribution directly. Compared with aforementioned uncertainty measures, this one should be able to capture the model uncertainty more accurately. To think about it intuitively, this quantity measure the information gain between the entropy of predictive output distribution and the expected entropy of output distribution marginalized over weights posterior. It will be low only if the predictive distribution agrees with most of possible models(weights realizations), which means that the model is sure about its prediction. Otherwise, it will be high because most of possible models do not agree with each other and thus the predictive distribution will be more uniform.
 
 \subsection{Evaluation metrics}
-As is stated in \cite{gneiting2007probabilistic}, the goal of probabilistic prediction is to maximize the sharpness of predictive prediction subject to calibration. Calibration refers to the statistical consistency between the predictive probability and the occurrence of observations. Therefore we employ different metrics including both the accuracy and other quantities related to calibration as well as summary of accuracy and calibration. Additionally, we also employ histogram and diagram to express the results visually. While the visual one can show us the results more directly, the quantitive one can enable us to evaluate the results more objective. The comparison between them can also help us to examine if visual metrics are corresponding to the numerical metrics and thus provide more insights in evaluating uncertainty estimation. 
+As is stated in \cite{gneiting2007probabilistic}, the goal of probabilistic prediction is to maximize the sharpness of predictive prediction subject to calibration. Calibration refers to the statistical consistency between the predictive probability and the occurrence of observations. Therefore we employ different metrics including both the accuracy and other quantities related to calibration as well as summary of accuracy and calibration. Additionally, we also employ histogram and diagram to express the results visually. While the visual one can show us the results more intuitively, the quantitative one can allow us to evaluate the results more objectively. The comparison between them can also help us to examine if visual metrics are corresponding to the numerical metrics and thus provide more insights in evaluating uncertainty estimation. 
 
-\paragraph{Uncertainty histogram} is a intuitive visual representation for analyzing the statistics of the uncertainty estimation. Compared with normal histogram, there is one difference to stress. In order to make visual effect more clear, \textbf{normalizer} of each type of prediction is the total number of this type of predictions instead of the entire dataset. More concretely, we have three types of predictions when plotting the histogram, which are:
+\paragraph{Uncertainty histogram} is a intuitive visual representation for analyzing the statistics of the uncertainty estimation. Compared with normal histogram, there is one difference to stress on. In order to make visual effect more clear, \textbf{normalizer} of each type of prediction is the total number of this type of predictions instead of the entire dataset. More concretely, we have three types of predictions when plotting the histogram, which are:
  \begin{itemize}
  	\item \textbf{correct prediction}
  	\item \textbf{miss-classification}
  	\item \textbf{out-of-distribution}
- \end{itemize}The range of y axis is $[0,1]$  and range of x axis is range of specific uncertainty.
+ \end{itemize}The range of y axis is $[0,1]$  and range of x axis depends on the type of uncertainty.
 
-\paragraph{Reliability diagram(Calibration curve), expectation calibration error and maximal calibration error:} Calibration curve is a visual representation of model \textbf{calibration}\cite{guo2017calibration}, which plot the frequency of success(accuracy of predictions in specific bin) as a function of confidence. If the model is perfectly calibrated, this function should be overlapping with the diagonal line. 
-In order to have this plot, we firstly group the predictions into M interval bins w.r.t. confidence. We use M=20 in this work. Then calculate the accuracy of predictions in each bin.
+\paragraph{Reliability diagram(Calibration curve)} is a visual representation of model \textbf{calibration}\cite{guo2017calibration}, which plot the frequency of success(accuracy of predictions in specific bin) as a function of confidence. If the model is perfectly calibrated, this function should be overlapping with the diagonal line. 
+In order to have this plot, we firstly group the predictions into M interval bins w.r.t. confidence and then calculate the accuracy of predictions in each bin. We use M=20 in this work.
+\begin{itemize}
+	\item \textbf{Expectation calibration error(ECE)}:Furthermore, in order to obtain a more objective measure of calibration quality, we can compute the \textbf{expected calibration error} by computing the weighted average of difference between accuracy and confidence:
+	
+	\begin{equation}
+	ECE = \sum_{m=1}^{M}\frac{|B_m|}{n}|acc(B_m) - conf(B_m)|
+	\end{equation}
+	where $n$ is the number of samples, and $acc(B_m)$ represents the accuracy of samples, $conf(B_m)$ the average predicted confidence of samples in $m$-th bin. We can see that this metric measures the inconsistency between the statistics and predictive distribution. To note that this metric only considers the calibration quality instead of accuracy. On the other hand, because the weights are computed based on number of samples in each bin, the metric would bias if most of predictions are clustered in few bins. 
+	
+	\item \textbf{Maximal calibration error(MCE)}:
+	Additionally, in high risk applications where reliable confidence measures are absolutely necessary, we may wish to take the worst case into account. Based on these two points, \textbf{maximum calibration error} should also be evaluated, whose expression is defined as follows:
+	
+	\begin{equation}
+	MCE = \max_m|acc(B_m) - conf(B_m)|
+	\end{equation}
+\end{itemize}
 
-Furthermore, in order to obtain a more objective measure of calibration quality, we can compute the \textbf{expected calibration error} by computing the weighted average of difference between accuracy and confidence:
 
-\begin{equation}
-ECE = \sum_{m=1}^{M}\frac{|B_m|}{n}|acc(B_m) - conf(B_m)|
-\end{equation}
-where $n$ is the number of samples, and $acc(B_m)$ represents the accuracy of samples, $conf(B_m)$ the average predicted confidence of samples in $m$-th bin. We can see that this metric measures the inconsistency between the statistics and predictive distribution. To note that this metric only considers the calibration quality instead of accuracy. On the other hand, because the weights are computed based on number of samples in each bin, the metric would bias if most of predictions are clustered in few bins. Additionally, in high risk applications where reliable confidence measures are absolutely necessary, we may wish to take the worst case into account. Based on these two points, \textbf{maximum calibration error} should also be evaluated, whose expression is defined as follows:
-
-\begin{equation}
-MCE = \max_m|acc(B_m) - conf(B_m)|
-\end{equation}
-
-
-\paragraph{Proper scoring rules} 
+\paragraph{Proper scoring rules:} 
 Scoring rules provides a \textbf{summary} measures for the evaluation of probabilistic forecasts by assigning a numerical score based on the predictive distribution and real distribution of event we want to predict. Because we want to make predictions for the future and also have a suitable measures of the uncertainty associated with them(  see \cite{gneiting2007strictly} for a review). Let's define the scoring rule as a function $\mathcal S(p(y|\bld x), (y|\bld x))$ that evaluates the quality of predictive distribution $p(y|\bld x)$ relative to an event $y|\bld x \sim q(y|\bld x)$ where $q(y|\bld x)$ represents the true distribution over $(y|\bld x)$. Consequently, the expected scoring rule is:
 
 \begin{equation}\label{scoring rule}
 	\mathcal S(p, q) = \int q(y| \bld x) \mathcal S(p,(y|\bld x))dy
 \end{equation}
 
-$\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality held if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules:
+$\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality held if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules in which the less it's, the better the performance is:
 \begin{itemize}
-	\item \textbf{test NLL}(test negative log likelihood):NLL is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
+	\item \textbf{negative log likelihood(NLL)}:NLL is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
 	
 	\begin{equation} \label{nll}
 		NLL = -\frac{1}{|\mathcal D_{test}|}\sum_{i=1}^{|\mathcal D_{test}|}\text{log}(p(y_i = c_i|\bld x_i))
@@ -126,11 +133,13 @@ $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality held
 	
 \end{itemize}
 
-\paragraph{Area under Receiver Operating Curve(AUROC)} Since one of our goals is to choose automatically labeled data based on uncertainty estimation, it's better to evaluate the discriminability between correct predictions and false predictions as well as out-of distribution samples. Therefore we consider another two metrics for this purpose, that are AUROC and AUPR.
+\paragraph{Separability metrics:} In addition to the summary metrics of predictive probability. We are also interested in the separability between different types of predictions, which can assist the down-stream tasks by separating them(e.g. separate correct predictions and false predictions or out-of-distribution data).
+\begin{itemize}
+	\item \textbf{Area under Receiver Operating Characteristic curve(AUROC)}:Since one of our goals is to choose automatically labeled data based on uncertainty estimation, it's better to evaluate the separability between correct predictions and false predictions or out-of distribution samples. ROC curve describes the relationship between true positive rate($tpr=\frac{tp}{tp+fn}$) and false positive rate($fpr=\frac{fp}{fp+tn}$). Moreover, AUROC can be interpreted as the probability that a positive samples has a greater score than a negative samples
+	
+	\item \textbf{Area under Precision Recall curve(AUPR)}: Because the normalizers of two kinds of rate in ROC curve are unrelated to each other. When these two normalizers differs too much. AUROC can provide misleading conclusion. For example, if the number of negative predictions is much higher than positive one, the AUROC could still achieve a relatively high value. But in fact there are many false positives which could induce undesired effects. Therefore another evaluation metric is employed, that is AUPR. AUPR describes the relationship between precision($pr = \frac{tp}{tp+fp}$) and recall($tpr=\frac{tp}{tp+fn}$), which resolves the problem of different base number. In the previously mentioned case, though the AUROC is high, the AUPR will be low because the precision is low. To note that, we treat the correct predictions as positive samples in these two kinds of curve.
+\end{itemize}
 
-ROC describes the relationship between true positive rate($tpr=\frac{tp}{tp+fn}$) and false positive rate($fpr=\frac{fp}{fp+tn}$). Moreover, AUROC can be interpreted as the probability that a positive samples has a greater score than a negative samples.
-
-\paragraph{Area under Precision Recall Curve(AUPR)} Because the normalizers of two rates in ROC have nothing to do with each other, when these two normalizers differs too much. AUROC can provide misleading conclusion. For example, if the number of negative predictions is much higher than positive one, the AUROC could still be high, but in fact there are still many false positives. Therefore another evaluation metric is employed, that is AUPR. AUPR describes the relationship between precision($pr = \frac{tp}{tp+fp}$) and recall($tpr=\frac{tp}{tp+fn}$), which adjusts for these different base numbers. To note that, we treat the correct predictions as positive samples.
 
 \section{Uncertainty estimation experiments}
 
