@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.7.20)  1 APR 2019 17:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.7.20)  1 APR 2019 17:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1188,10 +1188,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6308 strings out of 492646
- 98073 string characters out of 6132386
- 211862 words of memory out of 5000000
- 9909 multiletter control sequences out of 15000+600000
+ 6310 strings out of 492646
+ 98099 string characters out of 6132386
+ 210923 words of memory out of 5000000
+ 9911 multiletter control sequences out of 15000+600000
  17485 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  51i,20n,51p,1815b,401s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1218,7 +1218,7 @@ fonts/cm/cmsy8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sam10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on LMT_Thesis.pdf (69 pages, 3118586 bytes).
+Output written on LMT_Thesis.pdf (69 pages, 3118625 bytes).
 PDF statistics:
  890 PDF objects out of 1000 (max. 8388607)
  346 compressed objects within 4 object streams
