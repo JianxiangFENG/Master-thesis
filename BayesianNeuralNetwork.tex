@@ -141,12 +141,12 @@ To start with the formulation of dropout, we model likelihood of output conditio
 	p(\bld y| \bld x, \bld \omega) & = \sigma((\bld h_{1} \odot \bld \epsilon_{2}) \bld M_{2})\\
 		   & = \sigma(\bld h_{1} (diag(\bld \epsilon_{2}) \bld M_{2})) \\
 		   & = \sigma(\bld h_{1} \bld W_{2}) \\
-		   & = \sigma(a(\bld x (diag(\bld \epsilon_{1}) \bld M_{1})+ \bld b_{1}) \bld W_{2}) \\
-		   & = \sigma(a(\bld x \bld W_{1})\bld W_{2})
+		   & = \sigma(\phi(\bld x (diag(\bld \epsilon_{1}) \bld M_{1})+ \bld b_{1}) \bld W_{2}) \\
+		   & = \sigma(\phi(\bld x \bld W_{1})\bld W_{2})
 	\end{aligned}
 \end{equation}
 
-where $\odot$ is Hadamard product(element-wise product), $\sigma(a_{j}) = \frac{exp({a_{j}})}{\sum_{k}exp({a^{k}})}$ is softmax function, $a(\cdot)$ is non-linear activation function such as rectified unit function.
+where $\odot$ is Hadamard product(element-wise product), $\sigma(a_{j}) = \frac{exp({a_{j}})}{\sum_{k}exp({a^{k}})}$ is softmax function, $\phi(\cdot)$ is element-wise non-linear activation function such as rectified unit function.
   
 From the equation above, we have 
 
@@ -218,7 +218,7 @@ Normally we use gradient descent to tune our parameters in training, which requi
 
 \begin{equation}
 \begin{aligned} \label{dropout_grad}
-\frac{\partial L_{dropout}}{\partial \bld \omega} &=\frac{1}{K}\sum_{i \in S}\big[-\frac{\partial log(p(\bld y_{i}| \bld x_{i}, \bld \omega))}{\partial \bld \omega}\big] + \lambda\frac{\partial (\sum_{i=1}^{L} ||\bld W_{i}||^{2})}{\partial \bld \omega}
+\frac{\partial L_{dropout}}{\partial \bld \omega} &=\frac{N}{K}\sum_{i \in S}\big[-\frac{\partial log(p(\bld y_{i}| \bld x_{i}, \bld \omega))}{\partial \bld \omega}\big] + \lambda\frac{\partial (\sum_{i=1}^{L} ||\bld W_{i}||^{2})}{\partial \bld \omega}
 \end{aligned}
 \end{equation}
 
@@ -228,7 +228,7 @@ On the other hand, let's have a look at $ELBO$ in equation \ref{2.6}, if we want
 
 \begin{equation}
 \begin{aligned} \label{elbo_grad}
-\frac{\partial (-ELBO)}{\partial \theta} &=\frac{1}{K}\sum_{i \in S}\big[-\frac{\partial \mathbb E_{q_{\theta}(\bld \omega)} \big[log(p(\bld y_{i}| \bld x_{i}, \bld \omega))\big]}{\partial \theta}\big] + \frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta}
+\frac{\partial (-ELBO)}{\partial \theta} &=\frac{N}{K}\sum_{i \in S}\big[-\frac{\partial \mathbb E_{q_{\theta}(\bld \omega)} \big[log(p(\bld y_{i}| \bld x_{i}, \bld \omega))\big]}{\partial \theta}\big] + \frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta}
 \end{aligned}
 \end{equation}
 
@@ -320,7 +320,7 @@ where $\bld \omega \sim q_{\theta}(\bld \omega)$ and $\bld{\hat \omega_{i}}$ is 
 
 \subsection{Concrete dropout and Multi-Drop}
 \paragraph{Concrete dropout} 
-Based on the aforementioned description of dropout inference, we can see that if we fix dropout rate in training, then parameters of approximate distribution $\theta$ only contains $\{\bld M_{i}\}_{i=1,...,L}$, which is equivalent to $\bld \omega = \{\bld W_{i}\}_{i=1,...,L}$ in neural network with dropout. Therefore optimising any neural network with dropout is equivalent to a form of approximate inference in a probabilistic interpretation of the model. This means that the optimal weights found through the optimization of a neural network with dropout are the same as the optimal variational parameters in a Bayesian neural network with the same structure. 
+Based on the aforementioned description of dropout inference, we can see that if we fix dropout rate in training, then parameters of approximate distribution $\theta$ only contains $\{(\bld M_{i})^L_{i=1}\}$, which is equivalent to $\bld \omega = \{(\bld M_{i})^L_{i=1}\}$ in neural network with dropout. Therefore optimising any neural network with dropout is equivalent to a form of approximate inference in a probabilistic interpretation of the model. This means that the optimal weights found through the optimization of a neural network with dropout are the same as the optimal variational parameters in a Bayesian neural network with the same structure. 
 
 However, fixing dropout rate in train is not a trivial task for several reasons. Firstly, as is shown in \cite{srivastava2014dropout}, different dropout rates have different impact on model capacity and thus model performance. To choose an optimal dropout rate manually requires repeating tedious experiments and thus waste of time and computation effort. Secondly, if we want our model not only to achieve satisfied performance but also to possess reliable uncertainty estimation, the dropout rate matters a lot because it belongs to variational parameter $\theta$ and further influences the flexibility of approximate distribution family from the perspective of Bayesian interpretation.
 
@@ -418,11 +418,11 @@ From figure \ref{fig:dropout} and expression of approximate distribution in equa
 \end{aligned}
 \end{equation}  
 
-The intuitions behind multi-drop are as following:
+The reasons behind multi-drop are as following:
 \begin{itemize}
 \item to increase flexibility in tuning variational parameters. The tunability of parameter of Bernoulli random variable in the likelihood term is low because there is only single parameter controlling the entire layer. As is observed in the experiments(cf.figure \ref{fig:cdp_dropout2}), these parameters are always increased for each layer. The reason for this is probably that reducing it would lead to low capacity and thus low likelihood. 
 
-\item the solution space of concrete dropout should be a subset of the solution space of multi-drop if all of them are achievable. Because if it's optimal to assign same probability for each hidden units, this can be recovered in training with multi-drop. Otherwise, other optimal solutions of assigning different probabilities to different hidden units could be considered.
+\item the solution space of concrete dropout should be a subset of the solution space of multi-drop if all of them are reachable. Because if it's optimal to assign same probability for each hidden units, this can be recovered in training with multi-drop. Otherwise, other optimal solutions of assigning different probabilities to different hidden units could be considered.
 
 \item last but not least, multi-drop can extend the flexibility and diversity of the dropout approximate distribution family by adding more parameters. Hence the truth posterior can be approximated by the approximate posterior better.
  
@@ -524,7 +524,7 @@ p(\bld \omega | \bld Y, \bld X) \propto p(\bld \omega^\star|\bld Y, \bld X)\exp\
 
 which means $\bld \omega \sim \mathcal N(\bld \omega^\star, \bld H ^{-1})$. Therefore, we can obtain a Gaussian approximate distribution with local maximum $\bld \omega^\star$ as mean and inverse of negative Hessian as covariance matrix.
 
-We assume a Gaussian prior for weights. Then it's easy to know that the second order derivative of prior distribution term $\frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}$ is a identity matrix multiplied by regularization coefficient. And the non-trivial part is the first term, second derivatives of log likelihood. To make the explanation uncluttered, we define the Hessian of log likelihood with $\bld{\hat{H}}$ instead:
+We assume a Gaussian prior for weights. Then it's easy to know that the second order derivative of prior distribution term $\frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}$ is a identity matrix multiplied by regularization coefficient. And the non-trivial part is the first term, second derivatives of log likelihood. To make the explanation uncluttered, we define the negative Hessian of log likelihood with $\bld{\hat{H}}$ instead:
 
 \[
 \bld{\hat{H}} = -\frac{\partial^2\text{log}\big(p(\bld Y|\bld X, \bld \omega)\big)}{\partial \bld \omega^2}
@@ -541,10 +541,15 @@ where $N$ is size of training samples, and
 
 where $K$ is total number of mini-batch, and $(y_{ik}, \bld x_{ik})$ is the $i$-th training data sample in $k$-th mini-batch. 
 
-\paragraph{Fisher information matrix} is equivalent to the expected negative Hessian of exponential family log probability. Therefore we can use Fisher information matrix as replacement of expected Hessian for the log likelihood term. The derivation of equivalence between expected Hessian and Fisher matrix is straightforward. We define Fisher matrix $\bld F$ in the following:
+\paragraph{Fisher information matrix} is equivalent to the expected negative Hessian of exponential family log probability:
+\[
+\bld{\hat{F}} = \mathbb E_{p(\bld X, \bld Y)}[\bld{\hat{H}}]
+\]
+
+Therefore we can use Fisher information matrix as replacement of expected Hessian for the log likelihood term. The derivation of equivalence between expected Hessian and Fisher matrix is straightforward. We define Fisher matrix $\bld F$ in the following:
 \begin{equation}
 \begin{aligned}\label{Fisher}
-\bld F &= \mathbb E_{p(\bld Y, \bld X)}\big[\frac{\partial}{\partial \bld \omega}\text{log}p(\bld Y|\bld X,\bld \omega)\frac{\partial}{\partial \bld \omega}\text{log}p(\bld Y|\bld X,\bld \omega)^T\big] \\
+\bld{\hat{F}} &= \mathbb E_{p(\bld Y, \bld X)}\big[\frac{\partial}{\partial \bld \omega}\text{log}p(\bld Y|\bld X,\bld \omega)\frac{\partial}{\partial \bld \omega}\text{log}p(\bld Y|\bld X,\bld \omega)^T\big] \\
 &\approx \frac{1}{K}\sum_{k}\big[\frac{1}{M}\sum_{i}
 \big(\frac{\partial}{\partial \bld \omega}\text{log}p(y_{ik}|\bld x_{ik},\bld \omega)\frac{\partial}{\partial \bld \omega}\text{log}p(y_{ik}|\bld x_{ik},\bld \omega)^T\big)\big]
 \end{aligned}
@@ -554,12 +559,82 @@ We include the derivation of equivalence between negative expected Hessian and F
 Therefore we can obtain 
 
 \begin{equation} \label{fisher hessian}
-\bld{\hat H} \approx N\bld F
+\bld{\hat{H}} \approx N\bld{\hat{F}}
+\end{equation}
+
+and
+ 
+\begin{equation} \label{fisher hessian_with_prior}
+\bld H \approx N\bld{\hat F} + \tau \mathcal {\bld I}
 \end{equation}
 
 Actually, to compute outer product of gradients is feasible. But to compute the empirical average of outer product we need to save values with amount quadratic to the number of model parameters which induces large storage overhead. More than that, to inverse this matrix, the computation complexity is cubic of dimensionality of this matrix which is the number of model parameters which is also infeasible because the number of parameters in deep neural nets can reach million easily. Therefore an efficient approximation for Fisher matrix is required. 
 
 \subsection{Scalable Laplace approximation for neural network}
-In order to mitigate the computational burden in Laplace approximation above, \cite{ritter2018scalable} proposes to use Kronecker-factored approximation curve(KFAC) in \cite{martens2015optimizing} to approximate the Fisher matrix and perform Laplace approximation for neural network.
+In order to mitigate the computational burden in Laplace approximation above, \cite{ritter2018scalable} proposes to use Kronecker-factored approximation curve(KFAC) in \cite{martens2015optimizing} to approximate the Fisher information matrix $\bld F$ and perform Laplace approximation for neural network. This approximation is derived by approximating the large blocks matrix of Fisher(corresponding to each layer) by Kronecker product of two much smaller matrices. While several times more expensive to compute this, the issues of storage and inversion in Laplace approximation can be mitigated. Additionally, because we need this Fisher information matrix after training, this little expensive computation is required to perform once.
+
+With the notations used in previous subsection, where dropout variational inference is introduced, we will derive the approximation in the following. For clarity, we repeat the definitions of existing notations and new defined ones here. A neural network transforms its input $a_0 = \bld x$ to an output $a_L=p(\bld y| \bld x, \bld \omega)=\sigma(\bld x, \bld \omega)$ through a series of $L$ layers. The units each receive as input a weighted sum of outputs of units from the previous layer and compute their output via a non-linear activation function $\phi(\cdot)$. We denote by $\bld s_i$ the vector of these weighted sums for $i$-th layer, and by $\bld a_i$ the vector output of non-linear activation function. Computation performed for each layer $i\in{1,...,L}$ is given as follows:
+\begin{equation}
+\bld s_i = \bld a_i\bld W_i \text{ and } \bld a_i = \phi(\bld s_i)
+\end{equation}
+We define $\bld{\tilde{w}}$ to be the vector consisting of all of the network's parameters concatenated together, i.e. $\bld{\tilde{w}}= \big[vec(\bld W_1)^T \: vec(\bld W_2)^T \: ...\:vec(\bld W_L)^T\big]^T$, where $vec$ is the operator which vectorizes matrices by stacking their columns together. 
+For simplicity we first define the following notations:
+\[
+\partial v = -\frac{\partial \log{p(\bld y, | \bld x \bld \omega)}}{\partial v} \text{ and } \bld g_i = \partial \bld s_i
+\]
+The first derivatives of objective w.r.t. $\bld{\tilde{w}}$ is defined as follows:
+\begin{equation}
+\begin{aligned}
+\partial \bld{\tilde{w}} = \big[vec(\partial \bld W_1)^T\: vec(\partial \bld W_2)^T\: ...\:vec(\partial \bld W_L)^T\big]^T
+\end{aligned}
+\end{equation}
+
+From equation \ref{Fisher}, we know $\bld{\hat F} = \mathbb E[\partial \bld{\hat w}\partial \bld{\hat w}^T]$ which can viewed as $L$ by $L$ block matrix, with the $(i,j)$-th block $\bld{\hat F}_{i,j}$ given by $\bld{\hat F}_{i,j} = \mathbb E[vec(\partial\bld W_i)vec(\partial\bld W_j)^T]$.
+
+Noting that $\partial \bld W_i = \bld a_{i-1}\bld g_i^T$ and $vec(\bld u \bld v^T) = \bld v \otimes \bld u$, then we have 
+\[
+vec(\partial \bld W_i) = vec(\bld a_{i-1}\bld g_{i}^T) = \bld g_i \otimes \bld a_{i-1}
+\]
+Then we can rewrite 
+\[
+\begin{aligned}
+\bld{\hat F}_{i,j} &=  \mathbb E[vec(\partial\bld W_i)vec(\partial\bld W_j)^T]\\
+&=\mathbb E[(\bld g_i \otimes \bld a_{i-1})(\bld g_j \otimes \bld a_{j-1})^T]\\
+&=\mathbb E[(\bld g_i \otimes \bld a_{i-1})(\bld g_j^T \otimes \bld a_{j-1}^T)]\\
+&=\mathbb E[(\bld g_i \bld g_j^T)\otimes(\bld a_{i-1}  \bld a_{j-1}^T)]
+\end{aligned}
+\]
+Here we need to define $\bld{\tilde{F}}_{i,j}$ as approximation to $\bld{\hat F}_{i,j}$ in the following:
+\begin{equation}
+\begin{aligned}\label{fisher_appr}
+\bld{\hat F}_{i,j} &\approx \bld{\tilde{F}}_{i,j} \\
+&=\mathbb E[\bld g_i \bld g_j^T] \otimes \mathbb E[\bld a_{i-1} \bld a_{j-1}^T] \\
+&= \mathbb E[\bld G_{i,j}] \otimes \mathbb E[\bld A_{i,j}]
+\end{aligned}
+\end{equation}
+where $\bld G_{i,j} = \bld g_i \bld g_j^T$ and $\bld A_{i,j} = \bld a_{i-1}\bld a_{j-1}^T$. The expectation of a Kronecker product is, in general, not equal to the Kronecker product of expectations, and so this
+is indeed a major approximation to make, and one which likely won't become exact under any realistic set of assumptions, or as a limiting case in some kind of asymptotic analysis. Nevertheless, it seems to be fairly accurate in practice, and is able to successfully capture the "coarse structure" of the Fisher information Matrix. 
+In this work, we only consider the case that layers are independent to others. Therefore the Fisher information matrix of the entire network is a diagonal block matrix, which means $\bld{\tilde{F}}_{i,j}$ is non-zero only for $i=j$. For $i$-th layer, we can compute the Fisher information matrix with equation \ref{fisher_appr}. The two factors in Kronecker are outer product of gradients of pre-activation $\bld G_i = \bld g_i \bld g_j^T$ and outer product of activation from previous layer $\bld A_{i} = \bld a_{i-1}\bld a_{i-1}^T$, respectively:
+\[
+\bld{\tilde{F}}_{i} = \bld G_i \otimes \bld A_i
+\] 
+If we treat them as covariances of resulting Gaussian. That means each Gaussian has a Kronecker factored covariance, corresponding to a matrix normal distribution\cite{gupta1999matrix}, which considers the two Kronecker factors of the covariance to be the covariances of the rows and columns of a matrix. The two factors are much smaller than the full covariance and allow for significantly more efficient inversion and sampling. The final posterior of Laplace approximation for $i$-th layer is:
+\begin{equation}
+\begin{aligned} \label{mvg}
+\bld W_{i} \sim \mathcal{MN}(\bld W_i^\star, \mathbb E[\bld A_i]^{-1}, \mathbb E[\bld G_i]^{-1})
+\end{aligned}
+\end{equation}
+f
+If we consider Gaussian prior and scale of Fisher information matrix(cf.equation\ref{fisher hessian_with_prior}), then the resulting posterior can be written in the following form:
+
+\begin{equation}
+\begin{aligned} \label{mvg_priot}
+\bld W_{i} \sim \mathcal{MN}(\bld W_i^\star, (\sqrt{N} \mathbb E[\bld A_i]+\sqrt{\tau}\bld I)^{-1}, (\sqrt{N}\mathbb E[\bld G_i]+\sqrt{\tau}\bld I)^{-1})
+\end{aligned}
+\end{equation} 
+where $N$ is the size of training set and $\tau$ is the standard deviation of Gaussian prior.
+However, we find that in practice, to treat them as hyper-parameters and optimize them w.r.t. the predictive performance on a validation set can yield better performance. The possible reasons for them are two fold. Firstly, nowadays the scale of dataset is really large which can exceed tens of thousand easily. The large size of data could be probably redundant and if we take the redundant data into account and thus increase $N$. This will lead to unreasonably high precision for Gaussian and underestimate the uncertainty. Second, Laplace approximation requires positive definite Hessian and $\tau$ always serves as damp factors to fulfill this condition, therefore it needs to be chosen and tuned carefully.    
+
+
 
 

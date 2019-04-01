@@ -116,7 +116,7 @@ Scoring rules provides a \textbf{summary} measures for the evaluation of probabi
 	\mathcal S(p, q) = \int q(y| \bld x) \mathcal S(p,(y|\bld x))dy
 \end{equation}
 
-$\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality held if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules in which the less it's, the better the performance is:
+$\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality holds if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules in which the less it is, the better the performance is:
 \begin{itemize}
 	\item \textbf{negative log likelihood(NLL)}:NLL is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
 	
@@ -184,7 +184,7 @@ This is uncertainty hitsogram
 This is Reliability diagram
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble}
+		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
 		\caption{Calibration curve of one of three runs.}		
 		\label{exp1_reliability}
 	\end{center}
@@ -205,7 +205,7 @@ This is ROC and PR curve
 	\caption{results of acc, bs, nll, ece, mce, auroc, aupr}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
-		& accuracy     & brier\_score & \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood\end{tabular} \\ \hline
+		& accuracy$ \boldsymbol\uparrow$     & brier\_score $ \boldsymbol \downarrow$& \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood $ \boldsymbol\downarrow$\end{tabular} \\ \hline
 		ori           & 0.568$\pm$0.008 & 0.722$\pm$0.019 & 3.242$\pm$0.340                                                         \\ \hline
 		cdp           & 0.577$\pm$0.008 & 0.594$\pm$0.013 & 2.088$\pm$0.181                                                         \\ \hline
 		mdp           & 0.599$\pm$0.023 & 0.566$\pm$0.020 & 1.940$\pm$0.064                                                         \\ \hline
@@ -219,12 +219,13 @@ This is ROC and PR curve
 	% \caption{results of ece, mce, auroc, aupr}
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (w/o. OOD/\\ w. OOD)\end{tabular} \\ \hline
+		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)$ \boldsymbol\downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$ \boldsymbol\downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$ \boldsymbol\uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$ \boldsymbol\uparrow$\end{tabular} \\ \hline
 		ori           & \begin{tabular}[c]{@{}l@{}}0.304$\pm$0.016 /\\ 0.633$\pm$0.065\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.461$\pm$0.027 /\\ 0.362$\pm$0.025\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.750$\pm$0.007 /\\ 0.664$\pm$0.011\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.802$\pm$0.008 /\\ 0.751$\pm$0.018\end{tabular}                \\ \hline
 		cdp           & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/\\ 0.288$\pm$0.048\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\ 0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\ 0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\ 0.850$\pm$0.022\end{tabular}                \\ \hline
 		mdp           & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\ 0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\ 0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.780$\pm$0.011/ \\ 0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.838$\pm$0.013/ \\ 0.788$\pm$0.006\end{tabular}                \\ \hline
-		emsemble\_cdp & 0.044/0.042                                                                                      & 0.086/0.093                                                                                     & 0.798/0.811                                                                           & 0.845/0.868                                                                                \\ \hline
-		emsemble\_mdp & 0.032/0.170                                                                                      & 0.058/0.227                                                                                     & 0.789/0.653                                                                           & 0.875/0.754                                                                                \\ \hline
+		emsemble\_cdp & \begin{tabular}[c]{@{}l@{}}0.044/\\0.042 \end{tabular} 
+		 &  \begin{tabular}[c]{@{}l@{}}0.086/\\0.093 \end{tabular}                                                                                    & \begin{tabular}[c]{@{}l@{}}0.798/\\0.811  \end{tabular}                                                                           & \begin{tabular}[c]{@{}l@{}}0.845/\\0.868  \end{tabular}                                                                                \\ \hline
+		emsemble\_mdp & \begin{tabular}[c]{@{}l@{}}0.032/\\0.170 \end{tabular}                                                                                       & \begin{tabular}[c]{@{}l@{}}0.058/\\0.227  \end{tabular}                                                                                     & \begin{tabular}[c]{@{}l@{}}0.789/\\0.653 \end{tabular}                                                                            & \begin{tabular}[c]{@{}l@{}}0.875/\\0.754  \end{tabular}                                                                                \\ \hline
 	\end{tabular}
 \end{table}	
 
@@ -243,7 +244,7 @@ his is uncertainty hitsogram
 This is Reliability diagram
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3}
+		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3_}
 		\caption{Calibration curve of one of three runs.}		
 		\label{exp1_reliability}
 	\end{center}
@@ -262,7 +263,7 @@ This is ROC and PR curve
 	\centering
 	\begin{tabular}{|l|l|l|l|}
 		\hline
-		& accuracy                                                              & brier score                                                           & \begin{tabular}[c]{@{}l@{}}negative \\ log\\ likelihood\end{tabular}  \\ \hline
+		& accuracy  $\boldsymbol \uparrow$                                                            & brier score $\boldsymbol \downarrow$                                                           & \begin{tabular}[c]{@{}l@{}}negative \\ log\\ likelihood $\boldsymbol \downarrow$\end{tabular}  \\ \hline
 		cdp          & 
 		\begin{tabular}[c]{@{}l@{}}0.577$\pm$0.008\end{tabular} & 
 		\begin{tabular}[c]{@{}l@{}}0.594$\pm$0.013\end{tabular} & \begin{tabular}[c]{@{}l@{}}2.088$\pm$0.181\end{tabular} \\ \hline
@@ -279,7 +280,7 @@ This is ROC and PR curve
 	\centering
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (w/o. OOD/\\ w. OOD)\end{tabular} \\ \hline
+		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD) $\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} \\ \hline
 		
 		cdp          & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/ \\0.288$\pm$0.048\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\0.850$\pm$0.022\end{tabular}                \\ \hline
 		
@@ -303,7 +304,7 @@ This is ROC and PR curve
 This is Reliability diagram
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3.eps}
+		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
 		\caption{Calibration curve of one of three runs.}		
 		\label{exp1_reliability}
 	\end{center}
@@ -322,7 +323,7 @@ This is ROC and PR curve
 	\caption{results of acc, bs, nll, ece, mce, auroc, aupr}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
-		& accuracy     & brier\_score & \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood\end{tabular} \\ \hline
+		& accuracy   $\boldsymbol \uparrow$  & brier\_score $\boldsymbol \downarrow$& \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood $\boldsymbol \downarrow$\end{tabular} \\ \hline
 		ori           &0.532$\pm$0.015 & 0.717$\pm$0.023& 2.383$\pm$0.053                                                        \\ \hline
 		cdp           & 0.521$\pm$0.011&0.655$\pm$0.017 &  2.190$\pm$0.149                                                        \\ \hline
 		mdp           & 0.520$\pm$0.012 &0.641$\pm$0.014 & 1.804$\pm$0.073                                                         \\ \hline
@@ -334,7 +335,7 @@ This is ROC and PR curve
 	% \caption{results of ece, mce, auroc, aupr}
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (w/o. OOD/\\ w. OOD)\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (w/o. OOD/\\ w. OOD)\end{tabular} \\ \hline
+		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} \\ \hline
 		ori           & \begin{tabular}[c]{@{}l@{}}0.262$\pm$0.011/ \\0.793$\pm$0.012\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.365$\pm$0.010/ \\0.491$\pm$0.013\end{tabular}                     &
 		\begin{tabular}[c]{@{}l@{}}0.716$\pm$0.005/ \\0.602$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.724$\pm$0.022/ \\0.681$\pm$0.007\end{tabular}                \\ \hline
 		cdp           & \begin{tabular}[c]{@{}l@{}}0.141$\pm$0.022/ \\0.270$\pm$0.037\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.203$\pm$0.053/ \\0.359$\pm$0.056\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.748$\pm$0.002/ \\0.712$\pm$0.006\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.770$\pm$0.002/ \\0.782$\pm$0.004\end{tabular}                \\ \hline

@@ -84,6 +84,11 @@ Yarin Gal, Riashat Islam, and Zoubin Ghahramani.
 Yarin Gal, Rowan McAllister, and Carl~Edward Rasmussen.
 \newblock Improving pilco with bayesian neural network dynamics models.
 
+\bibitem[GN99]{gupta1999matrix}
+AK~Gupta and DK~Nagar.
+\newblock {\em Matrix Variate Distributions}, volume 104.
+\newblock CRC Press, 1999.
+
 \bibitem[GPSW17]{guo2017calibration}
 Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q Weinberger.
 \newblock On calibration of modern neural networks.
