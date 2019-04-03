@@ -637,7 +637,7 @@ If we consider Gaussian prior and scale of Fisher information matrix(cf.equation
 \end{aligned}
 \end{equation} 
 where $N$ is the size of training set and $\tau$ is the standard deviation of Gaussian prior.
-However, we find that in practice, to treat them as hyper-parameters and optimize them w.r.t. the predictive performance on a validation set can yield better performance. The possible reasons for them are two fold. Firstly, nowadays the scale of dataset is really large which can exceed tens of thousand easily. The large size of data could be probably redundant and if we take the redundant data into account and thus increase $N$. This will lead to unreasonably high precision for Gaussian and underestimate the uncertainty. Second, Laplace approximation requires positive definite Hessian and $\tau$ always serves as damp factors to fulfill this condition, therefore it needs to be chosen and tuned carefully.    
+However, we find that in practice, to treat them as hyper-parameters and tune them w.r.t. the predictive performance on a validation set can yield better performance. The possible reasons for this are two fold. Firstly, nowadays the scale of dataset is really large which can exceed tens of thousand easily. The large size of data could be probably redundant and if we take the redundant data into account and thus increase $N$. This will lead to unreasonably high precision for Gaussian and underestimate the uncertainty significantly. Second, Laplace approximation requires positive definite Hessian and $\tau$ always serves as damp factors to fulfill this condition, therefore it needs to be chosen and tuned carefully.    
 
 
 

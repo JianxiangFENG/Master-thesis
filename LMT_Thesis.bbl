@@ -1,6 +1,13 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{LSVDHR16}
 
+\bibitem[ABC{\etalchar{+}}16]{abadi2016tensorflow}
+Mart{\'\i}n Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey
+  Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et~al.
+\newblock Tensorflow: A system for large-scale machine learning.
+\newblock In {\em 12th $\{$USENIX$\}$ Symposium on Operating Systems Design and
+  Implementation ($\{$OSDI$\}$ 16)}, pages 265--283, 2016.
+
 \bibitem[AOS{\etalchar{+}}16]{amodei2016concrete}
 Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and
   Dan Man{\'e}.

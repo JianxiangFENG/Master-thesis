@@ -42,12 +42,12 @@
 \contentsline {paragraph}{T-LESS\cite {hodan2017tless}}{37}
 \contentsline {subsection}{\numberline {4.1.2}Uncertainty measures}{37}
 \contentsline {paragraph}{Confidence}{37}
-\contentsline {paragraph}{Predictive entropy}{38}
-\contentsline {paragraph}{Mutual information}{38}
+\contentsline {paragraph}{Predictive entropy}{37}
+\contentsline {paragraph}{Mutual information}{37}
 \contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{38}
-\contentsline {paragraph}{Uncertainty histogram}{39}
-\contentsline {paragraph}{Reliability diagram(Calibration curve)}{39}
-\contentsline {paragraph}{Proper scoring rules:}{40}
+\contentsline {paragraph}{Uncertainty histogram}{38}
+\contentsline {paragraph}{Reliability diagram(Calibration curve)}{38}
+\contentsline {paragraph}{Proper scoring rules:}{39}
 \contentsline {paragraph}{Separability metrics:}{40}
 \contentsline {section}{\numberline {4.2}Uncertainty estimation experiments}{41}
 \contentsline {subsection}{\numberline {4.2.1}Experiments \uppercase {i\relax }}{41}
