@@ -58,7 +58,7 @@ On the other hand, in Bayesian neural network, the model parameter $\boldsymbol{
 
 \section{Variational inference}
 \subsection{Introduction}
-As is mentioned above, variational inference cast inference into optimization by minimizing the Kullbach-Leibler divergence between approximate posterior distribution and the real posterior distribution. However, there is no analytical definition of this KL divergence between the real posterior distribution is unkown. We can derive a lower bound which is also called evidence lower bound($ELBO$) which bounds the log marginal likelihood with Jensen's inequality. And from that we know marginal likelihood is the sum of $ELBO$ and KL divergence between approximate posterior and real posterior. The derivation is given in the following:
+As is mentioned above, variational inference cast inference into optimization by minimizing the Kullbach-Leibler divergence between approximate posterior distribution and the real posterior distribution. However, there is no analytical definition of this KL divergence between the real posterior distribution is unknown. We can derive a lower bound which is also called evidence lower bound($ELBO$) which bounds the log marginal likelihood with Jensen's inequality. And from that we know that marginal likelihood is the sum of $ELBO$ and KL divergence between approximate posterior and real posterior. The derivation is given in the following:
 \begin{equation}\label{2.6}	
 \begin{aligned}
 	\log(p(\bld{Y}|\bld{X})) & = \log(\int p(\bld{Y}| \bld{X}, \bld{\omega})  p(\bld{\omega})d\bld{\omega}) \\	 
@@ -71,7 +71,7 @@ As is mentioned above, variational inference cast inference into optimization by
 
 where $p(\bld Y| \bld X)$ is the likelihood, $p(\bld \omega)$ is the prior distribution over model parameters, $q_{\theta}(\bld \omega)$ is the approximate posterior distribution over parameters which is parameterized by $\theta$.
 
-We can get log$(p(\bld Y) | \bld X)$ by adding $ELBO$ and KL divergence between approximate posterior $q_{\theta}(\bld \omega)$ and real posterior $p(\bld \omega | \bld X, \bld Y)$:
+We can get log$(p(\bld Y) | \bld X)$ by calculating the sum of $ELBO$ and KL divergence between approximate posterior $q_{\theta}(\bld \omega)$ and real posterior $p(\bld \omega | \bld X, \bld Y)$:
 
 \begin{equation}\label{2.7}	
 \begin{aligned}
@@ -82,7 +82,7 @@ We can get log$(p(\bld Y) | \bld X)$ by adding $ELBO$ and KL divergence between 
 \end{aligned}
 \end{equation}
 
-When we maximize the $ELBO$ w.r.t the parameters of approximate posterior $\theta$, it's equivalent to minimizing the KL divergence because the log marginal likelihood is not a function of $\theta$. Then we have a well-defined objective which is the $ELBO$, in which the first term is called expected log likelihood which ensures the model can explain the data well and the second term is called regularization term which ensures the approximate posterior does not deviate too far from the prior distribution.
+When we maximize the $ELBO$ w.r.t the parameter of approximate posterior $\theta$, which is also called \textbf{variational parameter}. We use these two terms interchangeably in the following. It's equivalent to minimizing the KL divergence because the log marginal likelihood is not a function of $\theta$. Then we have a well-defined objective which is the $ELBO$, in which the first term is called expected log likelihood which ensures the model can explain the data well and the second term is called regularization term which ensures the approximate posterior does not deviate too far from the prior distribution.
 Now we have cast an inference problem into an optimization problem:
 
 \begin{equation}\label{2.8}	
@@ -99,7 +99,7 @@ which is equivalent to
 \end{aligned}
 \end{equation}
 
-However, there are still some difficulties if we want to solve this optimization with this objective. The first one is to deal with large size dataset, which induces large computation in the expected log likelihood term. \cite{graves2011practical} shows that this can solved by data subsampling which is also called stochastic optimization. Another one is that we need to obtain the derivatives of $ELBO$ w.r.t. approximate parameter $\theta$. Since the model parameters are samples from approximate distribution, good estimator for the derivatives is required which will be introduced in next subsection. 
+However, there are still some difficulties if we want to solve this optimization with this objective. The first one is to deal with large size dataset, which induces large computation in the expected log likelihood term. \cite{graves2011practical} shows that this can solved by data sub-sampling which is also called stochastic optimization. Another one is that we need to obtain the derivatives of $ELBO$ w.r.t. approximate parameter $\theta$. Since the model parameters are samples from approximate distribution, good estimator for the derivatives is required which will be introduced in next subsection. 
 
 
 \subsection{Dropout variational inference}
@@ -117,15 +117,16 @@ The mechanism of dropout is simple, each units of specific layer is multiplied b
 
 
 \subsubsection{Bayesian interpretation of dropout}
-As is mentioned in the last subsection, in variational inference, we want to minimize the KL divergence between approximate distribution and the real posterior distribution over the model parameters, which turns out to be maximization of evidence lower bound($ELBO$). When dropout is interpreted in Bayesian way, the distribution over hidden units is reformulated as distribution over weight matrices. The training objectives of neural network with dropout is proved to be similar as the $ELBO$ of Bayesian neural network with Bernoulli distribution factorized over the input dimension of weight matrix. In the following, we will explain this interpretation including key factors such as \textbf{approximate distribution}, \textbf{training objective}, \textbf{marginalization in testing} by using one simple example in {classification} case in \ref{fig:dropout_inference}, in which we define the hidden layer as the first layer and output layer as the second layer and assume that we use L2 regularization and put a prior distribution of fully factorized Gaussian over weights initially, which can be generalized to multi-layer neural network easily.
+As is mentioned in the last subsection, in variational inference, we want to minimize the KL divergence between approximate distribution and the real posterior distribution over the model parameters, which turns out to be maximization of evidence lower bound($ELBO$). When dropout is interpreted in Bayesian way, the distribution over hidden units is reformulated as distribution over weight matrices. The training objectives of neural network with dropout is proved to be similar as the $ELBO$ of Bayesian neural network with Bernoulli distribution factorized over the input dimension of weight matrix. In the following, we will explain this interpretation including following key factors: \textbf{approximate distribution}, \textbf{training objective}, \textbf{marginalization in testing} by using one simple example in {classification} case in \ref{fig:dropout_inference}, in which we define the hidden layer as the first layer and output layer as the second layer and assume that we use L2 regularization and put a prior distribution of fully factorized Gaussian over weights initially, which can be generalized to multi-layer neural network easily.
 
 
 \begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=13cm]{dropout_inference}
+	%\begin{center}
+		\centering
+		\includegraphics[width=11cm]{dropout_inference}
 		\caption{A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}		
 		\label{fig:dropout_inference}
-	\end{center}
+	%\end{center}
 \end{figure}
 
 \newpage
@@ -202,7 +203,7 @@ From equation \ref{appr_covariance}, we can see that the entire covariance matri
 When observing covariance matrix of parameter matrix $\bld W_{i}$ w.r.t. approximate posterior distribution $q_{\theta}({\bld W_{i}})$, we know that samples of row vectors in weight matrix are drawn independently and thus covariance between rows are zero. On the other hand, samples for different weights in the same row are drawn at the same time because they are multiplied by the same realization of $\epsilon_{i}$, from which covariances between weights within the same row are induced. Therefore, by fitting this approximate distribution to the real posterior distribution weights within the same row can be learned. This means that the approximate distribution family have more flexibility to approximate the real posterior distribution when compared with other common approximate posterior distribution family that assumes distribution for each parameter is independent such as fully factorized Gaussian.
 
 
-\paragraph{Training objective} Up to now, we have only analyzed the approximate distribution of dropout inference. As is mentioned in introduction section of this chapter, we know that we perform optimization of $ELBO$ w.r.t. the approximate distribution parameters, in order to obtain a good approximation to the true posterior distribution over parameters, which we can use in testing to obtain more reliable uncertainty estimation. In the following, we will show that training a neural network with dropout is equivalent to optimizing the $ELBO$ w.r.t. approximate distribution parameters.
+\paragraph{Training objective} Up to now, we have only analyzed the approximate distribution of dropout inference. As is mentioned in introduction section of this chapter, we know that we perform optimization of $ELBO$ w.r.t. the approximate distribution parameters, in order to obtain a good approximation to the true posterior distribution over parameters, which we can use in testing to obtain more reliable uncertainty estimation. In the following, we will show that training a neural network with dropout is equivalent to optimizing the $ELBO$ w.r.t. variational parameters.
 
 At first, let's define the training objective of neural network with dropout, which is cross entropy between predictive distribution and target distribution plus L2 regularization:
 
@@ -224,7 +225,7 @@ Normally we use gradient descent to tune our parameters in training, which requi
 
 where $S$ is one random subset of entire dataset, and $|S| = K$.
 
-On the other hand, let's have a look at $ELBO$ in equation \ref{2.6}, if we want to maximize $ELBO$, which is equivalent to minimize negative $ELBO$ w.r.t. the approximate distribution parameters $\theta$, with SGD. The gradients are computed with the following expression:
+On the other hand, let's have a look at $ELBO$ in equation \ref{2.6}, if we want to maximize $ELBO$, which is equivalent to minimize negative $ELBO$ w.r.t. the variational parameter $\theta$, with SGD. The gradients are computed with the following expression:
 
 \begin{equation}
 \begin{aligned} \label{elbo_grad}
@@ -263,7 +264,7 @@ I'(\theta) &= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx \\
 &= \mathbb E_{p(\epsilon)}\big[ f'(g(\epsilon, \theta))\frac{\partial}{\partial \theta}g(\theta, \epsilon)\big] 
 \end{aligned}
 \end{equation} 
-From practical point of view, the expectation of last line in expression \ref{repa1} can be approximated with Monte Carlo integration. In dropout inference, we know that if we fix the dropout rate which is equal to $1- p_{i}$ in equation \ref{appro_cond_dist_form} in training. Then $\bld \epsilon_{i}$ in equation \ref{appro_cond_dist_form} is a parameter free random variable and $g(\cdot)$ is a differentiable function w.r.t. parameter $\bld M_{i}$. And the approximate distribution parameter $\theta$ only contains $\{(\bld M_{i})_{i=1}^{L} \}$, which are exactly the weights to be learned in training neural network with dropout. As a result, if we estimate the gradient of $ELBO$ w.r.t. approximate distribution parameters $\{(\bld M_{i})_{i=1}^{L}\}$, that is the first term in \ref{elbo_grad}, it's equivalent to calculate the gradient of dropout loss w.r.t. model parameters $\bld \omega$ which is the first term in equation \ref{dropout_grad}.
+From practical point of view, the expectation of last line in expression \ref{repa1} can be approximated with Monte Carlo integration. In dropout inference, we know that if we fix the dropout rate to $1- p_{i}$ in equation \ref{appro_cond_dist_form} during training. Then $\bld \epsilon_{i}$ in equation \ref{appro_cond_dist_form} is a parameter free random variable and $g(\cdot)$ is a differentiable function w.r.t. its input argument $\bld M_{i}$. Now the variational parameter $\theta$ only contains $\{(\bld M_{i})_{i=1}^{L} \}$, which are exactly the weights to be learned in training neural network with dropout. As a consequence, if we estimate the gradient of $ELBO$ w.r.t. $\{(\bld M_{i})_{i=1}^{L}\}$, which is the first term in equation \ref{elbo_grad}, it's equivalent to calculate the gradient of dropout loss w.r.t. model parameters $\bld \omega$ which is the first term in equation \ref{dropout_grad}.
 
 \subparagraph{KL condition:} The second term in equation \ref{elbo_grad} is proved to be equivalent to the second term in equation \ref{dropout_grad}
 for a large enough number of hidden units when we specify the model prior to be a product of independent Gaussian distributions over each weight with prior length scale $l$, that is:
@@ -295,7 +296,7 @@ with
 \[
 \mathcal H(\bld p_{i}) = D_{i-1}(-p_{i}\text{log}p_{i} - (1-p_{i})\text{log}(1-p_{i}))
 \]
-for large enough $D_{i}$. If we fix dropout rate in training and compute the gradients of KL divergence w.r.t. model parameters $\theta = \{(\bld M_{i})_{i=1}^{L} \}$. We can see that, if we choose $\lambda = \frac{l^{2}p_{i}}{2}$, then it's equivalent to the gradients of regularization term in dropout loss function(cf. \ref{dropout_grad}):
+for large enough $D_{i}$. If we \textbf{fix dropout rate} in training and compute the gradients of KL divergence w.r.t. variational parameters $\theta = \{(\bld M_{i})_{i=1}^{L} \}$, which is now exactly the same as the model parameters $\bld \omega = \{(\bld W_i)_{i=1}^L\}$. Then the term entropy of dropout rate can be ignored.  We can see that, if we choose $\lambda = \frac{l^{2}p_{i}}{2}$, then it's equivalent to the gradients of regularization term in dropout loss function(cf. equation \ref{dropout_grad}):
 
 \begin{equation} 
 \begin{aligned}\label{KL_grad}
@@ -303,10 +304,10 @@ for large enough $D_{i}$. If we fix dropout rate in training and compute the gra
 \end{aligned}
 \end{equation}
 
-With aforementioned re-parameterization trick and KL condition, we know that the computation of gradients of objective function w.r.t. model parameters in equation \ref{dropout_grad} is equivalent to those of $ELBO$ w.r.t. approximate distribution parameters in equation \ref{elbo_grad}. That means if we train a neural network with dropout, we can obtain the approximate posterior distribution over model parameters defined in equation \ref{appro_dist_form}.
+With aforementioned re-parameterization trick and KL condition, we know that the computation of gradients of objective function w.r.t. model parameters in equation \ref{dropout_grad} is equivalent to that of negative $ELBO$ w.r.t. variational parameter in equation \ref{elbo_grad}. That means, if we train a neural network with dropout, it's equivalent to train a Bayesian neural network with approximate posterior distribution over model parameters defined in equation \ref{appro_dist_form}.
 
 \paragraph{Marginalization in testing}
-After we have obtain the parameters $\theta$ of approximate posterior distribution over model parameters $q_{\theta}(\bld \omega)$, we can marginalize all possible parameters over approximate posterior to get final predictive distribution of output, similar to equation \ref{2.4} but with approximate posterior. Because the integration is hard to evaluate analytically. In practice, we always use Monte Carlo integration:
+After we have obtain the parameters $\theta$ of approximate posterior distribution over model parameters $q_{\theta}(\bld \omega)$, we can marginalize all possible parameters over approximate posterior distribution to get final predictive distribution of output, similar to equation \ref{2.4} but now with approximate posterior distribution over model parameter, which has an expression in equation \ref{marginalization_test}. Because the integration is hard to evaluate analytically. In practice, we always use Monte Carlo integration:
 
 \begin{equation}
 \begin{aligned} \label{marginalization_test}
@@ -324,10 +325,10 @@ Based on the aforementioned description of dropout inference, we can see that if
 
 However, fixing dropout rate in train is not a trivial task for several reasons. Firstly, as is shown in \cite{srivastava2014dropout}, different dropout rates have different impact on model capacity and thus model performance. To choose an optimal dropout rate manually requires repeating tedious experiments and thus waste of time and computation effort. Secondly, if we want our model not only to achieve satisfied performance but also to possess reliable uncertainty estimation, the dropout rate matters a lot because it belongs to variational parameter $\theta$ and further influences the flexibility of approximate distribution family from the perspective of Bayesian interpretation.
 
-Accordingly, one direct counter measure is to learn dropout rate from the data \cite{gal2017concrete}. One major difficulty to learn dropout rate from the data in gradient-based optimization is that it's not trivial to estimate gradients of expectation w.r.t. parameters of the distribution when this distribution is discrete. Before in case of continuous distribution, we estimate this gradient with help of re-parameterization trick. As introduced in the last section, re-parameterization trick requires re-parameterizing model parameters by a differential function with variational parameters and a parameter-free random variable as input arguments. For continuous distribution, this function can be found easily if they have tractable inverse cumulative density function or functional form like Gaussian\cite{kingma2013auto}. For most of discrete distributions such as Bernoulli distribution or categorical distribution, they lack useful reparameterizations
+Accordingly, one direct counter measure is to learn dropout rate from the data \cite{gal2017concrete}. One major difficulty to learn dropout rate from the data in gradient-based optimization is that it's not trivial to estimate gradients of expectation w.r.t. parameters of a discrete distribution. Before when the approximate distribution is continuous, we estimate this gradient with help of re-parameterization trick. As introduced in the last section, re-parameterization trick requires re-parameterizing samples of the distribution into a differential function with variational parameters and a parameter-free random variable as input arguments. For continuous distribution, this function can be found easily if they have tractable inverse cumulative density function or functional form like Gaussian\cite{kingma2013auto}. For most of discrete distributions such as Bernoulli distribution or categorical one, they lack useful re-parameterizations
 due to the discontinuous nature of discrete states \cite{maddison2016concrete}. 
 
-Faced with this issue, \cite{jang2016categorical} and \cite{maddison2016concrete} come up with one approach that replaces "max" operation in Gumbel-Max trick with softmax function, which can yields a practical re-parameterization for discrete random variable. With this method, gradients w.r.t. parameters of discrete distribution can be computed and used in gradient-based optimization. In this subsection, a quick recap of this method is given in the following.
+Confronted with this issue, \cite{jang2016categorical} and \cite{maddison2016concrete} come up with one approach where "max" operation in Gumbel-Max trick is replaced by "softmax" function, which can yields a practical re-parameterization for discrete random variable. With this, gradients w.r.t. parameters of discrete approximate distribution can be computed and used in gradient-based optimization. In this subsection, a quick recap of this approach is given in the following.
 
 \subparagraph{Re-parameterization of Bernoulli distribution}
 Firstly, Gumbel-Max trick\cite{maddison2014sampling} is introduced in figure \ref{gumbel_max}, which is used for drawing samples from a discrete distribution which is parameterized by set of unnormalized probability $\{\alpha_i\}_{i=1}^{n}$ via inverse cumulative distribution function of Gumbel distribution, where $\alpha_i \in \mathbb R_{>0}$ and $n$ denotes the number of class. Assuming that we use one-hot encoding vector for the class representation, that is $\bld d \in \{0,1\}^n $ and $\sum_{i=1}^{n}d_i = 1$. The Gumbel-Max trick proceeds as follows(cf. figure \ref{gumbel_max}):
@@ -346,7 +347,9 @@ Then we obtain one sample from this discrete distribution and the probability fo
 	\end{center}
 \end{figure}
 
-As observed in Gumbel-Max trick, the sampling step is re-paramterized by one function with distribution parameters and parameter-free random variable as arguments. This function is componentwise addition of two input arguments followed by $argmax$ operation. However, $argmax$ operation is not differential w.r.t. distribution parameter $\alpha_i$. Fortunately, this operation can be approximated by a continuous function, $softmax$, which is also differential w.r.t. distribution parameters. With this replacement, we can obtain a continuous approximation to $\bld d$ on the simplex $\triangle^{n-1} = \{\bld x \in \mathbb R^n | x_k \in [0,1], \sum_{i=1}^{n} x_i = 1 \}$:
+As observed in Gumbel-Max trick, the sampling step is re-paramterized by one function with distribution parameters and parameter-free random variable as arguments. This function is component-wise addition of two input arguments followed by $argmax$ operation. However, $argmax$ operation is not differential w.r.t. distribution parameter $\alpha_i$. 
+
+With a little abuse of notation, we denote temperature by $\lambda$ here. Fortunately, the $argmax$ operation can be approximated by a continuous function, $softmax$ function with $\lambda$ as temperature parameter, which is differential w.r.t. distribution parameters. With this replacement, we can obtain a continuous approximation to one-hot encoding vector $\bld d$ on the simplex $\triangle^{n-1} = \{\bld x \in \mathbb R^n | x_k \in [0,1], \sum_{i=1}^{n} x_i = 1 \}$:
 
 \begin{equation} \label{gumbel_softmax}
 \begin{aligned}
@@ -354,7 +357,7 @@ x_{k} = \frac{\text{exp}((\text{log}\alpha_k + G_k)/\lambda)}{\sum_{i=1}^{n}\tex
 \end{aligned}
 \end{equation}
 
-The sampling steps are similar to Gumbel-Max trick, but with smoothed $softmax$ operation instead of $argmax$(cf. figure \ref{fig:gumbel_softmax}). When $\lambda \rightarrow 0$, the $softmax$ function is recovered to $argmax$ operation, when $\lambda \rightarrow \infty$, this operation generates uniform vector instead of one-hot encoded vector.
+The sampling steps are similar to Gumbel-Max trick, but with smoothed $softmax$ operation instead of $argmax$(cf. figure \ref{fig:gumbel_softmax}). When $\lambda \rightarrow 0$, the $softmax$ function is recovered to $argmax$ operation, when $\lambda \rightarrow \infty$, this operation generates uniform vector instead of one-hot encoding vector. In practice, we set temperature as 0.1.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -364,7 +367,7 @@ The sampling steps are similar to Gumbel-Max trick, but with smoothed $softmax$ 
 	\end{center}
 \end{figure}
 
-When it comes to Bernoulli discrete distribution in our case, it becomes similar because there are only two states in this distribution and samples live in two dimensional simplex. On the other hand, the difference of two Gumbels distributed random variable is similar to a logistic distributed random variable.  With the probability of state 1 which can be expressed by:
+When it comes to Bernoulli discrete distribution in our case, it becomes simpler because there are only two states in this distribution and samples live in two dimensional simplex. On the other hand, the difference of two Gumbels distributed random variable is similar to a logistic distributed random variable.  With the probability of state 1 which can be expressed by:
 
 \[
 \begin{aligned}
@@ -374,11 +377,11 @@ When it comes to Bernoulli discrete distribution in our case, it becomes similar
 \] 
 
 where $G_1 - G_2 = \text{log}(\text{Uniform}(0,1)) - \text{log}(1-\text{Uniform}(0,1))$, which is the inverse cumulative density function of Logistic(0,1).
-Then we can infer the re-parameterization of Bernoulli distributed variable with $p$ as parameter as follows:
+Then we can infer the re-parameterization of continuous approximation of sample $x \in [0, 1]$ from Bernoulli distributed random variable with $p$ as parameter as follows:
 
 \begin{equation}\label{bern_repa}
 	\begin{aligned}
-	x_1 = \text{sigmoid}\big(
+	x = \text{sigmoid}\big(
 	\frac{1}{\lambda} (\text{log}p - \text{log}(1-p) + \text{u} - \text{log}(1-u)) 
 	\big)
 	\end{aligned}
@@ -386,26 +389,27 @@ Then we can infer the re-parameterization of Bernoulli distributed variable with
 
 where $u \sim \text{Uniform}(0,1)$. 
 
-In order to make explanation more clear and validate this re-parameterization, there is one plot in the following (figure \ref{fig:bern_repa}) showing the relationship between average values of 100 samples drawn from this continuous approximation of Bernoulli distribution with different probability. We can see that the samples drawn from equation \ref{bern_repa} distributed similar to the Bernoulli distribution, while most of samples lie on the boundary of range $[0,1]$ and only few of them lie in the interior.
+In order to make explanation more clear and validate the continuous approximate re-parameterization, there is one plot (figure \ref{fig:bern_repa}) showing the relationship between average values of 100 samples drawn from this continuous approximation of Bernoulli distribution with different probability parameter from 0 to 1 with step of 0.1. We can see that the empirical average of samples drawn from equation \ref{bern_repa} is close to expectation of Bernoulli distribution of corresponding parameter. Additionally, we show one single sample in the figure. As we can see, most of samples are lying on the boundary of range $[0,1]$ and only few of them lie in the interior.
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=9cm, width=15cm]{bern_repa_}
+		\includegraphics[height=8cm, width=14cm]{bern_repa_}
 		\caption{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}		
 		\label{fig:bern_repa}
 	\end{center}
 \end{figure}
 
 \subparagraph{Dropout regularization}
-Because keep rate of dropout is optimized now, the parameters of approximate distribution $\theta$ contains both $\{ (\bld M_i)_{i=1}^{L} \}$ and $\{(\bld p_i)_{i=1}^{L} \}$. In order to compute gradients of ELBO in equation \ref{elbo_grad}, we employ categorical re-parameterization to estimate the gradients w.r.t. Bernoulli distribution parameter $\bld p_i$ in the first term, for the second term, we could not ignore the term with $\bld p_i$ in KL condition \ref{kl_condition}, which is the entropy term. Consequently, unlike equation \ref{KL_grad}, the KL divergence term should be:
+Because keep rate of dropout is being optimized, the parameters of approximate distribution $\theta$ contains both $\{ (\bld M_i)_{i=1}^{L} \}$ and $\{(\bld p_i)_{i=1}^{L} \}$. In order to compute gradients of ELBO in equation \ref{elbo_grad}, we employ categorical re-parameterization to estimate the gradients w.r.t. Bernoulli distribution parameter $\bld p_i$ in the first term, for the second term, we could not ignore the term with $\bld p_i$ in KL condition \ref{kl_condition}, which is the entropy term. Consequently, unlike equation \ref{KL_grad}, the KL divergence term should be:
 
 \begin{equation} 
 \begin{aligned}\label{KL_grad_concrete}
 \frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta} 
-&\approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \mathcal H(\bld p_{i})}{\partial \theta}  \\
-&= \frac{\partial}{\partial \theta} \big( \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- D_{i-1}(-p_{i}\text{log}p_{i} - (1-p_{i})\text{log}(1-p_{i}))\big)
+&\approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \beta\mathcal H(\bld p_{i})}{\partial \theta}  \\
+&= \frac{\partial}{\partial \theta} \big( \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \beta D_{i-1}(-p_{i}\text{log}p_{i} - (1-p_{i})\text{log}(1-p_{i}))\big)
 \end{aligned}
 \end{equation}
 
+where $\lambda$ and $\beta$ are coefficients for L2 regularization and dropout regularization, respectively. They are hyper-parameters which can be tuned based on performance on validation set.
 From the equation above, we can see that this term maximize the entropy of Bernoulli distribution, which means this term pushes $\bld p_i$ to 0.5. The coefficient of the dropout regularisation term means that large models will push the dropout probability towards 0.5 much more than smaller models, but as the amount of data N increases the dropout probability will be pushed towards 1 because of the expected log likelihood in the first term. One of reasons behind could be pushing $\bld p_i$ to 0.5 would decrease the capacity of the model which will decrease the expected log-likelihood. 
 
 \paragraph{Multi-Drop}
@@ -413,8 +417,8 @@ From figure \ref{fig:dropout} and expression of approximate distribution in equa
 \begin{equation} 
 \begin{aligned}\label{KL_grad_multi}
 \frac{\partial KL(q_{\theta}(\bld \omega)||p(\bld \omega))}{\partial \theta} 
-&\approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \mathcal H(\bld p_{i})}{\partial \theta}  \\
-&= \frac{\partial}{\partial \theta} \big( \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \sum_{k=1}^{D_{i-1}}(-p_i^k\text{log}p_i^k - (1-p_i^k)\text{log}(1-p_i^k))\big)
+&\approx \frac{\partial \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \beta \mathcal H(\bld p_{i})}{\partial \theta}  \\
+&= \frac{\partial}{\partial \theta} \big( \sum_{i=1}^{L}\lambda||\bld M_{i}||^{2}- \beta \sum_{k=1}^{D_{i-1}}(-p_i^k\text{log}p_i^k - (1-p_i^k)\text{log}(1-p_i^k))\big)
 \end{aligned}
 \end{equation}  
 
@@ -446,7 +450,7 @@ The reasons behind multi-drop are as following:
 \begin{figure}[h!]
 	\begin{center}
 		\centering
-		\includegraphics[width=13cm]{multi-drop}
+		\includegraphics[width=11cm]{multi-drop}
 		\caption{Different dropout rates for different hidden units in multi-drop.}		
 		\label{fig:multi-drop}
 	\end{center}

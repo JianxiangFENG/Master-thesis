@@ -14,7 +14,7 @@
 \contentsline {subsection}{\numberline {2.2.1}Introduction}{11}
 \contentsline {subsection}{\numberline {2.2.2}Dropout variational inference}{12}
 \contentsline {subsubsection}{Dropout}{12}
-\contentsline {subsubsection}{Bayesian interpretation of dropout}{12}
+\contentsline {subsubsection}{Bayesian interpretation of dropout}{13}
 \contentsline {paragraph}{Approximate distribution}{14}
 \contentsline {paragraph}{Training objective}{16}
 \contentsline {subparagraph}{Re-parameterization trick:}{17}
@@ -24,7 +24,7 @@
 \contentsline {paragraph}{Concrete dropout}{20}
 \contentsline {subparagraph}{Re-parameterization of Bernoulli distribution}{21}
 \contentsline {subparagraph}{Dropout regularization}{23}
-\contentsline {paragraph}{Multi-Drop}{24}
+\contentsline {paragraph}{Multi-Drop}{25}
 \contentsline {subsection}{\numberline {2.2.4}Modified network architecture}{26}
 \contentsline {section}{\numberline {2.3}Laplace approximation}{28}
 \contentsline {subsection}{\numberline {2.3.1}Introduction}{28}
