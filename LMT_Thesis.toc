@@ -1,7 +1,7 @@
-\babel@toc {ngerman}{}
-\babel@toc {american}{}
-\babel@toc {american}{}
-\babel@toc {american}{}
+\select@language {ngerman}
+\select@language {american}
+\select@language {american}
+\select@language {american}
 \contentsline {chapter}{Contents}{ii}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}What is uncertainty?}{1}
@@ -55,24 +55,24 @@
 \contentsline {subsection}{\numberline {4.2.3}Comparison with Ensemble}{44}
 \contentsline {paragraph}{Uncertainty histogram}{44}
 \contentsline {paragraph}{Reliability diagram}{44}
-\contentsline {paragraph}{ROC curve and PR curve}{45}
-\contentsline {subsection}{\numberline {4.2.4}Comparison with Laplace approximation}{46}
-\contentsline {subsection}{\numberline {4.2.5}Ablation study}{49}
-\contentsline {section}{\numberline {4.3}Automatic labeling experiments}{51}
-\contentsline {subsection}{\numberline {4.3.1}Experiments settings}{51}
-\contentsline {subsection}{\numberline {4.3.2}Results}{51}
-\contentsline {subsection}{\numberline {4.3.3}Analysis}{51}
-\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{51}
-\contentsline {subsection}{\numberline {4.4.1}Experiments settings}{51}
-\contentsline {subsection}{\numberline {4.4.2}Results}{51}
-\contentsline {subsection}{\numberline {4.4.3}Analysis}{51}
-\contentsline {chapter}{\numberline {5}Conclusion}{52}
-\contentsline {chapter}{\numberline {A}Appendix}{53}
-\contentsline {section}{\numberline {A.1}KL condition}{53}
-\contentsline {paragraph}{Proposition 1.}{53}
-\contentsline {paragraph}{$Proof.$}{53}
-\contentsline {section}{\numberline {A.2}Figures}{55}
-\contentsline {section}{\numberline {A.3}Implementation Details}{55}
-\contentsline {chapter}{List of Figures}{56}
-\contentsline {chapter}{List of Tables}{58}
-\contentsline {chapter}{Bibliography}{59}
+\contentsline {paragraph}{ROC curve and PR curve}{46}
+\contentsline {subsection}{\numberline {4.2.4}Comparison with Laplace approximation}{48}
+\contentsline {subsection}{\numberline {4.2.5}Ablation study}{50}
+\contentsline {section}{\numberline {4.3}Automatic labeling experiments}{53}
+\contentsline {subsection}{\numberline {4.3.1}Experiments settings}{53}
+\contentsline {subsection}{\numberline {4.3.2}Results}{53}
+\contentsline {subsection}{\numberline {4.3.3}Analysis}{53}
+\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{53}
+\contentsline {subsection}{\numberline {4.4.1}Experiments settings}{53}
+\contentsline {subsection}{\numberline {4.4.2}Results}{53}
+\contentsline {subsection}{\numberline {4.4.3}Analysis}{53}
+\contentsline {chapter}{\numberline {5}Conclusion}{54}
+\contentsline {chapter}{\numberline {A}Appendix}{55}
+\contentsline {section}{\numberline {A.1}KL condition}{55}
+\contentsline {paragraph}{Proposition 1.}{55}
+\contentsline {paragraph}{$Proof.$}{55}
+\contentsline {section}{\numberline {A.2}Figures}{57}
+\contentsline {section}{\numberline {A.3}Implementation Details}{57}
+\contentsline {chapter}{List of Figures}{58}
+\contentsline {chapter}{List of Tables}{60}
+\contentsline {chapter}{Bibliography}{61}

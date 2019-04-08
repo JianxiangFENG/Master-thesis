@@ -172,49 +172,53 @@ In this experiment, we evaluate our model on a category recognition task. The di
 
 Accordingly, we use the entire WRGBD dataset including all view points, whose size is around $160.9\times10^3$, to train our model (in which we split off 20\% of training set as validation set for model selection during training). When it comes to UniHB dataset, we treat objects captured in elevation $30^\circ$ and $60^\circ$ in this dataset as \textbf{adaptation set}, whose size is around $17.1\times10^3$. We test performance of uncertainty estimation on this adaptation dataset. The images of $45^\circ$, whose size is around $8.6\times10^3$ , are used for final evaluation after we fine-tune the model with subset of adaptation set to obtain a domain specific model. The latter part will be experimented in next section. Besides, we also evaluate the uncertainty estimation on OOD dataset(cf. figure \ref{fig:not_in_wrgbd}) whose size is around $6.0\times10^3$. 
 
-There are some protocols for different metrics needed to be clarified, which can help understanding the plots and extracting useful information more easily and quickly.  
+We firstly explain protocols in the following for different kinds of metric, which can help understanding the plots and extracting useful information more easily and quickly.  
 \begin{itemize}
 	\item The following visual metrics are chosen in one of three runs of different random seeds. The average quantitative results are given in tables following the visual metrics.
-	\item The calibration curve with title "Classification" on the left is plotted only on test set. The one with title "OOD detection" on the right is plotted on both OOD dataset and test dataset.
+	\item The calibration curve with title "Classification" on the left is plotted \textbf{only} on predictions of test set. The one with title "OOD detection" on the right is plotted on predictions of \textbf{both} OOD dataset and test dataset.
 	\item The ROC curve and PR curve measure the separability between two types of prediction.
-	The ones with title "classification" on the left measure the separability between \textbf{miss-classification} and \textbf{correct prediction}. The ones with title "OOD detection" on the right measure the separability between \textbf{OOD prediction} and \textbf{correct prediction}.
-	\item As is shown in uncertainty histogram, we have used three uncertainty measures. Each one has its own ROC curve and PR curve of correct prediction versus miss-classification or OOD prediction. In the following results of ROC curve and PR curve, we only show the one with highest area under curve. In detail, \textbf{Confidence} is chosen in case of correct prediction versus miss-classification. \textbf{Mutual information} is chosen in case of correct prediction versus OOD prediction.
+	The ones with title "classification" on the left measure the separability between \textbf{correct prediction} and \textbf{miss-classification}. The ones with title "OOD detection" on the right measure the separability between \textbf{correct prediction} and \textbf{OOD prediction}. In all ROC curve and PR curve, correct prediction is always chosen to be positive.
+	\item As is shown in uncertainty histogram, we have used three uncertainty measures. Each one has its own ROC curve and PR curve of correct prediction versus miss-classification or OOD prediction. In the following plots of ROC curve and PR curve, we only show the one with highest area under curve. In detail, \textbf{Confidence} is chosen in case of correct prediction versus miss-classification. \textbf{Mutual information} is chosen in case of correct prediction versus OOD prediction.
 \end{itemize}   
 
 \subsection{Comparison with Ensemble}
-
+In this subsection, we will show the results in not only a qualitative (visual) way, but also in a quantitative way. The approaches we compare here include original version of ResNet50(ori), modified ResNet50 with concrete dropout(cdp), modified ResNet50 with multiple dropout(mdp) as well as their ensemble version. The members in ensemble are just initialized from different random seeds and no other techniques for enhancing the performance are used. In order to quantify the results more objectively, we average the results from three different random seeds and report the mean and the standard deviation.
 \paragraph{Uncertainty histogram}
-This is uncertainty hitsogram
-\begin{figure}[H]
+In the following figure \ref{exp2_histo}, we can see uncertainty histograms for different approaches and different uncertainty measures. Firstly, let's compare them vertically. We can see the improvement visually. The original version is still overconfident, which express low uncertainty to more than 50$\%$ of OOD data and nearly 40\% of miss-classification. The  cdp and mdp can lower this percentage to around 10\%, although at the same time the percentage of correct predictions is decreased. But we can know that the predictions for which the model expresses low uncertainty are more likely to be correct. And the ensemble of cdp and mdp can perform even better with miss-classification. However, the ensemble of mdp does not work as well as cdp version on OOD data, which can be seen in the histogram on the last row of the figure. The reason for this will be investigated in a ablation study later. Then we can compare them horizontally, it's shown that different uncertainty measures have similar trends in the histogram. Therefore we need other quantitative metrics for them in order to evaluate different approaches as well as metrics more accurately.  
+\paragraph{Reliability diagram}
+In the figure \ref{exp2_reliability}, on the left it's figure of calibration curves of different approaches, plotted from predictions on test dataset. We can see that the calibration performance is improved a lot by the cdp and mdp. Additionally, their ensemble versions can give even better results which are tightly overlapping with the diagonal curve. On the right there are curves plotted from predictions on both test dataset and OOD dataset. Similar ranks and trends as the left curves appear here. After adding the OOD data into evaluation, all of the calibration curves are pulled down, which means that the calibration performance get worse. If all OOD data is assigned with low confidence, then curves between left and right should be similar because the accuracy in middle or high confidence interval would not change a lot or be pulled down a lot. By comparison these two figures, we can also see that the robustness against OOD data of cdp, mdp and their ensembles are better than the original version.
+
+\begin{figure}[h!]
 	\begin{center}
 		\includegraphics[height=13cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
-		\caption{Uncertainty histogram of one of three runs.}		
-		\label{exp1_reliability}
+		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
+		\label{exp2_histo}
 	\end{center}
 \end{figure}
-\paragraph{Reliability diagram}
-This is Reliability diagram
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
-		\caption{Calibration curve of one of three runs.}		
-		\label{exp1_reliability}
+		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
+		\label{exp2_reliability}
 	\end{center}
 \end{figure}
 
 \paragraph{ROC curve and PR curve}
-This is ROC and PR curve
-\begin{figure}[H]
+When it comes to the separability metrics in figure \ref{exp2_roc_pr}, as stated before, we measure separability between correct prediction and miss-classification (on the left) and that between correct prediction and OOD prediction (on the right). On separability between correction prediction and miss-classification, cdp, mdp and their ensemble version can improve the results compared with original version in both ROC curve and PR curve on the left. On the other hand, the improvements on separability between correct prediction and OOD data are more obvious on the right. However, as observed before, the ensemble of mdp does not work well with OOD data, which can be observe with this metrics. We can know more from the curves that the worse performance with OOD data in mdp is enlarged by building ensemble of it.    
+
+\begin{figure}[h!]
 	\begin{center}
 		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/roc_pr_seed3_ensemble}
-		\caption{ROC and PR curve of one of three runs.}		
-		\label{exp1_reliability}
-	\end{center}
+		\caption{ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble of one of three runs.}		
+		\label{exp2_roc_pr}
+	\end{center} 
 \end{figure}
+
+Before we only show the visual metrics for evaluation, it's better to quantify the performance quantitatively. We adopt different aforementioned metrics to achieve this which are presented in the following table \ref{table:compareWithEnsemble}. In order to exclude the influence of random initialization, we train three models of different random seeds and report the mean and standard deviation for each metric. We can see the improvements by cdp, mdp and their ensemble versions along all the metrics. The phenomenon that mdp does not work well with OOD and this effect enlarged by ensemble is also expressed in the table. Based on these experiment results, we can draw the conclusion that, concrete dropout and multiple dropout can improve both accuracy and calibration performance compared with original ResNet50. While the ensemble of concrete dropout and multiple dropout work even better without OOD data, the ensemble of multiple dropout work worse than that of concrete dropout when considering OOD data in this work. When comparing concrete dropout and multiple dropout, concrete dropout is more robust than multiple dropout because the latter one does not work well with OOD data.
 
 \begin{table}[H]
 	\centering
-	\caption{results of acc, bs, nll, ece, mce, auroc, aupr}
+	\caption{Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		& accuracy$ \boldsymbol\uparrow$     & brier\_score $ \boldsymbol \downarrow$& \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood $ \boldsymbol\downarrow$\end{tabular} \\ \hline
@@ -242,38 +246,42 @@ This is ROC and PR curve
 	\end{tabular}
 \end{table}	
 
-
+\newpage
 \subsection{Comparison with Laplace approximation}
-Because Laplace approximation requires only MAP point estimate of parameter, re-training the model is not needed. Therefore we take the already trained model of different approaches as our MAP point estimate. We set the scale parameter of kronecker factors as $1$ and dump factor as $15$ based on grid search on the validation set.   
-his is uncertainty hitsogram
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[height=11cm, width=16cm]{uncertainty_estimation/laplace/histo_ood_seed3}
-		\caption{Uncertainty histogram of one of three runs.}		
-		\label{exp1_reliability}
-	\end{center}
-\end{figure}
+Because Laplace approximation requires only MAP point estimate of model parameter. Therefore we take the already trained model of different approaches as our MAP point estimate and compute the approximation of Kronecker factors with half of training set. We set the scale parameter of Kronecker factors $\sqrt{N}$ as $1$ and dump factor $\sqrt{\tau}$ as $15$ based on grid search on the validation set in equation \ref{mvg_prior}.   
 
-This is Reliability diagram
+In the following figures, we show the histograms, calibration curves, ROC curve and PR curve of cdp, mdp and their Laplace approximation versions. We can see that the Laplace approximation can achieve similar results as the cdp or mdp do in uncertainty histograms, calibration curves as well as ROC curve and PR curve. The histograms of different uncertainty measure show similar trend as before. 
+
+If we compare the Laplace approximation between cdp and mdp, we can see that the result of Laplace approximation is similar to the their dropout versions. This can be observed through that the percentage of OOD prediction with high confidence of Laplace approximation for network trained with mdp is higher than that of Laplace approximation for network trained with cdp in the histogram. Besides, in ROC curve/PR curve on correct prediction vs. OOD data prediction of mdp and cdp, the area under curve of Laplace approximation of mdp is obviously lower than that of cdp. This phenomenon also exists in the histogram and ROC as well as PR curve of mdp and cdp. In the table of quantitative results (cf. \ref{table:lap}), the quantities of different metrics corresponding to the visual metrics. To summarize this, although Laplace can achieve similar results as concrete dropout and multiple dropout do, their performance is highly related to the point estimate of parameter obtained during training.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3_}
-		\caption{Calibration curve of one of three runs.}		
-		\label{exp1_reliability}
+		\caption{Calibration curve of cdp, mdp and their Laplace approximation versions from one of three runs.}		
+		\label{lap_calibration}
 	\end{center}
 \end{figure}
 
-This is ROC and PR curve
+\begin{figure}[h!]		
+	\centering
+	\includegraphics[height=10cm, width=16cm]{uncertainty_estimation/laplace/histo_ood_seed3}
+	\caption{Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}
+	\label{figure:lap_hist}	
+\end{figure}
+
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/roc_pr_seed3}
-		\caption{ROC and PR curve of one of three runs.}		
-		\label{exp1_reliability}
+		\caption{ROC and PR curve of cdp, mdp and their Laplace approximation versions from one of three runs.}		
+		\label{lap_roc_pr}
 	\end{center}
 \end{figure}
 
 \begin{table}[H]
 	\centering
+	\label{table:lap}
+	\caption{Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		& accuracy  $\boldsymbol \uparrow$                                                            & brier score $\boldsymbol \downarrow$                                                           & \begin{tabular}[c]{@{}l@{}}negative \\ log\\ likelihood $\boldsymbol \downarrow$\end{tabular}  \\ \hline
@@ -305,35 +313,38 @@ This is ROC and PR curve
 	\end{tabular}
 \end{table}
 \subsection{Ablation study}
+As we can see from the previous results, mdp can work better than cdp without considering OOD data. However, it underperforms when OOD data is included. In order to investigate the reason behind this, we have done a ablation study to check the influence of aleatoric uncertainty which comes from mainly the feature extractor part. Considering this, we freeze the parameters of feature extractor and just train our probabilistic classifier which is a three-layer MLP. In the following we show the results of this ablation study with the same metrics used before. It's clear that the accuracy would drop when the feature extractor is frozen. However, we can see that mdp can have better  calibration performance than cdp and much better than original ResNet50. Regarding the separability metrics, although mdp still doesn't work better than cdp, the gap between is much smaller than the version without freezing feature extractor. These observations are expressed quantitatively in the table \ref{ab_table}. 
+
+Based on these observations, we know that the underperformance of mdp on OOD dataset can attribute to the influence of aleatoric uncertainty. If the feature extractor is not frozen, then the aleatoric uncertainty is trained to adapt to the dataset. The problem why optimizing dropout rates for each hidden units can change the point estimate of the model parameter to have low aleatoric uncertainty for OOD data arises now. One possible reason for this could be the variance of estimation of derivatives of variational parameters is too large because of increased number of variational parameters\cite{kingma2015variational}. And the larger variances are back propagated to the feature extractor which may make the point estimate deviate from the better local minimum. One possible solution to resolve this is to sample the realization of activations of hidden units independent to each data instance, which may decrease the variance and help to improve the results. 
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
 		\caption{Uncertainty histogram of one of three runs.}		
-		\label{exp1_reliability}
+		\label{ab_reliability}
 	\end{center}
 \end{figure}
 
-This is Reliability diagram
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
+		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
 		\caption{Calibration curve of one of three runs.}		
-		\label{exp1_reliability}
+		\label{ab_calibration}
 	\end{center}
 \end{figure}
 
-This is ROC and PR curve
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3.eps}
 		\caption{ROC and PR curve of one of three runs.}		
-		\label{exp1_reliability}
+		\label{ab_roc_pr}
 	\end{center}
 \end{figure}
 \begin{table}[H]
+	\label{ab_table}
 	\centering
-	\caption{results of acc, bs, nll, ece, mce, auroc, aupr}
+	\caption{Quantitative results of acc, bs, nll, ece, mce, auroc, aupr.}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		& accuracy   $\boldsymbol \uparrow$  & brier\_score $\boldsymbol \downarrow$& \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood $\boldsymbol \downarrow$\end{tabular} \\ \hline
