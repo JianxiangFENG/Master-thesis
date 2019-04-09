@@ -248,7 +248,7 @@ Before we only show the visual metrics for evaluation, it's better to quantify t
 
 \newpage
 \subsection{Comparison with Laplace approximation}
-Because Laplace approximation requires only MAP point estimate of model parameter. Therefore we take the already trained model of different approaches as our MAP point estimate and compute the approximation of Kronecker factors with half of training set. We set the scale parameter of Kronecker factors $\sqrt{N}$ as $1$ and dump factor $\sqrt{\tau}$ as $15$ based on grid search on the validation set in equation \ref{mvg_prior}.   
+Because Laplace approximation requires only MAP point estimate of model parameter. Therefore we take the already trained model of different approaches as our MAP point estimate and compute the approximation of Kronecker factors with half of training set. We set the scale parameter of Kronecker factors $\sqrt{N}$ as $1$ and dump factor $\sqrt{\tau}$ as $15$ in equation \ref{mvg_prior} based on grid search on the validation set.   
 
 In the following figures, we show the histograms, calibration curves, ROC curve and PR curve of cdp, mdp and their Laplace approximation versions. We can see that the Laplace approximation can achieve similar results as the cdp or mdp do in uncertainty histograms, calibration curves as well as ROC curve and PR curve. The histograms of different uncertainty measure show similar trend as before. 
 
@@ -371,6 +371,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \section{Automatic labeling experiments}
 \subsection{Experiments settings}
+In this experiment, we simulate the situation when a trained classifier is deployed 
 \subsection{Results}
 \subsection{Analysis}
 
