@@ -1,33 +1,33 @@
-\select@language {ngerman}
-\select@language {american}
-\select@language {american}
-\select@language {american}
+\babel@toc {ngerman}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Difference between parameter estimation of deterministic neural network and Bayesian neural network.}}{10}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces How dropout works\cite {srivastava2014dropout}.}}{13}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{14}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite {maddison2016concrete}.}}{22}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite {maddison2016concrete}.}}{23}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}}{24}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Changes along epochs of keep probability in training network with concrete dropout layer.}}{26}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Different dropout rates for different hidden units in multi-drop.}}{26}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Modified network architecture.}}{27}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Difference between parameter estimation of deterministic neural network and Bayesian neural network.}}{10}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces How dropout works\cite {srivastava2014dropout}.}}{13}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{14}% 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite {maddison2016concrete}.}}{22}% 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite {maddison2016concrete}.}}{23}% 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}}{24}% 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Changes along epochs of keep probability in training network with concrete dropout layer.}}{26}% 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Different dropout rates for different hidden units in multi-drop.}}{26}% 
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Modified network architecture.}}{27}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The fruit, device, vegetable, and container subtrees of the RGB-D Object Dataset object hierarchy, the shaded ellipse represent categories and number inside parenthesis denotes the number of instances within this category\cite {lai2011large}.}}{35}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets.}}{36}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}}{36}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Uncertainty(confidence, predictive entropy, mutual information) histograms of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}}{42}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}}{42}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}}{45}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}}{45}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble of one of three runs.}}{46}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Calibration curve of cdp, mdp and their Laplace approximation versions from one of three runs.}}{48}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}}{49}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces ROC and PR curve of cdp, mdp and their Laplace approximation versions from one of three runs.}}{49}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Uncertainty histogram of one of three runs.}}{51}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Calibration curve of one of three runs.}}{51}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces ROC and PR curve of one of three runs.}}{52}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The fruit, device, vegetable, and container subtrees of the RGB-D Object Dataset object hierarchy, the shaded ellipse represent categories and number inside parenthesis denotes the number of instances within this category\cite {lai2011large}.}}{35}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets.}}{36}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}}{36}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Uncertainty(confidence, predictive entropy, mutual information) histograms of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}}{42}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}}{42}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}}{45}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}}{45}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble of one of three runs.}}{46}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Calibration curve of cdp, mdp and their Laplace approximation versions from one of three runs.}}{48}% 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}}{49}% 
+\contentsline {figure}{\numberline {4.11}{\ignorespaces ROC and PR curve of cdp, mdp and their Laplace approximation versions from one of three runs.}}{49}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Uncertainty histogram of one of three runs.}}{51}% 
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Calibration curve of one of three runs.}}{51}% 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces ROC and PR curve of one of three runs.}}{52}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -1,14 +1,14 @@
-\select@language {ngerman}
-\select@language {american}
-\select@language {american}
-\select@language {american}
+\babel@toc {ngerman}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{47}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{50}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr.}}{52}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{47}% 
+\contentsline {table}{\numberline {4.2}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{50}% 
+\contentsline {table}{\numberline {4.3}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr.}}{52}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Beispiel f\"ur eine Beschriftung. Tabellenbeschriftungen sind \"ublicherweise \"uber der Tabelle platziert.}}{57}
+\contentsline {table}{\numberline {A.1}{\ignorespaces Beispiel f\"ur eine Beschriftung. Tabellenbeschriftungen sind \"ublicherweise \"uber der Tabelle platziert.}}{57}% 
