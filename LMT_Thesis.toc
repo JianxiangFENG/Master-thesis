@@ -2,79 +2,79 @@
 \babel@toc {american}{}
 \babel@toc {american}{}
 \babel@toc {american}{}
-\contentsline {chapter}{Contents}{ii}% 
-\contentsline {chapter}{\numberline {1}Introduction}{1}% 
-\contentsline {section}{\numberline {1.1}What is uncertainty?}{1}% 
-\contentsline {section}{\numberline {1.2}Why do we need uncertainty?}{2}% 
-\contentsline {section}{\numberline {1.3}How can we obtain and handle uncertainty in deep learning?}{4}% 
-\contentsline {section}{\numberline {1.4}Contributions and Structure}{6}% 
-\contentsline {chapter}{\numberline {2}Bayesian neural network}{8}% 
-\contentsline {section}{\numberline {2.1}Introduction}{9}% 
-\contentsline {section}{\numberline {2.2}Variational inference}{11}% 
-\contentsline {subsection}{\numberline {2.2.1}Introduction}{11}% 
-\contentsline {subsection}{\numberline {2.2.2}Dropout variational inference}{12}% 
-\contentsline {subsubsection}{Dropout}{12}% 
-\contentsline {subsubsection}{Bayesian interpretation of dropout}{12}% 
-\contentsline {paragraph}{Approximate distribution}{14}% 
-\contentsline {paragraph}{Training objective}{16}% 
-\contentsline {subparagraph}{Re-parameterization trick:}{17}% 
-\contentsline {subparagraph}{KL condition:}{19}% 
-\contentsline {paragraph}{Marginalization in testing}{20}% 
-\contentsline {subsection}{\numberline {2.2.3}Concrete dropout and Multi-Drop}{20}% 
-\contentsline {paragraph}{Concrete dropout}{20}% 
-\contentsline {subparagraph}{Re-parameterization of Bernoulli distribution}{21}% 
-\contentsline {subparagraph}{Dropout regularization}{23}% 
-\contentsline {paragraph}{Multi-Drop}{24}% 
-\contentsline {subsection}{\numberline {2.2.4}Modified network architecture}{26}% 
-\contentsline {section}{\numberline {2.3}Laplace approximation}{28}% 
-\contentsline {subsection}{\numberline {2.3.1}Introduction}{28}% 
-\contentsline {paragraph}{Fisher information matrix}{30}% 
-\contentsline {subsection}{\numberline {2.3.2}Scalable Laplace approximation for neural network}{30}% 
-\contentsline {chapter}{\numberline {3}Conditional random field}{33}% 
-\contentsline {section}{\numberline {3.1}Introduction}{33}% 
-\contentsline {section}{\numberline {3.2}Learning}{33}% 
-\contentsline {section}{\numberline {3.3}Inference}{33}% 
-\contentsline {chapter}{\numberline {4}Experiments and Discussion}{34}% 
-\contentsline {section}{\numberline {4.1}Introduction}{34}% 
-\contentsline {subsection}{\numberline {4.1.1}Dataset}{34}% 
-\contentsline {paragraph}{WRGBD\cite {lai2011large}}{34}% 
-\contentsline {paragraph}{UniHB}{35}% 
-\contentsline {paragraph}{T-LESS\cite {hodan2017tless}}{37}% 
-\contentsline {subsection}{\numberline {4.1.2}Uncertainty measures}{37}% 
-\contentsline {paragraph}{Confidence}{37}% 
-\contentsline {paragraph}{Predictive entropy}{37}% 
-\contentsline {paragraph}{Mutual information}{37}% 
-\contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{38}% 
-\contentsline {paragraph}{Uncertainty histogram}{38}% 
-\contentsline {paragraph}{Reliability diagram(Calibration curve)}{38}% 
-\contentsline {paragraph}{Proper scoring rules:}{39}% 
-\contentsline {paragraph}{Separability metrics:}{40}% 
-\contentsline {section}{\numberline {4.2}Uncertainty estimation experiments}{41}% 
-\contentsline {subsection}{\numberline {4.2.1}Experiments \uppercase {i\relax }}{41}% 
-\contentsline {subsection}{\numberline {4.2.2}Experiments \uppercase {ii\relax }}{43}% 
-\contentsline {subsubsection}{Comparison with Ensemble}{44}% 
-\contentsline {paragraph}{Uncertainty histogram}{44}% 
-\contentsline {paragraph}{Reliability diagram}{44}% 
-\contentsline {paragraph}{ROC curve and PR curve}{46}% 
-\contentsline {subsubsection}{Comparison with Laplace approximation}{48}% 
-\contentsline {subsubsection}{Ablation study}{50}% 
-\contentsline {section}{\numberline {4.3}Automatic labeling experiments}{53}% 
-\contentsline {subsection}{\numberline {4.3.1}Experiments settings}{53}% 
-\contentsline {subsection}{\numberline {4.3.2}Results}{53}% 
-\contentsline {subsection}{\numberline {4.3.3}Analysis}{53}% 
-\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{53}% 
-\contentsline {subsection}{\numberline {4.4.1}Experiments settings}{53}% 
-\contentsline {subsection}{\numberline {4.4.2}Results}{53}% 
-\contentsline {subsection}{\numberline {4.4.3}Analysis}{53}% 
-\contentsline {chapter}{\numberline {5}Conclusion}{54}% 
-\contentsline {subsection}{\numberline {5.0.1}Discussions and conclusions}{54}% 
-\contentsline {subsection}{\numberline {5.0.2}Future work}{54}% 
-\contentsline {chapter}{\numberline {A}Appendix}{55}% 
-\contentsline {section}{\numberline {A.1}KL condition}{55}% 
-\contentsline {paragraph}{Proposition 1.}{55}% 
-\contentsline {paragraph}{$Proof.$}{55}% 
-\contentsline {section}{\numberline {A.2}Figures}{57}% 
-\contentsline {section}{\numberline {A.3}Implementation Details}{57}% 
-\contentsline {chapter}{List of Figures}{58}% 
-\contentsline {chapter}{List of Tables}{60}% 
-\contentsline {chapter}{Bibliography}{61}% 
+\contentsline {chapter}{Contents}{ii}{chapter*.2}% 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}What is uncertainty?}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Why do we need uncertainty?}{2}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}How can we obtain and handle uncertainty in deep learning?}{4}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Contributions and Structure}{6}{section.1.4}% 
+\contentsline {chapter}{\numberline {2}Bayesian neural network}{8}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Introduction}{9}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Variational inference}{11}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Introduction}{11}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Dropout variational inference}{12}{subsection.2.2.2}% 
+\contentsline {subsubsection}{Dropout}{12}{section*.3}% 
+\contentsline {subsubsection}{Bayesian interpretation of dropout}{13}{section*.4}% 
+\contentsline {paragraph}{Approximate distribution}{14}{section*.5}% 
+\contentsline {paragraph}{Training objective}{16}{section*.6}% 
+\contentsline {subparagraph}{Re-parameterization trick:}{17}{section*.7}% 
+\contentsline {subparagraph}{KL condition:}{19}{section*.8}% 
+\contentsline {paragraph}{Marginalization in testing}{20}{section*.9}% 
+\contentsline {subsection}{\numberline {2.2.3}Concrete dropout and Multi-Drop}{20}{subsection.2.2.3}% 
+\contentsline {paragraph}{Concrete dropout}{20}{section*.10}% 
+\contentsline {subparagraph}{Re-parameterization of Bernoulli distribution}{21}{section*.11}% 
+\contentsline {subparagraph}{Dropout regularization}{23}{section*.12}% 
+\contentsline {paragraph}{Multi-Drop}{24}{section*.13}% 
+\contentsline {subsection}{\numberline {2.2.4}Modified network architecture}{26}{subsection.2.2.4}% 
+\contentsline {section}{\numberline {2.3}Laplace approximation}{28}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Introduction}{28}{subsection.2.3.1}% 
+\contentsline {paragraph}{Fisher information matrix}{30}{section*.14}% 
+\contentsline {subsection}{\numberline {2.3.2}Scalable Laplace approximation for neural network}{30}{subsection.2.3.2}% 
+\contentsline {chapter}{\numberline {3}Conditional random field}{33}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Introduction}{33}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Learning}{33}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Inference}{33}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}Experiments and Discussion}{34}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Introduction}{34}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Dataset}{34}{subsection.4.1.1}% 
+\contentsline {paragraph}{WRGBD\cite {lai2011large}}{34}{section*.15}% 
+\contentsline {paragraph}{UniHB}{35}{section*.16}% 
+\contentsline {paragraph}{T-LESS\cite {hodan2017tless}}{37}{section*.17}% 
+\contentsline {subsection}{\numberline {4.1.2}Uncertainty measures}{37}{subsection.4.1.2}% 
+\contentsline {paragraph}{Confidence}{37}{section*.18}% 
+\contentsline {paragraph}{Predictive entropy}{37}{section*.19}% 
+\contentsline {paragraph}{Mutual information}{37}{section*.20}% 
+\contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{38}{subsection.4.1.3}% 
+\contentsline {paragraph}{Uncertainty histogram}{38}{section*.21}% 
+\contentsline {paragraph}{Reliability diagram(Calibration curve)}{39}{section*.22}% 
+\contentsline {paragraph}{Proper scoring rules:}{39}{section*.23}% 
+\contentsline {paragraph}{Separability metrics:}{40}{section*.24}% 
+\contentsline {section}{\numberline {4.2}Uncertainty estimation experiments}{41}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Experiments \uppercase {i\relax }}{41}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Experiments \uppercase {ii\relax }}{43}{subsection.4.2.2}% 
+\contentsline {subsubsection}{Comparison with Ensemble}{44}{section*.25}% 
+\contentsline {paragraph}{Uncertainty histogram}{44}{section*.26}% 
+\contentsline {paragraph}{Reliability diagram}{44}{section*.27}% 
+\contentsline {paragraph}{ROC curve and PR curve}{46}{section*.28}% 
+\contentsline {subsubsection}{Comparison with Laplace approximation}{48}{section*.29}% 
+\contentsline {subsubsection}{Ablation study}{50}{section*.30}% 
+\contentsline {section}{\numberline {4.3}Automatic labeling experiments}{53}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Introduction}{53}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Experiments \uppercase {i\relax }}{53}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.3}Experiments \uppercase {ii\relax }}{55}{subsection.4.3.3}% 
+\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{55}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}Experiments settings}{55}{subsection.4.4.1}% 
+\contentsline {subsection}{\numberline {4.4.2}Results}{55}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.3}Analysis}{55}{subsection.4.4.3}% 
+\contentsline {chapter}{\numberline {5}Conclusion}{56}{chapter.5}% 
+\contentsline {subsection}{\numberline {5.0.1}Discussions and conclusions}{56}{subsection.5.0.1}% 
+\contentsline {subsection}{\numberline {5.0.2}Future work}{56}{subsection.5.0.2}% 
+\contentsline {chapter}{\numberline {A}Appendix}{57}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}KL condition}{57}{section.A.1}% 
+\contentsline {paragraph}{Proposition 1.}{57}{section*.31}% 
+\contentsline {paragraph}{$Proof.$}{57}{section*.32}% 
+\contentsline {section}{\numberline {A.2}Figures}{59}{section.A.2}% 
+\contentsline {section}{\numberline {A.3}Implementation Details}{59}{section.A.3}% 
+\contentsline {chapter}{List of Figures}{60}{appendix*.33}% 
+\contentsline {chapter}{List of Tables}{62}{appendix*.34}% 
+\contentsline {chapter}{Bibliography}{63}{appendix*.35}% 

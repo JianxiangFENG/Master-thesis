@@ -107,9 +107,9 @@ However, there are still some difficulties if we want to solve this optimization
 Dropout\cite{srivastava2014dropout} is originally introduced as regularization approach in training deep neural network which can improve the generalization performance. Although the author said this idea is inspired from human beings sexual reproduction, there are different interpretations trying to explain why it can work such as ensemble perspective and Bayesian perspective. In this subsection, the Bayesian interpretation of dropout is introduced and used for improving the uncertainty estimation of neural network. 
 
 The mechanism of dropout is simple, each units of specific layer is multiplied by a random variable under Bernoulli distribution with $1-p$ as its parameter, where $p$ is dropout rate. In each iteration of training, dropout is turned on, which means each unit is multiplied by the sample drawn from Bernoulli distribution in forward propagation which is kept in  derivatives back propagtion during current iteration. In testing, the sampling phase is turned off, only one forward propagation is needed to obtain predictions. Normally, in order to avoid rescaling weights in testing, which is used to keep the output magnitudes in the same scale when dropout is off, rescaling of the output of dropout is always done in training. In figure \ref{fig:dropout}, there are two figures about that dropout is on and off. 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=13cm]{dropout}
+		\includegraphics[height=7cm, width=13cm]{dropout}
 		\caption{How dropout works\cite{srivastava2014dropout}.}		
 		\label{fig:dropout}
 	\end{center}
@@ -123,7 +123,7 @@ As is mentioned in the last subsection, in variational inference, we want to min
 \begin{figure}[h!]
 	%\begin{center}
 		\centering
-		\includegraphics[width=11cm]{dropout_inference}
+		\includegraphics[height=8cm, width=11cm]{dropout_inference}
 		\caption{A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}		
 		\label{fig:dropout_inference}
 	%\end{center}

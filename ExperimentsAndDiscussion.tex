@@ -18,7 +18,7 @@ Before looking into the results, we need to specify the details of experiments s
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=6cm, width=13cm]{wrgbd1_}
+		\includegraphics[height=7cm, width=13cm]{wrgbd1_}
 		\caption{The fruit, device, vegetable, and container subtrees of the RGB-D Object Dataset object hierarchy, the shaded ellipse represent categories and number inside parenthesis denotes the number of instances within this category\cite{lai2011large}.}		
 		\label{fig:wrgbd1}
 	\end{center} 
@@ -44,8 +44,8 @@ While the UniHB dataset's setup strives to mimic the WRGBD one, the differing ca
 	\end{center}
 \end{figure} 
 
-\paragraph{T-LESS\cite{hodan2017tless}}
-
+\paragraph{T-LESS\cite{hodan2017tless}} T-LESS is a dataset containing 30 textureless and similar industry-relevant objects, in which some objects are parts of others. The training set is consisting of images of each object captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth.
+The test set 
 
 \subsection{Uncertainty measures}
 For each prediction, we can obtain one predictive probability distribution from our model with equation \ref{marginalization_test}. In order to quantify uncertainty of the prediction, there are different metrics to measure the uncertainty of prediction, which are introduced in the following. We define $x^\star$ as one test data sample and $\mathcal D$ as our training set. 
@@ -370,10 +370,58 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 
 \section{Automatic labeling experiments}
-\subsection{Experiments settings}
-In this experiment, we simulate the situation when a trained classifier is deployed 
-\subsection{Results}
-\subsection{Analysis}
+\subsection{Introduction}
+In this experiment, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance based on automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. 
+
+This way to enable the classifier to learn continuously is seldom seen in the literatures. Therefore, in order to problems of the way, we firstly perform a experiments with restrictions on the size of collected dataset. 
+
+Then we try to extend this way to another dataset to test its generalization ability in second experiment. We employ data augmentation to address the problems found in the first experiment and show the results achieved with this way of continuous learning.
+
+ 
+\subsection{Experiments \RNum{1}}
+The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} in uncertainty estimation, we train classifier with entire WRGBD dataset and evaluate performance of uncertainty estimation on adaptation set from UniHB dataset, which contain the images of object of elevation $30^{\circ}$ and $60^{\circ}$, whose size is around $17.1\times10^3$. The images of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
+
+In this experiment, the model we use for fine-tuning is classifier trained with concrete dropout. The uncertainty measure we used is confidence because in this case we do not consider OOD data and confidence performs better in separating correct predictions and miss-classifications based on the results of previous experiments.
+
+One major restriction we impose in this experiment is the size of dataset for fine-tuning. Because if we do not restrict the size, the performance is influenced by both the size of dataset and other factors such as imbalance or quality of dataset. In order to exclude the influence of dataset size, we fix it as 3\% of the adaptation set which is around 510. If the dataset is balanced in number of data sample of category, then there are around ten data samples in each category. The influence of other factors we want investigate are the imbalance of dataset and quality of data sample in dataset. In the following table, we use capital letter to denote different settings of dataset for fine-tuning.
+
+Here we firstly illustrate the steps of labeling in this experiment which is different to the strategy in experiment \RNum{2}. 
+
+For C, D, E, F, G, we conduct the following steps:
+\begin{itemize}
+	\item[1.] Automatic labeling: select the most confident predictions and label them with their predictions.
+	\item[2.] Manual labeling: select the data randomly or with least confidence required for manual labeling.
+	\item[3.] Combining: combine automatically labeled and manually labeled data, then check if any category does not have data sample, if yes add one random data sample of this category.
+	\item[4.] Balancing dataset: firstly check if number of data sample of any categories exceed the average number of data sample (which can be calculated beforehand), if yes, drop the data sample of this category randomly until its number reach the average number of category. After that, if augmentation is chosen, then use augmentation to increase of the number of data sample of category in which the number of data sample is less than average number of data sample.
+
+\end{itemize}
+To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in the settings means that we randomly choose the data according to the number of data sample in each category in order to make the dataset \textbf{as balanced as possible}.  
+\begin{table}[H]
+	\centering
+	\label{table:fine_tuning}
+	\caption{Results of fine-tuning of different settings}
+	\begin{tabular}{|l|c|}
+		\hline
+		Settings of dataset for fine-tuning                                                                                                                                                                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Accuracy\\ (average over 3\\ random seeds)\end{tabular}} \\ \hline
+		A: 0\% (no fine-tuning)                                                                                                                                                                                                  & 66.9\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}B: 3\% manually labeled data randomly \\   (\textbf{balanced})\end{tabular}                                                                                                                               & 91.7\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}C: 3\% automatically labeled data \\ (\textbf{imbalanced})\end{tabular}                                                                                                                        & 79.0\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}D: 3\% manually labeled data with least confidence\\ (\textbf{imbalanced})\end{tabular}                                                                                                       & 83.3\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}E: 2\% automatically labeled data and \\ 1\% manually labeled data with least confidence, \\ augmentation for balance (\textbf{balanced})\end{tabular}                                     & 83.8\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}F: 2\% automatically labeled data and \\ 0.5\% manually labeled data with least confidence and \\ 0.5\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular} & 88.3\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
+	\end{tabular}
+\end{table}
+From the description of settings we know that predictions with most confidence and least confidence are imbalanced in number of data sample of each category.Based on the results in the table above, we can have the following observations:
+\begin{itemize}
+	\item diverse and balanced dataset can achieved best performance.
+	\item the difference of performance between C and D may attribute to quality of dataset which include correct labeling and information of data sample.
+	\item by comparing performance of E, F and G, we know that diverse data sample before augmentation is important to achieve better performance. We also know that  dataset in E is more imbalanced than the dataset in F and G before augmentation because of the higher proportion of predictions with least confidence. 
+\end{itemize}
+We can see that the manual labeling effort can be reduced based on automatic labeling in fine-tuning a domain specific classifier, whose performance can nearly reach the the performance of classifier fine-tuned with all manually labeled data. In the end, we can also draw a conclusion that diversity of data and balance in number of data sample of each category play an significant role if we want to fine-tune classifier with automatic labeling based on uncertainty estimation.
+
+\subsection{Experiments \RNum{2}}
+The second experiment is performed on synthetic Tless dataset and original Tless dataset.
 
 
 \section{Context-based improvement experiments}
