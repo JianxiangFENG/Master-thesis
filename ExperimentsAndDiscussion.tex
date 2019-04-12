@@ -57,7 +57,7 @@ The test set
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm, width=13cm]{tless_trn_test}
+		\includegraphics[height=7cm, width=12cm]{tless_trn_test}
 		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
 		\label{fig:tless_test}
 	\end{center}
@@ -431,9 +431,11 @@ From the description of settings we know that predictions with most confidence a
 \begin{itemize}
 	\item diverse and balanced dataset can achieved best performance.
 	\item the difference of performance between C and D may attribute to quality of dataset which include correct labeling and information of data sample.
-	\item by comparing performance of E, F and G, we know that diverse data sample before augmentation is important to achieve better performance. We also know that  dataset in E is more imbalanced than the dataset in F and G before augmentation because of the higher proportion of predictions with least confidence. 
+	\item by comparing performance of E, F and G, we know that diverse data sample before augmentation is important to achieve better performance. When considering information of data sample, manually labeling of lest confident data sample sounds better. However, we also know that before augmentation dataset in E is more imbalanced than that in F, and F is more imbalanced than G because of the higher proportion of predictions with least confidence. Therefore it shows that data balance is more important than information of data sample in this case.
 \end{itemize}
-By comparing the results of other settings with that of A and B, we can see that the manual labeling effort can be reduced based on automatic labeling.  The performance of fine-tuned domain specific classifier can nearly reach the the performance of classifier fine-tuned with all manually labeled data. In the end, we can also draw a conclusion that diversity of data and balance in number of data sample of each category play an significant role if we want to fine-tune classifier with automatic labeling based on uncertainty estimation.
+By comparing the results of other settings with that of A and B, we can see that the manual labeling effort can be reduced based on automatic labeling.  The performance of fine-tuned domain specific classifier can nearly reach the the performance of classifier fine-tuned with all manually labeled data. 
+
+In the end, we can also draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
 \subsection{Experiments \RNum{2}}
 The second experiment is performed on synthetic Tless dataset and original Tless dataset.
