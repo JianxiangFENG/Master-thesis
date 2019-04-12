@@ -43,10 +43,10 @@
 \contentsline {subsection}{\numberline {4.1.2}Uncertainty measures}{38}{subsection.4.1.2}% 
 \contentsline {paragraph}{Confidence}{38}{section*.18}% 
 \contentsline {paragraph}{Predictive entropy}{38}{section*.19}% 
-\contentsline {paragraph}{Mutual information}{38}{section*.20}% 
+\contentsline {paragraph}{Mutual information}{39}{section*.20}% 
 \contentsline {subsection}{\numberline {4.1.3}Evaluation metrics}{39}{subsection.4.1.3}% 
 \contentsline {paragraph}{Uncertainty histogram}{39}{section*.21}% 
-\contentsline {paragraph}{Reliability diagram(Calibration curve)}{39}{section*.22}% 
+\contentsline {paragraph}{Reliability diagram(Calibration curve)}{40}{section*.22}% 
 \contentsline {paragraph}{Proper scoring rules:}{40}{section*.23}% 
 \contentsline {paragraph}{Separability metrics:}{41}{section*.24}% 
 \contentsline {section}{\numberline {4.2}Uncertainty estimation experiments}{42}{section.4.2}% 

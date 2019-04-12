@@ -45,8 +45,7 @@ While the UniHB dataset's setup strives to mimic the WRGBD one, the differing ca
 \end{figure} 
 
 \paragraph{T-LESS\cite{hodan2017tless}} This dataset features thirty commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others.  
-The training set is consisting of images of each object captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth.
-The test set 
+All images were obtained with an automatic procedure that systematically sampled images from a view sphere, resulting in around $38.0\times10^3$ training and $10.0\times10^3$ test images. The training images depict objects in isolation with a black background, while the test images originate from twenty table-top scenes with arbitrarily arranged objects. The training images of each object are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$, while the scene context information can be exploited with conditional random field in the final experiment.
 
 \begin{figure}[H]
 		\centering
