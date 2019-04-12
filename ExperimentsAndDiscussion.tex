@@ -44,8 +44,24 @@ While the UniHB dataset's setup strives to mimic the WRGBD one, the differing ca
 	\end{center}
 \end{figure} 
 
-\paragraph{T-LESS\cite{hodan2017tless}} T-LESS is a dataset containing 30 textureless and similar industry-relevant objects, in which some objects are parts of others. The training set is consisting of images of each object captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth.
+\paragraph{T-LESS\cite{hodan2017tless}} This dataset features thirty commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others.  
+The training set is consisting of images of each object captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth.
 The test set 
+
+\begin{figure}[H]
+		\centering
+		\includegraphics[height=7cm, width=13cm]{tless_domain_diff}
+		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
+		\label{fig:tless_train}
+\end{figure} 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=7cm, width=13cm]{tless_trn_test}
+		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
+		\label{fig:tless_test}
+	\end{center}
+\end{figure} 
 
 \subsection{Uncertainty measures}
 For each prediction, we can obtain one predictive probability distribution from our model with equation \ref{marginalization_test}. In order to quantify uncertainty of the prediction, there are different metrics to measure the uncertainty of prediction, which are introduced in the following. We define $x^\star$ as one test data sample and $\mathcal D$ as our training set. 
@@ -371,12 +387,11 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \section{Automatic labeling experiments}
 \subsection{Introduction}
-In this experiment, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance based on automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. 
+In this experiment, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance wtih automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. 
 
-This way to enable the classifier to learn continuously is seldom seen in the literatures. Therefore, in order to problems of the way, we firstly perform a experiments with restrictions on the size of collected dataset. 
+This way to enable the classifier to learn continuously is seldom seen in the literatures. Therefore, in order to investigate the practicability of the way, we firstly perform experiments with restriction on the size of collected dataset. 
 
-Then we try to extend this way to another dataset to test its generalization ability in second experiment. We employ data augmentation to address the problems found in the first experiment and show the results achieved with this way of continuous learning.
-
+Then we try to extend this way to another dataset to test its generalization ability in second experiment. We employ data augmentation to address the problem of imbalance in number of data sample of each category found in the first experiment and show the results.
  
 \subsection{Experiments \RNum{1}}
 The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} in uncertainty estimation, we train classifier with entire WRGBD dataset and evaluate performance of uncertainty estimation on adaptation set from UniHB dataset, which contain the images of object of elevation $30^{\circ}$ and $60^{\circ}$, whose size is around $17.1\times10^3$. The images of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
@@ -418,7 +433,7 @@ From the description of settings we know that predictions with most confidence a
 	\item the difference of performance between C and D may attribute to quality of dataset which include correct labeling and information of data sample.
 	\item by comparing performance of E, F and G, we know that diverse data sample before augmentation is important to achieve better performance. We also know that  dataset in E is more imbalanced than the dataset in F and G before augmentation because of the higher proportion of predictions with least confidence. 
 \end{itemize}
-We can see that the manual labeling effort can be reduced based on automatic labeling in fine-tuning a domain specific classifier, whose performance can nearly reach the the performance of classifier fine-tuned with all manually labeled data. In the end, we can also draw a conclusion that diversity of data and balance in number of data sample of each category play an significant role if we want to fine-tune classifier with automatic labeling based on uncertainty estimation.
+By comparing the results of other settings with that of A and B, we can see that the manual labeling effort can be reduced based on automatic labeling.  The performance of fine-tuned domain specific classifier can nearly reach the the performance of classifier fine-tuned with all manually labeled data. In the end, we can also draw a conclusion that diversity of data and balance in number of data sample of each category play an significant role if we want to fine-tune classifier with automatic labeling based on uncertainty estimation.
 
 \subsection{Experiments \RNum{2}}
 The second experiment is performed on synthetic Tless dataset and original Tless dataset.
