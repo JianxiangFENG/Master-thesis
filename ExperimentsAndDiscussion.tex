@@ -13,6 +13,7 @@ In this chapter, we perform different experiments for the following purposes:
 
 Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions. Models were implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20.
 
+
 \subsection{Dataset}
 \paragraph{WRGBD\cite{lai2011large}} This dataset is a large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories, some of categories and their subtrees. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping of features between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. 
 
@@ -20,13 +21,18 @@ Before looking into the results, we need to specify the details of experiments s
 
 While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that data of these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$). The size of this OOD dataset is around $6.0\times10^3$.
 
-\paragraph{T-LESS\cite{hodan2017tless}} This dataset features thirty commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others.  
-All images were obtained with an automatic procedure that systematically sampled images from a view sphere, resulting in around $38.0\times10^3$ training and $10.0\times10^3$ test images. The training images depict objects in isolation with a black background, while the test images originate from twenty table-top scenes with arbitrarily arranged objects. The training images of each object are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$, while the scene context information can be exploited with conditional random field in the final experiment.
+% and are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth
+
+%Each test scene is captured from a systematically sampled view hemisphere with $10^{\circ}$ step in elevation (from $75^{\circ}$ to $15^{\circ}$) and $5^{\circ}$ step in azimuth.
+
+\paragraph{T-LESS\cite{hodan2017tless}} This dataset features 30 commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others. All images were captured systematically sampled from a view sphere, resulting in around $38.0\times10^3$ training and $10.0\times10^3$ test images (cf. figure \ref{fig:tless_test}). The training images depict objects in isolation with a black background, while the test images are from twenty table-top scenes with arbitrarily arranged objects placed on table. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$, while the scene context information can be exploited with conditional random field in the final experiment.
+
+Because objects in test scenes are mostly occluded and have different background and reflectance. Therefore we employ data augmentation to improve the performance of classifier (cf. figure \ref{fig:tless_train}). Since collecting real data requires much manual effort, we want to first train classifier on synthetic data which are augmented images from 3D reconstructed CAD models(cf. figure \ref{fig:tless_train}). By comparing the real object and synthetic image, there is significantly large domain gap such as texture and details on the object, which can decrease the performance on test set greatly. Based on improved uncertainty estimation we can collect labeled data automatically, which is used to train a more accurate classifier.
 
 
  \begin{figure}[H]
  	\begin{center}
- 		\includegraphics[height=10cm, width=16cm]{domain_diff}
+ 		\includegraphics[height=9.5cm, width=16cm]{domain_diff}
  		\caption{Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets.}		
  		\label{fig:wrgbd2}
  	\end{center}
@@ -34,7 +40,7 @@ All images were obtained with an automatic procedure that systematically sampled
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm, width=12.5cm]{not_in_wrgbd}
+		\includegraphics[height=6cm, width=12cm]{not_in_wrgbd}
 		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
 		\label{fig:not_in_wrgbd}
 	\end{center}
@@ -42,15 +48,15 @@ All images were obtained with an automatic procedure that systematically sampled
 
 \begin{figure}[H]
 		\centering
-		\includegraphics[height=9cm, width=15cm]{tless_domain_diff}
-		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
+		\includegraphics[height=9cm, width=16cm]{tless_domain_diff}
+		\caption{Example of object of each category after augmentation. In each thumbnail, the left image is real augmented object and the right image is synthetic augmented object.}		
 		\label{fig:tless_train}
 \end{figure} 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8.5cm, width=14cm]{tless_trn_test}
-		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
+		\includegraphics[height=8.2cm, width=14cm]{tless_trn_test}
+		\caption{Example of object of each category in original training set and test set. In each thumbnail, the left image is real single object with black background and the right image is cropped image of object in test scene.}		
 		\label{fig:tless_test}
 	\end{center}
 \end{figure} 

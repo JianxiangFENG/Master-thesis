@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  14 APR 2019 15:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.13)  14 APR 2019 16:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -920,7 +920,7 @@ Chapter 4.
 
 
 
-]
+] [41]
 Package epstopdf Info: Source file: <figures/domain_diff.eps>
 (epstopdf)                    date: 2019-03-30 12:16:03
 (epstopdf)                    size: 9158461 bytes
@@ -929,21 +929,20 @@ Package epstopdf Info: Source file: <figures/domain_diff.eps>
 (epstopdf)                    size: 299512 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/domain_diff-eps-co
 nverted-to.pdf figures/domain_diff.eps>
-(epstopdf)             \includegraphics on input line 29.
+(epstopdf)             \includegraphics on input line 35.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: /usr/bin/pdflatex (file ./figures/domain_diff-eps-converted-to.
 pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 
-<figures/domain_diff-eps-converted-to.pdf, id=762, 1513.655pt x 857.2025pt>
+<figures/domain_diff-eps-converted-to.pdf, id=776, 1513.655pt x 857.2025pt>
 File: figures/domain_diff-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figures/domain_diff-eps-converted-to.pdf>
 Package pdftex.def Info: figures/domain_diff-eps-converted-to.pdf used on input
- line 29.
-(pdftex.def)             Requested size: 455.23174pt x 284.52576pt.
- [41]
+ line 35.
+(pdftex.def)             Requested size: 455.23174pt x 270.29489pt.
 Package epstopdf Info: Source file: <figures/not_in_wrgbd.eps>
 (epstopdf)                    date: 2019-03-30 12:16:04
 (epstopdf)                    size: 9586288 bytes
@@ -953,20 +952,20 @@ Package epstopdf Info: Source file: <figures/not_in_wrgbd.eps>
 (epstopdf)                    size: 231514 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/not_in_wrgbd-eps-c
 onverted-to.pdf figures/not_in_wrgbd.eps>
-(epstopdf)             \includegraphics on input line 37.
+(epstopdf)             \includegraphics on input line 43.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: /usr/bin/pdflatex (file ./figures/not_in_wrgbd-eps-converted-to
 .pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowe
 d
-<figures/not_in_wrgbd-eps-converted-to.pdf, id=772, 1513.655pt x 857.2025pt>
+<figures/not_in_wrgbd-eps-converted-to.pdf, id=777, 1513.655pt x 857.2025pt>
 File: figures/not_in_wrgbd-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figures/not_in_wrgbd-eps-converted-to.pdf>
 Package pdftex.def Info: figures/not_in_wrgbd-eps-converted-to.pdf used on inpu
-t line 37.
-(pdftex.def)             Requested size: 355.66278pt x 199.16672pt.
+t line 43.
+(pdftex.def)             Requested size: 341.43535pt x 170.71806pt.
 Package epstopdf Info: Source file: <figures/tless_domain_diff.eps>
 (epstopdf)                    date: 2019-04-13 10:46:05
 (epstopdf)                    size: 8232208 bytes
@@ -976,28 +975,28 @@ Package epstopdf Info: Source file: <figures/tless_domain_diff.eps>
 (epstopdf)                    size: 353982 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/tless_domain_diff-
 eps-converted-to.pdf figures/tless_domain_diff.eps>
-(epstopdf)             \includegraphics on input line 45.
+(epstopdf)             \includegraphics on input line 51.
 Package epstopdf Info: Output file is already uptodate.
 
-<figures/tless_domain_diff-eps-converted-to.pdf, id=773, 1513.655pt x 857.2025p
+<figures/tless_domain_diff-eps-converted-to.pdf, id=778, 1513.655pt x 857.2025p
 t>
 File: figures/tless_domain_diff-eps-converted-to.pdf Graphic file (type pdf)
  <use figures/tless_domain_diff-eps-converted-to.pdf>
 Package pdftex.def Info: figures/tless_domain_diff-eps-converted-to.pdf used on
- input line 45.
-(pdftex.def)             Requested size: 426.77687pt x 256.0771pt.
+ input line 51.
+(pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
  [42pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.49 
+l.55 
      pdfTeX warning (ext4): destination with the same identifier (name{figure.4
 .2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.49 
+l.55 
       <./figures/domain_diff-eps-converted-to.pdf> <./figures/not_in_wrgbd-eps-
 converted-to.pdf>]
 Package epstopdf Info: Source file: <figures/tless_trn_test.eps>
@@ -1009,35 +1008,35 @@ f>
 (epstopdf)                    size: 275666 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/tless_trn_test-eps
 -converted-to.pdf figures/tless_trn_test.eps>
-(epstopdf)             \includegraphics on input line 52.
+(epstopdf)             \includegraphics on input line 58.
 Package epstopdf Info: Output file is already uptodate.
 
-<figures/tless_trn_test-eps-converted-to.pdf, id=913, 1513.655pt x 857.2025pt>
+<figures/tless_trn_test-eps-converted-to.pdf, id=918, 1513.655pt x 857.2025pt>
 File: figures/tless_trn_test-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figures/tless_trn_test-eps-converted-to.pdf>
 Package pdftex.def Info: figures/tless_trn_test-eps-converted-to.pdf used on in
-put line 52.
-(pdftex.def)             Requested size: 398.3451pt x 241.84624pt.
+put line 58.
+(pdftex.def)             Requested size: 398.3451pt x 233.3051pt.
  [43pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.60 \paragraph
+l.66 \paragraph
                {Confidence} is defined as the maximum probability of the out...
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.60 \paragraph
+l.66 \paragraph
                {Confidence} is defined as the maximum probability of the out...
  <./figures/tless_domain_diff-eps-converted-to.pdf> <./figures/tless_trn_test-e
 ps-converted-to.pdf>] [44] [45] [46] [47]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 153.
+(hyperref)                removing `\uppercase' on input line 159.
 
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/exp1/exp1_h
 isto.eps>
@@ -1050,7 +1049,7 @@ isto-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/exp1/exp1_histo-eps-converted-to.pdf figures/uncertainty_estimation/exp1/e
 xp1_histo.eps>
-(epstopdf)             \includegraphics on input line 164.
+(epstopdf)             \includegraphics on input line 170.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1058,14 +1057,14 @@ pdfTeX warning: /usr/bin/pdflatex (file ./figures/uncertainty_estimation/exp1/e
 xp1_histo-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but at
  most version <1.5> allowed
 
-<figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf, id=1099, 
+<figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf, id=1102, 
 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf Graph
 ic file (type pdf)
 
 <use figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/exp1/exp1_histo-eps-con
-verted-to.pdf used on input line 164.
+verted-to.pdf used on input line 170.
 (pdftex.def)             Requested size: 455.23174pt x 227.61537pt.
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/exp1/exp1_r
 eliability.eps>
@@ -1078,7 +1077,7 @@ eliability-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/exp1/exp1_reliability-eps-converted-to.pdf figures/uncertainty_estimation/
 exp1/exp1_reliability.eps>
-(epstopdf)             \includegraphics on input line 171.
+(epstopdf)             \includegraphics on input line 177.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1087,32 +1086,32 @@ xp1_reliability-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>,
 but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf, id=
-1100, 1513.655pt x 857.2025pt>
+1103, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf
  Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/exp1/exp1_reliability-e
-ps-converted-to.pdf used on input line 171.
+ps-converted-to.pdf used on input line 177.
 (pdftex.def)             Requested size: 355.66278pt x 199.16672pt.
 [48] [49pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.4.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.177 \newpage
+l.183 \newpage
               pdfTeX warning (ext4): destination with the same identifier (name
 {figure.4.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.177 \newpage
+l.183 \newpage
                <./figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-
 to.pdf> <./figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-t
 o.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 178.
+(hyperref)                removing `\uppercase' on input line 184.
 
 [50]
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/hist_seed3_
@@ -1126,7 +1125,7 @@ ensemble-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/hist_seed3_ensemble-eps-converted-to.pdf figures/uncertainty_estimation/hi
 st_seed3_ensemble.eps>
-(epstopdf)             \includegraphics on input line 201.
+(epstopdf)             \includegraphics on input line 207.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1135,13 +1134,13 @@ eed3_ensemble-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, bu
 t at most version <1.5> allowed
 
 <figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf, id=12
-11, 1513.655pt x 857.2025pt>
+14, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf G
 raphic file (type pdf)
 
 <use figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/hist_seed3_ensemble-eps
--converted-to.pdf used on input line 201.
+-converted-to.pdf used on input line 207.
 (pdftex.def)             Requested size: 455.23174pt x 369.8848pt.
 
 
@@ -1158,7 +1157,7 @@ _seed3_ensemble_-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/reliability_seed3_ensemble_-eps-converted-to.pdf figures/uncertainty_estim
 ation/reliability_seed3_ensemble_.eps>
-(epstopdf)             \includegraphics on input line 208.
+(epstopdf)             \includegraphics on input line 214.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1167,17 +1166,17 @@ ility_seed3_ensemble_-eps-converted-to.pdf): PDF inclusion: found PDF version <
 1.7>, but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-to.pd
-f, id=1212, 1503.6175pt x 607.26875pt>
+f, id=1215, 1503.6175pt x 607.26875pt>
 File: figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-
 to.pdf Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-t
 o.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/reliability_seed3_ensem
-ble_-eps-converted-to.pdf used on input line 208.
+ble_-eps-converted-to.pdf used on input line 214.
 (pdftex.def)             Requested size: 469.46634pt x 170.71051pt.
 
-Overfull \hbox (8.7451pt too wide) in paragraph at lines 208--209
+Overfull \hbox (8.7451pt too wide) in paragraph at lines 214--215
  [] 
  []
 
@@ -1190,13 +1189,13 @@ Overfull \vbox (31.42862pt too high) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.213 
+l.219 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.213 
+l.219 
        <./figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.p
 df> <./figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted
 -to.pdf>]
@@ -1211,7 +1210,7 @@ Package epstopdf Info: Source file: <figures/uncertainty_estimation/roc_pr_seed
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/roc_pr_seed3_ensemble-eps-converted-to.pdf figures/uncertainty_estimation/
 roc_pr_seed3_ensemble.eps>
-(epstopdf)             \includegraphics on input line 219.
+(epstopdf)             \includegraphics on input line 225.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1220,23 +1219,23 @@ _seed3_ensemble-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>,
 but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf, id=
-1277, 1513.655pt x 857.2025pt>
+1280, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf
  Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/roc_pr_seed3_ensemble-e
-ps-converted-to.pdf used on input line 219.
+ps-converted-to.pdf used on input line 225.
 (pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
 [53pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.226 
+l.232 
        <./figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to
 .pdf>]
-Overfull \hbox (3.45496pt too wide) in paragraph at lines 245--255
+Overfull \hbox (3.45496pt too wide) in paragraph at lines 251--261
  [][] 
  []
 
@@ -1245,7 +1244,7 @@ Overfull \hbox (3.45496pt too wide) in paragraph at lines 245--255
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.257 \newpage
+l.263 \newpage
               ]
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/laplace/rel
 iabilty_seed3_.eps>
@@ -1258,7 +1257,7 @@ iabilty_seed3_-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/laplace/reliabilty_seed3_-eps-converted-to.pdf figures/uncertainty_estimat
 ion/laplace/reliabilty_seed3_.eps>
-(epstopdf)             \includegraphics on input line 267.
+(epstopdf)             \includegraphics on input line 273.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1267,29 +1266,29 @@ e/reliabilty_seed3_-eps-converted-to.pdf): PDF inclusion: found PDF version <1.
 7>, but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to.pdf,
- id=1388, 1492.57625pt x 596.2275pt>
+ id=1391, 1492.57625pt x 596.2275pt>
 File: figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to
 .pdf Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to.
 pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/laplace/reliabilty_seed
-3_-eps-converted-to.pdf used on input line 267.
+3_-eps-converted-to.pdf used on input line 273.
 (pdftex.def)             Requested size: 469.458pt x 142.26053pt.
 
-Overfull \hbox (8.73676pt too wide) in paragraph at lines 267--268
+Overfull \hbox (8.73676pt too wide) in paragraph at lines 273--274
  [] 
  []
 
 
-<figures/uncertainty_estimation/laplace/histo_ood_seed3.png, id=1389, 1514.0565
+<figures/uncertainty_estimation/laplace/histo_ood_seed3.png, id=1392, 1514.0565
 pt x 857.1222pt>
 File: figures/uncertainty_estimation/laplace/histo_ood_seed3.png Graphic file (
 type png)
 
 <use figures/uncertainty_estimation/laplace/histo_ood_seed3.png>
 Package pdftex.def Info: figures/uncertainty_estimation/laplace/histo_ood_seed3
-.png used on input line 275.
+.png used on input line 281.
 (pdftex.def)             Requested size: 455.23697pt x 284.52525pt.
 
 
@@ -1306,7 +1305,7 @@ _pr_seed3-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=figures/uncertainty_estima
 tion/laplace/roc_pr_seed3-eps-converted-to.pdf figures/uncertainty_estimation/l
 aplace/roc_pr_seed3.eps>
-(epstopdf)             \includegraphics on input line 283.
+(epstopdf)             \includegraphics on input line 289.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1315,13 +1314,13 @@ e/roc_pr_seed3-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, b
 ut at most version <1.5> allowed
 
 <figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf, id=1
-391, 1513.655pt x 857.2025pt>
+394, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf 
 Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/laplace/roc_pr_seed3-ep
-s-converted-to.pdf used on input line 283.
+s-converted-to.pdf used on input line 289.
 (pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
 
 [55pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
@@ -1329,7 +1328,7 @@ s-converted-to.pdf used on input line 283.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.288 
+l.294 
        <./figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converte
 d-to.pdf>]
 Overfull \vbox (28.10236pt too high) has occurred while \output is active []
@@ -1340,13 +1339,13 @@ Overfull \vbox (28.10236pt too high) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.288 
+l.294 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.12}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.288 
+l.294 
        <./figures/uncertainty_estimation/laplace/histo_ood_seed3.png> <./figure
 s/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf>] [57pdfTeX 
 warning (ext4): destination with the same identifier (name{table.4.2}) has been
@@ -1354,7 +1353,7 @@ warning (ext4): destination with the same identifier (name{table.4.2}) has been
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.327 
+l.333 
       ]
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/ablation_st
 udy/histo_froFeat_ori_cdp_mdp_ood_seed3.eps>
@@ -1368,7 +1367,7 @@ udy/histo_froFeat_ori_cdp_mdp_ood_seed3-eps-converted-to.pdf>
 tion/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3-eps-converted-to.pdf fi
 gures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3
 .eps>
-(epstopdf)             \includegraphics on input line 330.
+(epstopdf)             \includegraphics on input line 336.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1377,14 +1376,14 @@ on_study/histo_froFeat_ori_cdp_mdp_ood_seed3-eps-converted-to.pdf): PDF inclusi
 on: found PDF version <1.7>, but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_se
-ed3-eps-converted-to.pdf, id=1471, 1513.655pt x 857.2025pt>
+ed3-eps-converted-to.pdf, id=1474, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_o
 od_seed3-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_oo
 d_seed3-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/ablation_study/histo_fr
-oFeat_ori_cdp_mdp_ood_seed3-eps-converted-to.pdf used on input line 330.
+oFeat_ori_cdp_mdp_ood_seed3-eps-converted-to.pdf used on input line 336.
 (pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/ablation_st
 udy/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps>
@@ -1398,7 +1397,7 @@ udy/reliability_froFeat_ori_cdp_mdp_combined_seed3_-eps-converted-to.pdf>
 tion/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_-eps-convert
 ed-to.pdf figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori
 _cdp_mdp_combined_seed3_.eps>
-(epstopdf)             \includegraphics on input line 338.
+(epstopdf)             \includegraphics on input line 344.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1407,7 +1406,7 @@ on_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_-eps-converted-to.pdf):
  PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_
-combined_seed3_-eps-converted-to.pdf, id=1472, 1459.4525pt x 517.935pt>
+combined_seed3_-eps-converted-to.pdf, id=1475, 1459.4525pt x 517.935pt>
 File: figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp
 _mdp_combined_seed3_-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1415,10 +1414,10 @@ _mdp_combined_seed3_-eps-converted-to.pdf Graphic file (type pdf)
 mdp_combined_seed3_-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/ablation_study/reliabil
 ity_froFeat_ori_cdp_mdp_combined_seed3_-eps-converted-to.pdf used on input line
- 338.
+ 344.
 (pdftex.def)             Requested size: 469.46172pt x 142.26263pt.
 
-Overfull \hbox (8.74048pt too wide) in paragraph at lines 338--339
+Overfull \hbox (8.74048pt too wide) in paragraph at lines 344--345
  [] 
  []
 
@@ -1427,7 +1426,7 @@ Overfull \hbox (8.74048pt too wide) in paragraph at lines 338--339
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.343 
+l.349 
        <./figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_m
 dp_ood_seed3-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/ablation_st
@@ -1442,7 +1441,7 @@ udy/roc_pr_froFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.pdf>
 tion/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.
 pdf figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_co
 mbined_seed3.eps>
-(epstopdf)             \includegraphics on input line 347.
+(epstopdf)             \includegraphics on input line 353.
 Package epstopdf Info: Output file is already uptodate.
 
 
@@ -1451,51 +1450,51 @@ on_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.pdf): PDF i
 nclusion: found PDF version <1.7>, but at most version <1.5> allowed
 
 <figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combi
-ned_seed3-eps-converted-to.pdf, id=1521, 1513.655pt x 857.2025pt>
+ned_seed3-eps-converted-to.pdf, id=1524, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_
 combined_seed3-eps-converted-to.pdf Graphic file (type pdf)
 
 <use figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_c
 ombined_seed3-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/ablation_study/roc_pr_f
-roFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.pdf used on input line 347.
+roFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.pdf used on input line 353.
 (pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
  [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 14}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.378 
+l.384 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.15}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.378 
+l.384 
       pdfTeX warning (ext4): destination with the same identifier (name{table.4
 .3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.378 
+l.384 
        <./figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori
 _cdp_mdp_combined_seed3_-eps-converted-to.pdf> <./figures/uncertainty_estimatio
 n/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.pdf
 >]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 388.
+(hyperref)                removing `\uppercase' on input line 394.
 
 [60] [61] [62pdfTeX warning (ext4): destination with the same identifier (name{
 table.4.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.431 
+l.437 
       ]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 432.
+(hyperref)                removing `\uppercase' on input line 438.
 
 ) [63]
 \openout2 = `Conclusions.aux'.
@@ -1574,7 +1573,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 119.
 Here is how much of TeX's memory you used:
  10042 strings out of 493029
  155507 string characters out of 6136233
- 279495 words of memory out of 5000000
+ 280596 words of memory out of 5000000
  12963 multiletter control sequences out of 15000+600000
  17485 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1602,10 +1601,10 @@ ublic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /symbols/msbm10.pfb>
-Output written on LMT_Thesis.pdf (81 pages, 3337842 bytes).
+Output written on LMT_Thesis.pdf (81 pages, 3338846 bytes).
 PDF statistics:
- 1876 PDF objects out of 2073 (max. 8388607)
- 1184 compressed objects within 12 object streams
+ 1881 PDF objects out of 2073 (max. 8388607)
+ 1189 compressed objects within 12 object streams
  317 named destinations out of 1000 (max. 500000)
  504 words of extra memory for PDF output out of 10000 (max. 10000000)
 
