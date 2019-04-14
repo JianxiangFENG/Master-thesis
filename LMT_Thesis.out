@@ -15,7 +15,7 @@
 \BOOKMARK [2][-]{subsection.2.3.1}{Introduction}{section.2.3}% 15
 \BOOKMARK [2][-]{subsection.2.3.2}{Scalable Laplace approximation for neural network}{section.2.3}% 16
 \BOOKMARK [0][-]{chapter.3}{Conditional random field}{}% 17
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.1}{Definition}{chapter.3}% 18
 \BOOKMARK [1][-]{section.3.2}{Learning}{chapter.3}% 19
 \BOOKMARK [1][-]{section.3.3}{Inference}{chapter.3}% 20
 \BOOKMARK [0][-]{chapter.4}{Experiments and Discussion}{}% 21
@@ -41,6 +41,6 @@
 \BOOKMARK [1][-]{section.A.1}{KL condition}{appendix.A}% 41
 \BOOKMARK [1][-]{section.A.2}{Figures}{appendix.A}% 42
 \BOOKMARK [1][-]{section.A.3}{Implementation Details}{appendix.A}% 43
-\BOOKMARK [0][-]{appendix*.33}{List of Figures}{}% 44
-\BOOKMARK [0][-]{appendix*.34}{List of Tables}{}% 45
-\BOOKMARK [0][-]{appendix*.35}{Bibliography}{}% 46
+\BOOKMARK [0][-]{appendix*.34}{List of Figures}{}% 44
+\BOOKMARK [0][-]{appendix*.35}{List of Tables}{}% 45
+\BOOKMARK [0][-]{appendix*.36}{Bibliography}{}% 46

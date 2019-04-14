@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2018)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: LMT_Thesis.aux
 A level-1 auxiliary file: StatementsEN.aux
 A level-1 auxiliary file: Abstract.aux
@@ -11,18 +11,27 @@ A level-1 auxiliary file: Conclusions.aux
 A level-1 auxiliary file: Appendix.aux
 The style file: alpha.bst
 Database file #1: Bibliography.bib
-Repeated entry---line 108 of file Bibliography.bib
+Repeated entry---line 120 of file Bibliography.bib
  : @inproceedings{osband2016deep
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 430 of file Bibliography.bib
+Repeated entry---line 149 of file Bibliography.bib
+ : @book{koller2009probabilistic
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 458 of file Bibliography.bib
  : @inproceedings{louizos2017multiplicative
  :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 502 of file Bibliography.bib
+ : @article{lafferty2001conditional
+ :                                 ,
 I'm skipping whatever remains of this entry
 Warning--empty school in gal2016uncertainty
 Warning--empty year in gal2016uncertainty
 Warning--empty booktitle in gal2016improving
 Warning--empty year in gal2016improving
+Warning--empty journal in hammersley1968markov
 Warning--empty publisher in koller2009probabilistic
 Warning--empty journal in kendall2017multi
 Warning--empty year in kendall2017multi
@@ -30,45 +39,45 @@ Warning--empty journal in lafferty2001conditional
 Warning--empty booktitle in mcallister2017concrete
 Warning--empty journal in ritter2018scalable
 Warning--empty journal in rasiwasia2009holistic
-You've used 68 entries,
+You've used 71 entries,
             2543 wiz_defined-function locations,
-            900 strings with 16600 characters,
-and the built_in function-call counts, 31635 in all, are:
-= -- 3167
-> -- 1687
-< -- 37
-+ -- 608
-- -- 601
-* -- 2196
-:= -- 5067
-add.period$ -- 210
-call.type$ -- 68
-change.case$ -- 479
-chr.to.int$ -- 68
-cite$ -- 79
-duplicate$ -- 1282
-empty$ -- 2167
-format.name$ -- 666
-if$ -- 6574
+            912 strings with 17086 characters,
+and the built_in function-call counts, 32618 in all, are:
+= -- 3256
+> -- 1739
+< -- 38
++ -- 625
+- -- 618
+* -- 2254
+:= -- 5237
+add.period$ -- 219
+call.type$ -- 71
+change.case$ -- 496
+chr.to.int$ -- 71
+cite$ -- 83
+duplicate$ -- 1328
+empty$ -- 2243
+format.name$ -- 687
+if$ -- 6771
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 71
-newline$ -- 342
-num.names$ -- 204
-pop$ -- 530
+missing$ -- 75
+newline$ -- 357
+num.names$ -- 213
+pop$ -- 556
 preamble$ -- 1
-purify$ -- 552
+purify$ -- 573
 quote$ -- 0
-skip$ -- 1161
+skip$ -- 1195
 stack$ -- 0
-substring$ -- 1657
-swap$ -- 352
-text.length$ -- 37
-text.prefix$ -- 8
+substring$ -- 1678
+swap$ -- 355
+text.length$ -- 38
+text.prefix$ -- 9
 top$ -- 0
-type$ -- 528
-warning$ -- 11
-while$ -- 296
-width$ -- 73
-write$ -- 855
-(There were 2 error messages)
+type$ -- 548
+warning$ -- 12
+while$ -- 304
+width$ -- 77
+write$ -- 890
+(There were 4 error messages)

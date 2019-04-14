@@ -14,18 +14,14 @@ In this chapter, we perform different experiments for the following purposes:
 Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions. Models were implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20.
 
 \subsection{Dataset}
-\paragraph{WRGBD\cite{lai2011large}} This dataset is a large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories, some of categories and their subtrees are shown in figure \ref{fig:wrgbd1}. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping of features between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. 
+\paragraph{WRGBD\cite{lai2011large}} This dataset is a large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories, some of categories and their subtrees. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping of features between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. 
 
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[height=7cm, width=13cm]{wrgbd1_}
-		\caption{The fruit, device, vegetable, and container subtrees of the RGB-D Object Dataset object hierarchy, the shaded ellipse represent categories and number inside parenthesis denotes the number of instances within this category\cite{lai2011large}.}		
-		\label{fig:wrgbd1}
-	\end{center} 
-\end{figure}
 \paragraph{UniHB} To simulate application-specific situation in deployment of robots, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. The size of data with elevation $45^\circ$ is around $8.6\times10^3$ and that of data with elevation $30^\circ$ and $60^\circ$ is around $17.1\times10^3$.
 
 While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that data of these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$). The size of this OOD dataset is around $6.0\times10^3$.
+
+\paragraph{T-LESS\cite{hodan2017tless}} This dataset features thirty commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others.  
+All images were obtained with an automatic procedure that systematically sampled images from a view sphere, resulting in around $38.0\times10^3$ training and $10.0\times10^3$ test images. The training images depict objects in isolation with a black background, while the test images originate from twenty table-top scenes with arbitrarily arranged objects. The training images of each object are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$, while the scene context information can be exploited with conditional random field in the final experiment.
 
 
  \begin{figure}[H]
@@ -44,19 +40,16 @@ While the UniHB dataset's setup strives to mimic the WRGBD one, the differing ca
 	\end{center}
 \end{figure} 
 
-\paragraph{T-LESS\cite{hodan2017tless}} This dataset features thirty commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others.  
-All images were obtained with an automatic procedure that systematically sampled images from a view sphere, resulting in around $38.0\times10^3$ training and $10.0\times10^3$ test images. The training images depict objects in isolation with a black background, while the test images originate from twenty table-top scenes with arbitrarily arranged objects. The training images of each object are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$, while the scene context information can be exploited with conditional random field in the final experiment.
-
 \begin{figure}[H]
 		\centering
-		\includegraphics[height=7cm, width=13cm]{tless_domain_diff}
+		\includegraphics[height=9cm, width=15cm]{tless_domain_diff}
 		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
 		\label{fig:tless_train}
 \end{figure} 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm, width=12cm]{tless_trn_test}
+		\includegraphics[height=8.5cm, width=14cm]{tless_trn_test}
 		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
 		\label{fig:tless_test}
 	\end{center}

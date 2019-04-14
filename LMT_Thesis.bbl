@@ -119,6 +119,11 @@ Carolina Galleguillos, Andrew Rabinovich, and Serge Belongie.
 \newblock In {\em Computer Vision and Pattern Recognition, 2008. CVPR 2008.
   IEEE Conference on}, pages 1--8. IEEE, 2008.
 
+\bibitem[HC68]{hammersley1968markov}
+John~M Hammersley and Peter Clifford.
+\newblock Markov fields on finite graphs and lattices.
+\newblock 1968.
+
 \bibitem[HG16]{hendrycks2016baseline}
 Dan Hendrycks and Kevin Gimpel.
 \newblock A baseline for detecting misclassified and out-of-distribution
@@ -324,6 +329,12 @@ Ian Osband, Charles Blundell, Alexander Pritzel, and Benjamin Van~Roy.
 \newblock In {\em Advances in neural information processing systems}, pages
   4026--4034, 2016.
 
+\bibitem[Pea14]{pearl2014probabilistic}
+Judea Pearl.
+\newblock {\em Probabilistic reasoning in intelligent systems: networks of
+  plausible inference}.
+\newblock Elsevier, 2014.
+
 \bibitem[QCRS{\etalchar{+}}05]{quinonero2005evaluating}
 Joaquin Quinonero-Candela, Carl~Edward Rasmussen, Fabian Sinz, Olivier
   Bousquet, and Bernhard Sch{\"o}lkopf.
@@ -335,6 +346,13 @@ Joaquin Quinonero-Candela, Carl~Edward Rasmussen, Fabian Sinz, Olivier
 Hippolyt Ritter, Aleksandar Botev, and David Barber.
 \newblock A scalable laplace approximation for neural networks.
 \newblock 2018.
+
+\bibitem[RSGGJ15]{Ruiz-Sarmiento-REACTS-2015}
+J.~R. Ruiz-Sarmiento, Cipriano Galindo, and Javier
+  Gonz{\'{a}}lez-Jim{\'{e}}nez.
+\newblock Upgmpp: a software library for contextual object recognition.
+\newblock In {\em 3rd. Workshop on Recognition and Action for Scene
+  Understanding (REACTS)}, 2015.
 
 \bibitem[RV09]{rasiwasia2009holistic}
 Nikhil Rasiwasia and Nuno Vasconcelos.
