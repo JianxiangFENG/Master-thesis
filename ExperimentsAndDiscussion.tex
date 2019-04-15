@@ -13,26 +13,26 @@ In this chapter, we perform different experiments for the following purposes:
 
 Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions. Models were implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20.
 
-
+\newpage
 \subsection{Dataset}
-\paragraph{WRGBD\cite{lai2011large}} This dataset is a large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories, some of categories and their subtrees. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping of features between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. 
+\paragraph{WRGBD\cite{lai2011large}} This dataset is a public large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories and 300 instance classes in hierarchical structure. There are multiple instances in different categories. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping in features space between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition.  
 
-\paragraph{UniHB} To simulate application-specific situation in deployment of robots, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. The size of data with elevation $45^\circ$ is around $8.6\times10^3$ and that of data with elevation $30^\circ$ and $60^\circ$ is around $17.1\times10^3$.
+\paragraph{UniHB} To simulate application-specific situation in deployment of robots, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. In this work, we call it UniHB dataset for simplicity. The size of data with elevation $45^\circ$ is around $8.6\times10^3$ and that of data with elevation $30^\circ$ and $60^\circ$ is around $17.1\times10^3$.
 
-While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that data of these novel objects are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$). The size of this OOD dataset is around $6.0\times10^3$.
+While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. figure \ref{fig:not_in_wrgbd}) that do not belong to the 51 class categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that data of these novel classes are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$). The size of this OOD dataset is around $6.0\times10^3$.
 
 % and are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth
 
 %Each test scene is captured from a systematically sampled view hemisphere with $10^{\circ}$ step in elevation (from $75^{\circ}$ to $15^{\circ}$) and $5^{\circ}$ step in azimuth.
 
-\paragraph{T-LESS\cite{hodan2017tless}} This dataset features 30 commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others. All images were captured systematically sampled from a view sphere, resulting in around $38.0\times10^3$ training and $10.0\times10^3$ test images (cf. figure \ref{fig:tless_test}). The training images depict objects in isolation with a black background, while the test images are from twenty table-top scenes with arbitrarily arranged objects placed on table. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$, while the scene context information can be exploited with conditional random field in the final experiment.
+\paragraph{T-LESS\cite{hodan2017tless}} This dataset features 30 commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others. All images were captured systematically sampled from a view sphere, resulting in around $38.0\times10^3$ training images and $10.0\times10^3$ test scene images (cf. figure \ref{fig:tless_test}). The training images depict objects in isolation with a black background, while the test images are from 20 table-top scenes with arbitrarily arranged objects placed on table. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $69.5\times10^3$. Nevertheless, the context information in the scene can be exploited with conditional random field in the next experiment.
 
-Because objects in test scenes are mostly occluded and have different background and reflectance. Therefore we employ data augmentation to improve the performance of classifier (cf. figure \ref{fig:tless_train}). Since collecting real data requires much manual effort, we want to first train classifier on synthetic data which are augmented images from 3D reconstructed CAD models(cf. figure \ref{fig:tless_train}). By comparing the real object and synthetic image, there is significantly large domain gap such as texture and details on the object, which can decrease the performance on test set greatly. Based on improved uncertainty estimation we can collect labeled data automatically, which is used to train a more accurate classifier.
+Because objects in test scenes are mostly occluded and have different backgrounds and lightness. Therefore we employ data augmentation to improve the performance, where the real single objects are augmented and put onto different background images from VOC2012 dataset\cite{pascal-voc-2012}(cf. figure \ref{fig:tless_train}). Since collecting real data requires much manual effort, we want to first train classifier on synthetic data which are multi-view images of objects rendered from 3D reconstructed CAD models with similar augmentations as the real single objects(cf. figure \ref{fig:tless_train}). Although the real object and synthetic object do not look much different, there is significantly large domain gap between them such as texture and details on the object so that the performance of classifier trained on synthetic dataset on test set decreases a lot. One way to tackle this is that we can collect labeled data automatically based on improved uncertainty estimation, which can then be used to train a more accurate classifier.
 
 
  \begin{figure}[H]
  	\begin{center}
- 		\includegraphics[height=9.5cm, width=16cm]{domain_diff}
+ 		\includegraphics[height=10cm, width=16cm]{domain_diff}
  		\caption{Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets.}		
  		\label{fig:wrgbd2}
  	\end{center}
@@ -40,26 +40,27 @@ Because objects in test scenes are mostly occluded and have different background
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=12cm]{not_in_wrgbd}
+		\includegraphics[height=7cm, width=12cm]{not_in_wrgbd}
 		\caption{Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}		
 		\label{fig:not_in_wrgbd}
 	\end{center}
 \end{figure} 
 
 \begin{figure}[H]
-		\centering
-		\includegraphics[height=9cm, width=16cm]{tless_domain_diff}
-		\caption{Example of object of each category after augmentation. In each thumbnail, the left image is real augmented object and the right image is synthetic augmented object.}		
-		\label{fig:tless_train}
-\end{figure} 
-
-\begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8.2cm, width=14cm]{tless_trn_test}
+		\includegraphics[height=8.5cm, width=14cm]{tless_trn_test}
 		\caption{Example of object of each category in original training set and test set. In each thumbnail, the left image is real single object with black background and the right image is cropped image of object in test scene.}		
 		\label{fig:tless_test}
 	\end{center}
 \end{figure} 
+
+\begin{figure}[H]
+		\centering
+		\includegraphics[height=9cm, width=16cm]{tless_domain_diff}
+		\caption{Example of object of each category with augmentation. In each thumbnail, the left image is real augmented object and the right image is synthetic augmented object.}		
+		\label{fig:tless_train}
+\end{figure} 
+
 
 \subsection{Uncertainty measures}
 For each prediction, we can obtain one predictive probability distribution from our model with equation \ref{marginalization_test}. In order to quantify uncertainty of the prediction, there are different metrics to measure the uncertainty of prediction, which are introduced in the following. We define $x^\star$ as one test data sample and $\mathcal D$ as our training set. 
@@ -70,7 +71,7 @@ For each prediction, we can obtain one predictive probability distribution from 
 conf = \max_c \big[ p(y=c|x^\star, \mathcal D) \big]
 \end{aligned}
 \end{equation}
-where $conf \in [0,1]$, $c \in \mathcal P = \{0,...,|\mathcal P|-1\}$, and $\mathcal P$ represents output space in which label is expressed as number index which is transformed into one-hot representation in computation of objective function. The larger this quantity is, the less uncertain the prediction is. 
+where $conf \in [0,1]$, $c \in \mathcal L = \{0,...,|\mathcal L|-1\}$, and $\mathcal L$ represents output space in which label is expressed as number index which is transformed into one-hot representation in computation of objective function. The larger this quantity is, the less uncertain the prediction is. 
 
 \paragraph{Predictive entropy} is quantity that captures the average amount information contained in predictive distribution\cite{shannon1948mathematical}: 
 \begin{equation}\label{entropy}	
@@ -167,14 +168,14 @@ In addition to uncertainty histogram, we also plot the calibration curve of each
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8cm, width=16cm]{uncertainty_estimation/exp1/exp1_histo}
+		\includegraphics[height=7cm, width=16cm]{uncertainty_estimation/exp1/exp1_histo}
 		\caption{Uncertainty(confidence, predictive entropy, mutual information) histograms of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
 		\label{exp1_histo}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm, width=12.5cm]{uncertainty_estimation/exp1/exp1_reliability}
+		\includegraphics[height=6cm, width=12cm]{uncertainty_estimation/exp1/exp1_reliability}
 		\caption{Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
 		\label{exp1_reliability}
 	\end{center}
@@ -197,27 +198,27 @@ We firstly explain protocols in the following for different kinds of metric, whi
 
 \subsubsection{Comparison with Ensemble}
 In this subsection, we will show the results in not only a qualitative (visual) way, but also in a quantitative way. The approaches we compare here include original version of ResNet50(ori), modified ResNet50 with concrete dropout(cdp), modified ResNet50 with multiple dropout(mdp) as well as their ensemble version. The members in ensemble are just initialized from different random seeds and no other techniques for enhancing the performance are used. In order to quantify the results more objectively, we average the results from three different random seeds and report the mean and the standard deviation.
-\paragraph{Uncertainty histogram}
-In the following figure \ref{exp2_histo}, we can see uncertainty histograms for different approaches and different uncertainty measures. Firstly, let's compare them vertically. We can see the improvement visually. The original version is still overconfident, which express low uncertainty to more than 50$\%$ of OOD data and nearly 40\% of miss-classification. The  cdp and mdp can lower this percentage to around 10\%, although at the same time the percentage of correct predictions is decreased. But we can know that the predictions for which the model expresses low uncertainty are more likely to be correct. And the ensemble of cdp and mdp can perform even better with miss-classification. However, the ensemble of mdp does not work as well as cdp version on OOD data, which can be seen in the histogram on the last row of the figure. The reason for this will be investigated in a ablation study later. Then we can compare them horizontally, it's shown that different uncertainty measures have similar trends in the histogram. Therefore we need other quantitative metrics for them in order to evaluate different approaches as well as metrics more accurately.  
-\paragraph{Reliability diagram}
+
 In the figure \ref{exp2_reliability}, on the left it's figure of calibration curves of different approaches, plotted from predictions on test dataset. We can see that the calibration performance is improved a lot by the cdp and mdp. Additionally, their ensemble versions can give even better results which are tightly overlapping with the diagonal curve. On the right there are curves plotted from predictions on both test dataset and OOD dataset. Similar ranks and trends as the left curves appear here. After adding the OOD data into evaluation, all of the calibration curves are pulled down, which means that the calibration performance get worse. If all OOD data is assigned with low confidence, then curves between left and right should be similar because the accuracy in middle or high confidence interval would not change a lot or be pulled down a lot. By comparison these two figures, we can also see that the robustness against OOD data of cdp, mdp and their ensembles are better than the original version.
 
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[height=13cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
-		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
-		\label{exp2_histo}
-	\end{center}
-\end{figure}
+In the figure \ref{exp2_histo}, we can see uncertainty histograms for different approaches and different uncertainty measures. Firstly, let's compare them vertically. We can see the improvement visually. The original version is still overconfident, which express low uncertainty to more than 50$\%$ of OOD data and nearly 40\% of miss-classification. The  cdp and mdp can lower this percentage to around 10\%, although at the same time the percentage of correct predictions is decreased. But we can know that the predictions for which the model expresses low uncertainty are more likely to be correct. And the ensemble of cdp and mdp can perform even better with miss-classification. However, the ensemble of mdp does not work as well as cdp version on OOD data, which can be seen in the histogram on the last row of the figure. The reason for this will be investigated in a ablation study later. Then we can compare them horizontally, it's shown that different uncertainty measures have similar trends in the histogram. Therefore we need other quantitative metrics for them in order to evaluate different approaches as well as metrics more accurately.  
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
+		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
 		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
 		\label{exp2_reliability}
 	\end{center}
 \end{figure}
 
-\paragraph{ROC curve and PR curve}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=12cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
+		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
+		\label{exp2_histo}
+	\end{center}
+\end{figure}
+
 When it comes to the separability metrics in figure \ref{exp2_roc_pr}, as stated before, we measure separability between correct prediction and miss-classification (on the left) and that between correct prediction and OOD prediction (on the right). On separability between correction prediction and miss-classification, cdp, mdp and their ensemble version can improve the results compared with original version in both ROC curve and PR curve on the left. On the other hand, the improvements on separability between correct prediction and OOD data are more obvious on the right. However, as observed before, the ensemble of mdp does not work well with OOD data, which can be observe with this metrics. We can know more from the curves that the worse performance with OOD data in mdp is enlarged by building ensemble of it.    
 
 \begin{figure}[h!]
@@ -278,7 +279,7 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 
 \begin{figure}[h!]		
 	\centering
-	\includegraphics[height=10cm, width=16cm]{uncertainty_estimation/laplace/histo_ood_seed3}
+	\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/histo_ood_seed3}
 	\caption{Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}
 	\label{figure:lap_hist}	
 \end{figure}
@@ -327,23 +328,25 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 	\end{tabular}
 \end{table}
 \subsubsection{Ablation study}
-As we can see from the previous results, mdp can work better than cdp without considering OOD data. However, it underperforms when OOD data is included. In order to investigate the reason behind this, we have done a ablation study to check the influence of aleatoric uncertainty which comes from mainly the feature extractor part. Considering this, we freeze the parameters of feature extractor and just train our probabilistic classifier which is a three-layer MLP. In the following we show the results of this ablation study with the same metrics used before. It's clear that the accuracy would drop when the feature extractor is frozen. However, we can see that mdp can have better  calibration performance than cdp and much better than original ResNet50. Regarding the separability metrics, although mdp still doesn't work better than cdp, the gap between is much smaller than the version without freezing feature extractor. These observations are expressed quantitatively in the table \ref{ab_table}. 
+As we can see from the previous results, mdp can work better than cdp without considering OOD data. However, it underperforms when OOD data is included. In order to investigate the reason behind this, we have done a ablation study to check the influence of aleatoric uncertainty which comes from mainly the feature extractor part. To this end, we firstly make assumption that the feature extractor part has a dominant effect on the aleatoric uncertainty, because it's deterministic compared with the following MLP classifier. 
 
-Based on these observations, we know that the underperformance of mdp on OOD dataset can attribute to the influence of aleatoric uncertainty. If the feature extractor is not frozen, then the aleatoric uncertainty is trained to adapt to the dataset. The problem why optimizing dropout rates for each hidden units can change the point estimate of the model parameter to have low aleatoric uncertainty for OOD data arises now. One possible reason for this could be the variance of estimation of derivatives of variational parameters is too large because of increased number of variational parameters\cite{kingma2015variational}. And the larger variances are back propagated to the feature extractor which may make the point estimate deviate from the better local minimum. One possible solution to resolve this is to sample the realization of activations of hidden units independent to each data instance, which may decrease the variance and help to improve the results. 
+Considering this, we freeze the parameters of feature extractor trying to keep the dominant effect on aleatoric uncertainty fixed for different approaches and just train our probabilistic classifier which is a three-layer MLP. In the following we show the results of this ablation study with the same metrics used before. It's clear that the accuracy would drop when the feature extractor is frozen. However, we can see that mdp can have better  calibration performance than cdp and much better than original ResNet50. Regarding the separability metrics, although mdp still doesn't work better than cdp, the gap between is much smaller than the version without freezing feature extractor. These observations are expressed quantitatively in the table \ref{ab_table}. 
+
+Based on these observations, we know that the underperformance of mdp on OOD dataset can attribute to the influence of aleatoric uncertainty. If the feature extractor is not frozen, then the aleatoric uncertainty is trained to adapt to the dataset. The problem why optimizing dropout rates for each hidden units can change the point estimate of the model parameter to have low aleatoric uncertainty for OOD data arises here. One possible reason for this could be the variance of estimation of derivatives of variational parameters is too large because of increased number of variational parameters\cite{kingma2015variational}. And the larger variances are back propagated to the feature extractor which may make the point estimate deviate from the better local minimum. One possible solution to resolve this is to sample the realization of activations of hidden units independent to each data instance, which may decrease the variance and help to improve the results. 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
-		\caption{Uncertainty histogram of one of three runs.}		
-		\label{ab_reliability}
+		\includegraphics[height=4.5cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
+		\caption{Calibration curve of one of three runs.}		
+		\label{ab_calibration}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
-		\caption{Calibration curve of one of three runs.}		
-		\label{ab_calibration}
+		\includegraphics[height=8cm,width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
+		\caption{Uncertainty histogram of one of three runs.}		
+		\label{ab_reliability}
 	\end{center}
 \end{figure}
 
@@ -384,12 +387,12 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 
 \section{Automatic labeling experiments}
-\subsection{Introduction}
-In this experiment, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance wtih automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. 
 
-This way to enable the classifier to learn continuously is seldom seen in the literatures. Therefore, in order to investigate the practicability of the way, we firstly perform experiments with restriction on the size of collected dataset. 
+In experiments of automatic labeling, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance with automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. 
 
-Then we try to extend this way to another dataset to test its generalization ability in second experiment. We employ data augmentation to address the problem of imbalance in number of data sample of each category found in the first experiment and show the results.
+This way to enable the classifier to learn continuously is seldom seen in the literatures. Therefore, in order to investigate the practicability of this method, we firstly perform experiments on WRGBD and UniHB dataset with restriction on the size of collected dataset. 
+
+Then we try to extend this way to another dataset, T-LESS dataset, to test its generalization ability in second experiment. In the second experiment, the situation is similar to the first experiment, where a classifier is firstly trained on synthetic dataset and then deployed in a real world environment which is simulated by the real objects in training set.  We employ data augmentation to address the problem of imbalance in fine-tuning classifier found in the first experiment.
  
 \subsection{Experiments \RNum{1}}
 The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} in uncertainty estimation, we train classifier with entire WRGBD dataset and evaluate performance of uncertainty estimation on adaptation set from UniHB dataset, which contain the images of object of elevation $30^{\circ}$ and $60^{\circ}$, whose size is around $17.1\times10^3$. The images of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
@@ -409,7 +412,7 @@ For C, D, E, F, G, we conduct the following steps:
 
 \end{itemize}
 To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in the settings means that we randomly choose the data according to the number of data sample in each category in order to make the dataset \textbf{as balanced as possible}.  
-\begin{table}[H]
+\begin{table}[h!]
 	\centering
 	\label{table:fine_tuning}
 	\caption{Results of fine-tuning of different settings}
@@ -425,7 +428,7 @@ To note that, the accuracy of automatically labeled data in C, E, F, G is around
 		\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
 	\end{tabular}
 \end{table}
-From the description of settings we know that predictions with most confidence and least confidence are imbalanced in number of data sample of each category.Based on the results in the table above, we can have the following observations:
+From the description of settings we know that predictions with most confidence and least confidence are imbalanced in number of data sample of each category. Based on the results in the table \ref{table:fine_tuning}, we can have the following observations:
 \begin{itemize}
 	\item diverse and balanced dataset can achieved best performance.
 	\item the difference of performance between C and D may attribute to quality of dataset which include correct labeling and information of data sample.
@@ -436,10 +439,38 @@ By comparing the results of other settings with that of A and B, we can see that
 In the end, we can also draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
 \subsection{Experiments \RNum{2}}
-The second experiment is performed on synthetic Tless dataset and original Tless dataset.
+The second experiment is performed on synthetic T-LESS dataset and original T-LESS dataset.
 
 
 \section{Context-based improvement experiments}
-\subsection{Experiments settings}
-\subsection{Results}
-\subsection{Analysis}
+In this section, we perform experiments to investigate the effect of improved uncertainty estimation when incorporating them with a probabilistic graphical model in down-stream task. In detail, we employ CRF introduced in chapter 3 to capture the dependencies between objects by exploiting contextual information in the scene. The intuition behind this idea is that if the predictive distribution (used as one uncertainty measure) is more reliable and can represent the inherent randomness better. Then this bit of information can be better utilized by CRF in the down-stream task. 
+
+As is mentioned in chapter 3, we modify CRF library \cite{Ruiz-Sarmiento-REACTS-2015} for the experiments, in which loopy belief propagation is employed both during training and testing. We have done mainly two experiments in this part. Firstly we perform a simpler experiment on subset of T-LESS dataset to show that CRF can capture the dependencies and then improve the performance. The performance can be boosted with improved uncertainty estimation from Bayesian neural network. Secondly, we test the same idea on the entire T-LESS dataset based on the output of classifier fine-tuned in the automatic labeling experiment. 
+
+
+\subsection{Experiment \RNum{1}}
+In this experiment, we train original ResNet50 and modified ResNet50 with concrete dropout on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and use scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. Regarding the hyper-parameters in training CRF, we set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. As is mentioned in chapter 3, we perform optimization with stochastic gradient descent(SGD) with momentum and loopy belief propagation(LBP) for inference. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$. In experiments, the algorithm always reach the maximum number of iteration during optimization.
+
+In the following, we show the testing results of CRF trained with two different unary features from two different versions of ResNet50.
+ 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		& \begin{tabular}[c]{@{}l@{}}unary feature \\ from ori\end{tabular} & \begin{tabular}[c]{@{}l@{}}unary feature \\ from cdp\end{tabular} \\ \hline
+		unary accuracy & 48.79\%                                                           & 51.94\%                                                           \\ \hline
+		CRF accuracy   & 61.21\%                                                           & 65.11\%                                                           \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		& \multicolumn{1}{l|}{node weight $\theta_u$} & \multicolumn{1}{l|}{edge weight $\theta_p$} \\ \hline
+		\begin{tabular}[c]{@{}l@{}}unary feature \\ from ori\end{tabular} & 3.744                            & 4.213                            \\ \hline
+		\begin{tabular}[c]{@{}l@{}}unary feature \\ from cdp\end{tabular} & 4.635                            & 3.882                            \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Experiment \RNum{2}}

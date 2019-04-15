@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: LMT_Thesis.aux
 A level-1 auxiliary file: StatementsEN.aux
 A level-1 auxiliary file: Abstract.aux
@@ -11,19 +11,19 @@ A level-1 auxiliary file: Conclusions.aux
 A level-1 auxiliary file: Appendix.aux
 The style file: alpha.bst
 Database file #1: Bibliography.bib
-Repeated entry---line 120 of file Bibliography.bib
+Repeated entry---line 124 of file Bibliography.bib
  : @inproceedings{osband2016deep
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 149 of file Bibliography.bib
+Repeated entry---line 153 of file Bibliography.bib
  : @book{koller2009probabilistic
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 458 of file Bibliography.bib
+Repeated entry---line 462 of file Bibliography.bib
  : @inproceedings{louizos2017multiplicative
  :                                         ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 502 of file Bibliography.bib
+Repeated entry---line 506 of file Bibliography.bib
  : @article{lafferty2001conditional
  :                                 ,
 I'm skipping whatever remains of this entry
@@ -39,45 +39,45 @@ Warning--empty journal in lafferty2001conditional
 Warning--empty booktitle in mcallister2017concrete
 Warning--empty journal in ritter2018scalable
 Warning--empty journal in rasiwasia2009holistic
-You've used 71 entries,
+You've used 72 entries,
             2543 wiz_defined-function locations,
-            912 strings with 17086 characters,
-and the built_in function-call counts, 32618 in all, are:
-= -- 3256
-> -- 1739
+            916 strings with 17337 characters,
+and the built_in function-call counts, 33041 in all, are:
+= -- 3293
+> -- 1774
 < -- 38
-+ -- 625
-- -- 618
-* -- 2254
-:= -- 5237
-add.period$ -- 219
-call.type$ -- 71
-change.case$ -- 496
-chr.to.int$ -- 71
-cite$ -- 83
-duplicate$ -- 1328
-empty$ -- 2243
-format.name$ -- 687
-if$ -- 6771
++ -- 639
+- -- 631
+* -- 2285
+:= -- 5311
+add.period$ -- 222
+call.type$ -- 72
+change.case$ -- 505
+chr.to.int$ -- 72
+cite$ -- 84
+duplicate$ -- 1338
+empty$ -- 2268
+format.name$ -- 700
+if$ -- 6853
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 75
-newline$ -- 357
-num.names$ -- 213
-pop$ -- 556
+newline$ -- 362
+num.names$ -- 216
+pop$ -- 570
 preamble$ -- 1
-purify$ -- 573
+purify$ -- 583
 quote$ -- 0
-skip$ -- 1195
+skip$ -- 1205
 stack$ -- 0
-substring$ -- 1678
-swap$ -- 355
+substring$ -- 1686
+swap$ -- 356
 text.length$ -- 38
 text.prefix$ -- 9
 top$ -- 0
-type$ -- 548
+type$ -- 556
 warning$ -- 12
-while$ -- 304
-width$ -- 77
-write$ -- 890
+while$ -- 307
+width$ -- 78
+write$ -- 901
 (There were 4 error messages)

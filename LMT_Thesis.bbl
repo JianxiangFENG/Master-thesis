@@ -47,6 +47,13 @@ Terrance DeVries and Graham~W Taylor.
   networks.
 \newblock {\em arXiv preprint arXiv:1802.04865}, 2018.
 
+\bibitem[EVGW{\etalchar{+}}]{pascal-voc-2012}
+M.~Everingham, L.~Van~Gool, C.~K.~I. Williams, J.~Winn, and A.~Zisserman.
+\newblock The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)}
+  {R}esults.
+\newblock
+  http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html.
+
 \bibitem[FCSG17]{feinman2017detecting}
 Reuben Feinman, Ryan~R Curtin, Saurabh Shintre, and Andrew~B Gardner.
 \newblock Detecting adversarial samples from artifacts.
