@@ -388,20 +388,20 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \section{Automatic labeling experiments}
 
-In experiments of automatic labeling, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance with automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. 
+In experiments of automatic labeling, our goal is to perform a proof-of-concept experiment, which simulates the situation that a classifier trained on a public large scale dataset or synthetic dataset is deployed in a real world environment and tries to fine-tune itself to improve performance with automatically labeled dataset and as little manually labeled data as possible. The automatically labeled data is collected based on improved uncertainty estimation. Because ResNet50 with concrete dropout shows more stable results than other version, we use it to improve uncertainty estimation in the following experiments and call it \textbf{BNN} without other specifications. 
 
 This way to enable the classifier to learn continuously is seldom seen in the literatures. Therefore, in order to investigate the practicability of this method, we firstly perform experiments on WRGBD and UniHB dataset with restriction on the size of collected dataset. 
 
 Then we try to extend this way to another dataset, T-LESS dataset, to test its generalization ability in second experiment. In the second experiment, the situation is similar to the first experiment, where a classifier is firstly trained on synthetic dataset and then deployed in a real world environment which is simulated by the real objects in training set.  We employ data augmentation to address the problem of imbalance in fine-tuning classifier found in the first experiment.
  
-\subsection{Experiments \RNum{1}}
-The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} in uncertainty estimation, we train classifier with entire WRGBD dataset and evaluate performance of uncertainty estimation on adaptation set from UniHB dataset, which contain the images of object of elevation $30^{\circ}$ and $60^{\circ}$, whose size is around $17.1\times10^3$. The images of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
+\subsection{Experiment \RNum{1}}
+The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} of uncertainty estimation experiments, we train classifier with entire WRGBD dataset and evaluate performance of uncertainty estimation on adaptation set from UniHB dataset, which contain the images of object of elevation $30^{\circ}$ and $60^{\circ}$, whose size is around $17.1\times10^3$. The images of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
 
-In this experiment, the model we use for fine-tuning is classifier trained with concrete dropout. The uncertainty measure we used is confidence because in this case we do not consider OOD data and confidence performs better in separating correct predictions and miss-classifications based on the results of previous experiments.
+The uncertainty measure we used is confidence because in this case we do not consider OOD data and confidence performs better in separating correct predictions and miss-classifications based on the results of previous experiments.
 
 One major restriction we impose in this experiment is the size of dataset for fine-tuning. Because if we do not restrict the size, the performance is influenced by both the size of dataset and other factors such as imbalance or quality of dataset. In order to exclude the influence of dataset size, we fix it as 3\% of the adaptation set which is around 510. If the dataset is balanced in number of data sample of category, then there are around ten data samples in each category. The influence of other factors we want investigate are the imbalance of dataset and quality of data sample in dataset. In the following table, we use capital letter to denote different settings of dataset for fine-tuning.
 
-Here we firstly illustrate the steps of labeling in this experiment which is different to the strategy in experiment \RNum{2}. 
+Here we firstly illustrate the steps of \textbf{selecting automatically labeled data} in this experiment which is a little different to the strategy in experiment \RNum{2}. 
 
 For C, D, E, F, G, we conduct the following steps:
 \begin{itemize}
@@ -411,7 +411,9 @@ For C, D, E, F, G, we conduct the following steps:
 	\item[4.] Balancing dataset: firstly check if number of data sample of any categories exceed the average number of data sample (which can be calculated beforehand), if yes, drop the data sample of this category randomly until its number reach the average number of category. After that, if augmentation is chosen, then use augmentation to increase of the number of data sample of category in which the number of data sample is less than average number of data sample.
 
 \end{itemize}
-To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in the settings means that we randomly choose the data according to the number of data sample in each category in order to make the dataset \textbf{as balanced as possible}.  
+To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in the context means that we randomly choose the data of each class with number computed based on the difference between current number of data samples of each class and the average number of data samples of each class. We assume that we have manually labeled all the predictions after automatic labeling and conduct a \textit{proof-of-concept} experiment with a \textbf{as balanced as possible} dataset.    
+
+
 	\begin{table}[h!]
 		\centering
 		\label{table:fine_tuning}
@@ -438,18 +440,55 @@ By comparing the results of other settings with that of A and B, we can see that
 
 In the end, we can draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
-\subsection{Experiments \RNum{2}}
-The second experiment is performed on synthetic T-LESS dataset and original T-LESS dataset.
+\subsection{Experiment \RNum{2}}
+In this experiment, we firstly train networks on synthetic and augmented dataset which is introduced previously. Then we select automatically labeled data by testing the trained model on real single objects (original training set of T-LESS) which we call \textbf{adaptation dataset}. The difference between the strategy of selecting data in experiment \RNum{1} is that we split off a small balanced validation set from the whole real single object dataset with ratio 1:9. Then we choose the threshold of uncertainty up to which the accuracy can reach 95\% based on predictions on validation set. This threshold is employed in the rest of whole adaptation dataset for selecting automatically labeled data. In this experiment we use predictive entropy as uncertainty measure, because it shows better performance in term of separability metrics on validation set.
+
+The improved uncertainty estimation from BNN plays an important role here, because it not only provides a reliable uncertainty estimation, but also increases the separability between correct predictions and false predictions, which is more useful in this task. 
+
+We show the comparisons in term of different evaluation metrics between uncertainty estimation from BNN and original ResNet50 in the following figures. As we can see in the uncertainty histogram (cf.\ref{autoLa_exp2_hist}), the mode of distribution of uncertainty estimation between correct prediction and miss-classification is further from each other when testing with BNN than with original ResNet50. In figure \ref{autoLa_exp2_cali}, BNN express better performance on both calibration and separability metrics. 
+
+With the same procedure of selecting automatically labeled data, we can only obtain around $1.05\times10^3$ data samples with only 93\% accuracy using original ResNet50, but around $1.6\times10^3$ data samples with 96\% accuracy using BNN. Therefore we do not consider fine-tuning with original ResNet50 here and focus on fine-tuning BNN.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=6.7cm,width=12cm]{autoLa/exp2/uncer_hist.eps}
+		\caption{Uncertainty histograms of original ResNet50 (top)and BNN (down).}		
+		\label{autoLa_exp2_hist}
+	\end{center}
+\end{figure}
+However, as we found in experiment \RNum{1}, the problem of imbalance in number of data samples of each class still appears on this dataset. The confusion matrix in figure \ref{autoLa_exp2_cfm} shows this problem obviously, in which most of confident predictions cluster in few classes. To mitigate this problem, we adopt two simple ways which have been tested in experiment \RNum{1}:
+\begin{itemize}
+\item manually label data uniformly with size 3\% of the adaptation set.
+\item employ augmentations, occlusions and different background images to the objects to make the selected dataset balanced.  
+\end{itemize} 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=8cm,width=14cm]{autoLa/exp2/roc_pr_cali_.eps}
+		\caption{Calibration curves, ROC curves, PR curves.}		
+		\label{autoLa_exp2_cali}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{center}
+		\includegraphics[height=7cm,width=13cm]{autoLa/exp2/cmf.eps}
+		\caption{Confusion matrix of automatically labeled dataset.}		
+		\label{autoLa_exp2_cfm}
+	\end{center}
+\end{figure}
 
 
 \section{Context-based improvement experiments}
-In this section, we perform experiments to investigate the effect of improved uncertainty estimation when incorporating them with a probabilistic graphical model in down-stream task. In detail, we employ CRF introduced in chapter 3 to capture the dependencies between objects by exploiting contextual information in the scene. The intuition behind this idea is that if the predictive distribution (used as one uncertainty measure) is more reliable and can represent the inherent randomness better. Then this bit of information can be better utilized by CRF in the down-stream task. 
+In this section, we perform experiments to investigate the effect of improved uncertainty estimation when incorporating them with a probabilistic graphical model in down-stream task. In detail, we employ CRF introduced in chapter 3 to capture the dependencies between objects by exploiting contextual information in the scene. The intuition behind this idea is that if the predictive distribution (used as one uncertainty measure) is more reliable and can represent the inherent randomness better. Then this bit of information can be better utilized by CRF in the down-stream task. Similar to previous experiment, we use ResNet50 with concrete dropout to improve uncertainty estimation in the following experiments and call it \textbf{BNN} without other specifications.
 
 As is mentioned in chapter 3, we modify CRF library \cite{Ruiz-Sarmiento-REACTS-2015} for the experiments, in which loopy belief propagation is employed both during training and testing. We have done mainly two experiments in this part. Firstly we perform a simpler experiment on subset of T-LESS dataset to show that CRF can capture the dependencies and then improve the performance. The performance can be boosted with improved uncertainty estimation from Bayesian neural network. Secondly, we test the same idea on the entire T-LESS dataset based on the output of classifier fine-tuned in the automatic labeling experiment. 
 
 
 \subsection{Experiment \RNum{1}}
-In this experiment, we train original ResNet50 and modified ResNet50 with concrete dropout on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and use scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. Regarding the hyper-parameters in training CRF, we set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. As is mentioned in chapter 3, we perform optimization with stochastic gradient descent(SGD) with momentum and loopy belief propagation(LBP) for inference. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$. In experiments, the algorithm always reach the maximum number of iteration during optimization.
+In this experiment, we train original ResNet50 and BNN on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and use scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. Regarding the hyper-parameters in training CRF, we set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. As is mentioned in chapter 3, we perform optimization with stochastic gradient descent(SGD) with momentum and loopy belief propagation(LBP) for inference. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$. In experiments, the algorithm always reach the maximum number of iteration during optimization.
 
 In the table \ref{table:crf_exp1_acc}, we show the results of CRF trained with two different unary features from two different versions of ResNet50 and tested on scene 5, 6, 7, 8. As we can see, the network trained and tested with unary feature from BNN can yield more improvement(13.17\%) compared with that from deterministic network (12.42\%).  
 
@@ -461,7 +500,7 @@ In the table \ref{table:crf_exp1_acc}, we show the results of CRF trained with t
  		\hline
  		\multicolumn{1}{|l|}{}                                            & \begin{tabular}[c]{@{}c@{}}accuracy with\\ unary\\ potential\end{tabular} & \begin{tabular}[c]{@{}c@{}}accuracy with\\ unary and pariwise\\ potentials\end{tabular} \\ \hline
  		\begin{tabular}[c]{@{}c@{}}unary feature \\ from ori\end{tabular} & 48.79\%                                                                   & 61.21\%                                                                                 \\ \hline
- 		\begin{tabular}[c]{@{}c@{}}unary feature \\ from cdp\end{tabular} & 51.94\%                                                                   & 65.11\%                                                                                 \\ \hline
+ 		\begin{tabular}[c]{@{}c@{}}unary feature \\ from BNN\end{tabular} & 51.94\%                                                                   & 65.11\%                                                                                 \\ \hline
  	\end{tabular}
  \end{table}
 Additionally, because the weights in our CRF model act as coefficients for two kinds of features, we can check the magnitude of these two weights which can indicate the contribution to overall performance. In the table \ref{table:crf_exp1_weights}, we can see that in CRF trained with unary feature from BNN, the weight of unary feature $\theta_u$ is larger than the one of edge feature $\theta_p$. The situation is inverse in CRF trained with unary feature from deterministic ResNet50. This means that the unary feature contributes more than the pairwise one if we use the predictive distribution from BNN. It also shows that the predictive distribution from BNN contains more information than its counterpart from deterministic one. More importantly, this information can be utilized to improve the performance which is shown in the table \ref{table:crf_exp1_acc}.
@@ -473,9 +512,9 @@ Additionally, because the weights in our CRF model act as coefficients for two k
 		\hline
 		\multicolumn{1}{|l|}{}                                            & \begin{tabular}[c]{@{}c@{}}node weight\\ $\theta_u$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}edge weight\\ $\theta_p$ \end{tabular} \\ \hline
 		\begin{tabular}[c]{@{}c@{}}unary feature \\ from ori\end{tabular} & 3.744                                                   & 4.213                                                   \\ \hline
-		\begin{tabular}[c]{@{}c@{}}unary feature \\ from cdp\end{tabular} & 4.635                                                   & 3.882                                                   \\ \hline
+		\begin{tabular}[c]{@{}c@{}}unary feature \\ from BNN\end{tabular} & 4.635                                                   & 3.882                                                   \\ \hline
 	\end{tabular}
 \end{table}
 
 \subsection{Experiment \RNum{2}}
-In this experiment, we want to test the generalization ability of CRF on entire T-LESS dataset.
+In this experiment, we want to test the generalization ability of CRF on the whole T-LESS dataset.

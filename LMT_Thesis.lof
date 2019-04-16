@@ -31,5 +31,8 @@
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Calibration curve of one of three runs.}}{57}{figure.4.13}% 
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Uncertainty histogram of one of three runs.}}{57}{figure.4.14}% 
 \contentsline {figure}{\numberline {4.15}{\ignorespaces ROC and PR curve of one of three runs.}}{58}{figure.4.15}% 
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Uncertainty histograms of original ResNet50 (top)and BNN (down).}}{62}{figure.4.16}% 
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Calibration curves, ROC curves, PR curves.}}{63}{figure.4.17}% 
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Confusion matrix of automatically labeled dataset.}}{63}{figure.4.18}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
