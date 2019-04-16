@@ -412,23 +412,23 @@ For C, D, E, F, G, we conduct the following steps:
 
 \end{itemize}
 To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in the settings means that we randomly choose the data according to the number of data sample in each category in order to make the dataset \textbf{as balanced as possible}.  
-\begin{table}[h!]
-	\centering
-	\label{table:fine_tuning}
-	\caption{Results of fine-tuning of different settings}
-	\begin{tabular}{|l|c|}
-		\hline
-		Settings of dataset for fine-tuning                                                                                                                                                                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Accuracy\\ (average over 3\\ random seeds)\end{tabular}} \\ \hline
-		A: 0\% (no fine-tuning)                                                                                                                                                                                                  & 66.9\%                                                                                                  \\ \hline
-		\begin{tabular}[c]{@{}l@{}}B: 3\% manually labeled data randomly \\   (\textbf{balanced})\end{tabular}                                                                                                                               & 91.7\%                                                                                                  \\ \hline
-		\begin{tabular}[c]{@{}l@{}}C: 3\% automatically labeled data \\ (\textbf{imbalanced})\end{tabular}                                                                                                                        & 79.0\%                                                                                                  \\ \hline
-		\begin{tabular}[c]{@{}l@{}}D: 3\% manually labeled data with least confidence\\ (\textbf{imbalanced})\end{tabular}                                                                                                       & 83.3\%                                                                                                  \\ \hline
-		\begin{tabular}[c]{@{}l@{}}E: 2\% automatically labeled data and \\ 1\% manually labeled data with least confidence, \\ augmentation for balance (\textbf{balanced})\end{tabular}                                     & 83.8\%                                                                                                  \\ \hline
-		\begin{tabular}[c]{@{}l@{}}F: 2\% automatically labeled data and \\ 0.5\% manually labeled data with least confidence and \\ 0.5\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular} & 88.3\%                                                                                                  \\ \hline
-		\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
-	\end{tabular}
-\end{table}
-From the description of settings we know that predictions with most confidence and least confidence are imbalanced in number of data sample of each category. Based on the results in the table \ref{table:fine_tuning}, we can have the following observations:
+	\begin{table}[h!]
+		\centering
+		\label{table:fine_tuning}
+		\caption{Results of fine-tuned network with different settings}
+		\begin{tabular}{|l|c|}
+			\hline
+			Settings of dataset for fine-tuning                                                                                                                                                                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Accuracy\\ (average over 3\\ random seeds)\end{tabular}} \\ \hline
+			A: 0\% (no fine-tuning)                                                                                                                                                                                                  & 66.9\%                                                                                                  \\ \hline
+			\begin{tabular}[c]{@{}l@{}}B: 3\% manually labeled data randomly \\   (\textbf{balanced})\end{tabular}                                                                                                                               & 91.7\%                                                                                                  \\ \hline
+			\begin{tabular}[c]{@{}l@{}}C: 3\% automatically labeled data \\ (\textbf{imbalanced})\end{tabular}                                                                                                                        & 79.0\%                                                                                                  \\ \hline
+			\begin{tabular}[c]{@{}l@{}}D: 3\% manually labeled data with least confidence\\ (\textbf{imbalanced})\end{tabular}                                                                                                       & 83.3\%                                                                                                  \\ \hline
+			\begin{tabular}[c]{@{}l@{}}E: 2\% automatically labeled data and \\ 1\% manually labeled data with least confidence, \\ augmentation for balance (\textbf{balanced})\end{tabular}                                     & 83.8\%                                                                                                  \\ \hline
+			\begin{tabular}[c]{@{}l@{}}F: 2\% automatically labeled data and \\ 0.5\% manually labeled data with least confidence and \\ 0.5\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular} & 88.3\%                                                                                                  \\ \hline
+			\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
+		\end{tabular}
+	\end{table}
+From the description of settings we know that predictions with most confidence and least confidence are imbalanced in number of data sample of each category. Based on the results in the table \ref{table:fine_tuning}, we can obtain the following observations:
 \begin{itemize}
 	\item diverse and balanced dataset can achieved best performance.
 	\item the difference of performance between C and D may attribute to quality of dataset which include correct labeling and information of data sample.
@@ -436,7 +436,7 @@ From the description of settings we know that predictions with most confidence a
 \end{itemize}
 By comparing the results of other settings with that of A and B, we can see that the manual labeling effort can be reduced based on automatic labeling.  The performance of fine-tuned domain specific classifier can nearly reach the the performance of classifier fine-tuned with all manually labeled data. 
 
-In the end, we can also draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
+In the end, we can draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
 \subsection{Experiments \RNum{2}}
 The second experiment is performed on synthetic T-LESS dataset and original T-LESS dataset.
@@ -451,26 +451,31 @@ As is mentioned in chapter 3, we modify CRF library \cite{Ruiz-Sarmiento-REACTS-
 \subsection{Experiment \RNum{1}}
 In this experiment, we train original ResNet50 and modified ResNet50 with concrete dropout on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and use scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. Regarding the hyper-parameters in training CRF, we set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. As is mentioned in chapter 3, we perform optimization with stochastic gradient descent(SGD) with momentum and loopy belief propagation(LBP) for inference. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$. In experiments, the algorithm always reach the maximum number of iteration during optimization.
 
-In the following, we show the testing results of CRF trained with two different unary features from two different versions of ResNet50.
- 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|l|l|l|}
-		\hline
-		& \begin{tabular}[c]{@{}l@{}}unary feature \\ from ori\end{tabular} & \begin{tabular}[c]{@{}l@{}}unary feature \\ from cdp\end{tabular} \\ \hline
-		unary accuracy & 48.79\%                                                           & 51.94\%                                                           \\ \hline
-		CRF accuracy   & 61.21\%                                                           & 65.11\%                                                           \\ \hline
-	\end{tabular}
-\end{table}
+In the table \ref{table:crf_exp1_acc}, we show the results of CRF trained with two different unary features from two different versions of ResNet50 and tested on scene 5, 6, 7, 8. As we can see, the network trained and tested with unary feature from BNN can yield more improvement(13.17\%) compared with that from deterministic network (12.42\%).  
 
+ \begin{table}[H]
+ 	\centering
+ 	\caption{Results of CRF trained with unary feature from different versions of ResNet50}
+ 	\label{table:crf_exp1_acc}
+ 	\begin{tabular}{|c|c|c|}
+ 		\hline
+ 		\multicolumn{1}{|l|}{}                                            & \begin{tabular}[c]{@{}c@{}}accuracy with\\ unary\\ potential\end{tabular} & \begin{tabular}[c]{@{}c@{}}accuracy with\\ unary and pariwise\\ potentials\end{tabular} \\ \hline
+ 		\begin{tabular}[c]{@{}c@{}}unary feature \\ from ori\end{tabular} & 48.79\%                                                                   & 61.21\%                                                                                 \\ \hline
+ 		\begin{tabular}[c]{@{}c@{}}unary feature \\ from cdp\end{tabular} & 51.94\%                                                                   & 65.11\%                                                                                 \\ \hline
+ 	\end{tabular}
+ \end{table}
+Additionally, because the weights in our CRF model act as coefficients for two kinds of features, we can check the magnitude of these two weights which can indicate the contribution to overall performance. In the table \ref{table:crf_exp1_weights}, we can see that in CRF trained with unary feature from BNN, the weight of unary feature $\theta_u$ is larger than the one of edge feature $\theta_p$. The situation is inverse in CRF trained with unary feature from deterministic ResNet50. This means that the unary feature contributes more than the pairwise one if we use the predictive distribution from BNN. It also shows that the predictive distribution from BNN contains more information than its counterpart from deterministic one. More importantly, this information can be utilized to improve the performance which is shown in the table \ref{table:crf_exp1_acc}.
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|l|c|c|}
+	\caption{Learned weights of CRF trained with unary feature from different versions of ResNet50}
+	\label{table:crf_exp1_weights}
+	\begin{tabular}{|c|c|c|}
 		\hline
-		& \multicolumn{1}{l|}{node weight $\theta_u$} & \multicolumn{1}{l|}{edge weight $\theta_p$} \\ \hline
-		\begin{tabular}[c]{@{}l@{}}unary feature \\ from ori\end{tabular} & 3.744                            & 4.213                            \\ \hline
-		\begin{tabular}[c]{@{}l@{}}unary feature \\ from cdp\end{tabular} & 4.635                            & 3.882                            \\ \hline
+		\multicolumn{1}{|l|}{}                                            & \begin{tabular}[c]{@{}c@{}}node weight\\ $\theta_u$ \end{tabular} & \begin{tabular}[c]{@{}c@{}}edge weight\\ $\theta_p$ \end{tabular} \\ \hline
+		\begin{tabular}[c]{@{}c@{}}unary feature \\ from ori\end{tabular} & 3.744                                                   & 4.213                                                   \\ \hline
+		\begin{tabular}[c]{@{}c@{}}unary feature \\ from cdp\end{tabular} & 4.635                                                   & 3.882                                                   \\ \hline
 	\end{tabular}
 \end{table}
 
 \subsection{Experiment \RNum{2}}
+In this experiment, we want to test the generalization ability of CRF on entire T-LESS dataset.
