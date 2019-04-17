@@ -175,7 +175,7 @@ In addition to uncertainty histogram, we also plot the calibration curve of each
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=12cm]{uncertainty_estimation/exp1/exp1_reliability}
+		\includegraphics[height=6cm, width=10cm]{uncertainty_estimation/exp1/exp1_reliability}
 		\caption{Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
 		\label{exp1_reliability}
 	\end{center}
@@ -205,7 +205,7 @@ In the figure \ref{exp2_histo}, we can see uncertainty histograms for different 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
+		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
 		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
 		\label{exp2_reliability}
 	\end{center}
@@ -213,7 +213,7 @@ In the figure \ref{exp2_histo}, we can see uncertainty histograms for different 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=12cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
+		\includegraphics[height=11cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
 		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
 		\label{exp2_histo}
 	\end{center}
@@ -271,7 +271,7 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3_}
+		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3_.eps}
 		\caption{Calibration curve of cdp, mdp and their Laplace approximation versions from one of three runs.}		
 		\label{lap_calibration}
 	\end{center}
@@ -279,7 +279,7 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 
 \begin{figure}[h!]		
 	\centering
-	\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/histo_ood_seed3}
+	\includegraphics[height=9cm, width=15cm]{uncertainty_estimation/laplace/histo_ood_seed3.eps}
 	\caption{Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}
 	\label{figure:lap_hist}	
 \end{figure}
@@ -287,8 +287,8 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/roc_pr_seed3}
-		\caption{ROC and PR curve of cdp, mdp and their Laplace approximation versions from one of three runs.}		
+		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/roc_pr_seed3.eps}
+		\caption{ROC and PR curve of cdp, mdp and their Laplace approximation versions of one of three runs.}		
 		\label{lap_roc_pr}
 	\end{center}
 \end{figure}
@@ -336,7 +336,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=4.5cm, width=16.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
+		\includegraphics[height=4.5cm, width=15.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
 		\caption{Calibration curve of one of three runs.}		
 		\label{ab_calibration}
 	\end{center}
@@ -344,7 +344,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8cm,width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
+		\includegraphics[height=8.5cm,width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
 		\caption{Uncertainty histogram of one of three runs.}		
 		\label{ab_reliability}
 	\end{center}
@@ -441,7 +441,7 @@ By comparing the results of other settings with that of A and B, we can see that
 In the end, we can draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
 \subsection{Experiment \RNum{2}}
-In this experiment, we firstly train networks on synthetic and augmented dataset which is introduced previously. Then we select automatically labeled data by testing the trained model on real single objects (original training set of T-LESS) which we call \textbf{adaptation dataset}. The difference between the strategy of selecting data in experiment \RNum{1} is that we split off a small balanced validation set from the whole real single object dataset with ratio 1:9. Then we choose the threshold of uncertainty up to which the accuracy can reach 95\% based on predictions on validation set. This threshold is employed in the rest of whole adaptation dataset for selecting automatically labeled data. In this experiment we use predictive entropy as uncertainty measure, because it shows better performance in term of separability metrics on validation set.
+In this experiment, we firstly train networks on synthetic and augmented dataset which is introduced previously. Then we select automatically labeled data by testing the trained model on real single objects (original training set of T-LESS) which we call \textbf{adaptation dataset}. The difference between the strategy of selecting data in experiment \RNum{1} is that we split off a small balanced validation set from the whole real single object dataset with ratio 2:8. Then we choose the threshold of uncertainty up to which the accuracy can reach 95\% based on predictions on validation set. This threshold is employed in the rest of whole adaptation dataset for selecting automatically labeled data. In this experiment we use predictive entropy as uncertainty measure, because it shows better performance in term of separability metrics on validation set.
 
 The improved uncertainty estimation from BNN plays an important role here, because it not only provides a reliable uncertainty estimation, but also increases the separability between correct predictions and false predictions, which is more useful in this task. 
 

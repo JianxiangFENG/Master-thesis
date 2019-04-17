@@ -27,7 +27,7 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble of one of three runs.}}{52}{figure.4.9}% 
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Calibration curve of cdp, mdp and their Laplace approximation versions from one of three runs.}}{54}{figure.4.10}% 
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}}{55}{figure.4.11}% 
-\contentsline {figure}{\numberline {4.12}{\ignorespaces ROC and PR curve of cdp, mdp and their Laplace approximation versions from one of three runs.}}{55}{figure.4.12}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces ROC and PR curve of cdp, mdp and their Laplace approximation versions of one of three runs.}}{55}{figure.4.12}% 
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Calibration curve of one of three runs.}}{57}{figure.4.13}% 
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Uncertainty histogram of one of three runs.}}{57}{figure.4.14}% 
 \contentsline {figure}{\numberline {4.15}{\ignorespaces ROC and PR curve of one of three runs.}}{58}{figure.4.15}% 
