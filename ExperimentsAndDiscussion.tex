@@ -181,7 +181,6 @@ In addition to uncertainty histogram, we also plot the calibration curve of each
 	\end{center}
 \end{figure}
 
-\newpage
 \subsection{Experiments \RNum{2}}
 In this experiment, we evaluate our model on a category recognition task. The difficulties are expressed in two-fold. Firstly, in this task, the model is confronted with classes with more overlapping. Second, because we want to simulate situation of deploying robots in real world scenario and facing data in real world, the UniHB dataset with domain gap(cf. figure\ref{fig:wrgbd2}) to WRGBD is used to achieve this goal. This means, the uncertainty estimation should not only be able to perform well on dataset with exactly same distribution to training set, but also to generalize well to dataset with domain gap which may decrease the accuracy significantly.
 
@@ -205,7 +204,7 @@ In the figure \ref{exp2_histo}, we can see uncertainty histograms for different 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
+		\includegraphics[height=5.5cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
 		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
 		\label{exp2_reliability}
 	\end{center}
@@ -221,7 +220,7 @@ In the figure \ref{exp2_histo}, we can see uncertainty histograms for different 
 
 When it comes to the separability metrics in figure \ref{exp2_roc_pr}, as stated before, we measure separability between correct prediction and miss-classification (on the left) and that between correct prediction and OOD prediction (on the right). On separability between correction prediction and miss-classification, cdp, mdp and their ensemble version can improve the results compared with original version in both ROC curve and PR curve on the left. On the other hand, the improvements on separability between correct prediction and OOD data are more obvious on the right. However, as observed before, the ensemble of mdp does not work well with OOD data, which can be observe with this metrics. We can know more from the curves that the worse performance with OOD data in mdp is enlarged by building ensemble of it.    
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/roc_pr_seed3_ensemble}
 		\caption{ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble of one of three runs.}		
@@ -241,7 +240,7 @@ Before we only show the visual metrics for evaluation, it's better to quantify t
 		cdp           & 0.577$\pm$0.008 & 0.594$\pm$0.013 & 2.088$\pm$0.181                                                         \\ \hline
 		mdp           & 0.599$\pm$0.023 & 0.566$\pm$0.020 & 1.940$\pm$0.064                                                         \\ \hline
 		emsemble\_cdp & 0.604        & 0.534        & 1.452                                                                \\ \hline
-		emsemble\_mdp & 0.645        & 0.496        & 1.389                                                                \\ \hline
+		emsemble\_mdp & \textbf{0.645}        & \textbf{0.496}        & \textbf{1.389}                                                                \\ \hline
 	\end{tabular}
 \label{table:compareWithEnsemble}
 \end{table}
@@ -256,12 +255,11 @@ Before we only show the visual metrics for evaluation, it's better to quantify t
 		cdp           & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/\\ 0.288$\pm$0.048\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\ 0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\ 0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\ 0.850$\pm$0.022\end{tabular}                \\ \hline
 		mdp           & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\ 0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\ 0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.780$\pm$0.011/ \\ 0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.838$\pm$0.013/ \\ 0.788$\pm$0.006\end{tabular}                \\ \hline
 		emsemble\_cdp & \begin{tabular}[c]{@{}l@{}}0.044/\\0.042 \end{tabular} 
-		 &  \begin{tabular}[c]{@{}l@{}}0.086/\\0.093 \end{tabular}                                                                                    & \begin{tabular}[c]{@{}l@{}}0.798/\\0.811  \end{tabular}                                                                           & \begin{tabular}[c]{@{}l@{}}0.845/\\0.868  \end{tabular}                                                                                \\ \hline
-		emsemble\_mdp & \begin{tabular}[c]{@{}l@{}}0.032/\\0.170 \end{tabular}                                                                                       & \begin{tabular}[c]{@{}l@{}}0.058/\\0.227  \end{tabular}                                                                                     & \begin{tabular}[c]{@{}l@{}}0.789/\\0.653 \end{tabular}                                                                            & \begin{tabular}[c]{@{}l@{}}0.875/\\0.754  \end{tabular}                                                                                \\ \hline
+		 &  \begin{tabular}[c]{@{}l@{}}0.086/\\\textbf{0.093} \end{tabular}                                                                                    & \begin{tabular}[c]{@{}l@{}}\textbf{0.798}/\\\textbf{0.811}  \end{tabular}                                                                           & \begin{tabular}[c]{@{}l@{}}0.845/\\\textbf{0.868}  \end{tabular}                                                                                \\ \hline
+		emsemble\_mdp & \begin{tabular}[c]{@{}l@{}}\textbf{0.032}/\\\textbf{0.170} \end{tabular}                                                                                       & \begin{tabular}[c]{@{}l@{}}\textbf{0.058}/\\0.227  \end{tabular}                                                                                     & \begin{tabular}[c]{@{}l@{}}0.789/\\0.653 \end{tabular}                                                                            & \begin{tabular}[c]{@{}l@{}}\textbf{0.875}/\\0.754  \end{tabular}                                                                                \\ \hline
 	\end{tabular}
 \end{table}	
 
-\newpage
 \subsubsection{Comparison with Laplace approximation}
 Because Laplace approximation requires only MAP point estimate of model parameter. Therefore we take the already trained model of different approaches as our MAP point estimate and compute the approximation of Kronecker factors with half of training set. We set the scale parameter of Kronecker factors $\sqrt{N}$ as $1$ and dump factor $\sqrt{\tau}$ as $15$ in equation \ref{mvg_prior} based on grid search on the validation set.   
 
@@ -308,7 +306,7 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 		\begin{tabular}[c]{@{}l@{}}0.576$\pm$0.009\end{tabular}    & \begin{tabular}[c]{@{}l@{}}0.602$\pm$0.011\end{tabular} & \begin{tabular}[c]{@{}l@{}}2.322$\pm$0.350\end{tabular} \\ \hline
 		
 		mdp          & 
-		\begin{tabular}[c]{@{}l@{}}0.599$\pm$0.023\end{tabular} & \begin{tabular}[c]{@{}l@{}}0.566$\pm$0.020\end{tabular} & \begin{tabular}[c]{@{}l@{}}1.940$\pm$0.064\end{tabular} \\ \hline
+		\begin{tabular}[c]{@{}l@{}}\textbf{0.599}$\pm$0.023\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{0.566}$\pm$0.020\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{1.940}$\pm$0.064\end{tabular} \\ \hline
 		laplace\_mdp & 		\begin{tabular}[c]{@{}l@{}}0.598$\pm$0.024\end{tabular} & \begin{tabular}[c]{@{}l@{}}0.567$\pm$0.018\end{tabular} & \begin{tabular}[c]{@{}l@{}}1.970$\pm$0.117\end{tabular} \\ \hline
 	\end{tabular}
 \end{table}
@@ -318,13 +316,13 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 		\hline
 		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD) $\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} \\ \hline
 		
-		cdp          & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/ \\0.288$\pm$0.048\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\0.850$\pm$0.022\end{tabular}                \\ \hline
+		cdp          & \begin{tabular}[c]{@{}l@{}}\textbf{0.124}$\pm$0.023/ \\0.288$\pm$0.048\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\\textbf{0.783}$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\\textbf{0.850}$\pm$0.022\end{tabular}                \\ \hline
 		
 		laplace\_cdp & \begin{tabular}[c]{@{}l@{}}0.129$\pm$0.058/ \\0.341$\pm$0.157\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.235$\pm$0.073/ \\0.406$\pm$0.070\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.779$\pm$0.004/ \\0.782$\pm$0.017\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.826$\pm$0.007/ \\0.849$\pm$0.016\end{tabular}                \\ \hline
 		
-		mdp          & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.780$\pm$0.011/ \\0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.838$\pm$0.013/ \\0.788$\pm$0.006\end{tabular}                \\ \hline
+		mdp          & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}\textbf{0.780}$\pm$0.011/ \\0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\textbf{0.838}$\pm$0.013/ \\0.788$\pm$0.006\end{tabular}                \\ \hline
 		
-		laplace\_mdp         & \begin{tabular}[c]{@{}l@{}} 0.104$\pm$0.018/ \\0.352$\pm$0.061\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.179$\pm$0.029/ \\0.352$\pm$0.038\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.776$\pm$0.012/ \\0.711$\pm$0.005\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.837$\pm$0.015/ \\0.798$\pm$0.005\end{tabular}                \\ \hline
+		laplace\_mdp         & \begin{tabular}[c]{@{}l@{}} \textbf{0.104}$\pm$0.018/ \\0.352$\pm$0.061\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}\textbf{0.179}$\pm$0.029/ \\\textbf{0.352}$\pm$0.038\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.776$\pm$0.012/ \\0.711$\pm$0.005\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.837$\pm$0.015/ \\0.798$\pm$0.005\end{tabular}                \\ \hline
 	\end{tabular}
 \end{table}
 \subsubsection{Ablation study}
@@ -365,9 +363,9 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		& accuracy   $\boldsymbol \uparrow$  & brier\_score $\boldsymbol \downarrow$& \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood $\boldsymbol \downarrow$\end{tabular} \\ \hline
-		ori           &0.532$\pm$0.015 & 0.717$\pm$0.023& 2.383$\pm$0.053                                                        \\ \hline
+		ori           &\textbf{0.532}$\pm$0.015 & 0.717$\pm$0.023& 2.383$\pm$0.053                                                        \\ \hline
 		cdp           & 0.521$\pm$0.011&0.655$\pm$0.017 &  2.190$\pm$0.149                                                        \\ \hline
-		mdp           & 0.520$\pm$0.012 &0.641$\pm$0.014 & 1.804$\pm$0.073                                                         \\ \hline
+		mdp           & 0.520$\pm$0.012 &\textbf{0.641}$\pm$0.014 & \textbf{1.804}$\pm$0.073                                                         \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -379,9 +377,9 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} \\ \hline
 		ori           & \begin{tabular}[c]{@{}l@{}}0.262$\pm$0.011/ \\0.793$\pm$0.012\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.365$\pm$0.010/ \\0.491$\pm$0.013\end{tabular}                     &
 		\begin{tabular}[c]{@{}l@{}}0.716$\pm$0.005/ \\0.602$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.724$\pm$0.022/ \\0.681$\pm$0.007\end{tabular}                \\ \hline
-		cdp           & \begin{tabular}[c]{@{}l@{}}0.141$\pm$0.022/ \\0.270$\pm$0.037\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.203$\pm$0.053/ \\0.359$\pm$0.056\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.748$\pm$0.002/ \\0.712$\pm$0.006\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.770$\pm$0.002/ \\0.782$\pm$0.004\end{tabular}                \\ \hline
+		cdp           & \begin{tabular}[c]{@{}l@{}}0.141$\pm$0.022/ \\0.270$\pm$0.037\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.203$\pm$0.053/ \\0.359$\pm$0.056\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}\textbf{0.748}$\pm$0.002/ \\\textbf{0.712}$\pm$0.006\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\textbf{0.770}$\pm$0.002/ \\\textbf{0.782}$\pm$0.004\end{tabular}                \\ \hline
 		
-		mdp           & \begin{tabular}[c]{@{}l@{}}0.068$\pm$0.009/ \\0.158$\pm$0.006\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.134$\pm$0.018/ \\0.311$\pm$0.008\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.730$\pm$0.009/ \\0.674$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.749$\pm$0.009/ \\0.748$\pm$0.010\end{tabular}                \\ \hline
+		mdp           & \begin{tabular}[c]{@{}l@{}}\textbf{0.068}$\pm$0.009/ \\\textbf{0.158}$\pm$0.006\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}\textbf{0.134}$\pm$0.018/ \\\textbf{0.311}$\pm$0.008\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.730$\pm$0.009/ \\0.674$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.749$\pm$0.009/ \\0.748$\pm$0.010\end{tabular}                \\ \hline
 	\end{tabular}
 \end{table}	
 
