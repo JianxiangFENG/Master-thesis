@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  17 APR 2019 17:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  18 APR 2019 12:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1420,110 +1420,125 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [60]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 443.
+(hyperref)                removing `\uppercase' on input line 451.
 
 [61pdfTeX warning (ext4): destination with the same identifier (name{table.4.4}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.446 T
-       he improved uncertainty estimation from BNN plays an important role h...
-]
-Package epstopdf Info: Source file: <figures/autoLa/exp2/uncer_hist.eps>
+l.453 
+      ]
+Package epstopdf Info: Source file: <figures/autoLa/exp2/syn_cdp_trn_uncer_hist
+.eps>
 (epstopdf)                    date: 2019-04-17 16:10:09
 (epstopdf)                    size: 121750 bytes
-(epstopdf)             Output file: <figures/autoLa/exp2/uncer_hist-eps-convert
-ed-to.pdf>
-(epstopdf)                    date: 2019-04-17 16:10:30
+(epstopdf)             Output file: <figures/autoLa/exp2/syn_cdp_trn_uncer_hist
+-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-04-18 11:37:14
 (epstopdf)                    size: 22819 bytes
-(epstopdf)             Command: <repstopdf --outfile=figures/autoLa/exp2/uncer_
-hist-eps-converted-to.pdf figures/autoLa/exp2/uncer_hist.eps>
-(epstopdf)             \includegraphics on input line 454.
+(epstopdf)             Command: <repstopdf --outfile=figures/autoLa/exp2/syn_cd
+p_trn_uncer_hist-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_uncer_his
+t.eps>
+(epstopdf)             \includegraphics on input line 463.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/uncer_hist-eps-converted-to.pdf, id=1629, 1513.655pt x 857
-.2025pt>
-File: figures/autoLa/exp2/uncer_hist-eps-converted-to.pdf Graphic file (type pd
-f)
-<use figures/autoLa/exp2/uncer_hist-eps-converted-to.pdf>
-Package pdftex.def Info: figures/autoLa/exp2/uncer_hist-eps-converted-to.pdf  u
-sed on input line 454.
+<figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf, id=1632, 1513
+.655pt x 857.2025pt>
+File: figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf Graphic f
+ile (type pdf)
+<use figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf>
+Package pdftex.def Info: figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-convert
+ed-to.pdf  used on input line 463.
 (pdftex.def)             Requested size: 341.43535pt x 190.62558pt.
-Package epstopdf Info: Source file: <figures/autoLa/exp2/roc_pr_cali_.eps>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package epstopdf Info: Source file: <figures/autoLa/exp2/syn_cdp_trn_roc_pr_cal
+i_.eps>
 (epstopdf)                    date: 2019-04-17 16:17:34
 (epstopdf)                    size: 276427 bytes
-(epstopdf)             Output file: <figures/autoLa/exp2/roc_pr_cali_-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2019-04-17 16:17:58
+(epstopdf)             Output file: <figures/autoLa/exp2/syn_cdp_trn_roc_pr_cal
+i_-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-04-18 11:37:15
 (epstopdf)                    size: 85171 bytes
-(epstopdf)             Command: <repstopdf --outfile=figures/autoLa/exp2/roc_pr
-_cali_-eps-converted-to.pdf figures/autoLa/exp2/roc_pr_cali_.eps>
-(epstopdf)             \includegraphics on input line 467.
+(epstopdf)             Command: <repstopdf --outfile=figures/autoLa/exp2/syn_cd
+p_trn_roc_pr_cali_-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_roc_pr_
+cali_.eps>
+(epstopdf)             \includegraphics on input line 476.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/roc_pr_cali_-eps-converted-to.pdf, id=1631, 1448.41125pt x
- 834.11626pt>
-File: figures/autoLa/exp2/roc_pr_cali_-eps-converted-to.pdf Graphic file (type 
-pdf)
-<use figures/autoLa/exp2/roc_pr_cali_-eps-converted-to.pdf>
-Package pdftex.def Info: figures/autoLa/exp2/roc_pr_cali_-eps-converted-to.pdf 
- used on input line 467.
+<figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf, id=1634, 14
+48.41125pt x 834.11626pt>
+File: figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf Graphic
+ file (type pdf)
+<use figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf>
+Package pdftex.def Info: figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-conve
+rted-to.pdf  used on input line 476.
 (pdftex.def)             Requested size: 398.32538pt x 227.6199pt.
- [62pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-16}) has been already used, duplicate ignored
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.472 
-       <./figures/autoLa/exp2/uncer_hist-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <figures/autoLa/exp2/cmf.eps>
-(epstopdf)                    date: 2019-04-17 16:03:27
-(epstopdf)                    size: 10145954 bytes
-(epstopdf)             Output file: <figures/autoLa/exp2/cmf-eps-converted-to.p
-df>
-(epstopdf)                    date: 2019-04-17 16:03:50
-(epstopdf)                    size: 31964 bytes
-(epstopdf)             Command: <repstopdf --outfile=figures/autoLa/exp2/cmf-ep
-s-converted-to.pdf figures/autoLa/exp2/cmf.eps>
-(epstopdf)             \includegraphics on input line 477.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package epstopdf Info: Source file: <figures/autoLa/exp2/syn_cdp_trn_cmf.eps>
+(epstopdf)                    date: 2019-04-18 11:49:38
+(epstopdf)                    size: 10117418 bytes
+(epstopdf)             Output file: <figures/autoLa/exp2/syn_cdp_trn_cmf-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2019-04-18 12:07:49
+(epstopdf)                    size: 31752 bytes
+(epstopdf)             Command: <repstopdf --outfile=figures/autoLa/exp2/syn_cd
+p_trn_cmf-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_cmf.eps>
+(epstopdf)             \includegraphics on input line 486.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/cmf-eps-converted-to.pdf, id=1684, 1513.655pt x 857.2025pt
->
-File: figures/autoLa/exp2/cmf-eps-converted-to.pdf Graphic file (type pdf)
-<use figures/autoLa/exp2/cmf-eps-converted-to.pdf>
-Package pdftex.def Info: figures/autoLa/exp2/cmf-eps-converted-to.pdf  used on 
-input line 477.
+<figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf, id=1635, 1513.655pt 
+x 857.2025pt>
+File: figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+<use figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf>
+Package pdftex.def Info: figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.p
+df  used on input line 486.
 (pdftex.def)             Requested size: 369.89021pt x 199.16672pt.
- [63pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-17}) has been already used, duplicate ignored
+[62]
+Overfull \vbox (102.24551pt too high) has occurred while \output is active []
+
+
+[63pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.486 
+l.491 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+4.17}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.491 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 4.18}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.486 
-       <./figures/autoLa/exp2/roc_pr_cali_-eps-converted-to.pdf> <./figures/aut
-oLa/exp2/cmf-eps-converted-to.pdf>]
+l.491 
+       <./figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf> <./f
+igures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf> <./figures/au
+toLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 490.
+(hyperref)                removing `\uppercase' on input line 500.
 
-[64pdfTeX warning (ext4): destination with the same identifier (name{table.4.5}
-) has been already used, duplicate ignored
+[64]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\uppercase' on input line 529.
+
+) [65pdfTeX warning (ext4): destination with the same identifier (name{table.4.
+5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.517 \end{table}
-                 ]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 519.
-
-) [65pdfTeX warning (ext4): destination with the same identifier (name{table.4.
-6}) has been already used, duplicate ignored
+l.95 \include{ExperimentsAndDiscussion}
+                                       pdfTeX warning (ext4): destination with 
+the same identifier (name{table.4.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
@@ -1607,7 +1622,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 119.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 119.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 119.
 Package rerunfilecheck Info: File `LMT_Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: B57C5C1FB94EFF548C5A5A737B391A01;2926.
+(rerunfilecheck)             Checksum: CE74C4719209A8C1733F4D882E5D642A;2926.
 
 
 LaTeX Warning: There were undefined references.
@@ -1617,9 +1632,9 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10427 strings out of 492616
- 160975 string characters out of 6131824
- 303060 words of memory out of 5000000
+ 10431 strings out of 492616
+ 161199 string characters out of 6131824
+ 303145 words of memory out of 5000000
  13694 multiletter control sequences out of 15000+600000
  17485 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1647,10 +1662,10 @@ fonts/cm/cmsy8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sam10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on LMT_Thesis.pdf (83 pages, 3297725 bytes).
+Output written on LMT_Thesis.pdf (83 pages, 3298593 bytes).
 PDF statistics:
- 2039 PDF objects out of 2073 (max. 8388607)
- 1230 compressed objects within 13 object streams
- 321 named destinations out of 1000 (max. 500000)
+ 2046 PDF objects out of 2073 (max. 8388607)
+ 1238 compressed objects within 13 object streams
+ 325 named destinations out of 1000 (max. 500000)
  503 words of extra memory for PDF output out of 10000 (max. 10000000)
 

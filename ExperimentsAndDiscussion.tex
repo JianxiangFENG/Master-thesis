@@ -49,7 +49,7 @@ Because objects in test scenes are mostly occluded and have different background
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=8.5cm, width=14cm]{tless_trn_test}
-		\caption{Example of object of each category in original training set and test set. In each thumbnail, the left image is real single object with black background and the right image is cropped image of object in test scene.}		
+		\caption{Example of object of each category in original training set and test set. In each thumbnail, the left image is real single object with black background and the right image is cropped image of object in test scene. (label index starts from 1.)}		
 		\label{fig:tless_test}
 	\end{center}
 \end{figure} 
@@ -57,7 +57,7 @@ Because objects in test scenes are mostly occluded and have different background
 \begin{figure}[H]
 		\centering
 		\includegraphics[height=9cm, width=16cm]{tless_domain_diff}
-		\caption{Example of object of each category with augmentation. In each thumbnail, the left image is real augmented object and the right image is synthetic augmented object.}		
+		\caption{Example of object of each category with augmentation. In each thumbnail, the left image is real augmented object and the right image is synthetic augmented object.(label index starts from 1.)}		
 		\label{fig:tless_train}
 \end{figure} 
 
@@ -395,11 +395,17 @@ This way to enable the classifier to learn continuously is seldom seen in the li
 Then we try to extend this way to another dataset, T-LESS dataset, to test its generalization ability in second experiment. In the second experiment, the situation is similar to the first experiment, where a classifier is firstly trained on synthetic dataset and then deployed in a real world environment which is simulated by the real objects in training set.  We employ data augmentation to address the problem of imbalance in fine-tuning classifier found in the first experiment.
  
 \subsection{Experiment \RNum{1}}
-The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} of uncertainty estimation experiments, we train classifier with entire WRGBD dataset and evaluate performance of uncertainty estimation on adaptation set from UniHB dataset, which contain the images of object of elevation $30^{\circ}$ and $60^{\circ}$, whose size is around $17.1\times10^3$. The images of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
+The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} of uncertainty estimation experiments, we train BNN with entire WRGBD dataset and evaluate performance of uncertainty estimation on objects of elevation $30^{\circ}$ and $60^{\circ}$ in UniHB dataset, which we call \textbf{adaptation dataset}. The size of adaptation dataset in this experiment is around $17.1\times10^3$. The objects of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
 
 The uncertainty measure we used is confidence because in this case we do not consider OOD data and confidence performs better in separating correct predictions and miss-classifications based on the results of previous experiments.
 
-One major restriction we impose in this experiment is the size of dataset for fine-tuning. Because if we do not restrict the size, the performance is influenced by both the size of dataset and other factors such as imbalance or quality of dataset. In order to exclude the influence of dataset size, we fix it as 3\% of the adaptation set which is around 510. If the dataset is balanced in number of data sample of category, then there are around ten data samples in each category. The influence of other factors we want investigate are the imbalance of dataset and quality of data sample in dataset. In the following table, we use capital letter to denote different settings of dataset for fine-tuning.
+\paragraph{Automatic Labeling:}One major restriction we impose in this experiment is the size of dataset for fine-tuning. Because if we do not restrict the size, the performance is influenced by both the size of dataset and other factors such as imbalance or quality of dataset. In order to exclude the influence of dataset size, we fix it as 3\% of the adaptation set which is around 510. If the dataset is balanced in number of data sample of category, then there are around 10 data samples in each category. Then we can investigate two factors that may influence the performance of fine-tuning mostly. 
+These two factors are:
+\begin{itemize}
+	\item the balance in number of data sample of each class 
+	\item the amount of information of data samples
+\end{itemize}
+In the following table \ref{table:fine_tuning}, we describe different settings and use capital letter to denote them.
 
 Here we firstly illustrate the steps of \textbf{selecting automatically labeled data} in this experiment which is a little different to the strategy in experiment \RNum{2}. 
 
@@ -411,7 +417,7 @@ For C, D, E, F, G, we conduct the following steps:
 	\item[4.] Balancing dataset: firstly check if number of data sample of any categories exceed the average number of data sample (which can be calculated beforehand), if yes, drop the data sample of this category randomly until its number reach the average number of category. After that, if augmentation is chosen, then use augmentation to increase of the number of data sample of category in which the number of data sample is less than average number of data sample.
 
 \end{itemize}
-To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in the context means that we randomly choose the data of each class with number computed based on the difference between current number of data samples of each class and the average number of data samples of each class. We assume that we have manually labeled all the predictions after automatic labeling and conduct a \textit{proof-of-concept} experiment with a \textbf{as balanced as possible} dataset.    
+To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in this context means that we randomly choose the data of each class with number computed based on the difference between current number of data samples of each class and the average number of data samples of each class. We assume that we have manually labeled all the predictions after automatic labeling and conduct a \textit{proof-of-concept} experiment with \textbf{as balanced as possible} dataset in F and G.    
 
 
 	\begin{table}[h!]
@@ -430,7 +436,9 @@ To note that, the accuracy of automatically labeled data in C, E, F, G is around
 			\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
 		\end{tabular}
 	\end{table}
-From the description of settings we know that predictions with most confidence and least confidence are imbalanced in number of data sample of each category. Based on the results in the table \ref{table:fine_tuning}, we can obtain the following observations:
+
+
+\paragraph{Fine-tuning:} After collecting the dataset with different settings, we show the results of BNN fine-tuned with those dataset on the final test set which contains only objects of $45^{\circ}$ from UniHB data in the table \ref{table:fine_tuning}. We can draw the following observations from this table:
 \begin{itemize}
 	\item diverse and balanced dataset can achieved best performance.
 	\item the difference of performance between C and D may attribute to quality of dataset which include correct labeling and information of data sample.
@@ -441,30 +449,31 @@ By comparing the results of other settings with that of A and B, we can see that
 In the end, we can draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
 \subsection{Experiment \RNum{2}}
-In this experiment, we firstly train networks on synthetic and augmented dataset which is introduced previously. Then we select automatically labeled data by testing the trained model on real single objects (original training set of T-LESS) which we call \textbf{adaptation dataset}. The difference between the strategy of selecting data in experiment \RNum{1} is that we split off a small balanced validation set from the whole real single object dataset with ratio 2:8. Then we choose the threshold of uncertainty up to which the accuracy can reach 95\% based on predictions on validation set. This threshold is employed in the rest of whole adaptation dataset for selecting automatically labeled data. In this experiment we use predictive entropy as uncertainty measure, because it shows better performance in term of separability metrics on validation set.
+In this experiment, we firstly train networks on synthetic and augmented dataset which is introduced previously. Then we select automatically labeled data by testing the trained model on real single objects (original training set of T-LESS) which we call \textbf{adaptation dataset}. The difference between the strategy of selecting data in experiment \RNum{1} is that we split off a small balanced validation set from the whole real single object dataset with ratio 2:8. Then we choose the threshold of uncertainty up to which the accuracy can reach 95\% based on predictions on validation set. This threshold is employed in the rest of whole adaptation dataset for selecting automatically labeled data. This way to choose threshold makes the simulate situation more realistic and show the practicability of this approach. In this experiment we use predictive entropy as uncertainty measure, because it shows better performance in term of separability metrics on validation set.
 
 The improved uncertainty estimation from BNN plays an important role here, because it not only provides a reliable uncertainty estimation, but also increases the separability between correct predictions and false predictions, which is more useful in this task. 
 
+\paragraph{Automatic labeling:}
 We show the comparisons in term of different evaluation metrics between uncertainty estimation from BNN and original ResNet50 in the following figures. As we can see in the uncertainty histogram (cf.\ref{autoLa_exp2_hist}), the mode of distribution of uncertainty estimation between correct prediction and miss-classification is further from each other when testing with BNN than with original ResNet50. In figure \ref{autoLa_exp2_cali}, BNN express better performance on both calibration and separability metrics. 
 
 With the same procedure of selecting automatically labeled data, we can only obtain around $1.05\times10^3$ data samples with only 93\% accuracy using original ResNet50, but around $1.6\times10^3$ data samples with 96\% accuracy using BNN. Therefore we do not consider fine-tuning with original ResNet50 here and focus on fine-tuning BNN.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=6.7cm,width=12cm]{autoLa/exp2/uncer_hist.eps}
+		\includegraphics[height=6.7cm,width=12cm]{autoLa/exp2/syn_cdp_trn_uncer_hist.eps}
 		\caption{Uncertainty histograms of original ResNet50 (top)and BNN (down).}		
 		\label{autoLa_exp2_hist}
 	\end{center}
 \end{figure}
-However, as we found in experiment \RNum{1}, the problem of imbalance in number of data samples of each class still appears on this dataset. The confusion matrix in figure \ref{autoLa_exp2_cfm} shows this problem obviously, in which most of confident predictions cluster in few classes. To mitigate this problem, we adopt two simple ways which have been tested in experiment \RNum{1}:
+However, as we found in experiment \RNum{1}, the problem of imbalance in number of data samples of each class still appears on this dataset. The confusion matrix in figure \ref{autoLa_exp2_cfm} shows this problem obviously, in which most of confident predictions cluster in few classes which are class 6, 7 and 28 in this work. To mitigate this problem, we adopt two simple ways following the procedures in experiment \RNum{1}:
 \begin{itemize}
-\item manually label data uniformly with size 3\% of the adaptation set.
-\item employ augmentations, occlusions and different background images to the objects to make the selected dataset balanced.  
+\item to manually label data uniformly with size 3\% of the adaptation set(around 900 data samples).
+\item to employ augmentations including occlusions, different background images and so on for the objects to balance the dataset as much as possible.  
 \end{itemize} 
 
-\begin{figure}[H]
+\begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=8cm,width=14cm]{autoLa/exp2/roc_pr_cali_.eps}
+		\includegraphics[height=8cm,width=14cm]{autoLa/exp2/syn_cdp_trn_roc_pr_cali_.eps}
 		\caption{Calibration curves, ROC curves, PR curves.}		
 		\label{autoLa_exp2_cali}
 	\end{center}
@@ -474,12 +483,13 @@ However, as we found in experiment \RNum{1}, the problem of imbalance in number 
 \begin{figure}[H]
 	\centering
 	\begin{center}
-		\includegraphics[height=7cm,width=13cm]{autoLa/exp2/cmf.eps}
-		\caption{Confusion matrix of automatically labeled dataset.}		
+		\includegraphics[height=7cm,width=13cm]{autoLa/exp2/syn_cdp_trn_cmf.eps}
+		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
 		\label{autoLa_exp2_cfm}
 	\end{center}
 \end{figure}
 
+\paragraph{Fine-tuning:} After collecting dataset with automatic labeling and little manually effort, we can use it to fine tune the BNN, which was trained previously with only augmented synthetic data. In the following, we show the results of fine-tuned BNN on the original test set of T-LESS dataset and analyze the results with additional tool such as confusion matrix.  
 
 \section{Context-based improvement experiments}
 In this section, we perform experiments to investigate the effect of improved uncertainty estimation when incorporating them with a probabilistic graphical model in down-stream task. In detail, we employ CRF introduced in chapter 3 to capture the dependencies between objects by exploiting contextual information in the scene. The intuition behind this idea is that if the predictive distribution (used as one uncertainty measure) is more reliable and can represent the inherent randomness better. Then this bit of information can be better utilized by CRF in the down-stream task. Similar to previous experiment, we use ResNet50 with concrete dropout to improve uncertainty estimation in the following experiments and call it \textbf{BNN} without other specifications.

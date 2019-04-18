@@ -59,8 +59,12 @@
 \contentsline {subsubsection}{Ablation study}{56}{section*.29}% 
 \contentsline {section}{\numberline {4.3}Automatic labeling experiments}{59}{section.4.3}% 
 \contentsline {subsection}{\numberline {4.3.1}Experiment \uppercase {i\relax }}{59}{subsection.4.3.1}% 
-\contentsline {subsection}{\numberline {4.3.2}Experiment \uppercase {ii\relax }}{61}{subsection.4.3.2}% 
-\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{63}{section.4.4}% 
+\contentsline {paragraph}{Automatic Labeling:}{59}{section*.30}% 
+\contentsline {paragraph}{Fine-tuning:}{60}{section*.31}% 
+\contentsline {subsection}{\numberline {4.3.2}Experiment \uppercase {ii\relax }}{62}{subsection.4.3.2}% 
+\contentsline {paragraph}{Automatic labeling:}{62}{section*.32}% 
+\contentsline {paragraph}{Fine-tuning:}{64}{section*.33}% 
+\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{64}{section.4.4}% 
 \contentsline {subsection}{\numberline {4.4.1}Experiment \uppercase {i\relax }}{64}{subsection.4.4.1}% 
 \contentsline {subsection}{\numberline {4.4.2}Experiment \uppercase {ii\relax }}{65}{subsection.4.4.2}% 
 \contentsline {chapter}{\numberline {5}Conclusion}{66}{chapter.5}% 
@@ -68,10 +72,10 @@
 \contentsline {subsection}{\numberline {5.0.2}Future work}{66}{subsection.5.0.2}% 
 \contentsline {chapter}{\numberline {A}Appendix}{67}{appendix.A}% 
 \contentsline {section}{\numberline {A.1}KL condition}{67}{section.A.1}% 
-\contentsline {paragraph}{Proposition 1.}{67}{section*.30}% 
-\contentsline {paragraph}{$Proof.$}{67}{section*.31}% 
+\contentsline {paragraph}{Proposition 1.}{67}{section*.34}% 
+\contentsline {paragraph}{$Proof.$}{67}{section*.35}% 
 \contentsline {section}{\numberline {A.2}Figures}{69}{section.A.2}% 
 \contentsline {section}{\numberline {A.3}Implementation Details}{69}{section.A.3}% 
-\contentsline {chapter}{List of Figures}{70}{appendix*.32}% 
-\contentsline {chapter}{List of Tables}{72}{appendix*.33}% 
-\contentsline {chapter}{Bibliography}{73}{appendix*.34}% 
+\contentsline {chapter}{List of Figures}{70}{appendix*.36}% 
+\contentsline {chapter}{List of Tables}{72}{appendix*.37}% 
+\contentsline {chapter}{Bibliography}{73}{appendix*.38}% 
