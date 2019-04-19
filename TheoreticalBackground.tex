@@ -3,55 +3,62 @@
 
 
 \section{Bayesian neural network}
-As is mentioned in the introduction chapter, we investigate obtaining model uncertainty via Bayesian neural network. Therefore in this chapter, a brief review on theory of Bayesian neural network is given. Since capturing the exact posterior distribution over the parameters of neural network is intractable, we need to have techniques to perform approximate inference. Those techniques could be categorized into two main types, variational inference(VI) and Markov Chain Monte Carlo(MCMC). Brief history and basic idea of these two types of method are introduced. However, since larger dataset and more complex neural network are applied nowadays, traditional approximate inference techniques are difficult to scale to large dataset and complex advanced architectures. Therefore modern approximate inference needs to adopt to obtain model uncertainty. We will introduce and evaluate two modern variational inference methods for neural network, which are dropout inference\cite{gal2016dropout} and scalable Laplace approximation\cite{ritter2018scalable}. Additionally, we investigate improving uncertainty estimation by learning dropout rate from data via concrete dropout \cite{gal2017concrete}, which is introduced following section of dropout inference. Finally, with help of concrete dropout, a new variants of dropout inference is introduced here, which has more flexible approximation distribution family.
+As is mentioned in the introduction chapter, in this work obtaining model uncertainty via Bayesian neural network is invastigated. Therefore in this chapter, a brief review on the theory of Bayesian neural network is given. Since capturing the exact posterior distribution over the parameters of neural network is intractable, techniques to perform approximate inference are required. Those techniques could be categorized into two main types, variational inference(VI) and Markov Chain Monte Carlo(MCMC) \maxcom{both terms you already introduced before -> here only abbreviation}. A brief history and the basic idea of these two methods are introduced. However, since larger dataset and more complex neural network are applied nowadays, traditional approximate inference techniques are difficult to scale to large datasets and to complex advanced architectures. Therefore modern approximate inference needs to adopt in order to obtain model uncertainty. Two modern variational inference methods for neural network are introduced and evaluated: the dropout inference\cite{gal2016dropout} and scalable Laplace approximation\cite{ritter2018scalable}. Additionally, the improvement of the uncertainty estimation by learning the dropout rate from data via concrete dropout \cite{gal2017concrete} is investigated. Finally, with the help of concrete dropout, a new variant of dropout inference is introduced here, \maxcom{which has more flexible approximation distribution family} \maxcom{in this part sth is missing ;)}.
 
 \subsection{Introduction}
+\maxcom{we should think of a better title then introduction sicne your previous chapter is also called like this}
 
-Let $\mathcal{D}$ denote an observable dataset consisting of a set of input and output pairs, that is $\mathcal{D} = \{\mathbf{X}, \mathbf{Y}\} = \{(x_{i}, y_{i})_{i=1}^{N}\}$, where $x_{i}\in\mathbb{R}^{D}$ and $y_{i}\in\mathbb{Y}$, $\mathbb{Y}$ is set of labels, and $f^{\boldsymbol{\omega}}$ denote one parametric model which is in our case neural network with {\boldmath{$\omega$}} its parameters which are weights $W_{1:L}$ and biases $b_{1:L}$ for $L$ layers.
+Let $\mathcal{D}$ denote an observable dataset consisting of a set of input and output pairs \maxcom{($x_i, y_i$)}, that is $\mathcal{D} = \{\mathbf{X}, \mathbf{Y}\} = \{(x_{i}, y_{i})_{i=1}^{N}\}$, where $x_{i}\in\mathbb{R}^{D}$ and $y_{i}\in\mathbb{Y}$, $\mathbb{Y}$ is the set of labels, and $f^{\boldsymbol{\omega}}$ denotes one parametric model.
+Here in this case the model is a neural network with its parameters {\boldmath{$\omega$}} consisting of weights $W_{1:L}$ and biases $b_{1:L}$ for $L$ layers. \maxcom{normally a matrix is represented by a \textbf{bold capital letter} e.g. \textbf{W} and a vector by a \textbf{bold lower-case letter} e.g. \textbf{b} or \textbf{$x$}; I am not sure if you have a reason to not stick to this convention but think about it ;) }
 
-In supervised learning, our goal is to learn a probabilistic model of conditional distribution of output given input, $p(\mathbf{y}|\mathbf{x})$ that can explain the underlying data distribution instead of just the observables $\mathcal{D}$ very well based on the observables $\mathcal{D}$ which are samples drawn from the underlying data distribution. Then this learned model can be used to make predictions on unobservable data samples under the same data distribution. In classification where output is label represented by discrete integer, the likelihood function is defined based on parametric model, which is softmax score:
+In supervised learning, the goal is to learn a probabilistic model of a conditional distribution of the output given the input $p(\mathbf{y}|\mathbf{x})$ that can explain the underlying data distribution 
+%instead of just the observables $\mathcal{D}$ very well 
+based on the observables $\mathcal{D}$ drawn from the underlying data distribution. 
+The generated model can be used to predict unobservable data samples under the same data distribution. In classification where the output is a label represented by a discrete integer, the likelihood function is defined based on the parametric model, which is the softmax score: \maxcom{you did not introduce $d$ or $d'$; $d$ might be a bit confusing since $\mathcal{D}$ is the dataset; what do you think?}
 \begin{equation}
 p(y = d|\mathbf{x}, \boldsymbol{\omega}) = \frac{exp(f^{\boldsymbol{\omega}}_{d})}{\sum_{d'}exp(f^{\boldsymbol{\omega}}_{d'})}  \label{2.1}
 \end{equation}
 
-In regression case, the likelihood is Gaussian:
+In the regression case, the likelihood is Gaussian:
 
 \begin{equation}
 p(\mathbf{y}|\mathbf{x}, \boldsymbol{\omega}) = \mathcal{N}(\mathbf{x}; f^{\boldsymbol{\omega}}(\mathbf{x}), \tau^{-1}\textbf{I}) 
 \label{2.2}
 \end{equation}
 
-with model precision $\tau$, which represents the inverse of noise level of the outputs.
+with the model precision $\tau$, which represents the inverse of noise level of the outputs.
 
-As mentioned above, learning means to find model(s) which is parameterized by a set of parameters that can explain the data well, which means the likelihood should be maximized w.r.t. model parameters over the observables. On the other hand, some prior constraints are imposed on the model via prior distribution of the model parameters $p(\boldsymbol{\omega})$. The probability distribution of model parameters is updated from prior distribution into posterior distribution after observing training dataset $\mathcal{D}$ via Bayes' theorem:
+As mentioned above, learning means to find model(s) which is parameterized by a set of parameters that can explain the data well, which means the likelihood should be maximized w.r.t. the model parameters over the observables. On the other hand, some prior constraints are imposed on the model via prior distribution of the model parameters $p(\boldsymbol{\omega})$. The probability distribution of model parameters is updated from a prior distribution into a posterior distribution after observing the training dataset $\mathcal{D}$ via the Bayes' theorem:
 
 \begin{equation}
 p(\boldsymbol{\omega}|\mathbf{X}, \mathbf{Y}) = \frac{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})p(\boldsymbol{\omega})}{p(\mathbf{Y}|\mathbf{X})}
 \label{2.3}
 \end{equation}
 
-where $p(\mathbf{Y}| \mathbf{X}) = \int p(\mathbf{Y}| \mathbf{X}, \boldsymbol{\omega})p(\boldsymbol{\omega})d\boldsymbol{\omega}$ is so called model evidence or marginal likelihood, whose integration is always intractable.
+where $p(\mathbf{Y}| \mathbf{X}) = \int p(\mathbf{Y}| \mathbf{X}, \boldsymbol{\omega})p(\boldsymbol{\omega})d\boldsymbol{\omega}$ is the so-called model evidence or marginal likelihood, whose integration is always intractable.
 
-After obtaining posterior distribution over model parameters, we can make predictions by marginalizing the likelihood of unseen input points such as $x^{\star}$ over model parameters, which leads to predictive distribution over output:
+After obtaining the posterior distribution over the model parameters, predictions by marginalizing the likelihood of unseen input points such as $x^{\star}$ over the model parameters can be made, which leads to a predictive distribution over the output:
 
 \begin{equation}
 p(y^{\star}|x^{\star}, \mathcal D) = \int p(y^{\star}|x^{\star}, \boldsymbol{\omega})p(\boldsymbol{\omega}|\mathcal D)d\boldsymbol{\omega}
 \label{2.4}
 \end{equation}
 
-To point out the difference between normal deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In figure \ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while shaded circle denote observed random variable which represents training set. Plate notation denotes $N$ observed data pairs. As we can see in the figure, parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by Maximum a posterior method:
+%To point out the difference between a normal deterministic neural network and Bayesian neural network \maxcom{perhaps it makes sense to introduce also abbreviations for these two names?} can help understanding the mechanism of Bayesian neural network better. 
+%In figure \ref{fig:dnn_bnn}, a graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while shaded circle denote observed random variable which represents training set. 
+Figure \ref{fig:dnn_bnn} illustrates the difference between a deterministic neural network and Bayesian neural network \maxcom{perhaps it makes sense to introduce also abbreviations for these two names?}: A solid point denotes a deterministic variable, and a circle a random variable, while a shaded circle denotes an observed random variable which represents the training set.
+The plate notation denotes $N$ observed data pairs. As can be seen in the figure, the parameters $\boldsymbol{\omega}$ in the deterministic version is a normal variable which is a point estimate done by Maximum a posterior \maxcom{you already used MAP...} method:
 
 \begin{equation}
 \boldsymbol{\omega^{\star}} = argmax_{\boldsymbol{\omega}}\{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})\}\label{2.5}
 \end{equation}
 
-On the other hand, in Bayesian neural network, the model parameter $\boldsymbol{\omega}$ is random variable which obey the distribution parameterized by $\theta$. To note that for explanation of concept here, we do not make any assumption on the function parameterized by $\theta$, which means it can be arbitrary function. This distribution over model parameters can be inferred based on Bayes' rule in equation \ref{2.3}. However, for model with large number of parameters, it's hard to calculate the integral tractably. Therefore many approximation methods mentioned in the introduction chapter are applied to solve this problem. It's worth to note that if we choose the approximate distribution as delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, then we can recover Bayesian neural network into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
-
+On the other hand, in a Bayesian neural network the \maxcom{model parameters $\boldsymbol{\omega}$ are random variables} which obey the distribution parameterized by $\theta$. To note that for explanation of concept here, no assumption on the function parameterized by $\theta$ is made, which means it can be an arbitrary function. This distribution over the model parameters can be inferred based on the Bayes' rule (equation \ref{2.3}). However, for a model with a large number of parameters, it is hard to calculate the integral tractably. Therefore many approximation methods mentioned in section \ref{sec:related_work} are applied to solve this problem. It is worth to note that if the approximate distribution is defined as delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, a Bayesian neural network is recovered into a deterministic neural network. Since the computation of the model evidence $p(\mathbf{Y}|\mathbf{X})$ is intractable for complex models and large datasets, an approximate inference is required, which is briefly introduced in next section.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9.1cm, width=12cm]{dnn_bnn}
-		\caption{Difference between parameter estimation of deterministic neural network and Bayesian neural network.}		
+		\caption{Difference between parameter estimation of deterministic neural network and Bayesian neural network. \maxcom{explain the notation again here... normally a figure should be understandable only reading the caption } \maxcom{crop the image so the margin between image and caption is not so big}}		
 		\label{fig:dnn_bnn}
 	\end{center}
 \end{figure}
