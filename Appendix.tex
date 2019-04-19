@@ -1,7 +1,7 @@
 \chapter{Appendix}
 \section{KL condition}
 \label{appendix:kl_condition}
-\paragraph{Proposition 1.} Fix $K$, $L \in \mathbb N$, a probability vector $\bld p = (p_{1}, ..., p_{L})$, and $\bld \Sigma_{i} \in \mathbb R^{K \times K}$ diagonal positive definite for $i=1,...,L$, with the elements of each $\bld \Sigma_{i}$ not dependent on $K$. Let
+\paragraph{Proposition} Fix $K$, $L \in \mathbb N$, a probability vector $\bld p = (p_{1}, ..., p_{L})$, and $\bld \Sigma_{i} \in \mathbb R^{K \times K}$ diagonal positive definite for $i=1,...,L$, with the elements of each $\bld \Sigma_{i}$ not dependent on $K$. Let
 \[
 q(\bld x) = \sum_{i=1}^{L} p_{i}\mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) 
 \]
@@ -86,25 +86,29 @@ as required to show.
 \begin{flushright}
 	$\square$
 \end{flushright}
+\section{Fisher information} \label{appendix:fisher_matrix}
+Fisher information $\mathcal{I}(\theta)$ is defined as the variance of the partial derivative of log likelihood w.r.t. parameters $\theta$ which parameterize the likelihood function $f(x; \theta)$. For this, we need to first calculate the expectation of first derivative:
+\begin{equation}
+\begin{aligned}
+\mathbb{E}\big[\frac{\partial}{\partial \theta} \log{f(X;\theta)} \big] &= \int \frac{\partial}{\partial \theta}\log{f(x; \theta)} f(x;\theta) dx \\
+&= \int \frac{\frac{\partial}{\partial \theta}f(x;\theta)}{f(x; \theta)} f(x;\theta) dx 
+\end{aligned}
+\end{equation}
 
-\section{Figures}
-\thispagestyle{empty}% no page number in chapter title page
-Beispiel für eine Tabelle:
+Then the equation of Fisher information is expressed as follows:
+\begin{equation}
+\begin{aligned}
+\mathcal{I}(\theta) &= \mathbb{E}\big[ 
+\big( 
+\frac{\partial}{\partial \theta} \log{f(X;\theta)}
+\big)^2
+\big] \\
+&= \int (\frac{\partial}{\partial \theta}\log{f(x; \theta)})^2 f(x;\theta) dx
+\end{aligned}
+\end{equation}
 
-\begin{table}[htbp]
-\caption{Beispiel für eine Beschriftung. Tabellenbeschriftungen sind üblicherweise über der Tabelle platziert.}
-  \begin{center}
-    \begin{tabular}{lcr}
-      \hline
-      left & center & right\\
-      \hline
-      entry & entry & entry \\
-      entry & entry & entry \\
-      entry & entry & entry \\
-      \hline
-    \end{tabular}    
-    \label{tab:ToRef}
-  \end{center}
-\end{table}
 
-\section{Implementation Details}
+
+\section{Implementation details}
+
+

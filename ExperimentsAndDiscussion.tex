@@ -13,7 +13,6 @@ In this chapter, we perform different experiments for the following purposes:
 
 Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions. Models were implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20.
 
-\newpage
 \subsection{Dataset}
 \paragraph{WRGBD\cite{lai2011large}} This dataset is a public large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories and 300 instance classes in hierarchical structure. There are multiple instances in different categories. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping in features space between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition.  
 
@@ -81,8 +80,7 @@ where $conf \in [0,1]$, $c \in \mathcal L = \{0,...,|\mathcal L|-1\}$, and $\mat
 \end{equation}
 where $c$ is the possible class $y$ can take, $\mathcal H(\cdot) \in [0, \text{log}{|\mathcal P|}]$, the larger this quantity is, the more uncertain the prediction is.
 
-\paragraph{Mutual information}
-Mutual information between the prediction $y$ and the weights posterior offers a different uncertainty measure when compared with the aforementioned ones. This measure is widely used in active learning tasks\cite{houlsby2011bayesian}, which is also called Bayesian active learning disagreement(BALD). The definition of this measure is as follows:
+\paragraph{Mutual information} between the prediction $y$ and the weights posterior offers a different uncertainty measure when compared with the aforementioned ones. This measure is widely used in active learning tasks\cite{houlsby2011bayesian}, which is also called Bayesian active learning disagreement(BALD). The definition of this measure is as follows:
 \begin{equation}\label{mi}	
 \begin{aligned}
 \mathcal I[y,\bld \omega|x^\star, \mathcal D] &= \mathcal H[y|x^\star, \mathcal D] - \mathbb E_{p(\bld \omega| \mathcal D)}\big[\mathcal H[y|x^\star, \bld \omega] \big] \\
@@ -105,7 +103,7 @@ As is stated in \cite{gneiting2007probabilistic}, the goal of probabilistic pred
 
 \paragraph{Reliability diagram(Calibration curve)} is another visual tool for expressing \textbf{calibration} performance of the model\cite{guo2017calibration}, which plots the frequency of success(accuracy of predictions in specific bin) as a function of confidence, which is predictive likelihood of prediction. If the model is perfectly calibrated, this function should be overlapping with the diagonal line exactly. The closer this curve is to diagonal curve, the better the calibration performance is. In order to draw the curve, we firstly group the predictions into $M$ interval bins w.r.t. confidence and then calculate the accuracy of predictions in each bin. We use $M=20$ in this work. To quantify the proximity to the diagonal curve, we use two metrics:
 \begin{itemize}
-	\item \textbf{Expectation calibration error(ECE)}: in order to obtain a more objective measure of calibration quality, we can compute the \textbf{expected calibration error} by computing the weighted average of difference between accuracy and confidence:
+	\item \textbf{Expectation calibration error(ECE)}: In order to obtain a more objective measure of calibration quality, we can compute the \textbf{expected calibration error} by computing the weighted average of difference between accuracy and confidence:
 	
 	\begin{equation}
 	ECE = \sum_{m=1}^{M}\frac{|B_m|}{n}|acc(B_m) - conf(B_m)|
@@ -132,7 +130,7 @@ Because we want to make predictions for the future and also have a suitable meas
 
 $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality holds if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules in which the less it is, the better the performance is:
 \begin{itemize}
-	\item \textbf{averaged negative log likelihood(NLL)}:NLL is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
+	\item \textbf{averaged negative log likelihood(NLL)} is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
 	
 	\begin{equation} \label{nll}
 		NLL = -\frac{1}{|\mathcal D_{test}|}\sum_{i=1}^{|\mathcal D_{test}|}\text{log}(p(y_i = c_i|\bld x_i))
@@ -149,39 +147,42 @@ $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality hold
 
 \paragraph{Separability metrics:} In addition to the summary metrics of predictive probability. We are also interested in the separability between different types of predictions, which can assist the down-stream tasks if they are highly separable (e.g. separate correct predictions and false predictions or out-of-distribution data to improve robustness of system and provide more safety guarantee). To note that, we treat the correct predictions as positive samples in the two following metrics.
 \begin{itemize}
-	\item \textbf{Area under Receiver Operating Characteristic curve(AUROC)}:Since one of our goals is to choose automatically labeled data based on uncertainty estimation, it's necessary to evaluate the separability between correct predictions and false predictions or out-of distribution data predictions. ROC curve describes the relationship between true positive rate($tpr=\frac{tp}{tp+fn}$) and false positive rate($fpr=\frac{fp}{fp+tn}$). Moreover, AUROC can be interpreted as the probability that a positive samples has a greater score than a negative samples. However, the drawback of AUROC is that, the normalizers of two kinds of rate in ROC curve are independent to each other. When these two normalizers differs too much. AUROC can provide misleading conclusion. For example, if the number of negative predictions is much higher than positive one, the AUROC could still achieve a relatively high value, while in fact there are already many false positives. 
+	\item \textbf{Area under Receiver Operating Characteristic curve(AUROC)}: Since one of our goals is to choose automatically labeled data based on uncertainty estimation, it's necessary to evaluate the separability between correct predictions and false predictions or out-of distribution data predictions. ROC curve describes the relationship between true positive rate($tpr=\frac{tp}{tp+fn}$) and false positive rate($fpr=\frac{fp}{fp+tn}$). Moreover, AUROC can be interpreted as the probability that a positive samples has a greater score than a negative samples. However, the drawback of AUROC is that, the normalizers of two kinds of rate in ROC curve are independent to each other. When these two normalizers differs too much. AUROC can provide misleading conclusion. For example, if the number of negative predictions is much higher than positive one, the AUROC could still achieve a relatively high value, while in fact there are already many false positives. 
 	
 	\item \textbf{Area under Precision Recall curve(AUPR)}: Considering the downside of AUROC, another evaluation metric is employed, that is AUPR. AUPR describes the relationship between precision($pr = \frac{tp}{tp+fp}$) and recall($tpr=\frac{tp}{tp+fn}$), which resolves the problem of different base number. In the previously mentioned case, though the AUROC is high, the AUPR will be low because the precision is low. 
 \end{itemize}
 
 
 \section{Uncertainty estimation experiments}
+In this part, we evaluate performance of accuracy and uncertainty estimation as well as their summarized performance of different inference techniques for BNN on WRGB and UniHB dataset. Before that, the shorthands of different techniques should be explained. We call original ResNet50 "ori", ResNet50 with concrete dropout "cdp", ResNet50 with multiple dropout "mdp" without specifications.
 
-\subsection{Experiments \RNum{1}}
-In this experiments, we want to evaluate our model on a relatively easy task which is instance recognition at first. That means, the appearances of different classes as well as the out-of-distribution data are highly discriminable. To this end, we separate WRGBD dataset into two subsets based on the instance class. Subset \RNum{1} contains objects with instance class from 0 to 199 (assuming that here we use index to denote the instance label) and Subset \RNum{2} contains objects with instance class from 200 to 299. 
+In the first experiment, we evaluate them on a relatively simple task, instance recognition. However, our main focus is in the second experiment, where different techniques including dropout, Laplace approximation and ensembles are evaluated and compared on a more difficult task, category recognition. Besides comparing them, a ablation study to investigate how feature extractor influences the predictive uncertainty is performed and showed.
+
+\subsection{Experiments \RNum{1}: uncertainty estimation on instance recognition}
+In this experiment, we want to evaluate our model on a relatively easy task which is instance recognition at first. The appearances of different classes as well as the out-of-distribution data are highly discriminable. To this end, we separate WRGBD dataset into two subsets based on the instance class. Subset \RNum{1} contains objects with instance class from 0 to 199 (assuming that here we use index to denote the instance label) and Subset \RNum{2} contains objects with instance class from 200 to 299. 
 
 We train our model with objects captured in elevation $30^\circ$ and $60^\circ$ of Subset \RNum{1} (in which we split off 20\% of training set as validation set for model selection in training). The size of training set and validation set is around $71.0\times10^3$. Then we test the model on objects captured in elevation $45^\circ$ of both Subset \RNum{1} and Subset \RNum{2}. In this experiment, the objects in Subset \RNum{2} serve as out-of-distribution samples because they are not present during training. The size of test set is around $35.6\times10^3$ and that of OOD dataset is around $17.8\times10^3$. 
 
 In this experiment, we just want to test and compare the performance of different approaches. Because the OOD data is highly different to the training set. The model should express high uncertainty when facing these data. Nevertheless, the miss-classifications should have higher uncertainty than the correct predictions because the model should be confident when it makes predictions correctly. Otherwise the model is overconfident when it's confident with its incorrect predictions, which can induce hazardous consequence in some safety-critical applications. As we can see in the figure \ref{exp1_histo}, the original ResNet50 model is highly overconfident, which assigns high confidence to nearly $50\%$ of miss-classification and nearly $30\%$ of OOD data in the highest bin. While the model with concrete dropout and multi-drop can significantly decrease these two proportions. As we can see, different uncertainty show similar trend in this experiment.
 
-In addition to uncertainty histogram, we also plot the calibration curve of each model evaluated on both test set and OOD dataset in figure \ref{exp1_reliability}. As expected, the calibration performance of original model is much worse than those of the other two models. This result is corresponding to the results in \cite{guo2017calibration}, that the model is highly overconfident. And the concrete dropout and multi-dropout can mitigate the undesired problem significantly.
+In addition to uncertainty histogram, we plot the calibration curve of each model evaluated on both test set and OOD dataset in figure \ref{exp1_reliability}. As expected, the calibration performance of original model is much worse than those of the other two models. This result is corresponding to the results in \cite{guo2017calibration}, that the original ResNet50 is highly overconfident. And the concrete dropout and multi-dropout can mitigate the undesired problem significantly.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm, width=16cm]{uncertainty_estimation/exp1/exp1_histo}
+		\includegraphics[height=7cm, width=14.5cm]{uncertainty_estimation/exp1/exp1_histo}
 		\caption{Uncertainty(confidence, predictive entropy, mutual information) histograms of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
 		\label{exp1_histo}
 	\end{center}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=10cm]{uncertainty_estimation/exp1/exp1_reliability}
-		\caption{Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
+		\includegraphics[height=6cm, width=11cm]{uncertainty_estimation/exp1/exp1_reliability}
+		\caption{Calibration curves of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout evaluated on both test set and OOD dataset.}		
 		\label{exp1_reliability}
 	\end{center}
 \end{figure}
 
-\subsection{Experiments \RNum{2}}
+\subsection{Experiments \RNum{2}: uncertainty estimation on category recognition}
 In this experiment, we evaluate our model on a category recognition task. The difficulties are expressed in two-fold. Firstly, in this task, the model is confronted with classes with more overlapping. Second, because we want to simulate situation of deploying robots in real world scenario and facing data in real world, the UniHB dataset with domain gap(cf. figure\ref{fig:wrgbd2}) to WRGBD is used to achieve this goal. This means, the uncertainty estimation should not only be able to perform well on dataset with exactly same distribution to training set, but also to generalize well to dataset with domain gap which may decrease the accuracy significantly.
 
 Accordingly, we use the entire WRGBD dataset including all view points, whose size is around $160.9\times10^3$, to train our model (in which we split off 20\% of training set as validation set for model selection during training). When it comes to UniHB dataset, we treat objects captured in elevation $30^\circ$ and $60^\circ$ in this dataset as \textbf{adaptation set}, whose size is around $17.1\times10^3$. We test performance of uncertainty estimation on this adaptation dataset. The images of $45^\circ$, whose size is around $8.6\times10^3$ , are used for final evaluation after we fine-tune the model with subset of adaptation set to obtain a domain specific model. The latter part will be experimented in next section. Besides, we also evaluate the uncertainty estimation on OOD dataset(cf. figure \ref{fig:not_in_wrgbd}) whose size is around $6.0\times10^3$. 
@@ -202,31 +203,32 @@ In the figure \ref{exp2_reliability}, on the left it's figure of calibration cur
 
 In the figure \ref{exp2_histo}, we can see uncertainty histograms for different approaches and different uncertainty measures. Firstly, let's compare them vertically. We can see the improvement visually. The original version is still overconfident, which express low uncertainty to more than 50$\%$ of OOD data and nearly 40\% of miss-classification. The  cdp and mdp can lower this percentage to around 10\%, although at the same time the percentage of correct predictions is decreased. But we can know that the predictions for which the model expresses low uncertainty are more likely to be correct. And the ensemble of cdp and mdp can perform even better with miss-classification. However, the ensemble of mdp does not work as well as cdp version on OOD data, which can be seen in the histogram on the last row of the figure. The reason for this will be investigated in a ablation study later. Then we can compare them horizontally, it's shown that different uncertainty measures have similar trends in the histogram. Therefore we need other quantitative metrics for them in order to evaluate different approaches as well as metrics more accurately.  
 
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[height=5.5cm, width=16.5cm]{uncertainty_estimation/reliability_seed3_ensemble_}
-		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
-		\label{exp2_reliability}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[height=11cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
-		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp from one of three runs.}		
-		\label{exp2_histo}
-	\end{center}
-\end{figure}
 
 When it comes to the separability metrics in figure \ref{exp2_roc_pr}, as stated before, we measure separability between correct prediction and miss-classification (on the left) and that between correct prediction and OOD prediction (on the right). On separability between correction prediction and miss-classification, cdp, mdp and their ensemble version can improve the results compared with original version in both ROC curve and PR curve on the left. On the other hand, the improvements on separability between correct prediction and OOD data are more obvious on the right. However, as observed before, the ensemble of mdp does not work well with OOD data, which can be observe with this metrics. We can know more from the curves that the worse performance with OOD data in mdp is enlarged by building ensemble of it.    
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/roc_pr_seed3_ensemble}
-		\caption{ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble of one of three runs.}		
+		\caption{ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble in one of three runs.}		
 		\label{exp2_roc_pr}
 	\end{center} 
 \end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=11cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
+		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp in one of three runs.}		
+		\label{exp2_histo}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=5.5cm, width=16cm]{uncertainty_estimation/reliability_seed3_ensemble_}
+		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp in one of three runs.}		
+		\label{exp2_reliability}
+	\end{center}
+\end{figure}
+
 
 Before we only show the visual metrics for evaluation, it's better to quantify the performance quantitatively. We adopt different aforementioned metrics to achieve this which are presented in the following table \ref{table:compareWithEnsemble}. In order to exclude the influence of random initialization, we train three models of different random seeds and report the mean and standard deviation for each metric. We can see the improvements by cdp, mdp and their ensemble versions along all the metrics. The phenomenon that mdp does not work well with OOD and this effect enlarged by ensemble is also expressed in the table. Based on these experiment results, we can draw the conclusion that, concrete dropout and multiple dropout can improve both accuracy and calibration performance compared with original ResNet50. While the ensemble of concrete dropout and multiple dropout work even better without OOD data, the ensemble of multiple dropout work worse than that of concrete dropout when considering OOD data in this work. When comparing concrete dropout and multiple dropout, concrete dropout is more robust than multiple dropout because the latter one does not work well with OOD data.
 
@@ -254,9 +256,9 @@ Before we only show the visual metrics for evaluation, it's better to quantify t
 		ori           & \begin{tabular}[c]{@{}l@{}}0.304$\pm$0.016 /\\ 0.633$\pm$0.065\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.461$\pm$0.027 /\\ 0.362$\pm$0.025\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.750$\pm$0.007 /\\ 0.664$\pm$0.011\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.802$\pm$0.008 /\\ 0.751$\pm$0.018\end{tabular}                \\ \hline
 		cdp           & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/\\ 0.288$\pm$0.048\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\ 0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\ 0.783$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\ 0.850$\pm$0.022\end{tabular}                \\ \hline
 		mdp           & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\ 0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\ 0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.780$\pm$0.011/ \\ 0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.838$\pm$0.013/ \\ 0.788$\pm$0.006\end{tabular}                \\ \hline
-		emsemble\_cdp & \begin{tabular}[c]{@{}l@{}}0.044/\\0.042 \end{tabular} 
+		emsemble\_cdp & \begin{tabular}[c]{@{}l@{}}0.044/\\ \textbf{0.042} \end{tabular} 
 		 &  \begin{tabular}[c]{@{}l@{}}0.086/\\\textbf{0.093} \end{tabular}                                                                                    & \begin{tabular}[c]{@{}l@{}}\textbf{0.798}/\\\textbf{0.811}  \end{tabular}                                                                           & \begin{tabular}[c]{@{}l@{}}0.845/\\\textbf{0.868}  \end{tabular}                                                                                \\ \hline
-		emsemble\_mdp & \begin{tabular}[c]{@{}l@{}}\textbf{0.032}/\\\textbf{0.170} \end{tabular}                                                                                       & \begin{tabular}[c]{@{}l@{}}\textbf{0.058}/\\0.227  \end{tabular}                                                                                     & \begin{tabular}[c]{@{}l@{}}0.789/\\0.653 \end{tabular}                                                                            & \begin{tabular}[c]{@{}l@{}}\textbf{0.875}/\\0.754  \end{tabular}                                                                                \\ \hline
+		emsemble\_mdp & \begin{tabular}[c]{@{}l@{}}\textbf{0.032}/\\0.170 \end{tabular}                                                                                       & \begin{tabular}[c]{@{}l@{}}\textbf{0.058}/\\0.227  \end{tabular}                                                                                     & \begin{tabular}[c]{@{}l@{}}0.789/\\0.653 \end{tabular}                                                                            & \begin{tabular}[c]{@{}l@{}}\textbf{0.875}/\\0.754  \end{tabular}                                                                                \\ \hline
 	\end{tabular}
 \end{table}	
 
@@ -269,15 +271,15 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5cm, width=16.5cm]{uncertainty_estimation/laplace/reliabilty_seed3_.eps}
-		\caption{Calibration curve of cdp, mdp and their Laplace approximation versions from one of three runs.}		
+		\includegraphics[height=5.5cm, width=16cm]{uncertainty_estimation/laplace/reliabilty_seed3_.eps}
+		\caption{Calibration curve of cdp, mdp and their Laplace approximation versions in one of three runs.}		
 		\label{lap_calibration}
 	\end{center}
 \end{figure}
 
-\begin{figure}[h!]		
+\begin{figure}[H]		
 	\centering
-	\includegraphics[height=9cm, width=15cm]{uncertainty_estimation/laplace/histo_ood_seed3.eps}
+	\includegraphics[height=9.5cm, width=14.5cm]{uncertainty_estimation/laplace/histo_ood_seed3.eps}
 	\caption{Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}
 	\label{figure:lap_hist}	
 \end{figure}
@@ -285,8 +287,8 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/laplace/roc_pr_seed3.eps}
-		\caption{ROC and PR curve of cdp, mdp and their Laplace approximation versions of one of three runs.}		
+		\includegraphics[height=8.3cm, width=15cm]{uncertainty_estimation/laplace/roc_pr_seed3.eps}
+		\caption{ROC and PR curve of cdp, mdp and their Laplace approximation versions in one of three runs.}		
 		\label{lap_roc_pr}
 	\end{center}
 \end{figure}
@@ -306,7 +308,7 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 		\begin{tabular}[c]{@{}l@{}}0.576$\pm$0.009\end{tabular}    & \begin{tabular}[c]{@{}l@{}}0.602$\pm$0.011\end{tabular} & \begin{tabular}[c]{@{}l@{}}2.322$\pm$0.350\end{tabular} \\ \hline
 		
 		mdp          & 
-		\begin{tabular}[c]{@{}l@{}}\textbf{0.599}$\pm$0.023\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{0.566}$\pm$0.020\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{1.940}$\pm$0.064\end{tabular} \\ \hline
+		\begin{tabular}[c]{@{}l@{}}\textbf{0.599$\pm$0.023}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{0.566$\pm$0.020}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{1.940$\pm$0.064}\end{tabular} \\ \hline
 		laplace\_mdp & 		\begin{tabular}[c]{@{}l@{}}0.598$\pm$0.024\end{tabular} & \begin{tabular}[c]{@{}l@{}}0.567$\pm$0.018\end{tabular} & \begin{tabular}[c]{@{}l@{}}1.970$\pm$0.117\end{tabular} \\ \hline
 	\end{tabular}
 \end{table}
@@ -316,13 +318,13 @@ If we compare the Laplace approximation between cdp and mdp, we can see that the
 		\hline
 		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD) $\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} \\ \hline
 		
-		cdp          & \begin{tabular}[c]{@{}l@{}}\textbf{0.124}$\pm$0.023/ \\0.288$\pm$0.048\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\\textbf{0.783}$\pm$0.022\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\\textbf{0.850}$\pm$0.022\end{tabular}                \\ \hline
+		cdp          & \begin{tabular}[c]{@{}l@{}}0.124$\pm$0.023/ \\\textbf{0.288$\pm$0.048}\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.206$\pm$0.015/ \\0.374$\pm$0.018\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.775$\pm$0.008/ \\\textbf{0.783$\pm$0.022}\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.825$\pm$0.007/ \\\textbf{0.850$\pm$0.022}\end{tabular}                \\ \hline
 		
 		laplace\_cdp & \begin{tabular}[c]{@{}l@{}}0.129$\pm$0.058/ \\0.341$\pm$0.157\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}0.235$\pm$0.073/ \\0.406$\pm$0.070\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.779$\pm$0.004/ \\0.782$\pm$0.017\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.826$\pm$0.007/ \\0.849$\pm$0.016\end{tabular}                \\ \hline
 		
-		mdp          & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}\textbf{0.780}$\pm$0.011/ \\0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\textbf{0.838}$\pm$0.013/ \\0.788$\pm$0.006\end{tabular}                \\ \hline
+		mdp          & \begin{tabular}[c]{@{}l@{}}0.114$\pm$0.012/ \\0.383$\pm$0.046\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.199$\pm$0.016/ \\0.367$\pm$0.023\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}\textbf{0.780$\pm$0.011}/ \\0.709$\pm$0.004\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\textbf{0.838$\pm$0.013}/ \\0.788$\pm$0.006\end{tabular}                \\ \hline
 		
-		laplace\_mdp         & \begin{tabular}[c]{@{}l@{}} \textbf{0.104}$\pm$0.018/ \\0.352$\pm$0.061\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}\textbf{0.179}$\pm$0.029/ \\\textbf{0.352}$\pm$0.038\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.776$\pm$0.012/ \\0.711$\pm$0.005\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.837$\pm$0.015/ \\0.798$\pm$0.005\end{tabular}                \\ \hline
+		laplace\_mdp         & \begin{tabular}[c]{@{}l@{}} \textbf{0.104$\pm$0.018}/ \\0.352$\pm$0.061\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}\textbf{0.179$\pm$0.029}/ \\\textbf{0.352$\pm$0.038}\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.776$\pm$0.012/ \\0.711$\pm$0.005\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.837$\pm$0.015/ \\0.798$\pm$0.005\end{tabular}                \\ \hline
 	\end{tabular}
 \end{table}
 \subsubsection{Ablation study}
@@ -334,38 +336,38 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=4.5cm, width=15.5cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
-		\caption{Calibration curve of one of three runs.}		
-		\label{ab_calibration}
-	\end{center}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[height=8.5cm,width=16cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
-		\caption{Uncertainty histogram of one of three runs.}		
+		\includegraphics[height=7cm,width=15cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
+		\caption{Uncertainty histograms of ori, cdp, mdp trained with frozen features in one of three runs.}		
 		\label{ab_reliability}
 	\end{center}
 \end{figure}
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=5cm, width=15cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
+		\caption{Calibration curves of ori, cdp, mdp trained with frozen features one of three runs.}		
+		\label{ab_calibration}
+	\end{center}
+\end{figure}
+
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3.eps}
-		\caption{ROC and PR curve of one of three runs.}		
+		\includegraphics[height=9cm, width=15cm]{uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3.eps}
+		\caption{ROC and PR curves of ori, cdp, mdp trained with frozen features one of three runs.}		
 		\label{ab_roc_pr}
 	\end{center}
 \end{figure}
 \begin{table}[H]
 	\label{ab_table}
 	\centering
-	\caption{Quantitative results of acc, bs, nll, ece, mce, auroc, aupr.}
+	\caption{Quantitative results averaged from 3 random seeds.}
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		& accuracy   $\boldsymbol \uparrow$  & brier\_score $\boldsymbol \downarrow$& \begin{tabular}[c]{@{}l@{}}negative\\ log \\ likelihood $\boldsymbol \downarrow$\end{tabular} \\ \hline
-		ori           &\textbf{0.532}$\pm$0.015 & 0.717$\pm$0.023& 2.383$\pm$0.053                                                        \\ \hline
+		ori           &\textbf{0.532$\pm$0.015} & 0.717$\pm$0.023& 2.383$\pm$0.053                                                        \\ \hline
 		cdp           & 0.521$\pm$0.011&0.655$\pm$0.017 &  2.190$\pm$0.149                                                        \\ \hline
-		mdp           & 0.520$\pm$0.012 &\textbf{0.641}$\pm$0.014 & \textbf{1.804}$\pm$0.073                                                         \\ \hline
+		mdp           & 0.520$\pm$0.012 &\textbf{0.641$\pm$0.014} & \textbf{1.804$\pm$0.073}                                                         \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -377,9 +379,9 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 		& \begin{tabular}[c]{@{}l@{}}expected\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}maximal\\ calibration\\ error(w/o. OOD/\\ w. OOD)$\boldsymbol \downarrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ ROC\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} & \begin{tabular}[c]{@{}l@{}}area under\\ PR curve\\ (vs. Miss-\\ classified/\\ vs. OOD)$\boldsymbol \uparrow$\end{tabular} \\ \hline
 		ori           & \begin{tabular}[c]{@{}l@{}}0.262$\pm$0.011/ \\0.793$\pm$0.012\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}0.365$\pm$0.010/ \\0.491$\pm$0.013\end{tabular}                     &
 		\begin{tabular}[c]{@{}l@{}}0.716$\pm$0.005/ \\0.602$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.724$\pm$0.022/ \\0.681$\pm$0.007\end{tabular}                \\ \hline
-		cdp           & \begin{tabular}[c]{@{}l@{}}0.141$\pm$0.022/ \\0.270$\pm$0.037\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.203$\pm$0.053/ \\0.359$\pm$0.056\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}\textbf{0.748}$\pm$0.002/ \\\textbf{0.712}$\pm$0.006\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\textbf{0.770}$\pm$0.002/ \\\textbf{0.782}$\pm$0.004\end{tabular}                \\ \hline
+		cdp           & \begin{tabular}[c]{@{}l@{}}0.141$\pm$0.022/ \\0.270$\pm$0.037\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.203$\pm$0.053/ \\0.359$\pm$0.056\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}\textbf{0.748$\pm$0.002}/ \\\textbf{0.712$\pm$0.006}\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\textbf{0.770$\pm$0.002}/ \\\textbf{0.782$\pm$0.004}\end{tabular}                \\ \hline
 		
-		mdp           & \begin{tabular}[c]{@{}l@{}}\textbf{0.068}$\pm$0.009/ \\\textbf{0.158}$\pm$0.006\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}\textbf{0.134}$\pm$0.018/ \\\textbf{0.311}$\pm$0.008\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.730$\pm$0.009/ \\0.674$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.749$\pm$0.009/ \\0.748$\pm$0.010\end{tabular}                \\ \hline
+		mdp           & \begin{tabular}[c]{@{}l@{}}\textbf{0.068$\pm$0.009}/ \\\textbf{0.158$\pm$0.006}\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}\textbf{0.134$\pm$0.018}/ \\\textbf{0.311$\pm$0.008}\end{tabular}                     & \begin{tabular}[c]{@{}l@{}}0.730$\pm$0.009/ \\0.674$\pm$0.014\end{tabular}           & \begin{tabular}[c]{@{}l@{}}0.749$\pm$0.009/ \\0.748$\pm$0.010\end{tabular}                \\ \hline
 	\end{tabular}
 \end{table}	
 
@@ -392,12 +394,12 @@ This way to enable the classifier to learn continuously is seldom seen in the li
 
 Then we try to extend this way to another dataset, T-LESS dataset, to test its generalization ability in second experiment. In the second experiment, the situation is similar to the first experiment, where a classifier is firstly trained on synthetic dataset and then deployed in a real world environment which is simulated by the real objects in training set.  We employ data augmentation to address the problem of imbalance in fine-tuning classifier found in the first experiment.
  
-\subsection{Experiment \RNum{1}}
+\subsection{Experiment \RNum{1}: evaluation on WRGBD and UniHB dataset}
 The first experiment is performed on the WRGBD and UniHB dataset. As is mentioned in experiment \RNum{2} of uncertainty estimation experiments, we train BNN with entire WRGBD dataset and evaluate performance of uncertainty estimation on objects of elevation $30^{\circ}$ and $60^{\circ}$ in UniHB dataset, which we call \textbf{adaptation dataset}. The size of adaptation dataset in this experiment is around $17.1\times10^3$. The objects of $45^{\circ}$ with size $8.6\times10^3$ are used for final evaluation after fine-tuning the classifier. The dataset used for fine-tuning are collected from the adaptation set with different settings in order to investigate the issues of this way for continuous learning. 
 
 The uncertainty measure we used is confidence because in this case we do not consider OOD data and confidence performs better in separating correct predictions and miss-classifications based on the results of previous experiments.
 
-\paragraph{Automatic Labeling:}One major restriction we impose in this experiment is the size of dataset for fine-tuning. Because if we do not restrict the size, the performance is influenced by both the size of dataset and other factors such as imbalance or quality of dataset. In order to exclude the influence of dataset size, we fix it as 3\% of the adaptation set which is around 510. If the dataset is balanced in number of data sample of category, then there are around 10 data samples in each category. Then we can investigate two factors that may influence the performance of fine-tuning mostly. 
+\paragraph{Automatic Labeling:}One major restriction we impose in this experiment is the size of dataset for fine-tuning. Because if we do not restrict the size, the performance is influenced by both the size of dataset and other factors such as imbalance or quality of dataset. In order to exclude the influence of dataset size, we fix it as 3\% of the adaptation set which is around 510. If the dataset is balanced in number of data sample of category, then there are around 10 data samples in each category. Then we can investigate how two factors may influence the performance of fine-tuning. 
 These two factors are:
 \begin{itemize}
 	\item the balance in number of data sample of each class 
@@ -446,7 +448,7 @@ By comparing the results of other settings with that of A and B, we can see that
 
 In the end, we can draw a conclusion that diversity of data and balance of number of data sample of each category play an significant role. Based on the last aforementioned observation, balance of number of data sample of each category is more important in than information of data sample.
 
-\subsection{Experiment \RNum{2}}
+\subsection{Experiment \RNum{2}: evaluation on T-LESS dataset}
 In this experiment, we firstly train networks on synthetic and augmented dataset which is introduced previously. Then we select automatically labeled data by testing the trained model on real single objects (original training set of T-LESS) which we call \textbf{adaptation dataset}. The difference between the strategy of selecting data in experiment \RNum{1} is that we split off a small balanced validation set from the whole real single object dataset with ratio 2:8. Then we choose the threshold of uncertainty up to which the accuracy can reach 95\% based on predictions on validation set. This threshold is employed in the rest of whole adaptation dataset for selecting automatically labeled data. This way to choose threshold makes the simulate situation more realistic and show the practicability of this approach. In this experiment we use predictive entropy as uncertainty measure, because it shows better performance in term of separability metrics on validation set.
 
 The improved uncertainty estimation from BNN plays an important role here, because it not only provides a reliable uncertainty estimation, but also increases the separability between correct predictions and false predictions, which is more useful in this task. 
@@ -458,8 +460,8 @@ With the same procedure of selecting automatically labeled data, we can only obt
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=6.7cm,width=12cm]{autoLa/exp2/syn_cdp_trn_uncer_hist.eps}
-		\caption{Uncertainty histograms of original ResNet50 (top)and BNN (down).}		
+		\includegraphics[height=7cm,width=12cm]{autoLa/exp2/syn_cdp_trn_uncer_hist.eps}
+		\caption{Uncertainty histograms of original ResNet50 (top) and BNN (down).}		
 		\label{autoLa_exp2_hist}
 	\end{center}
 \end{figure}
@@ -469,10 +471,10 @@ However, as we found in experiment \RNum{1}, the problem of imbalance in number 
 \item to employ augmentations including occlusions, different background images and so on for the objects to balance the dataset as much as possible.  
 \end{itemize} 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8cm,width=14cm]{autoLa/exp2/syn_cdp_trn_roc_pr_cali_.eps}
-		\caption{Calibration curves, ROC curves, PR curves.}		
+		\includegraphics[height=9cm,width=13.5cm]{autoLa/exp2/syn_cdp_trn_roc_pr_cali_.eps}
+		\caption{Calibration curves, ROC curves, PR curves of original ResNet50 and BNN.}		
 		\label{autoLa_exp2_cali}
 	\end{center}
 \end{figure}
@@ -495,7 +497,7 @@ In this section, we perform experiments to investigate the effect of improved un
 As is mentioned in chapter 3, we modify CRF library \cite{Ruiz-Sarmiento-REACTS-2015} for the experiments, in which loopy belief propagation is employed both during training and testing. We have done mainly two experiments in this part. Firstly we perform a simpler experiment on subset of T-LESS dataset to show that CRF can capture the dependencies and then improve the performance. The performance can be boosted with improved uncertainty estimation from Bayesian neural network. Secondly, we test the same idea on the entire T-LESS dataset based on the output of classifier fine-tuned in the automatic labeling experiment. 
 
 
-\subsection{Experiment \RNum{1}}
+\subsection{Experiment \RNum{1}: evaluation on subset of T-LESS dataset}
 In this experiment, we train original ResNet50 and BNN on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. Regarding the hyper-parameters in training CRF, we set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. As is mentioned in chapter 3, we perform optimization with stochastic gradient descent(SGD) with momentum and loopy belief propagation(LBP) for inference. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$. In experiments, the algorithm always reach the maximum number of iteration during optimization.
 
 In the table \ref{table:crf_exp1_acc}, we show the results of CRF trained with two different unary features from two different versions of ResNet50 and tested on scene 5, 6, 7, 8. As we can see, the network trained and tested with unary feature from BNN can yield more improvement(13.17\%) compared with that from deterministic network (12.42\%).  
@@ -524,5 +526,5 @@ Additionally, because the weights in our CRF model act as coefficients for two k
 	\end{tabular}
 \end{table}
 
-\subsection{Experiment \RNum{2}}
+\subsection{Experiment \RNum{2}: evaluation on entire T-LESS dataset}
 In this experiment, we want to test the generalization ability of CRF on the whole T-LESS dataset.
