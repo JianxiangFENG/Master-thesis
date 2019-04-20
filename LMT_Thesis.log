@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  20 APR 2019 10:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  20 APR 2019 10:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -878,11 +878,11 @@ ready used, duplicate ignored
 l.55 \end{itemize}
                    <./figures/multi-drop-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <figures/m_network.eps>
-(epstopdf)                    date: 2019-04-19 15:13:50
-(epstopdf)                    size: 421262 bytes
+(epstopdf)                    date: 2019-04-20 10:33:11
+(epstopdf)                    size: 424508 bytes
 (epstopdf)             Output file: <figures/m_network-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-04-19 15:14:42
-(epstopdf)                    size: 63836 bytes
+(epstopdf)                    date: 2019-04-20 10:33:19
+(epstopdf)                    size: 65187 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/m_network-eps-conv
 erted-to.pdf figures/m_network.eps>
 (epstopdf)             \includegraphics on input line 62.
@@ -1666,7 +1666,7 @@ fonts/cm/cmsy8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sam10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on LMT_Thesis.pdf (86 pages, 3889796 bytes).
+Output written on LMT_Thesis.pdf (86 pages, 3891151 bytes).
 PDF statistics:
  2090 PDF objects out of 2487 (max. 8388607)
  1272 compressed objects within 13 object streams
