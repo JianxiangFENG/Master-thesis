@@ -43,7 +43,7 @@ p(y^{\star}|x^{\star}, \mathcal D) = \int p(y^{\star}|x^{\star}, \boldsymbol{\om
 Pointing out the difference between deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In figure \ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while the shaded circle denotes observed random variable. Plate notation denotes $N$ observed data pairs $(\bld x, \bld y)$. Figure \ref{fig:dnn_bnn} demonstrates that parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by Maximum a posterior method:
 
 \begin{equation}
-\boldsymbol{\omega^{\star}} = argmax_{\boldsymbol{\omega}}\{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})\}\label{2.5}
+\boldsymbol{\omega^{\star}} = \underset{\bld \omega}{argmax}\{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})\}\label{2.5}
 \end{equation}
 
 On the other hand, in Bayesian neural network, the model parameter $\boldsymbol{\omega}$ is random variable with distribution parameterized by $\theta$. To note that for explanation of concept here, we do not make any assumption on the function parameterized by $\theta$, which means it can be arbitrary function. This distribution over model parameters can be inferred based on Bayes' rule in equation \ref{2.3}. However, for model with large number of parameters, it's hard to calculate the integral tractably. Many approximation methods mentioned in the introduction chapter are applied to solve this problem. It's worth noting that if we choose the approximate distribution to be delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, Bayesian neural network is recovered into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
@@ -88,7 +88,7 @@ Now the inference problem has been cast into an optimization problem:
 
 \begin{equation}\label{2.8}	
 \begin{aligned}
-\theta^{\star} = argmin_{\theta} [KL(q_{\theta}(\bld \omega)||p(\bld \omega | \bld X, \bld Y))]
+\theta^{\star} = \underset{\theta}{argmin} \{KL(q_{\theta}(\bld \omega)||p(\bld \omega | \bld X, \bld Y))\}
 \end{aligned}
 \end{equation}
 
@@ -96,7 +96,7 @@ which is equivalent to
 
 \begin{equation}\label{2.9}	
 \begin{aligned}
-\theta^{\star} = argmax_{\theta} [ELBO]
+\theta^{\star} = \underset{\theta}{argmax}\{ELBO\}
 \end{aligned}
 \end{equation}
 
@@ -128,7 +128,7 @@ In variational inference, the goal is to minimize the KL divergence between appr
 	%\end{center}
 \end{figure}
 
-\newpage
+
 \subparagraph{Approximate distribution:}
 Let's denote $\bld y\in \mathbb R ^{m \times D_{2}}$ as output, $\bld x \in \mathbb R^{m \times D_{0}}$ as input, $\bld h_{1} \in \mathbb R^{D_{1}}$ as the response of hidden layer, where $m$ represents number of data instances, $D_{i}$ is dimensionality of $i$-th layer, where $0$-th layer represents input layer and $i \in \{1,..,L\}$, $L=2$ in this example. Further we define $\bld \omega = \{ (\bld W_{i})_{i=1}^{L}  \}$ as model parameters, and $\bld \epsilon_{i} \in \mathbb R^{D_{i-1}}$ as the Bernoulli distributed random vector parameterized by $\bld p_{i} \in \mathbb R^{D_{i-1}}$, for $i$-th layer. In normal dropout, elements in vector $\bld p_{i}$ have same values $p_{i}$, which means that there is one keep rate or ($1-$dropout rate) for each layer. In the following, we will use $\bld p_{i}$ and $p_{i}$ interchangeably depending on the context if there is no special specification. To note that since weight matrix is treated as random variable, we use $\bld M_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ to denote position of non-zero element in Bernoulli distribution for $\bld W_{i}$. To note that bias $\bld b_{i} \in \mathbb R^{D_{i}}$ is absorbed into $W_{i}$ by appending a new row at the end of weight matrix and 1 at the end of each data input vector, which is also called homogeneous coordinate. We also assume that approximate weight distribution is factorized over layer, which yields
 \[
@@ -281,7 +281,9 @@ q_{\theta}(\bld \omega) &= \prod_{i=1}^{L}q_{\theta}(\bld W_{i}) \\
 &= \prod_{i=1}^{L}\prod_{j=1}^{D_{i-1}} \big[ p_{i} \mathcal N(\textbf{m}_{i,j},\sigma^{2} \bld I_{D_{i}}) + (1-p_{i})\mathcal N(\bld 0, \sigma^{2} \bld I_{D_{i}})\big]
 \end{aligned}
 \end{equation}
-where $\textbf{w}_{i,j} \in \mathbb R^{D_{i}}$ is the $j$-th row of weight matrix $\bld W_{i}$ and $p_{i}$ is the parameter of Bernoulli distributed random variable of $i$-th layer. With this, the KL divergence between approximate posterior and prior is KL divergence between mixture of Gaussian and a single Gaussian. In order to keep this report as self-contained as possible, we attach the derivation of KL divergence between mixture of Gaussian and single Gaussian in appendix \ref{appendix:kl_condition}. Then we have KL condition in the following:
+where $\textbf{w}_{i,j} \in \mathbb R^{D_{i}}$ is the $j$-th row of weight matrix $\bld W_{i}$ and $p_{i}$ is the parameter of Bernoulli distributed random variable of $i$-th layer. With this, the KL divergence between approximate posterior and prior is KL divergence between mixture of Gaussian and a single Gaussian. 
+%In order to keep this report as self-contained as possible, we attach 
+Reader who has interest can refer to derivation of KL divergence between mixture of Gaussian and single Gaussian in \cite{gal2016uncertainty}. Then we have KL condition in the following:
 
 \begin{equation}
 \begin{aligned} \label{kl_condition}
@@ -341,7 +343,7 @@ Then we obtain one sample from this discrete distribution and the probability fo
 
 \begin{figure}[h!]
 	\begin{center} \label{gumbel_max}
-		\includegraphics[width=9cm]{gumbel_max}
+		\includegraphics[width=7cm, height=5cm]{gumbel_max}
 		\caption{Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha_{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite{maddison2016concrete}.}		
 		\label{fig:gumbel_max}
 	\end{center}
@@ -361,7 +363,7 @@ The sampling steps are similar to Gumbel-Max trick, but with smoothed $softmax$ 
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=9cm]{gumbel_softmax}
+		\includegraphics[width=7cm, height=5cm]{gumbel_softmax}
 		\caption{Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha_{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite{maddison2016concrete}.}		
 		\label{fig:gumbel_softmax}
 	\end{center}
@@ -392,7 +394,7 @@ where $u \sim \text{Uniform}(0,1)$.
 In order to make explanation more clear and validate the continuous approximate re-parameterization, there is one plot (figure \ref{fig:bern_repa}) showing the relationship between average values of 100 samples drawn from this continuous approximation of Bernoulli distribution with different probability parameter from 0 to 1 with step of 0.1. We can see that the empirical average of samples drawn from equation \ref{bern_repa} is close to expectation of Bernoulli distribution of corresponding parameter. Additionally, we show one single sample in the figure. As we can see, most of samples are lying on the boundary of range $[0,1]$ and only few of them lie in the interior.
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[height=7cm, width=12cm]{bern_repa_}
+		\includegraphics[height=7cm, width=10.5cm]{bern_repa_}
 		\caption{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}		
 		\label{fig:bern_repa}
 	\end{center}
@@ -415,7 +417,7 @@ From the equation above, we can see that this term maximize the entropy of Berno
 
 \subsection{Laplace approximation}
 \subsubsection{Introduction}
-In this section, another method to approximate the real posterior distribution over weights is introduced, which is called Laplace approximation\cite{bishop2006pattern}. It requires only point estimation of model parameters, thus there is no need to learn variational parameters during training. The idea behind that is to put a Gaussian approximation on the maximum a posterior point estimate of the model parameters, which is one mode of posterior distribution. The reasons why we consider this method are as following:
+In this section, another method to approximate the real posterior distribution over weights is introduced, which is called Laplace approximation\cite{bishop2006pattern}. It requires only point estimation of model parameters, thus there is no need to re-train existing model which has already obtained an point estimate. This characteristic makes this approach more appealing  because it's not required to modify the model and thus can be applied to any existing models. The idea behind that is to put a Gaussian approximation on the maximum a posterior point estimate of the model parameters, which is one mode of posterior distribution. The reasons why we consider this method are as following:
 \begin{itemize}
 	\item it has easy compatibility to existing network. To perform Laplace approximation, we only need one point estimation of model parameters which is already available for most of architectures. That also means, we do not need modify the training phase and we can have approximation of the true posterior for all trained models.
 	\item it can capture relationship between model parameters. As mentioned in the first chapter, most of approximation approaches make assumption that parameters are independent to each other for simplicity, scalability as well as computation effort. That could be a quite strong restrictions on the approximation leading to bad performance.
@@ -426,14 +428,14 @@ In the following, we introduce the basic idea of Laplace approximation and furth
 Assume we have a point estimate of model parameters via maximum a posterior estimation:
 \begin{equation}
 \begin{aligned} \label{point estimate}
-\bld \omega^\star &= argmax_{\bld \omega}\{p(\bld \omega|\bld Y,\bld X)\} \\
-&= argmax_{\bld \omega}\{\frac{p(\bld Y|\bld X, \bld \omega) p(\bld \omega)}{p(\bld Y | \bld X)}\} \\
-&= argmax_{\bld \omega}\{p(\bld Y|\bld X, \bld \omega) p(\bld \omega)\}
+\bld \omega^\star &= \underset{\bld \omega}{argmax}\{p(\bld \omega|\bld Y,\bld X)\} \\
+&= \underset{\bld \omega}{argmax}\{\frac{p(\bld Y|\bld X, \bld \omega) p(\bld \omega)}{p(\bld Y | \bld X)}\} \\
+&= \underset{\bld \omega}{argmax}\{p(\bld Y|\bld X, \bld \omega) p(\bld \omega)\}
 \end{aligned}
 \end{equation}
 
 
-After taking a second order Taylor expansion of the logarithm of of posterior distribution $p(\bld \omega | \bld Y, \bld X)$ around its mode $\bld \omega^\star$, we have:
+After taking a second order Taylor expansion of the logarithm of of posterior distribution $p(\bld \omega | \bld Y, \bld X)$ around its mode $\bld \omega^\star$, assuming that the prior of weights is uniform, then we have:
 
 \begin{equation}
 \begin{aligned} \label{taylor expansion}
@@ -464,7 +466,7 @@ p(\bld \omega | \bld Y, \bld X) \propto p(\bld \omega^\star|\bld Y, \bld X)\exp\
 
 which means $\bld \omega \sim \mathcal N(\bld \omega^\star, \bld H ^{-1})$. Therefore, we can obtain a Gaussian approximate distribution with local maximum $\bld \omega^\star$ as mean and inverse of negative Hessian as covariance matrix.
 
-We assume a Gaussian prior for weights. Then it's easy to know that the second order derivative of prior distribution term $\frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}$ is a identity matrix multiplied by regularization coefficient. And the non-trivial part is the first term, second derivatives of log likelihood. To make the explanation uncluttered, we define the negative Hessian of log likelihood with $\bld{\hat{H}}$ instead:
+If we use Gaussian prior for weights. Then it's easy to know that the second order derivative of prior distribution term $\frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}$ is a identity matrix multiplied by regularization coefficient. And the non-trivial part is the first term, second derivatives of log likelihood. To make the explanation uncluttered, we define the negative Hessian of log likelihood with $\bld{\hat{H}}$ instead:
 
 \[
 \bld{\hat{H}} = -\frac{\partial^2\text{log}\big(p(\bld Y|\bld X, \bld \omega)\big)}{\partial \bld \omega^2}
@@ -481,7 +483,7 @@ where $N$ is size of training samples, and
 
 where $K$ is total number of mini-batch, and $(y_{ik}, \bld x_{ik})$ is the $i$-th training data sample in $k$-th mini-batch. 
 
-\paragraph{Fisher information matrix} is equivalent to the expected negative Hessian of exponential family log probability:
+\paragraph{Fisher information matrix} is an approximation to the expected negative Hessian of exponential family log probability:
 \[
 \bld{\hat{F}} = \mathbb E_{p(\bld X, \bld Y)}[\bld{\hat{H}}]
 \]
@@ -495,7 +497,7 @@ Therefore we can use Fisher information matrix as replacement of expected Hessia
 \end{aligned}
 \end{equation}
 
-We include the derivation of equivalence between negative expected Hessian and Fisher matrix for case that parameter is scalar in appendix \ref{appedix:fisher_matrix}, which can be generalized to case for vector.
+We include the derivation of equivalence between negative expected Hessian and Fisher matrix for case that parameter is scalar in appendix \ref{appendix:fisher_matrix}, which can be extended to case for vector easily.
 Therefore we can obtain 
 
 \begin{equation} \label{fisher hessian}
@@ -608,7 +610,7 @@ p(y_1, y_2, y_3, y_4) &= \frac{1}{Z(x_1, x_2, x_3, x_4)}\psi_1\psi_2\psi_3\psi_4
 where the transformation from first line to second line comes from the ignorance of potentials with order higher than two.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8.5cm, width=11.5cm]{crf.eps}
+		\includegraphics[height=8cm, width=11cm]{crf.eps}
 		\caption{Simple example of conditional random field.}		
 		\label{crf}
 	\end{center}

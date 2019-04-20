@@ -1,114 +1,125 @@
 \chapter{Appendix}
-\section{KL condition}
-\label{appendix:kl_condition}
-\paragraph{Proposition} Fix $K$, $L \in \mathbb N$, a probability vector $\bld p = (p_{1}, ..., p_{L})$, and $\bld \Sigma_{i} \in \mathbb R^{K \times K}$ diagonal positive definite for $i=1,...,L$, with the elements of each $\bld \Sigma_{i}$ not dependent on $K$. Let
-\[
-q(\bld x) = \sum_{i=1}^{L} p_{i}\mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) 
-\]
-be a mixture of Gaussians with $L$ components and $\bld \mu_{i} \in \mathbb R^{K}$, let $p(\bld x) = \mathcal N(0, \bld I_{K})$, and further assume that $\bld \mu_{i} - \bld \mu_{j} \sim \mathcal N(0, \bld I)$ for all $i$ and $j$.
+% \section{KL condition}
+% \label{appendix:kl_condition}
+% \paragraph{Proposition} Fix $K$, $L \in \mathbb N$, a probability vector $\bld p = (p_{1}, ..., p_{L})$, and $\bld \Sigma_{i} \in \mathbb R^{K \times K}$ diagonal positive definite for $i=1,...,L$, with the elements of each $\bld \Sigma_{i}$ not dependent on $K$. Let
+%\[
+%q(\bld x) = \sum_{i=1}^{L} p_{i}\mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) 
+%\]
+%be a mixture of Gaussians with $L$ components and $\bld \mu_{i} \in \mathbb R^{K}$, let $p(\bld x) = \mathcal N(0, \bld I_{K})$, and further assume that $\bld \mu_{i} - \bld \mu_{j} \sim \mathcal N(0, \bld I)$ for all $i$ and $j$.
+%
+%The KL divergence between $q(\bld x)$ and $p(\bld x)$ can be approximated as:
+%\[ 
+%KL(q(\bld x) || p(\bld x)) \approx \sum_{i=1}^{L}\frac{p_{i}}{2}(\bld \mu_{i}^{T} \bld \mu_{i} + tr(\bld \Sigma_{i}) - K(1+\text{log}2\pi) - \text{log}(\text{det}(\bld \Sigma_{i}))) - \mathcal H (\bld p)
+%\] 
+%with 
+%\[
+%\mathcal H(\bld p) = -\sum_{i=1}^{L}p_{i}\text{log}p_{i}
+%\]
+%for large enough $K$. 
+%
+%\paragraph{$Proof.$}
+%We have 
+%\[
+%\begin{aligned}
+%KL(q(\bld x) || p(\bld x)) &= \int q(\bld x) \text{log }\frac{q(\bld x)}{p(\bld x)} d\bld x \\
+%&=\int q(\bld x) \text{log} q(\bld x) d\bld x - \int q(\bld x)\text{log} p(\bld x) d\bld x \\
+%&=-\mathcal H(q(\bld x)) - \int q(\bld x)\text{log } p(\bld x) d\bld x 
+%\end{aligned}
+%\]
+%which is sum of entropy of $q(\bld x)$ and the expected log probability of $\bld x$. The expected log probability can be evaluated analytically, but the entropy term has to be approximated.
+%
+%We begin by approximating the entropy term. We write 
+%\[
+%\begin{aligned}
+%\mathcal H(q(\bld x)) &= -\sum_{i=1}^{L}p_{i}\int \mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i})\text{log }q(\bld x)d\bld x \\
+%&=-\sum_{i=1}^{L} p_{i}\int \mathcal N(\bld \epsilon_{i}; 0, \bld I) \text{log } q(\bld \mu_{i} + \bld L_{i} \bld \epsilon_{i}) d\bld \epsilon_{i} \\ 
+%\end{aligned}
+%\] 
+%with a re-parameterization of $\bld x$, that is $\bld x = \bld \mu_{i} + \bld L_{i} \bld \epsilon_{i}$ with $\bld L_{i} \bld L_{i}^{T} = \bld \Sigma_{i}$ and $\bld \epsilon_{i} \sim \mathcal N(0, I)$.
+%
+%Now the term inside logarithm can be written as 
+%\[
+%\begin{aligned}
+%q(\bld \mu_{i} + \bld L_{i}\bld \epsilon_{i}) &= \sum_{j=1}^{L} p_{j} \mathcal N(\bld \mu_{i}+\bld L_{i}\bld \epsilon_{i}; \bld \mu_{j}, \bld \Sigma_{j}) \\
+%&=\sum_{j=1}^{L}p_{j}(2\pi)^{-\frac{K}{2}} \text{det}(\bld \Sigma_{j})^{-\frac{1}{2}}\text{exp }\{-\frac{1}{2}||\bld \mu_{j} - \bld \mu_{i} - \bld L_{i} \bld \epsilon_{i}||^{2}_{\bld \Sigma_{j}}\}
+%\end{aligned}
+%\]
+%where $||\cdot||_{\bld \Sigma}$ is Mahalanobis distance with $\bld \Sigma$ as covariance matrix. Since $\bld \mu_{i} - \bld \mu_{j}$ is assumed to be normally distributed, the quantity $\bld \mu_i - \bld \mu_{j} - \bld L_{i} \bld \epsilon_{i} $ is also normally distributed. Since the expectation of a generalized $\mathcal X^{2}$ distribution with $K$ degrees of freedom increases with $K$, we have that $K \gg 0$ implies that $||\bld \mu_i - \bld \mu_{j} - \bld L_{i} \bld \epsilon_{i} ||^{2}_{\bld \Sigma_{j}} \gg 0 $ for $i \neq j$(since the elements of $\bld \Sigma_{j}$ does not depend on $K$). Finally, we have for $i=j$ that  $||\bld \mu_i - \bld \mu_{j} - \bld L_{i} \bld \epsilon_{i} ||^{2}_{\bld \Sigma_{j}} = \bld \epsilon_{i}^{T} \bld L_{i}^{T} \bld L_{i}^{-T} \bld L_{i}^{-1} \bld L_{i} \bld \epsilon_{i} = \bld \epsilon_{i}^{T} \bld \epsilon_{i}$. Therefore the last equation can be approximated as 
+%\[
+%q(\bld \mu_{i} + \bld L_{i} \bld \epsilon_{i}) \approx p_{i}(2\pi)^{-\frac{K}{2}}\text{det}(\bld \Sigma_{i})^{-\frac{1}{2}}\text{exp }\{-\frac{1}{2}\bld \epsilon_{i}^{T} \bld \epsilon_{i}\}
+%\]
+%I.e. in high dimensions the mixture components will not overlap.This gives us 
+%\[
+%\begin{aligned}
+%\mathcal H(q(\bld x)) & \approx -\sum_{i=1}^{L} p_{i}\int \mathcal N(\bld \epsilon_{i}; 0, \bld I) \text{log } \big(p_{i}(2\pi)^{-\frac{K}{2}}\text{det}(\bld \Sigma_{i})^{-\frac{1}{2}}\text{exp }\{-\frac{1}{2}\bld \epsilon_{i}^{T} \bld \epsilon_{i}\}\big) d\bld \epsilon_{i} \\ 
+%&= -\sum_{i=1}^{L}p_{i}\big[\text{log }p_{i} - \frac{K}{2}\text{log }2\pi  - \frac{1}{2} \text{log }\text{det}(\bld \Sigma_{i}) - \frac{1}{2}\int \mathcal N(\bld \epsilon_{i}; 0, \bld I)\bld \epsilon_{i}^{T} \bld \epsilon_{i} d \bld \epsilon_{i}\big] \\
+%&=\sum_{i=1}^{L}\frac{p_{i}}{2}\big(K\text{log }2\pi + \text{log } \text{det}(\bld \Sigma_{i}) + \int \mathcal N(\bld \epsilon_{i};0, \bld I)\bld \epsilon_{i}^{T}\bld \epsilon_{i}d\bld \epsilon_{i} \big) + \mathcal H(\bld p)
+%\end{aligned}
+%\] 
+%Since $\bld \epsilon_{i}^{T}\bld \epsilon_{i}$ distributes according to a $\mathcal X^{2}$ distribution , its expectation is $K$, and in the end the entropy term can be approximated as 
+%\[
+%\mathcal H(q(\bld x)) \approx \sum_{i=1}^{L}\frac{p_{i}}{2}\big(K(\text{log }2\pi + 1) + \text{log } \text{det}(\bld \Sigma_{i}) \big) + \mathcal H(\bld p)
+%\]
+%
+%Next, we can evaluate the expected log probability term, we get 
+%\[
+%\int q(\bld x) \text{log }p(\bld x) d\bld x = \sum_{i=1}^{L}p_{i}\int \mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i})\text{log }p(\bld x) d\bld x
+%\]
+%for $p(\bld x) = \mathcal N(0, \bld I_{K})$, it is easy to show that
+%\[
+%\begin{aligned}
+%\int q(\bld x) \text{log }p(\bld x) d\bld x &= \sum_{i=1}^{L}p_{i} \int 
+%\mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) \text{log}\big[(2\pi)^{-\frac{K}{2}} \text{det}(\bld I_{K})^{-\frac{1}{2}} \text{exp}\{-\frac{1}{2}\bld x^{T} \bld x \} \big] d\bld x \\ 
+%&= \sum_{i=1}^{L}p_{i} \big[
+%-\frac{K}{2} \text{log} 2\pi
+%-\frac{1}{2}\int \mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) \bld x^{T} \bld x d\bld x
+%\big]\\
+%&=-\frac{1}{2}\sum_{i=1}^{L}p_{i}(\bld \mu_{i}^{T} \bld \mu_{i} + tr(\bld \Sigma_{i}) + K\text{log}2\pi)
+%\end{aligned}
+%\]
+%
+%Finally, combining the equations above, we have 
+%\[ 
+%KL(q(\bld x) || p(\bld x)) \approx \sum_{i=1}^{L}\frac{p_{i}}{2}(\bld \mu_{i}^{T} \bld \mu_{i} + tr(\bld \Sigma_{i}) - K - \text{log}(\text{det}(\bld \Sigma_{i}))) - \mathcal H (\bld p)
+%\] 
+%as required to show.  
+%\begin{flushright}
+%	$\square$
+%\end{flushright}
 
-The KL divergence between $q(\bld x)$ and $p(\bld x)$ can be approximated as:
-\[ 
-KL(q(\bld x) || p(\bld x)) \approx \sum_{i=1}^{L}\frac{p_{i}}{2}(\bld \mu_{i}^{T} \bld \mu_{i} + tr(\bld \Sigma_{i}) - K(1+\text{log}2\pi) - \text{log}(\text{det}(\bld \Sigma_{i}))) - \mathcal H (\bld p)
-\] 
-with 
-\[
-\mathcal H(\bld p) = -\sum_{i=1}^{L}p_{i}\text{log}p_{i}
-\]
-for large enough $K$. 
-
-\paragraph{$Proof.$}
-We have 
-\[
-\begin{aligned}
-KL(q(\bld x) || p(\bld x)) &= \int q(\bld x) \text{log }\frac{q(\bld x)}{p(\bld x)} d\bld x \\
-&=\int q(\bld x) \text{log} q(\bld x) d\bld x - \int q(\bld x)\text{log} p(\bld x) d\bld x \\
-&=-\mathcal H(q(\bld x)) - \int q(\bld x)\text{log } p(\bld x) d\bld x 
-\end{aligned}
-\]
-which is sum of entropy of $q(\bld x)$ and the expected log probability of $\bld x$. The expected log probability can be evaluated analytically, but the entropy term has to be approximated.
-
-We begin by approximating the entropy term. We write 
-\[
-\begin{aligned}
-\mathcal H(q(\bld x)) &= -\sum_{i=1}^{L}p_{i}\int \mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i})\text{log }q(\bld x)d\bld x \\
-&=-\sum_{i=1}^{L} p_{i}\int \mathcal N(\bld \epsilon_{i}; 0, \bld I) \text{log } q(\bld \mu_{i} + \bld L_{i} \bld \epsilon_{i}) d\bld \epsilon_{i} \\ 
-\end{aligned}
-\] 
-with a re-parameterization of $\bld x$, that is $\bld x = \bld \mu_{i} + \bld L_{i} \bld \epsilon_{i}$ with $\bld L_{i} \bld L_{i}^{T} = \bld \Sigma_{i}$ and $\bld \epsilon_{i} \sim \mathcal N(0, I)$.
-
-Now the term inside logarithm can be written as 
-\[
-\begin{aligned}
-q(\bld \mu_{i} + \bld L_{i}\bld \epsilon_{i}) &= \sum_{j=1}^{L} p_{j} \mathcal N(\bld \mu_{i}+\bld L_{i}\bld \epsilon_{i}; \bld \mu_{j}, \bld \Sigma_{j}) \\
-&=\sum_{j=1}^{L}p_{j}(2\pi)^{-\frac{K}{2}} \text{det}(\bld \Sigma_{j})^{-\frac{1}{2}}\text{exp }\{-\frac{1}{2}||\bld \mu_{j} - \bld \mu_{i} - \bld L_{i} \bld \epsilon_{i}||^{2}_{\bld \Sigma_{j}}\}
-\end{aligned}
-\]
-where $||\cdot||_{\bld \Sigma}$ is Mahalanobis distance with $\bld \Sigma$ as covariance matrix. Since $\bld \mu_{i} - \bld \mu_{j}$ is assumed to be normally distributed, the quantity $\bld \mu_i - \bld \mu_{j} - \bld L_{i} \bld \epsilon_{i} $ is also normally distributed. Since the expectation of a generalized $\mathcal X^{2}$ distribution with $K$ degrees of freedom increases with $K$, we have that $K \gg 0$ implies that $||\bld \mu_i - \bld \mu_{j} - \bld L_{i} \bld \epsilon_{i} ||^{2}_{\bld \Sigma_{j}} \gg 0 $ for $i \neq j$(since the elements of $\bld \Sigma_{j}$ does not depend on $K$). Finally, we have for $i=j$ that  $||\bld \mu_i - \bld \mu_{j} - \bld L_{i} \bld \epsilon_{i} ||^{2}_{\bld \Sigma_{j}} = \bld \epsilon_{i}^{T} \bld L_{i}^{T} \bld L_{i}^{-T} \bld L_{i}^{-1} \bld L_{i} \bld \epsilon_{i} = \bld \epsilon_{i}^{T} \bld \epsilon_{i}$. Therefore the last equation can be approximated as 
-\[
-q(\bld \mu_{i} + \bld L_{i} \bld \epsilon_{i}) \approx p_{i}(2\pi)^{-\frac{K}{2}}\text{det}(\bld \Sigma_{i})^{-\frac{1}{2}}\text{exp }\{-\frac{1}{2}\bld \epsilon_{i}^{T} \bld \epsilon_{i}\}
-\]
-I.e. in high dimensions the mixture components will not overlap.This gives us 
-\[
-\begin{aligned}
-\mathcal H(q(\bld x)) & \approx -\sum_{i=1}^{L} p_{i}\int \mathcal N(\bld \epsilon_{i}; 0, \bld I) \text{log } \big(p_{i}(2\pi)^{-\frac{K}{2}}\text{det}(\bld \Sigma_{i})^{-\frac{1}{2}}\text{exp }\{-\frac{1}{2}\bld \epsilon_{i}^{T} \bld \epsilon_{i}\}\big) d\bld \epsilon_{i} \\ 
-&= -\sum_{i=1}^{L}p_{i}\big[\text{log }p_{i} - \frac{K}{2}\text{log }2\pi  - \frac{1}{2} \text{log }\text{det}(\bld \Sigma_{i}) - \frac{1}{2}\int \mathcal N(\bld \epsilon_{i}; 0, \bld I)\bld \epsilon_{i}^{T} \bld \epsilon_{i} d \bld \epsilon_{i}\big] \\
-&=\sum_{i=1}^{L}\frac{p_{i}}{2}\big(K\text{log }2\pi + \text{log } \text{det}(\bld \Sigma_{i}) + \int \mathcal N(\bld \epsilon_{i};0, \bld I)\bld \epsilon_{i}^{T}\bld \epsilon_{i}d\bld \epsilon_{i} \big) + \mathcal H(\bld p)
-\end{aligned}
-\] 
-Since $\bld \epsilon_{i}^{T}\bld \epsilon_{i}$ distributes according to a $\mathcal X^{2}$ distribution , its expectation is $K$, and in the end the entropy term can be approximated as 
-\[
-\mathcal H(q(\bld x)) \approx \sum_{i=1}^{L}\frac{p_{i}}{2}\big(K(\text{log }2\pi + 1) + \text{log } \text{det}(\bld \Sigma_{i}) \big) + \mathcal H(\bld p)
-\]
-
-Next, we can evaluate the expected log probability term, we get 
-\[
-\int q(\bld x) \text{log }p(\bld x) d\bld x = \sum_{i=1}^{L}p_{i}\int \mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i})\text{log }p(\bld x) d\bld x
-\]
-for $p(\bld x) = \mathcal N(0, \bld I_{K})$, it is easy to show that
-\[
-\begin{aligned}
-\int q(\bld x) \text{log }p(\bld x) d\bld x &= \sum_{i=1}^{L}p_{i} \int 
-\mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) \text{log}\big[(2\pi)^{-\frac{K}{2}} \text{det}(\bld I_{K})^{-\frac{1}{2}} \text{exp}\{-\frac{1}{2}\bld x^{T} \bld x \} \big] d\bld x \\ 
-&= \sum_{i=1}^{L}p_{i} \big[
--\frac{K}{2} \text{log} 2\pi
--\frac{1}{2}\int \mathcal N(\bld x; \bld \mu_{i}, \bld \Sigma_{i}) \bld x^{T} \bld x d\bld x
-\big]\\
-&=-\frac{1}{2}\sum_{i=1}^{L}p_{i}(\bld \mu_{i}^{T} \bld \mu_{i} + tr(\bld \Sigma_{i}) + K\text{log}2\pi)
-\end{aligned}
-\]
-
-Finally, combining the equations above, we have 
-\[ 
-KL(q(\bld x) || p(\bld x)) \approx \sum_{i=1}^{L}\frac{p_{i}}{2}(\bld \mu_{i}^{T} \bld \mu_{i} + tr(\bld \Sigma_{i}) - K - \text{log}(\text{det}(\bld \Sigma_{i}))) - \mathcal H (\bld p)
-\] 
-as required to show.  
-\begin{flushright}
-	$\square$
-\end{flushright}
 \section{Fisher information} \label{appendix:fisher_matrix}
-Fisher information $\mathcal{I}(\theta)$ is defined as the variance of the partial derivative of log likelihood w.r.t. parameters $\theta$ which parameterize the likelihood function $f(x; \theta)$. For this, we need to first calculate the expectation of first derivative:
+Here, we consider the case that parameter of likelihood function is scalar. This can easily be extended to the case that $\theta$ is a vector. Fisher information $\mathcal{I}(\theta)$ is defined as follows:
 \begin{equation}
-\begin{aligned}
-\mathbb{E}\big[\frac{\partial}{\partial \theta} \log{f(X;\theta)} \big] &= \int \frac{\partial}{\partial \theta}\log{f(x; \theta)} f(x;\theta) dx \\
-&= \int \frac{\frac{\partial}{\partial \theta}f(x;\theta)}{f(x; \theta)} f(x;\theta) dx 
-\end{aligned}
+	\mathcal{I}(\theta) = \mathbb{E}\big[\big(\frac{\partial}{\partial \theta}\log{f(X; \theta)}\big)^2\big]
 \end{equation}
-
-Then the equation of Fisher information is expressed as follows:
-\begin{equation}
+Where $f(X;\theta)$ is probability density function or mass function of random variable $X$. We need to prove that $\mathbb{E}\big[\big(\frac{\partial}{\partial \theta}\log{f(X; \theta)}\big)^2\big] = \mathbb{E}\big[-\frac{\partial^2}{\partial \theta^2}\log{f(X; \theta)}\big]$.
+When we suppose that $\theta$ is the true parameter. Based on the fact that $f(X;\theta)$ is density, we can have:
+\[
+\int f(x;\theta) dx = 1
+\]
+Differentiating the above with respect to $\theta$ gives:
+\[
+\frac{\partial}{\partial \theta}\int f(x;\theta) dx = 0
+\]
+After moving differentiating operation into integration and making use of derivative of logarithm, we get:
+\[
+\int \frac{\partial \log f(x;\theta)}{\partial \theta} f(x;\theta) dx = 0
+\]
+Differentiating again w.r.t. $\theta$ and taking the derivative inside gives:
+\[
 \begin{aligned}
-\mathcal{I}(\theta) &= \mathbb{E}\big[ 
-\big( 
-\frac{\partial}{\partial \theta} \log{f(X;\theta)}
-\big)^2
-\big] \\
-&= \int (\frac{\partial}{\partial \theta}\log{f(x; \theta)})^2 f(x;\theta) dx
+&\int \frac{\partial^2\log f(x;\theta)}{\partial \theta^2}f(x;\theta) dx + \int \frac{\partial\log f(x;\theta)}{\partial \theta} \frac{\partial f(x;\theta)}{\partial \theta}dx
+= 0\\
+\Rightarrow &\int \frac{\partial^2\log f(x;\theta)}{\partial \theta^2}f(x;\theta) dx + \int \frac{\partial\log f(x;\theta)}{\partial \theta} \frac{\partial f(x;\theta)}{\partial \theta}\frac{1}{f(x;\theta)} f(y;\theta) dx= 0 \\
+\Rightarrow &\int \frac{\partial^2\log f(x;\theta)}{\partial \theta^2}f(x;\theta) dx + \int \frac{\partial\log f(x;\theta)}{\partial \theta} \frac{\partial \log f(x;\theta)}{\partial \theta} f(y;\theta) dx= 0 \\
+\Rightarrow & -\mathbb{E}[\frac{\partial^2\log f(x;\theta)}{\partial \theta^2}] = \mathbb{E}[\frac{\partial\log f(x;\theta)}{\partial \theta} \frac{\partial \log f(x;\theta)}{\partial \theta} ] \\
 \end{aligned}
-\end{equation}
-
-
-
+\]
+which gives us the required result.
+ \begin{flushright}
+ 	$\square$
+ \end{flushright}
+ 
 \section{Implementation details}
 
 

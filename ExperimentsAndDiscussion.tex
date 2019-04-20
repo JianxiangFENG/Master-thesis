@@ -1,7 +1,7 @@
 
 \chapter{Experiments and Discussion}
 
-\section{Introduction}
+\section{Preliminaries}
 In this chapter, we perform different experiments for the following purposes:
 \begin{itemize}
 	\item to evaluate the performance of uncertainty estimation of dropout variational inference and its variants as well as Laplace approximation. Comparisons and analysis towards the results of these two kinds of approach are given.
@@ -456,7 +456,7 @@ The improved uncertainty estimation from BNN plays an important role here, becau
 \paragraph{Automatic labeling:}
 We show the comparisons in term of different evaluation metrics between uncertainty estimation from BNN and original ResNet50 in the following figures. As we can see in the uncertainty histogram (cf.\ref{autoLa_exp2_hist}), the mode of distribution of uncertainty estimation between correct prediction and miss-classification is further from each other when testing with BNN than with original ResNet50. In figure \ref{autoLa_exp2_cali}, BNN express better performance on both calibration and separability metrics. 
 
-With the same procedure of selecting automatically labeled data, we can only obtain around $1.05\times10^3$ data samples with only 93\% accuracy using original ResNet50, but around $1.6\times10^3$ data samples with 96\% accuracy using BNN. Therefore we do not consider fine-tuning with original ResNet50 here and focus on fine-tuning BNN.
+With the same procedure of selecting automatically labeled data, we can only obtain around $1.05\times10^3$ data samples with only 93\% accuracy using original ResNet50, but around $1.6\times10^3$ data samples with 96\% accuracy using BNN. Because original ResNet50 produces less automatically labeled data with lower quality, we do not consider using original ResNet50 for collecting fine-tuning dataset and instead focus on using BNN.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -489,7 +489,10 @@ However, as we found in experiment \RNum{1}, the problem of imbalance in number 
 	\end{center}
 \end{figure}
 
-\paragraph{Fine-tuning:} After collecting dataset with automatic labeling and little manually effort, we can use it to fine tune the BNN, which was trained previously with only augmented synthetic data. In the following, we show the results of fine-tuned BNN on the original test set of T-LESS dataset and analyze the results with additional tool such as confusion matrix.  
+\paragraph{Fine-tuning:} After collecting dataset with automatic labeling and small portion of manually labeling, we can use it to fine tune BNN, which was trained previously with only augmented synthetic data. In the following, we show the results of fine-tuned BNN on the original test set of T-LESS dataset and analyze the results with additional tool such as confusion matrix.  
+
+
+
 
 \section{Context-based improvement experiments}
 In this section, we perform experiments to investigate the effect of improved uncertainty estimation when incorporating them with a probabilistic graphical model in down-stream task. In detail, we employ CRF introduced in chapter 3 to capture the dependencies between objects by exploiting contextual information in the scene. The intuition behind this idea is that if the predictive distribution (used as one uncertainty measure) is more reliable and can represent the inherent randomness better. Then this bit of information can be better utilized by CRF in the down-stream task. Similar to previous experiment, we use ResNet50 with concrete dropout to improve uncertainty estimation in the following experiments and call it \textbf{BNN} without specifications.

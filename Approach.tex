@@ -21,21 +21,21 @@ The reasons behind multi-drop are as following:
  
 \end{itemize}
 
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=4cm, width=12cm]{cdp_dropout1}	
+		\includegraphics[height=4cm, width=11cm]{cdp_dropout1}	
+		\caption{Changes of keep probability of the first two concrete dropout layers during training.}
 		\label{fig:cdp_dropout1}
 	\end{center}
 \end{figure}
-
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=4cm, width=12cm]{cdp_dropout2}	
+		\includegraphics[height=4cm, width=11cm]{cdp_dropout2}	
 		\label{fig:cdp_dropout2}
-		\caption{Changes along epochs of keep probability in training network with concrete dropout layer.}
+		\caption{Changes of keep probability of the last two concrete dropout layers during training.}
 	\end{center}
 \end{figure}
-
 \begin{figure}[H]
 	\begin{center}
 		\centering
@@ -44,6 +44,7 @@ The reasons behind multi-drop are as following:
 		\label{fig:multi-drop}
 	\end{center}
 \end{figure}
+
 
 \section{Modified network architecture}
 After introducing dropout and concrete dropout variational inference, we will describe the modified network architecture in this subsection. The fundamental task in this work is object classification. We choose ResNet50\cite{he2016deep} pre-trained on ImageNet as backbone for fine-tuning because of its strong ability to learn powerful representation for images. However, there is no dropout in original version of ResNet50. If we want to employ dropout variational inference to obtain reliable uncertainty estimation, dropout should be inserted into the network. In this work, we add three fully connected layer with 1024 hidden units , which are initialized from scratch, before the output layer whose dimension needs to be set to the number of classes. Then we add concrete dropout at flatten layer, and these three new added fully connected layer, respectively.
