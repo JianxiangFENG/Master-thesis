@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  19 APR 2019 17:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  20 APR 2019 10:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -934,7 +934,7 @@ Package epstopdf Info: Source file: <figures/con_learn.eps>
 erted-to.pdf figures/con_learn.eps>
 (epstopdf)             \includegraphics on input line 87.
 Package epstopdf Info: Output file is already uptodate.
-<figures/con_learn-eps-converted-to.pdf, id=761, 796.9775pt x 447.6725pt>
+<figures/con_learn-eps-converted-to.pdf, id=762, 796.9775pt x 447.6725pt>
 File: figures/con_learn-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/con_learn-eps-converted-to.pdf>
 Package pdftex.def Info: figures/con_learn-eps-converted-to.pdf  used on input 
@@ -977,7 +977,7 @@ Package epstopdf Info: Output file is already uptodate.
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/d
 omain_diff-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but a
 t most version <1.5> allowed
-<figures/domain_diff-eps-converted-to.pdf, id=798, 1513.655pt x 857.2025pt>
+<figures/domain_diff-eps-converted-to.pdf, id=799, 1513.655pt x 857.2025pt>
 File: figures/domain_diff-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/domain_diff-eps-converted-to.pdf>
 Package pdftex.def Info: figures/domain_diff-eps-converted-to.pdf  used on inpu
@@ -999,7 +999,7 @@ Package epstopdf Info: Output file is already uptodate.
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/n
 ot_in_wrgbd-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but 
 at most version <1.5> allowed
-<figures/not_in_wrgbd-eps-converted-to.pdf, id=799, 1513.655pt x 857.2025pt>
+<figures/not_in_wrgbd-eps-converted-to.pdf, id=800, 1513.655pt x 857.2025pt>
 File: figures/not_in_wrgbd-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/not_in_wrgbd-eps-converted-to.pdf>
 Package pdftex.def Info: figures/not_in_wrgbd-eps-converted-to.pdf  used on inp
@@ -1023,7 +1023,7 @@ f>
 -converted-to.pdf figures/tless_trn_test.eps>
 (epstopdf)             \includegraphics on input line 50.
 Package epstopdf Info: Output file is already uptodate.
-<figures/tless_trn_test-eps-converted-to.pdf, id=883, 1513.655pt x 857.2025pt>
+<figures/tless_trn_test-eps-converted-to.pdf, id=884, 1513.655pt x 857.2025pt>
 File: figures/tless_trn_test-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/tless_trn_test-eps-converted-to.pdf>
 Package pdftex.def Info: figures/tless_trn_test-eps-converted-to.pdf  used on i
@@ -1040,7 +1040,7 @@ Package epstopdf Info: Source file: <figures/tless_domain_diff.eps>
 eps-converted-to.pdf figures/tless_domain_diff.eps>
 (epstopdf)             \includegraphics on input line 58.
 Package epstopdf Info: Output file is already uptodate.
-<figures/tless_domain_diff-eps-converted-to.pdf, id=884, 1513.655pt x 857.2025p
+<figures/tless_domain_diff-eps-converted-to.pdf, id=885, 1513.655pt x 857.2025p
 t>
 File: figures/tless_domain_diff-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/tless_domain_diff-eps-converted-to.pdf>
@@ -1086,7 +1086,7 @@ tion/exp1/exp1_histo-eps-converted-to.pdf figures/uncertainty_estimation/exp1/e
 xp1_histo.eps>
 (epstopdf)             \includegraphics on input line 172.
 Package epstopdf Info: Output file is already uptodate.
-<figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf, id=1129, 
+<figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf, id=1130, 
 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf Graph
 ic file (type pdf)
@@ -1108,7 +1108,7 @@ exp1/exp1_reliability.eps>
 (epstopdf)             \includegraphics on input line 179.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf, id=
-1130, 1513.655pt x 857.2025pt>
+1131, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf
  Graphic file (type pdf)
 <use figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf>
@@ -1150,7 +1150,7 @@ roc_pr_seed3_ensemble.eps>
 (epstopdf)             \includegraphics on input line 211.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf, id=
-1245, 1513.655pt x 857.2025pt>
+1246, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf
  Graphic file (type pdf)
 <use figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf>
@@ -1172,7 +1172,7 @@ st_seed3_ensemble.eps>
 (epstopdf)             \includegraphics on input line 218.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf, id=12
-46, 1513.655pt x 857.2025pt>
+47, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf G
 raphic file (type pdf)
 <use figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf>
@@ -1201,7 +1201,7 @@ ation/reliability_seed3_ensemble_.eps>
 (epstopdf)             \includegraphics on input line 226.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-to.pd
-f, id=1348, 1497.595pt x 624.3325pt>
+f, id=1349, 1497.595pt x 624.3325pt>
 File: figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-
 to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-t
@@ -1249,7 +1249,7 @@ ion/laplace/reliabilty_seed3_.eps>
 (epstopdf)             \includegraphics on input line 274.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to.pdf,
- id=1411, 1488.56125pt x 558.085pt>
+ id=1412, 1488.56125pt x 558.085pt>
 File: figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to
 .pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to.
@@ -1271,7 +1271,7 @@ n/laplace/histo_ood_seed3.eps>
 (epstopdf)             \includegraphics on input line 282.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/laplace/histo_ood_seed3-eps-converted-to.pdf, i
-d=1412, 1513.655pt x 857.2025pt>
+d=1413, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/laplace/histo_ood_seed3-eps-converted-to.p
 df Graphic file (type pdf)
 <use figures/uncertainty_estimation/laplace/histo_ood_seed3-eps-converted-to.pd
@@ -1301,7 +1301,7 @@ aplace/roc_pr_seed3.eps>
 (epstopdf)             \includegraphics on input line 290.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf, id=1
-427, 1513.655pt x 857.2025pt>
+428, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf 
 Graphic file (type pdf)
 <use figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf>
@@ -1344,7 +1344,7 @@ gures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3
 (epstopdf)             \includegraphics on input line 339.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_se
-ed3-eps-converted-to.pdf, id=1534, 1513.655pt x 857.2025pt>
+ed3-eps-converted-to.pdf, id=1535, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_o
 od_seed3-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_oo
@@ -1367,7 +1367,7 @@ _cdp_mdp_combined_seed3_.eps>
 (epstopdf)             \includegraphics on input line 347.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_
-combined_seed3_-eps-converted-to.pdf, id=1535, 1495.5875pt x 592.2125pt>
+combined_seed3_-eps-converted-to.pdf, id=1536, 1495.5875pt x 592.2125pt>
 File: figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp
 _mdp_combined_seed3_-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_
@@ -1391,7 +1391,7 @@ mbined_seed3.eps>
 (epstopdf)             \includegraphics on input line 356.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combi
-ned_seed3-eps-converted-to.pdf, id=1536, 1513.655pt x 857.2025pt>
+ned_seed3-eps-converted-to.pdf, id=1537, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_
 combined_seed3-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_c
@@ -1462,7 +1462,7 @@ p_trn_uncer_hist-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_uncer_his
 t.eps>
 (epstopdf)             \includegraphics on input line 463.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf, id=1667, 1513
+<figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf, id=1668, 1513
 .655pt x 857.2025pt>
 File: figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf Graphic f
 ile (type pdf)
@@ -1487,7 +1487,7 @@ p_trn_roc_pr_cali_-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_roc_pr_
 cali_.eps>
 (epstopdf)             \includegraphics on input line 476.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf, id=1669, 14
+<figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf, id=1670, 14
 48.41125pt x 834.11626pt>
 File: figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf Graphic
  file (type pdf)
@@ -1507,7 +1507,7 @@ nverted-to.pdf>
 p_trn_cmf-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_cmf.eps>
 (epstopdf)             \includegraphics on input line 486.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf, id=1678, 1513.655pt 
+<figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf, id=1679, 1513.655pt 
 x 857.2025pt>
 File: figures/autoLa/exp2/syn_cdp_trn_cmf-eps-converted-to.pdf Graphic file (ty
 pe pdf)
@@ -1636,10 +1636,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10455 strings out of 492616
- 161674 string characters out of 6131824
- 304488 words of memory out of 5000000
- 13706 multiletter control sequences out of 15000+600000
+ 10456 strings out of 492616
+ 161683 string characters out of 6131824
+ 304536 words of memory out of 5000000
+ 13707 multiletter control sequences out of 15000+600000
  17485 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  47i,20n,51p,1815b,584s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1666,10 +1666,10 @@ fonts/cm/cmsy8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmti12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/m
 sam10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on LMT_Thesis.pdf (86 pages, 3889732 bytes).
+Output written on LMT_Thesis.pdf (86 pages, 3889796 bytes).
 PDF statistics:
- 2089 PDF objects out of 2487 (max. 8388607)
- 1271 compressed objects within 13 object streams
+ 2090 PDF objects out of 2487 (max. 8388607)
+ 1272 compressed objects within 13 object streams
  335 named destinations out of 1000 (max. 500000)
  521 words of extra memory for PDF output out of 10000 (max. 10000000)
 
