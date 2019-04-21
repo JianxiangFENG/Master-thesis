@@ -1,18 +1,19 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
 \citation{abadi2016tensorflow}
-\citation{lai2011large}
+\citation{Ruiz-Sarmiento-REACTS-2015}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments and Discussion}{40}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Preliminaries}{40}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Dataset}{40}{subsection.4.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{WRGBD\cite  {lai2011large}}{40}{section*.20}\protected@file@percent }
+\citation{lai2011large}
 \citation{lai2011large}
 \citation{hodan2017tless}
-\citation{pascal-voc-2012}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Dataset}{41}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{WRGBD\cite  {lai2011large}}{41}{section*.20}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{UniHB}{41}{section*.21}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{T-LESS\cite  {hodan2017tless}}{41}{section*.22}\protected@file@percent }
+\citation{pascal-voc-2012}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets.}}{42}{figure.4.1}\protected@file@percent }
 \newlabel{fig:wrgbd2}{{4.1}{42}{Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets}{figure.4.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Example of masked images of objects from 28 categories which are not belonging to WRGBD categories, which are treated as OOD data samples.}}{43}{figure.4.2}\protected@file@percent }
@@ -90,19 +91,24 @@
 \newlabel{autoLa_exp2_hist}{{4.16}{64}{Uncertainty histograms of original ResNet50 (top) and BNN (down)}{figure.4.16}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces Calibration curves, ROC curves, PR curves of original ResNet50 and BNN.}}{64}{figure.4.17}\protected@file@percent }
 \newlabel{autoLa_exp2_cali}{{4.17}{64}{Calibration curves, ROC curves, PR curves of original ResNet50 and BNN}{figure.4.17}{}}
-\citation{Ruiz-Sarmiento-REACTS-2015}
+\@writefile{toc}{\contentsline {paragraph}{Fine-tuning:}{64}{section*.36}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{65}{figure.4.18}\protected@file@percent }
 \newlabel{autoLa_exp2_cfm}{{4.18}{65}{Confusion matrix of automatically labeled dataset(label index starts from 0)}{figure.4.18}{}}
-\@writefile{toc}{\contentsline {paragraph}{Fine-tuning:}{65}{section*.36}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{65}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Experiment \uppercase {i\relax }: evaluation on subset of T-LESS dataset}{66}{subsection.4.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Results of CRF trained with unary feature from different versions of ResNet50}}{66}{table.4.5}\protected@file@percent }
-\newlabel{table:crf_exp1_acc}{{4.5}{66}{Results of CRF trained with unary feature from different versions of ResNet50}{table.4.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Learned weights of CRF trained with unary feature from different versions of ResNet50}}{67}{table.4.6}\protected@file@percent }
-\newlabel{table:crf_exp1_weights}{{4.6}{67}{Learned weights of CRF trained with unary feature from different versions of ResNet50}{table.4.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Experiment \uppercase {ii\relax }: evaluation on entire T-LESS dataset}{67}{subsection.4.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{66}{figure.4.19}\protected@file@percent }
+\newlabel{autoLa_exp2_cfm}{{4.19}{66}{Confusion matrix of automatically labeled dataset(label index starts from 0)}{figure.4.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.20}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{66}{figure.4.20}\protected@file@percent }
+\newlabel{autoLa_exp2_cfm}{{4.20}{66}{Confusion matrix of automatically labeled dataset(label index starts from 0)}{figure.4.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.21}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{67}{figure.4.21}\protected@file@percent }
+\newlabel{autoLa_exp2_cfm}{{4.21}{67}{Confusion matrix of automatically labeled dataset(label index starts from 0)}{figure.4.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Context-based improvement experiments}{67}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Experiment \uppercase {i\relax }: evaluation on subset of T-LESS dataset}{68}{subsection.4.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Results of CRF trained with unary feature from different versions of ResNet50}}{68}{table.4.5}\protected@file@percent }
+\newlabel{table:crf_exp1_acc}{{4.5}{68}{Results of CRF trained with unary feature from different versions of ResNet50}{table.4.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Learned weights of CRF trained with unary feature from different versions of ResNet50}}{68}{table.4.6}\protected@file@percent }
+\newlabel{table:crf_exp1_weights}{{4.6}{68}{Learned weights of CRF trained with unary feature from different versions of ResNet50}{table.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Experiment \uppercase {ii\relax }: evaluation on entire T-LESS dataset}{69}{subsection.4.4.2}\protected@file@percent }
 \@setckpt{ExperimentsAndDiscussion}{
-\setcounter{page}{68}
+\setcounter{page}{70}
 \setcounter{equation}{8}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
@@ -117,7 +123,7 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{18}
+\setcounter{figure}{21}
 \setcounter{table}{6}
 \setcounter{StandardModuleDepth}{0}
 \setcounter{AM@survey}{0}

@@ -11,7 +11,10 @@ In this chapter, we perform different experiments for the following purposes:
 	\item to evaluate performance of classifier including context information via CRF.
 \end{itemize}
 
-Before looking into the results, we need to specify the details of experiments such as the dataset, evaluation metrics. Besides, the detailed parameters of the model will be reported in section of each experiment to avoid confusions. Models were implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20.
+Before looking into the results, we need to specify some details of experiments such as the dataset, evaluation metrics. Models of deep neural nets are implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20. 
+
+
+Regarding implementation of conditional random field, we employ C++ library from \cite{Ruiz-Sarmiento-REACTS-2015}. However, the weights there are assumed to be category-independent, which means that the weights are defined as weight matrix to build a linear mapping from feature function to potential function. Therefore we modify the type of weights in this library in order to incorporate different types of weight defined in Eq. \ref{crf_used}, which serve as coefficients of different potential functions instead of a linear mapping inside the potential functions. To note that the messages are initialized uniformly during loopy belief propagation and parameter are initialized with Gaussian prior with small standard deviation (0.01) around 0. Besides, we perform optimization with stochastic gradient descent(SGD) with momentum and set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. Loopy belief propagation(LBP) is used for inference both during training and testing. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$.
 
 \subsection{Dataset}
 \paragraph{WRGBD\cite{lai2011large}} This dataset is a public large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories and 300 instance classes in hierarchical structure. There are multiple instances in different categories. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. figure \ref{fig:wrgbd2}). The total size of entire dataset is around $160.9\times10^3$. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping in features space between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition.  
@@ -31,7 +34,7 @@ Because objects in test scenes are mostly occluded and have different background
 
  \begin{figure}[H]
  	\begin{center}
- 		\includegraphics[height=10cm, width=16cm]{domain_diff}
+ 		\includegraphics[height=9cm, width=16cm]{domain_diff}
  		\caption{Example of masked images of objects from 51 categories in WRGBD and UniHB dataset. In each category, the left is from WRGBD and the right is from UniHB. We randomly pick one instance for the objects of WRGBD. We can see some light and appearance difference between objects in these two datasets.}		
  		\label{fig:wrgbd2}
  	\end{center}
@@ -468,7 +471,7 @@ With the same procedure of selecting automatically labeled data, we can only obt
 However, as we found in experiment \RNum{1}, the problem of imbalance in number of data samples of each class still appears on this dataset. The confusion matrix in figure \ref{autoLa_exp2_cfm} shows this problem obviously, in which most of confident predictions cluster in few classes which are class 6, 7 and 28 in this work. To mitigate this problem, we adopt two simple ways following the procedures in experiment \RNum{1}:
 \begin{itemize}
 \item to manually label data uniformly with size 3\% of the adaptation set(around 900 data samples).
-\item to employ augmentations including occlusions, different background images and so on for the objects to balance the dataset as much as possible.  
+\item to employ augmentations including occlusions, different background images and so on to the objects to balance the dataset as much as possible.  
 \end{itemize} 
 
 \begin{figure}[H]
@@ -480,28 +483,81 @@ However, as we found in experiment \RNum{1}, the problem of imbalance in number 
 \end{figure}
 
 
+%\begin{figure}[H]
+%	\centering
+%	\begin{center}
+%		\includegraphics[height=7cm,width=13cm]{autoLa/exp2/syn_cdp_trn_cmf.eps}
+%		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
+%		\label{autoLa_exp2_cfm}
+%	\end{center}
+%\end{figure}
+
+\paragraph{Fine-tuning:} After collecting dataset with automatic labeling and small portion of manually labeling, we can use it to fine tune BNN, which was trained previously with only augmented synthetic data. In the following, we show the results of fine-tuned BNN on the original test set of T-LESS dataset and analyze the results with additional tool such as confusion matrix.  
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		Setting of dataset                                                                                                                                    & \multicolumn{1}{l|}{Accuracy} \\ \hline
+		A: augmented, synthetic dataset                                                                                                                       & 34.91\%                       \\ \hline
+		B: augmented, entire real dataset ($\sim$30K)                                                                                                         & 69.58\%                       \\ \hline
+		\begin{tabular}[c]{@{}l@{}}C: fine-tune A with \\ augmented, automatically labeled \\ and 3\% manually labeled real dataset ($\sim$2.5K)\end{tabular} & 72.48\%                       \\ \hline
+		\begin{tabular}[c]{@{}l@{}}D: fine-tune A with \\ augmented, only automatically \\ labeled real dataset ($\sim$1.6K)\end{tabular}                     & 44.99\%                       \\ \hline
+	\end{tabular}
+\end{table}
+
+
 \begin{figure}[H]
 	\centering
 	\begin{center}
-		\includegraphics[height=7cm,width=13cm]{autoLa/exp2/syn_cdp_trn_cmf.eps}
+		\includegraphics[height=8cm,width=16cm]{autoLa/exp2/class_balance_NoMa_3percMa.eps}
 		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
 		\label{autoLa_exp2_cfm}
 	\end{center}
 \end{figure}
 
-\paragraph{Fine-tuning:} After collecting dataset with automatic labeling and small portion of manually labeling, we can use it to fine tune BNN, which was trained previously with only augmented synthetic data. In the following, we show the results of fine-tuned BNN on the original test set of T-LESS dataset and analyze the results with additional tool such as confusion matrix.  
+\begin{figure}[H]
+	\centering
+	\begin{center}
+		\includegraphics[height=9cm,width=16cm]{autoLa/exp2/syn_cdp_tst_cmf.eps}
+		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
+		\label{autoLa_exp2_cfm}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\begin{center}
+		\includegraphics[height=9cm,width=16cm]{autoLa/exp2/AutoLaNoMa_FT_CFM.eps}
+		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
+		\label{autoLa_exp2_cfm}
+	\end{center}
+\end{figure}
 
+\begin{figure}[H]
+	\centering
+	\begin{center}
+		\includegraphics[height=9cm,width=16cm]{autoLa/exp2/AutoLaWithMa3perc_CFM.eps}
+		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
+		\label{autoLa_exp2_cfm}
+	\end{center}
+\end{figure}
 
-
+%\begin{figure}[H]
+%	\centering
+%	\begin{center}
+%		\includegraphics[height=10cm,width=16cm]{autoLa/exp2/all_CFMs.eps}
+%		\caption{Confusion matrix of automatically labeled dataset(label index starts from 0).}		
+%		\label{autoLa_exp2_cfm}
+%	\end{center}
+%\end{figure}
 
 \section{Context-based improvement experiments}
 In this section, we perform experiments to investigate the effect of improved uncertainty estimation when incorporating them with a probabilistic graphical model in down-stream task. In detail, we employ CRF introduced in chapter 3 to capture the dependencies between objects by exploiting contextual information in the scene. The intuition behind this idea is that if the predictive distribution (used as one uncertainty measure) is more reliable and can represent the inherent randomness better. Then this bit of information can be better utilized by CRF in the down-stream task. Similar to previous experiment, we use ResNet50 with concrete dropout to improve uncertainty estimation in the following experiments and call it \textbf{BNN} without specifications.
 
-As is mentioned in chapter 3, we modify CRF library \cite{Ruiz-Sarmiento-REACTS-2015} for the experiments, in which loopy belief propagation is employed both during training and testing. We have done mainly two experiments in this part. Firstly we perform a simpler experiment on subset of T-LESS dataset to show that CRF can capture the dependencies and then improve the performance. The performance can be boosted with improved uncertainty estimation from Bayesian neural network. Secondly, we test the same idea on the entire T-LESS dataset based on the output of classifier fine-tuned in the automatic labeling experiment. 
+We have performed mainly two experiments in this part. Firstly we perform a simpler experiment on subset of T-LESS dataset to show that CRF can capture the dependencies and then improve the performance. The performance can be boosted with improved uncertainty estimation from Bayesian neural network. Secondly, we test the same idea on the entire T-LESS dataset based on the output of classifier fine-tuned in the automatic labeling experiment. 
 
 
 \subsection{Experiment \RNum{1}: evaluation on subset of T-LESS dataset}
-In this experiment, we train original ResNet50 and BNN on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. Regarding the hyper-parameters in training CRF, we set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. As is mentioned in chapter 3, we perform optimization with stochastic gradient descent(SGD) with momentum and loopy belief propagation(LBP) for inference. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$. In experiments, the algorithm always reach the maximum number of iteration during optimization.
+In this experiment, we train original ResNet50 and BNN on the real single objects with black background which is the original training set of T-LESS dataset. Then we use a subset of test scenes to train and test CRF. In detail, we use scene 1, 2, 3, 4 to train CRF, and scene 5, 6, 7, 8 to test CRF. The background of these scenes are black, thus we do not apply augmentations to the dataset for training the CRF. In experiments, the algorithm always reach the maximum number of iteration during optimization.
 
 In the table \ref{table:crf_exp1_acc}, we show the results of CRF trained with two different unary features from two different versions of ResNet50 and tested on scene 5, 6, 7, 8. As we can see, the network trained and tested with unary feature from BNN can yield more improvement(13.17\%) compared with that from deterministic network (12.42\%).  
 
@@ -531,3 +587,14 @@ Additionally, because the weights in our CRF model act as coefficients for two k
 
 \subsection{Experiment \RNum{2}: evaluation on entire T-LESS dataset}
 In this experiment, we want to test the generalization ability of CRF on the whole T-LESS dataset.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		Type of potential                                                              & \multicolumn{1}{l|}{Accuracy} \\ \hline
+		Unary                                                                          & 72.48\%                       \\ \hline
+		\begin{tabular}[c]{@{}l@{}}Unary and pairwise\\ (-1s on diagonal)\end{tabular} & 73.40\%                       \\ \hline
+		\begin{tabular}[c]{@{}l@{}}Unary and pairwise\\ (0s on diagonal)\end{tabular}  & 74.64\%                       \\ \hline
+		\begin{tabular}[c]{@{}l@{}}Unary and pairwise\\ (1s on diagonal)\end{tabular}  & 76.50\%                       \\ \hline
+	\end{tabular}
+\end{table}

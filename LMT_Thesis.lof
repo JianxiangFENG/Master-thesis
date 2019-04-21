@@ -6,11 +6,11 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Difference between parameter estimation of deterministic neural network and Bayesian neural network.}}{9}{figure.2.1}% 
 \contentsline {figure}{\numberline {2.2}{\ignorespaces How dropout works\cite {srivastava2014dropout}.}}{11}{figure.2.2}% 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{12}{figure.2.3}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{12}{figure.2.3}% 
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite {maddison2016concrete}.}}{20}{figure.2.4}% 
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite {maddison2016concrete}.}}{21}{figure.2.5}% 
 \contentsline {figure}{\numberline {2.6}{\ignorespaces One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}}{22}{figure.2.6}% 
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Simple example of conditional random field.}}{30}{figure.2.7}% 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Simple example of conditional random field.}}{29}{figure.2.7}% 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Changes of keep probability of the first two concrete dropout layers during training.}}{35}{figure.3.1}% 
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Changes of keep probability of the last two concrete dropout layers during training.}}{35}{figure.3.2}% 
@@ -37,5 +37,8 @@
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Uncertainty histograms of original ResNet50 (top) and BNN (down).}}{64}{figure.4.16}% 
 \contentsline {figure}{\numberline {4.17}{\ignorespaces Calibration curves, ROC curves, PR curves of original ResNet50 and BNN.}}{64}{figure.4.17}% 
 \contentsline {figure}{\numberline {4.18}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{65}{figure.4.18}% 
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{66}{figure.4.19}% 
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{66}{figure.4.20}% 
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Confusion matrix of automatically labeled dataset(label index starts from 0).}}{67}{figure.4.21}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

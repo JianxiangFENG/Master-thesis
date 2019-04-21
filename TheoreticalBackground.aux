@@ -29,8 +29,8 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces How dropout works\cite  {srivastava2014dropout}.}}{11}{figure.2.2}\protected@file@percent }
 \newlabel{fig:dropout}{{2.2}{11}{How dropout works\cite {srivastava2014dropout}}{figure.2.2}{}}
 \@writefile{toc}{\contentsline {paragraph}{Bayesian interpretation of dropout:}{12}{section*.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{12}{figure.2.3}\protected@file@percent }
-\newlabel{fig:dropout_inference}{{2.3}{12}{A two layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of input layer and hidden layer}{figure.2.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{12}{figure.2.3}\protected@file@percent }
+\newlabel{fig:dropout_inference}{{2.3}{12}{An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer}{figure.2.3}{}}
 \@writefile{toc}{\contentsline {subparagraph}{Approximate distribution:}{12}{section*.7}\protected@file@percent }
 \newlabel{dropout_form}{{2.10}{13}{Approximate distribution:}{equation.2.1.10}{}}
 \newlabel{appro_dist_form}{{2.11}{13}{Approximate distribution:}{equation.2.1.11}{}}
@@ -48,80 +48,79 @@
 \citation{kingma2013auto}
 \@writefile{toc}{\contentsline {subparagraph}{Re-parameterization trick:}{16}{section*.9}\protected@file@percent }
 \newlabel{repa}{{2.18}{16}{Re-parameterization trick:}{equation.2.1.18}{}}
-\newlabel{repa1}{{2.19}{17}{Re-parameterization trick:}{equation.2.1.19}{}}
-\@writefile{toc}{\contentsline {subparagraph}{KL condition:}{17}{section*.10}\protected@file@percent }
+\newlabel{repa1}{{2.19}{16}{Re-parameterization trick:}{equation.2.1.19}{}}
 \citation{gal2016uncertainty}
-\newlabel{appro_dist_guassian}{{2.20}{18}{KL condition:}{equation.2.1.20}{}}
+\@writefile{toc}{\contentsline {subparagraph}{KL condition:}{17}{section*.10}\protected@file@percent }
+\newlabel{appro_dist_guassian}{{2.20}{17}{KL condition:}{equation.2.1.20}{}}
 \newlabel{kl_condition}{{2.21}{18}{KL condition:}{equation.2.1.21}{}}
 \newlabel{KL_grad}{{2.22}{18}{KL condition:}{equation.2.1.22}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Marginalization in testing:}{18}{section*.11}\protected@file@percent }
+\newlabel{marginalization_test}{{2.23}{18}{Marginalization in testing:}{equation.2.1.23}{}}
 \citation{srivastava2014dropout}
 \citation{gal2017concrete}
 \citation{kingma2013auto}
 \citation{maddison2016concrete}
-\@writefile{toc}{\contentsline {subparagraph}{Marginalization in testing:}{19}{section*.11}\protected@file@percent }
-\newlabel{marginalization_test}{{2.23}{19}{Marginalization in testing:}{equation.2.1.23}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Concrete dropout}{19}{section*.12}\protected@file@percent }
 \citation{jang2016categorical}
 \citation{maddison2016concrete}
 \citation{maddison2014sampling}
+\@writefile{toc}{\contentsline {subsubsection}{Concrete dropout}{19}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization for Bernoulli distribution:}{19}{section*.13}\protected@file@percent }
 \citation{maddison2016concrete}
 \citation{maddison2016concrete}
-\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization for Bernoulli distribution:}{20}{section*.13}\protected@file@percent }
+\citation{maddison2016concrete}
+\citation{maddison2016concrete}
 \newlabel{gumbel_max}{{2.1.2}{20}{Re-parameterization for Bernoulli distribution:}{section*.13}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite  {maddison2016concrete}.}}{20}{figure.2.4}\protected@file@percent }
 \newlabel{fig:gumbel_max}{{2.4}{20}{Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite {maddison2016concrete}}{figure.2.4}{}}
-\citation{maddison2016concrete}
-\citation{maddison2016concrete}
-\newlabel{gumbel_softmax}{{2.24}{21}{Re-parameterization for Bernoulli distribution:}{equation.2.1.24}{}}
+\newlabel{gumbel_softmax}{{2.24}{20}{Re-parameterization for Bernoulli distribution:}{equation.2.1.24}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite  {maddison2016concrete}.}}{21}{figure.2.5}\protected@file@percent }
 \newlabel{fig:gumbel_softmax}{{2.5}{21}{Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite {maddison2016concrete}}{figure.2.5}{}}
-\newlabel{bern_repa}{{2.25}{22}{Re-parameterization for Bernoulli distribution:}{equation.2.1.25}{}}
+\newlabel{bern_repa}{{2.25}{21}{Re-parameterization for Bernoulli distribution:}{equation.2.1.25}{}}
+\citation{bishop2006pattern}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}}{22}{figure.2.6}\protected@file@percent }
 \newlabel{fig:bern_repa}{{2.6}{22}{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$}{figure.2.6}{}}
 \@writefile{toc}{\contentsline {subparagraph}{Dropout regularization:}{22}{section*.14}\protected@file@percent }
-\citation{bishop2006pattern}
-\newlabel{KL_grad_concrete}{{2.26}{23}{Dropout regularization:}{equation.2.1.26}{}}
+\newlabel{KL_grad_concrete}{{2.26}{22}{Dropout regularization:}{equation.2.1.26}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Laplace approximation}{23}{subsection.2.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{Introduction}{23}{section*.15}\protected@file@percent }
-\newlabel{point estimate}{{2.27}{24}{Introduction}{equation.2.1.27}{}}
+\newlabel{point estimate}{{2.27}{23}{Introduction}{equation.2.1.27}{}}
 \newlabel{taylor expansion}{{2.28}{24}{Introduction}{equation.2.1.28}{}}
 \newlabel{gaussian form}{{2.29}{24}{Introduction}{equation.2.1.29}{}}
+\citation{martens2015optimizing}
+\citation{ritter2018scalable}
 \newlabel{expected hessian}{{2.30}{25}{Introduction}{equation.2.1.30}{}}
 \@writefile{toc}{\contentsline {paragraph}{Fisher information matrix}{25}{section*.16}\protected@file@percent }
 \newlabel{Fisher}{{2.31}{25}{Fisher information matrix}{equation.2.1.31}{}}
 \newlabel{fisher hessian}{{2.32}{25}{Fisher information matrix}{equation.2.1.32}{}}
 \newlabel{fisher hessian_with_prior}{{2.33}{25}{Fisher information matrix}{equation.2.1.33}{}}
-\citation{martens2015optimizing}
-\citation{ritter2018scalable}
 \@writefile{toc}{\contentsline {subsubsection}{Scalable Laplace approximation for neural network}{26}{section*.17}\protected@file@percent }
 \citation{gupta1999matrix}
+\citation{koller2009probabilistic}
 \newlabel{fisher_appr}{{2.36}{27}{Scalable Laplace approximation for neural network}{equation.2.1.36}{}}
 \newlabel{mvg}{{2.37}{27}{Scalable Laplace approximation for neural network}{equation.2.1.37}{}}
 \newlabel{mvg_prior}{{2.38}{27}{Scalable Laplace approximation for neural network}{equation.2.1.38}{}}
-\citation{koller2009probabilistic}
 \citation{lafferty2001conditional}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Conditional random field}{28}{section.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Definition}{28}{subsection.2.2.1}\protected@file@percent }
 \newlabel{crf_def}{{2.2.1}{28}{Definition}{subsection.2.2.1}{}}
-\newlabel{crf}{{2.39}{29}{Definition}{equation.2.2.39}{}}
+\newlabel{crf}{{2.39}{28}{Definition}{equation.2.2.39}{}}
 \citation{hammersley1968markov}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Simple example of conditional random field.}}{30}{figure.2.7}\protected@file@percent }
-\newlabel{crf}{{2.7}{30}{Simple example of conditional random field}{figure.2.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Simple example of conditional random field.}}{29}{figure.2.7}\protected@file@percent }
+\newlabel{crf}{{2.7}{29}{Simple example of conditional random field}{figure.2.7}{}}
 \newlabel{crf_potential}{{2.40}{30}{Definition}{equation.2.2.40}{}}
 \@writefile{toc}{\contentsline {paragraph}{Parametrization}{30}{section*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Pairwise feature}{31}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pairwise feature}{30}{section*.19}\protected@file@percent }
+\citation{koller2009probabilistic}
 \newlabel{crf_used}{{2.41}{31}{Pairwise feature}{equation.2.2.41}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Learning}{31}{subsection.2.2.2}\protected@file@percent }
 \newlabel{crf_obj}{{2.42}{31}{Learning}{equation.2.2.42}{}}
-\citation{koller2009probabilistic}
+\newlabel{log_partition_func}{{2.43}{31}{Learning}{equation.2.2.43}{}}
+\newlabel{crf_nll_opt}{{2.44}{31}{Learning}{equation.2.2.44}{}}
+\newlabel{crf_grad}{{2.45}{31}{Learning}{equation.2.2.45}{}}
+\newlabel{exp_log_part}{{2.46}{31}{Learning}{equation.2.2.46}{}}
 \citation{pearl2014probabilistic}
-\newlabel{log_partition_func}{{2.43}{32}{Learning}{equation.2.2.43}{}}
-\newlabel{crf_nll_opt}{{2.44}{32}{Learning}{equation.2.2.44}{}}
-\newlabel{crf_grad}{{2.45}{32}{Learning}{equation.2.2.45}{}}
-\newlabel{exp_log_part}{{2.46}{32}{Learning}{equation.2.2.46}{}}
-\citation{Ruiz-Sarmiento-REACTS-2015}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Inference}{33}{subsection.2.2.3}\protected@file@percent }
-\newlabel{message}{{2.47}{33}{Inference}{equation.2.2.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Inference}{32}{subsection.2.2.3}\protected@file@percent }
+\newlabel{message}{{2.47}{32}{Inference}{equation.2.2.47}{}}
 \newlabel{belief}{{2.48}{33}{Inference}{equation.2.2.48}{}}
 \@setckpt{TheoreticalBackground}{
 \setcounter{page}{34}
