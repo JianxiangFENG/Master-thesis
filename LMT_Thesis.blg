@@ -4,26 +4,30 @@ The top-level auxiliary file: LMT_Thesis.aux
 A level-1 auxiliary file: StatementsEN.aux
 A level-1 auxiliary file: Abstract.aux
 A level-1 auxiliary file: Introduction.aux
-A level-1 auxiliary file: BayesianNeuralNetwork.aux
-A level-1 auxiliary file: ConditionalRandomField.aux
+A level-1 auxiliary file: TheoreticalBackground.aux
+A level-1 auxiliary file: Approach.aux
 A level-1 auxiliary file: ExperimentsAndDiscussion.aux
 A level-1 auxiliary file: Conclusions.aux
 A level-1 auxiliary file: Appendix.aux
 The style file: alpha.bst
 Database file #1: Bibliography.bib
-Repeated entry---line 124 of file Bibliography.bib
+Repeated entry---line 131 of file Bibliography.bib
  : @inproceedings{osband2016deep
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 153 of file Bibliography.bib
+Repeated entry---line 160 of file Bibliography.bib
  : @book{koller2009probabilistic
  :                              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 462 of file Bibliography.bib
+Repeated entry---line 389 of file Bibliography.bib
+ : @article{hinton2015distilling
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 469 of file Bibliography.bib
  : @inproceedings{louizos2017multiplicative
  :                                         ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 506 of file Bibliography.bib
+Repeated entry---line 513 of file Bibliography.bib
  : @article{lafferty2001conditional
  :                                 ,
 I'm skipping whatever remains of this entry
@@ -39,45 +43,45 @@ Warning--empty journal in lafferty2001conditional
 Warning--empty booktitle in mcallister2017concrete
 Warning--empty journal in ritter2018scalable
 Warning--empty journal in rasiwasia2009holistic
-You've used 72 entries,
+You've used 73 entries,
             2543 wiz_defined-function locations,
-            916 strings with 17337 characters,
-and the built_in function-call counts, 33041 in all, are:
-= -- 3293
-> -- 1774
+            920 strings with 17468 characters,
+and the built_in function-call counts, 33402 in all, are:
+= -- 3328
+> -- 1799
 < -- 38
-+ -- 639
-- -- 631
-* -- 2285
-:= -- 5311
-add.period$ -- 222
-call.type$ -- 72
-change.case$ -- 505
-chr.to.int$ -- 72
-cite$ -- 84
-duplicate$ -- 1338
-empty$ -- 2268
-format.name$ -- 700
-if$ -- 6853
++ -- 648
+- -- 640
+* -- 2310
+:= -- 5377
+add.period$ -- 225
+call.type$ -- 73
+change.case$ -- 512
+chr.to.int$ -- 73
+cite$ -- 85
+duplicate$ -- 1351
+empty$ -- 2288
+format.name$ -- 710
+if$ -- 6922
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 75
-newline$ -- 362
-num.names$ -- 216
-pop$ -- 570
+missing$ -- 76
+newline$ -- 367
+num.names$ -- 219
+pop$ -- 576
 preamble$ -- 1
-purify$ -- 583
+purify$ -- 591
 quote$ -- 0
-skip$ -- 1205
+skip$ -- 1217
 stack$ -- 0
-substring$ -- 1686
-swap$ -- 356
+substring$ -- 1693
+swap$ -- 357
 text.length$ -- 38
 text.prefix$ -- 9
 top$ -- 0
-type$ -- 556
+type$ -- 564
 warning$ -- 12
-while$ -- 307
-width$ -- 78
-write$ -- 901
-(There were 4 error messages)
+while$ -- 310
+width$ -- 79
+write$ -- 913
+(There were 5 error messages)

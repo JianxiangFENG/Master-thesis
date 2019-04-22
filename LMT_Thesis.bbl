@@ -165,6 +165,11 @@ Geoffrey~E Hinton and Drew Van~Camp.
 \newblock In {\em Proceedings of the sixth annual conference on Computational
   learning theory}, pages 5--13. ACM, 1993.
 
+\bibitem[HVD15]{hinton2015distilling}
+Geoffrey Hinton, Oriol Vinyals, and Jeff Dean.
+\newblock Distilling the knowledge in a neural network.
+\newblock {\em arXiv preprint arXiv:1503.02531}, 2015.
+
 \bibitem[HZRS16]{he2016deep}
 Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
 \newblock Deep residual learning for image recognition.

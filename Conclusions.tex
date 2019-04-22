@@ -1,16 +1,46 @@
 \chapter{Summary and Conclusion}
-\section{Discussions}
+\section{Summary}
+In this work, different approaches for continuous learning related to uncertainty have been investigated.
+ 
+Firstly, in order to enable classifier to adapt itself in test environment which has domain gap with its training set, dataset for fine-tuning should be collected with as little human efforts as possible. We propose to gather automatically labeled data based on uncertainty estimation of the classifier. Considering the overconfident behavior of deep learning classifier, we employ Bayesian neural network to improve the uncertainty estimation. For easy compatibility with existing neural network architectures, dropout variational inference and scalable Laplace approximation chosen for this task. In addition to the naive version, advanced variants of them such as concrete dropout, multiple dropout and ensemble of them are taken into account. We modify ResNet50 to incorporate these techniques and keep the ability of extracting powerful features at the same time. Extensive experiments on WRGBD and UniHb dataset are performed to evaluate the performance of uncertainty estimation of different approaches in terms of different metrics including accuracy, proper scoring rules, calibration metrics, separability metrics. The results show that Bayesian neural network can improve the performance of both accuracy and calibration as well as uncertainty estimation when compared with the original ResNet50. 
 
+Secondly, the improved uncertainty estimation is used for collecting automatically labeled dataset, which is used for fine-tuning the model trained on a easily obtainable dataset. The goal is to obtain a more accurate domain-specific classifier with as little human efforts as possible. Experiments of this part are performed on both WRGBD/UniHB dataset and original T-LESS/synthetic T-LESS dataset. During experiments, we find that the balance of data samples in each class has a significant influence on the performance after fine-tuning. Augmentations are employed to mitigate this problem and the experiments results show that, a more accurate domain-specific can be obtained with much less human efforts, while its performance can reach or even exceed the performance of classifier obtained with much more human efforts.
+
+Thirdly, the improved uncertainty estimation should be utilized further with proper probabilistic model. On the other hand, uncertainty induced by appearances similarity should be handled by modeling the contextual information between objects. On account of these two points, conditional random field is employed to further improve the performance by utilizing more information from out put of Bayesian neural network and capturing the contextual relationship between objects in the same scene. For the end, experiments are performed to validate this idea but only on T-LESS dataset because designing pairwise feature in WRGBD dataset is non-trivial. The experiments results show that CRF can improve the accuracy further by not only making use of the information from better uncertainty estimation but exploiting the contextual relationship between objects.
+
+Although experiments results show that these approaches can achieve better performance compared with original version, the problems occurring when constructing approaches and performing experiments should require more attention and efforts towards solving them. There are several main problems listed in the following:
 \begin{itemize}
-	\item 
+	\item inefficiency in testing with Bayesian neural network: testing each input requires sampling the posterior many times. Different approaches are already available such as network\cite{hinton2015distilling} distillation and parallel computation.  
+	
+	\item Uncertainty estimation should be defined more clearly and explored with more efforts. For example, difference of separability metrics and calibration metrics are used to evaluate uncertainty estimation in literatures\cite{hendrycks2016baseline}\cite{guo2017calibration}. However, they should account for different ability which should not be summaries with one word. As can be seen in the experiments, well calibrated model may have similar or even worse separability between correct predictions versus miss-classifications or OOD predictions than the badly-calibrated model. 
+	
+	\item Other approaches to improve uncertainty estimation should be considered. Bayesian neural network is a principal way for this purpose. But the computation behind that is too high. It's like using a generative model to solve a problem which can be solved by discriminative model. Maybe there is more efficient way to achieve this goal such as different post-processing methods \cite{guo2017calibration}. 
+	
+	\item the way to choose highly confident predictions as automatically labeled data for continuous learning sounds practical and meaningful. However, from perspective of active learning, the confident predictions contain little information required by the classifier. To train a classifier with better performance requires training set with more information. To label predictions with more information (low confidence) sounds more meaningful. Therefore a better technique to combine them should be taken into account. 
+	
+	\item modeling dependencies between random variables is a promising and natural way to improve the results because the i.i.d. assumption does not hold all the time. However, employing probabilistic graphical model requires hand-crafted edge feature which is non-trivial to have and design. Therefore, graph neural network which can learn the edge feature based on data is promising to work on.
+\end{itemize} 
+
+\section{Conclusion}
+\begin{itemize}
+	\item Bayesian neural network can improve uncertainty estimation in terms of different evaluation metrics including accuracy, proper scoring rule, calibration and separability between correct predictions versus miss-classification or OOD predictions, while ensemble of them can achieve even better performance.
+	
+	\item Multiple dropout can work better without considering OOD data, while concrete dropout can offer more stable performance on separating correct predictions and miss-classifications.
+	
+	\item Laplace approximation can achieve similar performance as concrete dropout and multiple dropout, while their performance is highly related to the point estimate obtained during training.
+	
+	\item Collecting dataset with as little manual efforts as possible for fine-tuning based on better uncertainty estimation can enable classifier to adapt itself in test environment. Nevertheless, imbalance of collected dataset has a negative effect on fine-tuning, which can be mitigated by data augmentation and adding little manual labeling.
+	
+	\item Conditional random field can improve performance further by utilizing information brought by better uncertainty estimation and exploiting contextual information between objects in the same scene.
+	
 \end{itemize}
 
-\section{Conclusions}
 
 \section{Future work}
+There are interesting work related to the approaches used in this work:
 \begin{itemize}
-	\item check uncertainty distribution of different view points of the object.
-	\item try distillation method to decrease runtime of testing.
-	\item try more complex and expressive approximate posterior distribution such as normalizing flow.
-	\item improve performance of multiple dropout.
+	\item Uncertainty distribution of different view points of the object can be checked. On the one hand, to understand the behavior of neural network better with uncertainty. On the other hand, if the uncertainty can represent actual discriminability of different view points, this information is useful in down-stream tasks such optimal view point planing for grasping and so on. 
+	\item As mentioned in summary, inefficiency in testing is an important problem. It would be interesting to try distillation method to decrease runtime in testing.
+	\item Although in this work, dropout variational inference and Laplace approximation are evaluated. The approximation distribution of them seem restrictive and simple. Interesting future work would be to try more complex and expressive approximate posterior distribution such as normalizing flow .
+	\item In the experiments of evaluating uncertainty estimation, multiple dropout can achieve better performance without considering OOD data. Ablation study has also showed that multiple dropout can have better performance. As stated in \cite{kingma2015variational}, covariances between instances increase variances of estimating derivatives of variational parameters. One way to improve performance of multiple dropout would be to decrease the variance of estimating variational parameters by sampling masks for each instance separately because there are more parameters than concrete dropout. 
 \end{itemize}
