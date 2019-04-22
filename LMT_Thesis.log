@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  22 APR 2019 18:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.4.8)  22 APR 2019 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -506,9 +506,302 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box57
 \@float@everytoks=\toks27
 \@floatcapt=\box58
-) (./LMT_Thesis.aux
-(./StatementsEN.aux) (./Abstract.aux) (./Introduction.aux)
-(./TheoreticalBackground.aux
+)
+(/opt/TeXLive/2018/texmf-dist/tex/latex/todonotes/todonotes.sty
+Package: todonotes 2019/01/24 v1.1.2 Todonotes source and documentation.
+Package: todonotes 2018/11/22
+
+(/opt/TeXLive/2018/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/opt/TeXLive/2018/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks28
+\XKV@tempa@toks=\toks29
+)
+\XKV@depth=\count138
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks30
+\pgfutil@tempdima=\dimen135
+\pgfutil@tempdimb=\dimen136
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.te
+x)) (/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box59
+
+(/opt/TeXLive/2018/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2019/02/02 v3.1.1 (3.1.1)
+))
+Package: pgf 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks31
+\pgfkeys@temptoks=\toks32
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.te
+x
+\pgfkeys@tmptoks=\toks33
+))
+\pgf@x=\dimen137
+\pgf@y=\dimen138
+\pgf@xa=\dimen139
+\pgf@ya=\dimen140
+\pgf@xb=\dimen141
+\pgf@yb=\dimen142
+\pgf@xc=\dimen143
+\pgf@yc=\dimen144
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count139
+\c@pgf@countb=\count140
+\c@pgf@countc=\count141
+\c@pgf@countd=\count142
+\t@pgf@toka=\toks34
+\t@pgf@tokb=\toks35
+\t@pgf@tokc=\toks36
+\pgf@sys@id@count=\count143
+ (/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2019/02/02 v3.1.1 (3.1.1)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2019/02/02 v3.1.1 (3.1.1)
+)))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.t
+ex
+File: pgfsyssoftpath.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgfsyssoftpath@smallbuffer@items=\count144
+\pgfsyssoftpath@bigbuffer@items=\count145
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.t
+ex
+File: pgfsysprotocol.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)) (/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen145
+\pgfmath@count=\count146
+\pgfmath@box=\box60
+\pgfmath@toks=\toks37
+\pgfmath@stack@operand=\toks38
+\pgfmath@stack@operation=\toks39
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.
+tex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometr
+ic.code.tex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code
+.tex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.
+code.tex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.t
+ex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.
+tex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.t
+ex)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarit
+hmetics.code.tex)))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count147
+))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgf@picminx=\dimen146
+\pgf@picmaxx=\dimen147
+\pgf@picminy=\dimen148
+\pgf@picmaxy=\dimen149
+\pgf@pathminx=\dimen150
+\pgf@pathmaxx=\dimen151
+\pgf@pathminy=\dimen152
+\pgf@pathmaxy=\dimen153
+\pgf@xx=\dimen154
+\pgf@xy=\dimen155
+\pgf@yx=\dimen156
+\pgf@yy=\dimen157
+\pgf@zx=\dimen158
+\pgf@zy=\dimen159
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.c
+ode.tex
+File: pgfcorepathconstruct.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgf@path@lastx=\dimen160
+\pgf@path@lasty=\dimen161
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.
+tex
+File: pgfcorepathusage.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgf@shorten@end@additional=\dimen162
+\pgf@shorten@start@additional=\dimen163
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgfpic=\box61
+\pgf@hbox=\box62
+\pgf@layerbox@main=\box63
+\pgf@picture@serial@count=\count148
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.co
+de.tex
+File: pgfcoregraphicstate.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgflinewidth=\dimen164
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations
+.code.tex
+File: pgfcoretransformations.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgf@pt@x=\dimen165
+\pgf@pt@y=\dimen166
+\pgf@pt@temp=\dimen167
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.te
+x
+File: pgfcoreobjects.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.
+code.tex
+File: pgfcorepathprocessing.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgfarrowsep=\dimen168
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgf@max=\dimen169
+\pgf@sys@shading@range@num=\count149
+) (/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.te
+x
+File: pgfcoreimage.code.tex 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.t
+ex
+File: pgfcoreexternal.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgfexternal@startupbox=\box64
+))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.co
+de.tex
+File: pgfcoretransparency.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.t
+ex
+File: pgfcorepatterns.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2019/02/02 v3.1.1 (3.1.1)
+))) (/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.
+tex
+File: pgfmoduleshapes.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgfnodeparttextbox=\box65
+) (/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.
+sty
+Package: pgfcomp-version-0-65 2019/02/02 v3.1.1 (3.1.1)
+\pgf@nodesepstart=\dimen170
+\pgf@nodesepend=\dimen171
+)
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.
+sty
+Package: pgfcomp-version-1-18 2019/02/02 v3.1.1 (3.1.1)
+)) (/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/opt/TeXLive/2018/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen172
+\pgffor@skip=\dimen173
+\pgffor@stack=\toks40
+\pgffor@toks=\toks41
+))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.
+code.tex
+File: pgflibraryplothandlers.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgf@plot@mark@count=\count150
+\pgfplotmarksize=\dimen174
+)
+\tikz@lastx=\dimen175
+\tikz@lasty=\dimen176
+\tikz@lastxsaved=\dimen177
+\tikz@lastysaved=\dimen178
+\tikzleveldistance=\dimen179
+\tikzsiblingdistance=\dimen180
+\tikz@figbox=\box66
+\tikz@figbox@bg=\box67
+\tikz@tempbox=\box68
+\tikz@tempbox@bg=\box69
+\tikztreelevel=\count151
+\tikznumberofchildren=\count152
+\tikznumberofcurrentchild=\count153
+\tikz@fig@count=\count154
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2019/02/02 v3.1.1 (3.1.1)
+\pgfmatrixcurrentrow=\count155
+\pgfmatrixcurrentcolumn=\count156
+\pgf@matrix@numberofcolumns=\count157
+)
+\tikz@expandcount=\count158
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+librarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)))
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+librarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+libraryshadows.code.tex
+File: tikzlibraryshadows.code.tex 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikz
+libraryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2019/02/02 v3.1.1 (3.1.1)
+
+(/opt/TeXLive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.
+tex
+File: pgflibraryfadings.code.tex 2019/02/02 v3.1.1 (3.1.1)
+)))
+\c@@todonotes@numberoftodonotes=\count159
+) (./LMT_Thesis.aux (./StatementsEN.aux) (./Abstract.aux)
+(./Introduction.aux) (./TheoreticalBackground.aux
 
 LaTeX Warning: Label `crf' multiply defined.
 
@@ -516,34 +809,34 @@ LaTeX Warning: Label `crf' multiply defined.
 (./Appendix.aux))
 \openout1 = `LMT_Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 76.
-LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
 
 (/opt/TeXLive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count138
-\scratchdimen=\dimen135
-\scratchbox=\box59
-\nofMPsegments=\count139
-\nofMParguments=\count140
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count141
-\MPscratchDim=\dimen136
-\MPnumerator=\count142
-\makeMPintoPDFobject=\count143
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count160
+\scratchdimen=\dimen181
+\scratchbox=\box70
+\nofMPsegments=\count161
+\nofMParguments=\count162
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count163
+\MPscratchDim=\dimen182
+\MPnumerator=\count164
+\makeMPintoPDFobject=\count165
+\everyMPtoPDFconversion=\toks43
 ) (/opt/TeXLive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -561,7 +854,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box60
+\AtBeginShipoutBox=\box71
 
 (/opt/TeXLive/2018/texmf-dist/tex/latex/oberdiek/pdflscape.sty
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
@@ -571,7 +864,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-Package hyperref Info: Link coloring OFF on input line 76.
+Package hyperref Info: Link coloring OFF on input line 83.
 
 (/opt/TeXLive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -579,28 +872,29 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/opt/TeXLive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count144
+\c@section@level=\count166
 )
-LaTeX Info: Redefining \ref on input line 76.
-LaTeX Info: Redefining \pageref on input line 76.
-LaTeX Info: Redefining \nameref on input line 76.
+LaTeX Info: Redefining \ref on input line 83.
+LaTeX Info: Redefining \pageref on input line 83.
+LaTeX Info: Redefining \nameref on input line 83.
 
 (./LMT_Thesis.out) (./LMT_Thesis.out)
-\@outlinefile=\write3
-\openout3 = `LMT_Thesis.out'.
+\@outlinefile=\write4
+\openout4 = `LMT_Thesis.out'.
 
-<figures/TUMLogo_oZ_Outline_schwarz_CMYK.pdf, id=180, 53.24391pt x 28.41014pt>
+ ABD: EveryShipout initializing macros
+<figures/TUMLogo_oZ_Outline_schwarz_CMYK.pdf, id=207, 53.24391pt x 28.41014pt>
 File: figures/TUMLogo_oZ_Outline_schwarz_CMYK.pdf Graphic file (type pdf)
 <use figures/TUMLogo_oZ_Outline_schwarz_CMYK.pdf>
 Package pdftex.def Info: figures/TUMLogo_oZ_Outline_schwarz_CMYK.pdf  used on i
-nput line 77.
+nput line 84.
 (pdftex.def)             Requested size: 113.81102pt x 60.72942pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 77.
+LaTeX Font Info:    Try loading font information for U+msa on input line 84.
 
 (/opt/TeXLive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 77.
+LaTeX Font Info:    Try loading font information for U+msb on input line 84.
 
 (/opt/TeXLive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -625,17 +919,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
 ]
 \openout2 = `Abstract.aux'.
 
- (./Abstract.tex) [1
+ (./Abstract.tex [1
 
 
-] (./LMT_Thesis.toc [2
+]) [2] (./LMT_Thesis.toc [3
 
 
 ])
-\tf@toc=\write4
-\openout4 = `LMT_Thesis.toc'.
+\tf@toc=\write5
+\openout5 = `LMT_Thesis.toc'.
 
- [3]
+ [4]
 \openout2 = `Introduction.aux'.
 
  (./Introduction.tex
@@ -644,34 +938,262 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.12 
+l.15 
       [1
 
 
-] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 32--36
-[]\OT1/cmr/m/n/12 There are some al-ter-na-tives to MCMC, one pop-u-lar one is 
-vari-a-tional
+] [2]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 30.
+ [3]
+
+LaTeX Warning: Marginpar on page 4 moved.
+
+
+LaTeX Warning: Marginpar on page 4 moved.
+
+[4]
+
+LaTeX Warning: Marginpar on page 5 moved.
+
+[5]
+Underfull \hbox (badness 1237) in paragraph at lines 64--65
+[]\OT1/cmr/m/n/12 On the other hand, there are some more the-o-ret-i-cally ap-p
+roaches which em-ploy
  []
 
-[4] [5]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 53.
- (/opt/TeXLive/2018/texmf-dist/tex/latex/base/omscmr.fd
+
+Underfull \hbox (badness 2538) in paragraph at lines 64--65
+\OT1/cmr/bx/n/12 Bayesian neu-ral net-works\OT1/cmr/m/n/12 [[]][[]], \OT1/cmr/b
+x/n/12 boot-strap-ing\OT1/cmr/m/n/12 [[]], \OT1/cmr/bx/n/12 en-sem-ble
+ []
+
+[6] [7] [8]
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99  \item t
+             o show that dropout inference and Laplace approximation can obt...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99  \item t
+             o show that dropout inference and Laplace approximation can obt...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99  \item t
+             o show that dropout inference and Laplace approximation can obt...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 99.
+(/opt/TeXLive/2018/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 53.
-) [6]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101  \item t
+              o show that manual effort in data collection in slight domain ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101  \item t
+              o show that manual effort in data collection in slight domain ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101  \item t
+              o show that manual effort in data collection in slight domain ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.103  \item t
+              o show that uncertainty caused by appearance ambiguity can be ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.103  \item t
+              o show that uncertainty caused by appearance ambiguity can be ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.103  \item t
+              o show that uncertainty caused by appearance ambiguity can be ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.106 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.110 	\item t
+              o show that dropout inference and Laplace approximation can ob...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 110
+[][]
+ []
+
+[9]
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 	\item t
+              o show that manual effort in data collection in a slight domai...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 111
+[][]
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 	\item t
+              o show that uncertainty caused by appearance ambiguity can be ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 112
+[][]
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{itemize}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.113 \end{itemize}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.113 \end{itemize}
+                   
+Things are pretty mixed up, but I think the worst is over.
+
+) [10]
 \openout2 = `TheoreticalBackground.aux'.
 
-
-(./TheoreticalBackground.tex
+ (./TheoreticalBackground.tex
 Chapter 2.
-[7
+[11
 
 
 
-] [8]
+] [12] [13]
+
+LaTeX Warning: Reference `sec:related_work' on page 14 undefined on input line 
+77.
+
 Package epstopdf Info: Source file: <figures/dnn_bnn.eps>
 (epstopdf)                    date: 2019-04-01 14:54:13
 (epstopdf)                    size: 176376 bytes
@@ -680,38 +1202,38 @@ Package epstopdf Info: Source file: <figures/dnn_bnn.eps>
 (epstopdf)                    size: 26228 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/dnn_bnn-eps-conver
 ted-to.pdf figures/dnn_bnn.eps>
-(epstopdf)             \includegraphics on input line 54.
+(epstopdf)             \includegraphics on input line 82.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/d
 nn_bnn-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but at mo
 st version <1.5> allowed
-<figures/dnn_bnn-eps-converted-to.pdf, id=421, 796.9775pt x 597.23125pt>
+<figures/dnn_bnn-eps-converted-to.pdf, id=516, 796.9775pt x 597.23125pt>
 File: figures/dnn_bnn-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/dnn_bnn-eps-converted-to.pdf>
 Package pdftex.def Info: figures/dnn_bnn-eps-converted-to.pdf  used on input li
-ne 54.
+ne 82.
 (pdftex.def)             Requested size: 341.42891pt x 258.91864pt.
-[9pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}
-) has been already used, duplicate ignored
+[14] [15pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.63 \begin{equation}
+l.97 \begin{equation}
                      \label{2.6}	 <./figures/dnn_bnn-eps-converted-to.pdf>]
-[10]
-<figures/dropout.png, id=441, 1034.86626pt x 578.16pt>
+[16] [17]
+<figures/dropout.png, id=550, 1034.86626pt x 578.16pt>
 File: figures/dropout.png Graphic file (type png)
 <use figures/dropout.png>
-Package pdftex.def Info: figures/dropout.png  used on input line 111.
+Package pdftex.def Info: figures/dropout.png  used on input line 165.
 (pdftex.def)             Requested size: 369.88292pt x 199.16547pt.
- [11pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+ [18pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.120 
+l.175 
        <./figures/dropout.png>]
 Package epstopdf Info: Source file: <figures/dropout_inference.eps>
 (epstopdf)                    date: 2019-04-01 14:54:13
@@ -722,84 +1244,90 @@ Package epstopdf Info: Source file: <figures/dropout_inference.eps>
 (epstopdf)                    size: 7549 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/dropout_inference-
 eps-converted-to.pdf figures/dropout_inference.eps>
-(epstopdf)             \includegraphics on input line 125.
+(epstopdf)             \includegraphics on input line 186.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/d
 ropout_inference-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>,
  but at most version <1.5> allowed
-<figures/dropout_inference-eps-converted-to.pdf, id=452, 796.9775pt x 597.23125
+<figures/dropout_inference-eps-converted-to.pdf, id=560, 796.9775pt x 597.23125
 pt>
 File: figures/dropout_inference-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/dropout_inference-eps-converted-to.pdf>
 Package pdftex.def Info: figures/dropout_inference-eps-converted-to.pdf  used o
-n input line 125.
+n input line 186.
 (pdftex.def)             Requested size: 312.97244pt x 227.62459pt.
-[12pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
-}) has been already used, duplicate ignored
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[19] [20pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.134 \[
-         <./figures/dropout_inference-eps-converted-to.pdf>] [13]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 192.
+l.207 \[
+        pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.207 \[
+         <./figures/dropout_inference-eps-converted-to.pdf>] [21]
+LaTeX Font Info:    Try loading font information for U+bbm on input line 270.
 
 (/opt/TeXLive/2018/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [14] [15] [16]
-[17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+) [22] [23] [24]
+[25] [26] [27] [28]
+Underfull \hbox (badness 10000) in paragraph at lines 447--448
  []\OT1/cmr/bx/n/12 Re-parameterization for Bernoulli dis-tri-bu-tion:[] \OT1/c
 mr/m/n/12 Firstly, Gumbel-Max
  []
 
-<figures/gumbel_max.png, id=549, 625.33624pt x 415.5525pt>
+<figures/gumbel_max.png, id=689, 625.33624pt x 415.5525pt>
 File: figures/gumbel_max.png Graphic file (type png)
 <use figures/gumbel_max.png>
-Package pdftex.def Info: figures/gumbel_max.png  used on input line 346.
+Package pdftex.def Info: figures/gumbel_max.png  used on input line 457.
 (pdftex.def)             Requested size: 199.16704pt x 142.26247pt.
-[19]
-<figures/gumbel_softmax.png, id=561, 634.37pt x 405.515pt>
-File: figures/gumbel_softmax.png Graphic file (type png)
-<use figures/gumbel_softmax.png>
-Package pdftex.def Info: figures/gumbel_softmax.png  used on input line 366.
-(pdftex.def)             Requested size: 199.16937pt x 142.2665pt.
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[20pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4
-}) has been already used, duplicate ignored
+[29]
+<figures/gumbel_softmax.png, id=701, 634.37pt x 405.515pt>
+File: figures/gumbel_softmax.png Graphic file (type png)
+<use figures/gumbel_softmax.png>
+Package pdftex.def Info: figures/gumbel_softmax.png  used on input line 477.
+(pdftex.def)             Requested size: 199.16937pt x 142.2665pt.
+ [30pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.383 
-       <./figures/gumbel_max.png>]
-<figures/bern_repa_.png, id=574, 1277.77374pt x 941.5175pt>
+l.484 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2.6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.484 
+       <./figures/gumbel_max.png> <./figures/gumbel_softmax.png>]
+<figures/bern_repa_.png, id=713, 1277.77374pt x 941.5175pt>
 File: figures/bern_repa_.png Graphic file (type png)
 <use figures/bern_repa_.png>
-Package pdftex.def Info: figures/bern_repa_.png  used on input line 397.
+Package pdftex.def Info: figures/bern_repa_.png  used on input line 508.
 (pdftex.def)             Requested size: 298.75609pt x 199.16115pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21pdfTeX warning (ext4): destination with the same identifier (name{figure.2.5
-}) has been already used, duplicate ignored
+[31] [32pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.412 \end{equation}
-                     <./figures/gumbel_softmax.png>] [22pdfTeX warning (ext4): 
-destination with the same identifier (name{figure.2.6}) has been already used, 
-duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.421 \begin{itemize}
-                      <./figures/bern_repa_.png>] [23] [24] [25] [26] [27]
-[28]
+l.535 \end{itemize}
+                    <./figures/bern_repa_.png>] [33] [34] [35] [36] [37]
 Package epstopdf Info: Source file: <figures/crf.eps>
 (epstopdf)                    date: 2019-04-15 10:23:17
 (epstopdf)                    size: 141979 bytes
@@ -808,42 +1336,41 @@ Package epstopdf Info: Source file: <figures/crf.eps>
 (epstopdf)                    size: 10129 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/crf-eps-converted-
 to.pdf figures/crf.eps>
-(epstopdf)             \includegraphics on input line 613.
+(epstopdf)             \includegraphics on input line 724.
 Package epstopdf Info: Output file is already uptodate.
 
 
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/c
 rf-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but at most v
 ersion <1.5> allowed
-<figures/crf-eps-converted-to.pdf, id=648, 796.9775pt x 597.23125pt>
+<figures/crf-eps-converted-to.pdf, id=783, 796.9775pt x 597.23125pt>
 File: figures/crf-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/crf-eps-converted-to.pdf>
-Package pdftex.def Info: figures/crf-eps-converted-to.pdf  used on input line 6
-13.
+Package pdftex.def Info: figures/crf-eps-converted-to.pdf  used on input line 7
+24.
 (pdftex.def)             Requested size: 312.97244pt x 227.62459pt.
-[29pdfTeX warning (ext4): destination with the same identifier (name{figure.2.7
-}) has been already used, duplicate ignored
+[38] [39pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.625 \end{equation}
-                     <./figures/crf-eps-converted-to.pdf>] [30] [31] [32])
-[33]
+l.742 
+       <./figures/crf-eps-converted-to.pdf>] [40] [41]) [42]
 \openout2 = `Approach.aux'.
 
  (./Approach.tex
 Chapter 3.
-[34
+[43
 
 
 
 ]
-<figures/cdp_dropout1.png, id=708, 1016.79875pt x 347.2975pt>
+<figures/cdp_dropout1.png, id=844, 1016.79875pt x 347.2975pt>
 File: figures/cdp_dropout1.png Graphic file (type png)
 <use figures/cdp_dropout1.png>
 Package pdftex.def Info: figures/cdp_dropout1.png  used on input line 27.
 (pdftex.def)             Requested size: 312.97018pt x 113.80832pt.
-<figures/cdp_dropout2.png, id=709, 1025.8325pt x 343.2825pt>
+<figures/cdp_dropout2.png, id=845, 1025.8325pt x 343.2825pt>
 File: figures/cdp_dropout2.png Graphic file (type png)
 <use figures/cdp_dropout2.png>
 Package pdftex.def Info: figures/cdp_dropout2.png  used on input line 34.
@@ -863,13 +1390,13 @@ Package epstopdf Info: Output file is already uptodate.
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/m
 ulti-drop-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but at
  most version <1.5> allowed
-<figures/multi-drop-eps-converted-to.pdf, id=710, 796.9775pt x 597.23125pt>
+<figures/multi-drop-eps-converted-to.pdf, id=846, 796.9775pt x 597.23125pt>
 File: figures/multi-drop-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/multi-drop-eps-converted-to.pdf>
 Package pdftex.def Info: figures/multi-drop-eps-converted-to.pdf  used on input
  line 42.
 (pdftex.def)             Requested size: 312.9803pt x 234.53224pt.
-[35pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1
+[44pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -881,7 +1408,7 @@ l.47
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.47 
-      <./figures/cdp_dropout1.png> <./figures/cdp_dropout2.png>] [36pdfTeX warn
+      <./figures/cdp_dropout1.png> <./figures/cdp_dropout2.png>] [45pdfTeX warn
 ing (ext4): destination with the same identifier (name{figure.3.3}) has been al
 ready used, duplicate ignored
 
@@ -899,13 +1426,13 @@ Package epstopdf Info: Source file: <figures/m_network.eps>
 erted-to.pdf figures/m_network.eps>
 (epstopdf)             \includegraphics on input line 63.
 Package epstopdf Info: Output file is already uptodate.
-<figures/m_network-eps-converted-to.pdf, id=727, 796.9775pt x 447.6725pt>
+<figures/m_network-eps-converted-to.pdf, id=863, 796.9775pt x 447.6725pt>
 File: figures/m_network-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/m_network-eps-converted-to.pdf>
 Package pdftex.def Info: figures/m_network-eps-converted-to.pdf  used on input 
 line 63.
 (pdftex.def)             Requested size: 441.01436pt x 241.85567pt.
- [37pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+ [46pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
 4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -923,13 +1450,13 @@ Package epstopdf Info: Source file: <figures/combined_crf.eps>
 onverted-to.pdf figures/combined_crf.eps>
 (epstopdf)             \includegraphics on input line 77.
 Package epstopdf Info: Output file is already uptodate.
-<figures/combined_crf-eps-converted-to.pdf, id=739, 796.9775pt x 447.6725pt>
+<figures/combined_crf-eps-converted-to.pdf, id=875, 796.9775pt x 447.6725pt>
 File: figures/combined_crf-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/combined_crf-eps-converted-to.pdf>
 Package pdftex.def Info: figures/combined_crf-eps-converted-to.pdf  used on inp
 ut line 77.
 (pdftex.def)             Requested size: 426.78613pt x 227.62686pt.
- [38pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+ [47pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
 5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -946,7 +1473,7 @@ Package epstopdf Info: Source file: <figures/con_learn.eps>
 erted-to.pdf figures/con_learn.eps>
 (epstopdf)             \includegraphics on input line 88.
 Package epstopdf Info: Output file is already uptodate.
-<figures/con_learn-eps-converted-to.pdf, id=755, 796.9775pt x 447.6725pt>
+<figures/con_learn-eps-converted-to.pdf, id=890, 796.9775pt x 447.6725pt>
 File: figures/con_learn-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/con_learn-eps-converted-to.pdf>
 Package pdftex.def Info: figures/con_learn-eps-converted-to.pdf  used on input 
@@ -957,23 +1484,23 @@ Overfull \hbox (8.74959pt too wide) in paragraph at lines 88--89
  [] 
  []
 
-) [39pdfTeX warning (ext4): destination with the same identifier (name{figure.3
+) [48pdfTeX warning (ext4): destination with the same identifier (name{figure.3
 .6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.94 \include{Approach}
-                        <./figures/con_learn-eps-converted-to.pdf>]
+l.101 \include{Approach}
+                         <./figures/con_learn-eps-converted-to.pdf>]
 \openout2 = `ExperimentsAndDiscussion.aux'.
 
 
 (./ExperimentsAndDiscussion.tex
 Chapter 4.
-[40
+[49
 
 
 
-] [41]
+] [50]
 Package epstopdf Info: Source file: <figures/domain_diff.eps>
 (epstopdf)                    date: 2019-03-27 15:44:17
 (epstopdf)                    size: 9158461 bytes
@@ -989,13 +1516,13 @@ Package epstopdf Info: Output file is already uptodate.
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/d
 omain_diff-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but a
 t most version <1.5> allowed
-<figures/domain_diff-eps-converted-to.pdf, id=792, 1513.655pt x 857.2025pt>
+<figures/domain_diff-eps-converted-to.pdf, id=928, 1513.655pt x 857.2025pt>
 File: figures/domain_diff-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/domain_diff-eps-converted-to.pdf>
 Package pdftex.def Info: figures/domain_diff-eps-converted-to.pdf  used on inpu
 t line 40.
 (pdftex.def)             Requested size: 455.23174pt x 284.52576pt.
-[42]
+[51]
 Package epstopdf Info: Source file: <figures/not_in_wrgbd.eps>
 (epstopdf)                    date: 2019-03-27 15:15:44
 (epstopdf)                    size: 9586288 bytes
@@ -1012,7 +1539,7 @@ Package epstopdf Info: Output file is already uptodate.
 pdfTeX warning: /opt/TeXLive/latest/bin/x86_64-linux/pdflatex (file ./figures/n
 ot_in_wrgbd-eps-converted-to.pdf): PDF inclusion: found PDF version <1.7>, but 
 at most version <1.5> allowed
-<figures/not_in_wrgbd-eps-converted-to.pdf, id=804, 1513.655pt x 857.2025pt>
+<figures/not_in_wrgbd-eps-converted-to.pdf, id=940, 1513.655pt x 857.2025pt>
 File: figures/not_in_wrgbd-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/not_in_wrgbd-eps-converted-to.pdf>
 Package pdftex.def Info: figures/not_in_wrgbd-eps-converted-to.pdf  used on inp
@@ -1029,13 +1556,13 @@ f>
 -converted-to.pdf figures/tless_trn_test.eps>
 (epstopdf)             \includegraphics on input line 56.
 Package epstopdf Info: Output file is already uptodate.
-<figures/tless_trn_test-eps-converted-to.pdf, id=805, 1513.655pt x 857.2025pt>
+<figures/tless_trn_test-eps-converted-to.pdf, id=941, 1513.655pt x 857.2025pt>
 File: figures/tless_trn_test-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/tless_trn_test-eps-converted-to.pdf>
 Package pdftex.def Info: figures/tless_trn_test-eps-converted-to.pdf  used on i
 nput line 56.
 (pdftex.def)             Requested size: 384.11766pt x 227.61537pt.
-[43pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[52pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1060,14 +1587,14 @@ Package epstopdf Info: Source file: <figures/tless_domain_diff.eps>
 eps-converted-to.pdf figures/tless_domain_diff.eps>
 (epstopdf)             \includegraphics on input line 64.
 Package epstopdf Info: Output file is already uptodate.
-<figures/tless_domain_diff-eps-converted-to.pdf, id=945, 1513.655pt x 857.2025p
-t>
+<figures/tless_domain_diff-eps-converted-to.pdf, id=1081, 1513.655pt x 857.2025
+pt>
 File: figures/tless_domain_diff-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/tless_domain_diff-eps-converted-to.pdf>
 Package pdftex.def Info: figures/tless_domain_diff-eps-converted-to.pdf  used o
 n input line 64.
 (pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
- [44pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [53pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1082,12 +1609,12 @@ has been already used, duplicate ignored
 l.72 \paragraph
                {Confidence} is defined as the maximum probability of the out...
  <./figures/tless_trn_test-eps-converted-to.pdf> <./figures/tless_domain_diff-e
-ps-converted-to.pdf>] [45] [46] [47] [48]
+ps-converted-to.pdf>] [54] [55] [56] [57]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 167.
 
-[49]
+[58]
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/exp1/exp1_h
 isto.eps>
 (epstopdf)                    date: 2019-04-17 17:49:31
@@ -1101,7 +1628,7 @@ tion/exp1/exp1_histo-eps-converted-to.pdf figures/uncertainty_estimation/exp1/e
 xp1_histo.eps>
 (epstopdf)             \includegraphics on input line 178.
 Package epstopdf Info: Output file is already uptodate.
-<figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf, id=1136, 
+<figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf, id=1272, 
 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf Graph
 ic file (type pdf)
@@ -1123,7 +1650,7 @@ exp1/exp1_reliability.eps>
 (epstopdf)             \includegraphics on input line 185.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf, id=
-1137, 1513.655pt x 857.2025pt>
+1273, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf
  Graphic file (type pdf)
 <use figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf>
@@ -1136,7 +1663,7 @@ ps-converted-to.pdf  used on input line 185.
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 191.
 
-[50pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
+[59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1150,7 +1677,7 @@ l.193
 l.193 
        <./figures/uncertainty_estimation/exp1/exp1_histo-eps-converted-to.pdf> 
 <./figures/uncertainty_estimation/exp1/exp1_reliability-eps-converted-to.pdf>]
-[51]
+[60]
 Package epstopdf Info: Source file: <figures/uncertainty_estimation/hist_seed3_
 ensemble.eps>
 (epstopdf)                    date: 2019-04-17 16:33:16
@@ -1164,8 +1691,8 @@ tion/hist_seed3_ensemble-eps-converted-to.pdf figures/uncertainty_estimation/hi
 st_seed3_ensemble.eps>
 (epstopdf)             \includegraphics on input line 217.
 Package epstopdf Info: Output file is already uptodate.
-<figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf, id=12
-44, 1513.655pt x 857.2025pt>
+<figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf, id=13
+79, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf G
 raphic file (type pdf)
 <use figures/uncertainty_estimation/hist_seed3_ensemble-eps-converted-to.pdf>
@@ -1186,7 +1713,7 @@ roc_pr_seed3_ensemble.eps>
 (epstopdf)             \includegraphics on input line 224.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf, id=
-1245, 1513.655pt x 857.2025pt>
+1380, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf
  Graphic file (type pdf)
 <use figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf>
@@ -1194,7 +1721,7 @@ File: figures/uncertainty_estimation/roc_pr_seed3_ensemble-eps-converted-to.pdf
 Package pdftex.def Info: figures/uncertainty_estimation/roc_pr_seed3_ensemble-e
 ps-converted-to.pdf  used on input line 224.
 (pdftex.def)             Requested size: 455.23174pt x 256.0771pt.
- [52] [53pdfTeX warning (ext4): destination with the same identifier (name{figu
+ [61] [62pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.4.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1216,7 +1743,7 @@ ation/reliability_seed3_ensemble_.eps>
 (epstopdf)             \includegraphics on input line 232.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-to.pd
-f, id=1301, 1497.595pt x 624.3325pt>
+f, id=1437, 1497.595pt x 624.3325pt>
 File: figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-
 to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/reliability_seed3_ensemble_-eps-converted-t
@@ -1224,7 +1751,7 @@ o.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/reliability_seed3_ensem
 ble_-eps-converted-to.pdf  used on input line 232.
 (pdftex.def)             Requested size: 455.2462pt x 156.48285pt.
- [54pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [63pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1243,7 +1770,7 @@ Overfull \hbox (3.45496pt too wide) in paragraph at lines 259--269
  [][] 
  []
 
-[55pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}
+[64pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1264,7 +1791,7 @@ ion/laplace/reliabilty_seed3_.eps>
 (epstopdf)             \includegraphics on input line 280.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to.pdf,
- id=1417, 1488.56125pt x 558.085pt>
+ id=1553, 1488.56125pt x 558.085pt>
 File: figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to
 .pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/laplace/reliabilty_seed3_-eps-converted-to.
@@ -1286,7 +1813,7 @@ n/laplace/histo_ood_seed3.eps>
 (epstopdf)             \includegraphics on input line 288.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/laplace/histo_ood_seed3-eps-converted-to.pdf, i
-d=1418, 1513.655pt x 857.2025pt>
+d=1554, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/laplace/histo_ood_seed3-eps-converted-to.p
 df Graphic file (type pdf)
 <use figures/uncertainty_estimation/laplace/histo_ood_seed3-eps-converted-to.pd
@@ -1294,7 +1821,7 @@ f>
 Package pdftex.def Info: figures/uncertainty_estimation/laplace/histo_ood_seed3
 -eps-converted-to.pdf  used on input line 288.
 (pdftex.def)             Requested size: 412.54942pt x 270.29489pt.
- [56pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [65pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 10}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1316,14 +1843,14 @@ aplace/roc_pr_seed3.eps>
 (epstopdf)             \includegraphics on input line 296.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf, id=1
-432, 1513.655pt x 857.2025pt>
+567, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf 
 Graphic file (type pdf)
 <use figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-converted-to.pdf>
 Package pdftex.def Info: figures/uncertainty_estimation/laplace/roc_pr_seed3-ep
 s-converted-to.pdf  used on input line 296.
 (pdftex.def)             Requested size: 426.77687pt x 236.15651pt.
- [57pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [66pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 11}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1337,7 +1864,7 @@ ame{figure.4.12}) has been already used, duplicate ignored
 l.335 \end{table}
                   <./figures/uncertainty_estimation/laplace/histo_ood_seed3-eps
 -converted-to.pdf> <./figures/uncertainty_estimation/laplace/roc_pr_seed3-eps-c
-onverted-to.pdf>] [58pdfTeX warning (ext4): destination with the same identifie
+onverted-to.pdf>] [67pdfTeX warning (ext4): destination with the same identifie
 r (name{table.4.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1359,7 +1886,7 @@ gures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3
 (epstopdf)             \includegraphics on input line 345.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_se
-ed3-eps-converted-to.pdf, id=1539, 1513.655pt x 857.2025pt>
+ed3-eps-converted-to.pdf, id=1675, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_o
 od_seed3-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_oo
@@ -1382,7 +1909,7 @@ _cdp_mdp_combined_seed3_.eps>
 (epstopdf)             \includegraphics on input line 353.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_
-combined_seed3_-eps-converted-to.pdf, id=1540, 1495.5875pt x 592.2125pt>
+combined_seed3_-eps-converted-to.pdf, id=1676, 1495.5875pt x 592.2125pt>
 File: figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp
 _mdp_combined_seed3_-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_
@@ -1406,7 +1933,7 @@ mbined_seed3.eps>
 (epstopdf)             \includegraphics on input line 362.
 Package epstopdf Info: Output file is already uptodate.
 <figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combi
-ned_seed3-eps-converted-to.pdf, id=1541, 1513.655pt x 857.2025pt>
+ned_seed3-eps-converted-to.pdf, id=1677, 1513.655pt x 857.2025pt>
 File: figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_
 combined_seed3-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_c
@@ -1415,7 +1942,7 @@ Package pdftex.def Info: figures/uncertainty_estimation/ablation_study/roc_pr_f
 roFeat_ori_cdp_mdp_combined_seed3-eps-converted-to.pdf  used on input line 362.
 
 (pdftex.def)             Requested size: 426.77687pt x 256.0771pt.
- [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+ [68pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 13}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1430,7 +1957,7 @@ l.378 \end{table}
                   <./figures/uncertainty_estimation/ablation_study/histo_froFea
 t_ori_cdp_mdp_ood_seed3-eps-converted-to.pdf> <./figures/uncertainty_estimation
 /ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_-eps-converted-t
-o.pdf>] [60pdfTeX warning (ext4): destination with the same identifier (name{fi
+o.pdf>] [69pdfTeX warning (ext4): destination with the same identifier (name{fi
 gure.4.15}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1448,16 +1975,16 @@ mdp_combined_seed3-eps-converted-to.pdf>]
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 403.
 
-[61]
+[70]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[62]
+[71]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 457.
 
-[63pdfTeX warning (ext4): destination with the same identifier (name{table.4.4}
+[72pdfTeX warning (ext4): destination with the same identifier (name{table.4.4}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1477,7 +2004,7 @@ p_trn_uncer_hist-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_uncer_his
 t.eps>
 (epstopdf)             \includegraphics on input line 469.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf, id=1674, 1513
+<figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf, id=1809, 1513
 .655pt x 857.2025pt>
 File: figures/autoLa/exp2/syn_cdp_trn_uncer_hist-eps-converted-to.pdf Graphic f
 ile (type pdf)
@@ -1502,7 +2029,7 @@ p_trn_roc_pr_cali_-eps-converted-to.pdf figures/autoLa/exp2/syn_cdp_trn_roc_pr_
 cali_.eps>
 (epstopdf)             \includegraphics on input line 484.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf, id=1678, 14
+<figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf, id=1813, 14
 48.41125pt x 834.11626pt>
 File: figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf Graphic
  file (type pdf)
@@ -1510,7 +2037,7 @@ File: figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-converted-to.pdf Graphic
 Package pdftex.def Info: figures/autoLa/exp2/syn_cdp_trn_roc_pr_cali_-eps-conve
 rted-to.pdf  used on input line 484.
 (pdftex.def)             Requested size: 384.09236pt x 256.07877pt.
-[64] [65pdfTeX warning (ext4): destination with the same identifier (name{figur
+[73] [74pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.4.16}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1537,7 +2064,7 @@ balance_NoMa_3percMa-eps-converted-to.pdf figures/autoLa/exp2/class_balance_NoM
 a_3percMa.eps>
 (epstopdf)             \includegraphics on input line 520.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/class_balance_NoMa_3percMa-eps-converted-to.pdf, id=1744, 
+<figures/autoLa/exp2/class_balance_NoMa_3percMa-eps-converted-to.pdf, id=1880, 
 1513.655pt x 857.2025pt>
 File: figures/autoLa/exp2/class_balance_NoMa_3percMa-eps-converted-to.pdf Graph
 ic file (type pdf)
@@ -1558,7 +2085,7 @@ WithMa3perc&NoMa_CFM-eps-converted-to.pdf figures/autoLa/exp2/AutoLaWithMa3perc
 &NoMa_CFM.eps>
 (epstopdf)             \includegraphics on input line 529.
 Package epstopdf Info: Output file is already uptodate.
-<figures/autoLa/exp2/AutoLaWithMa3perc&NoMa_CFM-eps-converted-to.pdf, id=1745, 
+<figures/autoLa/exp2/AutoLaWithMa3perc&NoMa_CFM-eps-converted-to.pdf, id=1881, 
 683.55376pt x 846.16125pt>
 File: figures/autoLa/exp2/AutoLaWithMa3perc&NoMa_CFM-eps-converted-to.pdf Graph
 ic file (type pdf)
@@ -1566,7 +2093,7 @@ ic file (type pdf)
 Package pdftex.def Info: figures/autoLa/exp2/AutoLaWithMa3perc&NoMa_CFM-eps-con
 verted-to.pdf  used on input line 529.
 (pdftex.def)             Requested size: 384.12256pt x 455.2418pt.
- [66pdfTeX warning (ext4): destination with the same identifier (name{table.4.5
+ [75pdfTeX warning (ext4): destination with the same identifier (name{table.4.5
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1579,7 +2106,7 @@ l.534
                                                   \fi \fi 
 l.534 
        <./figures/autoLa/exp2/class_balance_NoMa_3percMa-eps-converted-to.pdf>]
-[67pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[76pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 9}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1590,7 +2117,7 @@ l.564
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 568.
 
-[68pdfTeX warning (ext4): destination with the same identifier (name{table.4.6}
+[77pdfTeX warning (ext4): destination with the same identifier (name{table.4.6}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1601,49 +2128,50 @@ l.606 \end{table}
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 608.
 
-) [69pdfTeX warning (ext4): destination with the same identifier (name{table.4.
+) [78pdfTeX warning (ext4): destination with the same identifier (name{table.4.
 7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.97 \include{ExperimentsAndDiscussion}
-                                       pdfTeX warning (ext4): destination with 
-the same identifier (name{table.4.8}) has been already used, duplicate ignored
+l.104 \include{ExperimentsAndDiscussion}
+                                        pdfTeX warning (ext4): destination with
+ the same identifier (name{table.4.8}) has been already used, duplicate ignored
+
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.97 \include{ExperimentsAndDiscussion}
-                                       ]
+l.104 \include{ExperimentsAndDiscussion}
+                                        ]
 \openout2 = `Conclusions.aux'.
 
  (./Conclusions.tex
 Chapter 5.
-[70
+[79
 
 
 
-] [71] [72]) [73]
+] [80] [81]) [82]
 \openout2 = `Appendix.aux'.
 
  (./Appendix.tex
 Appendix A.
-[74
+[83
 
 
 
-]) [75] (./LMT_Thesis.lof [76
+]) [84] (./LMT_Thesis.lof [85
 
 
 ])
-\tf@lof=\write5
-\openout5 = `LMT_Thesis.lof'.
+\tf@lof=\write6
+\openout6 = `LMT_Thesis.lof'.
 
- [77] (./LMT_Thesis.lot)
-\tf@lot=\write6
-\openout6 = `LMT_Thesis.lot'.
+ [86] (./LMT_Thesis.lot)
+\tf@lot=\write7
+\openout7 = `LMT_Thesis.lot'.
 
  (./LMT_Thesis.bbl
-[78
+[87
 
 ]
 Underfull \hbox (badness 7667) in paragraph at lines 51--56
@@ -1666,62 +2194,79 @@ Underfull \hbox (badness 1163) in paragraph at lines 58--61
  B
  []
 
-[79
+[88
 
-] [80] [81] [82] [83]
+] [89] [90] [91] [92]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 416.
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 121.
- [84]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 121.
+) [93]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 128.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 128.
  (./LMT_Thesis.aux (./StatementsEN.aux)
 (./Abstract.aux) (./Introduction.aux) (./TheoreticalBackground.aux)
 (./Approach.aux) (./ExperimentsAndDiscussion.aux) (./Conclusions.aux)
 (./Appendix.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 121.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 121.
-Package rerunfilecheck Info: File `LMT_Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 139D75A275839009B6899715BA7BE968;3132.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 128.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 128.
+
+
+Package rerunfilecheck Warning: File `LMT_Thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `LMT_Thesis.out':
+(rerunfilecheck)             Before: 139D75A275839009B6899715BA7BE968;3132
+(rerunfilecheck)             After:  51F613CDB3348C43AFBBB86EF34C4FB3;3132.
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10472 strings out of 492616
- 162226 string characters out of 6131824
- 304011 words of memory out of 5000000
- 13716 multiletter control sequences out of 15000+600000
+ 20823 strings out of 492616
+ 388914 string characters out of 6131824
+ 505230 words of memory out of 5000000
+ 23810 multiletter control sequences out of 15000+600000
  17485 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 47i,20n,51p,1815b,582s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/feng_ji/.texlive2018/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk
-></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></opt
-/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/TeXLiv
-e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/TeXLive/2018/
-texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></opt/TeXLive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></opt/TeXLive/2018/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></opt/TeXLive/2018/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmib10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/am
-sfonts/cmextra/cmmib8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr17.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
-></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/Te
-XLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></opt/TeXLive/2
-018/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></opt/TeXLive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></opt/TeXLive/2018/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/TeXLive/2018/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy6.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msam10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/sym
-bols/msbm10.pfb>
-Output written on LMT_Thesis.pdf (89 pages, 3985878 bytes).
+ 73i,20n,85p,1815b,937s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{appendix*.41} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix*.40} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix*.39} has been referenced but does not exis
+t, replaced by a fixed one
+
+ </home/feng_ji/.texlive2018/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk><
+/opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></opt/T
+eXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/TeXLive/
+2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/TeXLive/2018/te
+xmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></opt/TeXLive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></opt/TeXLive/2018/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi6.pfb></opt/TeXLive/2018/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmib10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cmextra/cmmib8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
+/opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/TeXL
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></opt/TeXLive/201
+8/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></opt/TeXLive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></opt/TeXLive/2018/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></opt/TeXLive/2018/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy6.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy8.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmti12.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/sym
+bols/msam10.pfb></opt/TeXLive/2018/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb>
+Output written on LMT_Thesis.pdf (99 pages, 4023087 bytes).
 PDF statistics:
- 2138 PDF objects out of 2487 (max. 8388607)
- 1311 compressed objects within 14 object streams
- 341 named destinations out of 1000 (max. 500000)
- 518 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2282 PDF objects out of 2487 (max. 8388607)
+ 1427 compressed objects within 15 object streams
+ 363 named destinations out of 1000 (max. 500000)
+ 626 words of extra memory for PDF output out of 10000 (max. 10000000)
 
