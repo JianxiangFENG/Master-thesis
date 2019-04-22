@@ -3,26 +3,17 @@
 
 
 \section{Bayesian neural network}
-<<<<<<< HEAD
-In this chapter, a brief review on theory of Bayesian neural network is given. Because calculating the exact posterior distribution over the parameters of large and complex neural network is intractable, proper techniques to perform approximate inference are required, which can be categorized into two mainstreams, variational inference(VI) and Markov Chain Monte Carlo(MCMC). However, since larger dataset and more complex neural network are popular and working pretty well nowadays, traditional approximate inference techniques are difficult to scale to large dataset and complex advanced architectures. Therefore modern approximate inference needs to be adopted. In this section, we introduce and evaluate two modern approximate inference methods for neural network, which are dropout variational inference\cite{gal2016dropout} and scalable Laplace approximation\cite{ritter2018scalable}. Additionally, we introduce concrete dropout \cite{gal2017concrete} to improve uncertainty estimation by learning dropout rate from data instead of tuning them by hand before training.
-=======
-As is mentioned in the introduction chapter, in this work obtaining model uncertainty via Bayesian neural network is invastigated. Therefore in this chapter, a brief review on the theory of Bayesian neural network is given. Since capturing the exact posterior distribution over the parameters of neural network is intractable, techniques to perform approximate inference are required. Those techniques could be categorized into two main types, variational inference(VI) and Markov Chain Monte Carlo(MCMC) \maxcom{both terms you already introduced before -> here only abbreviation}. A brief history and the basic idea of these two methods are introduced. However, since larger dataset and more complex neural network are applied nowadays, traditional approximate inference techniques are difficult to scale to large datasets and to complex advanced architectures. Therefore modern approximate inference needs to adopt in order to obtain model uncertainty. Two modern variational inference methods for neural network are introduced and evaluated: the dropout inference\cite{gal2016dropout} and scalable Laplace approximation\cite{ritter2018scalable}. Additionally, the improvement of the uncertainty estimation by learning the dropout rate from data via concrete dropout \cite{gal2017concrete} is investigated. Finally, with the help of concrete dropout, a new variant of dropout inference is introduced here, \maxcom{which has more flexible approximation distribution family} \maxcom{in this part sth is missing ;)}.
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
+In this chapter, a brief review on theory of Bayesian neural network is given. Since calculating the exact posterior distribution over the parameters of large and complex neural network is intractable, proper techniques to perform approximate inference are required. Those techniques could be categorized into two main mainstreams, VI and MCMC %\maxcom{both terms you already introduced before -> here only abbreviation}
+However, because larger dataset and more complex neural network are popular nowadays, traditional approximate inference techniques are difficult to scale to large datasets and to complex architectures. Therefore modern approximate inference needs to be adopted. In this section, we introduce and evaluate two modern approximate inference methods for neural network, which are dropout variational inference\cite{gal2016dropout} and scalable Laplace approximation\cite{ritter2018scalable}. Additionally, we introduce concrete dropout \cite{gal2017concrete} to improve uncertainty estimation by learning dropout rate from data instead of tuning them by hand before training. 
+
 
 \subsection{Introduction}
-\maxcom{we should think of a better title then introduction sicne your previous chapter is also called like this}
+% \maxcom{we should think of a better title then introduction sicne your previous chapter is also called like this}
 
-Let $\mathcal{D}$ denote an observable dataset consisting of a set of input and output pairs \maxcom{($x_i, y_i$)}, that is $\mathcal{D} = \{\mathbf{X}, \mathbf{Y}\} = \{(x_{i}, y_{i})_{i=1}^{N}\}$, where $x_{i}\in\mathbb{R}^{D}$ and $y_{i}\in\mathbb{Y}$, $\mathbb{Y}$ is the set of labels, and $f^{\boldsymbol{\omega}}$ denotes one parametric model.
-Here in this case the model is a neural network with its parameters {\boldmath{$\omega$}} consisting of weights $W_{1:L}$ and biases $b_{1:L}$ for $L$ layers. \maxcom{normally a matrix is represented by a \textbf{bold capital letter} e.g. \textbf{W} and a vector by a \textbf{bold lower-case letter} e.g. \textbf{b} or \textbf{$x$}; I am not sure if you have a reason to not stick to this convention but think about it ;) }
+Let $\mathcal{D}$ denote an observable dataset consisting of a set of input and output pairs ($\bld x_i, y_i$), that is $\mathcal{D} = \{\mathbf{X}, \mathbf{Y}\} = \{(\bld x_{i}, y_{i})_{i=1}^{N}\}$, where $x_{i}\in\mathbb{R}^{D}$ and $y_{i}\in\mathcal{Y}$, $\mathcal{Y}$ is the set of labels, and $f^{\boldsymbol{\omega}}$ denotes one function parameterized by $\bld \omega$. Here in this case the model is a neural network with its parameters {\boldmath{$\omega$}} consisting of weights $\bld W_{1:L}$ and biases $\bld b_{1:L}$ for $L$ layers. 
+%\maxcom{normally a matrix is represented by a \textbf{bold capital letter} e.g. \textbf{W} and a vector by a \textbf{bold lower-case letter} e.g. \textbf{b} or \textbf{$x$}; I am not sure if you have a reason to not stick to this convention but think about it ;) }
 
-<<<<<<< HEAD
 In supervised learning, our goal is to learn a distribution of output conditioned on input, $p(\mathbf{y}|\mathbf{x})$ that can explain the underlying data distribution based on the observables $\mathcal{D}$ which are samples drawn from the underlying data distribution. Then this learned model can be used to make predictions on unobservable data samples under the same data distribution. In classification where output is label represented by discrete integer, the likelihood function is defined based on parametric model, which is softmax score:
-=======
-In supervised learning, the goal is to learn a probabilistic model of a conditional distribution of the output given the input $p(\mathbf{y}|\mathbf{x})$ that can explain the underlying data distribution 
-%instead of just the observables $\mathcal{D}$ very well 
-based on the observables $\mathcal{D}$ drawn from the underlying data distribution. 
-The generated model can be used to predict unobservable data samples under the same data distribution. In classification where the output is a label represented by a discrete integer, the likelihood function is defined based on the parametric model, which is the softmax score: \maxcom{you did not introduce $d$ or $d'$; $d$ might be a bit confusing since $\mathcal{D}$ is the dataset; what do you think?}
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 \begin{equation}
 p(y = d|\mathbf{x}, \boldsymbol{\omega}) = \frac{exp(f^{\boldsymbol{\omega}}_{d})}{\sum_{d'}exp(f^{\boldsymbol{\omega}}_{d'})}  \label{2.1}
 \end{equation}
@@ -37,12 +28,7 @@ p(\mathbf{y}|\mathbf{x}, \boldsymbol{\omega}) = \mathcal{N}(\mathbf{x}; f^{\bold
 
 with the model precision $\tau$, which represents the inverse of noise level of the outputs.
 
-<<<<<<< HEAD
 As mentioned above, learning aims to find model(s) which is parameterized by a set of parameters that can explain the data well, which means the likelihood should be maximized w.r.t. model parameters over the observables. On the other hand, some prior constraints are imposed on the model via prior distribution of the model parameters $p(\boldsymbol{\omega})$. The probability distribution of model parameters is updated from prior distribution into posterior distribution after observing training dataset $\mathcal{D}$ via Bayes' theorem:
-=======
-As mentioned above, learning means to find model(s) which is parameterized by a set of parameters that can explain the data well, which means the likelihood should be maximized w.r.t. the model parameters over the observables. On the other hand, some prior constraints are imposed on the model via prior distribution of the model parameters $p(\boldsymbol{\omega})$. The probability distribution of model parameters is updated from a prior distribution into a posterior distribution after observing the training dataset $\mathcal{D}$ via the Bayes' theorem:
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
-
 \begin{equation}
 p(\boldsymbol{\omega}|\mathbf{X}, \mathbf{Y}) = \frac{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})p(\boldsymbol{\omega})}{p(\mathbf{Y}|\mathbf{X})}
 \label{2.3}
@@ -57,43 +43,25 @@ p(y^{\star}|x^{\star}, \mathcal D) = \int p(y^{\star}|x^{\star}, \boldsymbol{\om
 \label{2.4}
 \end{equation}
 
-<<<<<<< HEAD
-Pointing out the difference between deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In Fig.\ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while the shaded circle denotes observed random variable. Plate notation denotes $N$ observed data pairs $(\bld x, \bld y)$. Fig.\ref{fig:dnn_bnn} demonstrates that parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by Maximum a posterior method:
-=======
-%To point out the difference between a normal deterministic neural network and Bayesian neural network \maxcom{perhaps it makes sense to introduce also abbreviations for these two names?} can help understanding the mechanism of Bayesian neural network better. 
-%In figure \ref{fig:dnn_bnn}, a graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while shaded circle denote observed random variable which represents training set. 
-Figure \ref{fig:dnn_bnn} illustrates the difference between a deterministic neural network and Bayesian neural network \maxcom{perhaps it makes sense to introduce also abbreviations for these two names?}: A solid point denotes a deterministic variable, and a circle a random variable, while a shaded circle denotes an observed random variable which represents the training set.
-The plate notation denotes $N$ observed data pairs. As can be seen in the figure, the parameters $\boldsymbol{\omega}$ in the deterministic version is a normal variable which is a point estimate done by Maximum a posterior \maxcom{you already used MAP...} method:
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
+Pointing out the difference between deterministic neural network and Bayesian neural network can help understanding the mechanism of Bayesian neural network better. In Fig.\ref{fig:dnn_bnn}, we use graphical model to express these two kinds of neural network, in which solid point denotes deterministic variable, and circle denotes random variable, while the shaded circle denotes observed random variable. Plate notation denotes $N$ observed data pairs $(\bld x, \bld y)$. Fig.\ref{fig:dnn_bnn} demonstrates that parameters $\boldsymbol{\omega}$ in deterministic is normal variable which is a point estimate done by MAP:
 
 \begin{equation}
 \boldsymbol{\omega^{\star}} = \underset{\bld \omega}{argmax}\{p(\mathbf{Y}|\mathbf{X}, \boldsymbol{\omega})\}\label{2.5}
 \end{equation}
 
-<<<<<<< HEAD
-On the other hand, in Bayesian neural network, the model parameter $\boldsymbol{\omega}$ is random variable with distribution parameterized by $\theta$. To note that for explanation of concept here, we do not make any assumption on the function parameterized by $\theta$, which means it can be arbitrary function. This distribution over model parameters can be inferred based on Bayes' rule in Eq.\ref{2.3}. However, for model with large number of parameters, it's hard to compute the model evidence (denominator of r.h.s of Eq.\ref{2.3}) with integration tractably. Approximation needs to be employed to solve this problem. It's worth noting that if we choose the approximate distribution to be delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, Bayesian neural network is recovered into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
-
-=======
-On the other hand, in a Bayesian neural network the \maxcom{model parameters $\boldsymbol{\omega}$ are random variables} which obey the distribution parameterized by $\theta$. To note that for explanation of concept here, no assumption on the function parameterized by $\theta$ is made, which means it can be an arbitrary function. This distribution over the model parameters can be inferred based on the Bayes' rule (equation \ref{2.3}). However, for a model with a large number of parameters, it is hard to calculate the integral tractably. Therefore many approximation methods mentioned in section \ref{sec:related_work} are applied to solve this problem. It is worth to note that if the approximate distribution is defined as delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, a Bayesian neural network is recovered into a deterministic neural network. Since the computation of the model evidence $p(\mathbf{Y}|\mathbf{X})$ is intractable for complex models and large datasets, an approximate inference is required, which is briefly introduced in next section.
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
+On the other hand, in Bayesian neural network, the model parameters $\boldsymbol{\omega}$ are random variable with distribution parameterized by $\theta$. To note that for explanation of concept here, we do not make any assumption on the function parameterized by $\theta$, which means it can be arbitrary function. This distribution over model parameters can be inferred based on Bayes' rule in Eq.\ref{2.3}. However, for model with large number of parameters, it's hard to compute the model evidence (denominator of r.h.s of Eq.\ref{2.3}) with integration tractably. Approximation needs to be employed to solve this problem. It's worth noting that if we choose the approximate distribution to be delta function, $q_{\theta}(\bld \omega) = \delta(\bld \omega - \theta)$, Bayesian neural network is recovered into deterministic neural network. Because the computation of model evidence $p(\mathbf{Y}|\mathbf{X})$ is always intractable in complex model and large dataset, we need to resort to approximate inference, which will briefly be introduced in next section.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=9.1cm, width=12cm]{dnn_bnn}
-		\caption{Difference between parameter estimation of deterministic neural network and Bayesian neural network. \maxcom{explain the notation again here... normally a figure should be understandable only reading the caption } \maxcom{crop the image so the margin between image and caption is not so big}}		
+		\caption{Difference between parameter estimation of deterministic neural network and Bayesian neural network. Solid point denotes deterministic variable, and circle denotes random variable, while the shaded circle denotes observed random variable. Plate notation denotes $N$ observed data pairs $(\bld x, \bld y)$.}%\maxcom{explain the notation again here... normally a figure should be understandable only reading the caption } \maxcom{crop the image so the margin between image and caption is not so big}	
 		\label{fig:dnn_bnn}
 	\end{center}
 \end{figure}
 
 \subsection{Dropout variational inference}
-\subsubsection{Introduction}
-<<<<<<< HEAD
-Variational inference cast inference into optimization by minimizing the Kullbach-Leibler divergence between approximate posterior distribution and the real posterior distribution. However, there is no analytical definition of this KL divergence because the real posterior distribution is unknown. We can derive a lower bound which is also called evidence lower bound($ELBO$) which bounds the log marginal likelihood with Jensen's inequality. And from that we know that marginal likelihood is the sum of $ELBO$ and KL divergence between approximate posterior and real posterior. The derivation is given in the following:
-=======
-\maxcom{again an Introduction?! :P}
+VI cast inference into optimization by minimizing the KL-div between approximate posterior distribution and the real posterior distribution. However, there is no analytical definition of this KL-div if the real posterior distribution is unknown. We can derive a lower bound which is also called evidence lower bound($ELBO$) which bounds the log marginal likelihood with Jensen's inequality. And from that we know that marginal likelihood is the sum of $ELBO$ and KL divergence between approximate posterior and real posterior. The derivation is given in the following:
 
-As is mentioned above, variational inference \maxcom{you already introduced the abbreviation!!!} casts inference into optimization by minimizing the Kullbach-Leibler divergence \maxcom{also this term can be shortend into KL-div or sth similar and keep in mind, that you already used the term before} between the approximate posterior and the real posterior distribution. However, there is no analytical definition of the KL divergence \maxcom{if} the real posterior distribution is unknown. A lower bound defined as evidence lower bound($ELBO$) which bounds the log marginal likelihood with Jensen's inequality can be derived. Based on this it can be shown that the marginal likelihood is the sum of $ELBO$ and KL divergence between the approximate posterior and the real posterior distribution. The derivation is given in the following:
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 \begin{equation}\label{2.6}	
 \begin{aligned}
 \log(p(\bld{Y}|\bld{X})) & = \log(\int p(\bld{Y}| \bld{X}, \bld{\omega})  p(\bld{\omega})d\bld{\omega}) \\	 
@@ -117,16 +85,10 @@ The log$(p(\bld Y) | \bld X)$ can be obtained by calculating the sum of $ELBO$ a
 \end{aligned}
 \end{equation}
 
-<<<<<<< HEAD
-When we maximize the $ELBO$ w.r.t the parameter of approximate posterior $\theta$, which is also called \textbf{variational parameter}. We use these two terms interchangeably in the following. It's equivalent to minimizing the KL divergence because the log marginal likelihood is not a function of $\theta$. Then we have a well-defined objective which is the $ELBO$, in which the first term is called expected log likelihood which ensures the model can explain the data well and the second term is called regularization term which ensures the approximate posterior does not deviate too far from the prior distribution.
+When we maximize the $ELBO$ w.r.t the parameter of approximate posterior $\theta$, which is also called \textbf{variational parameter}. It's equivalent to minimizing the KL divergence because the log marginal likelihood is not a function of $\theta$. Then we have a well-defined objective which is the $ELBO$, in which the first term is called expected log likelihood which ensures the model can explain the data well and the second term is called regularization term which ensures the approximate posterior does not deviate too far from the prior distribution.
 Now the inference problem has been cast into an optimization problem:
-=======
-\maxcom{interesting :) could you explain this to me on Tuesday :P}
+% \maxcom{interesting :) could you explain this to me on Tuesday :P}
 
-By maximizing the $ELBO$ w.r.t the parameters of approximate posterior $\theta$, which is also called \textbf{variational parameter} \maxcom{something is missing here}. 
-In the following these two terms \maxcom{which two terms?} are used interchangeably. It is equivalent to minimize the KL divergence because the log marginal likelihood is not a function of $\theta$. Given a well-defined objective which is the $ELBO$, in which the first term is called the expected log likelihood which ensures the model can explain the data well. The second term is called the regularization term which ensures the approximate posterior does not deviate too far from the prior distribution.
-At this point the inference problem transformed into an optimization problem:
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 
 \begin{equation}\label{2.8}	
 \begin{aligned}
@@ -142,24 +104,16 @@ which is equivalent to
 \end{aligned}
 \end{equation}
 
-However, there are still some difficulties solving this optimization with the objective. The first one is to deal with large size datasets, which induce large computations in the expected log likelihood term. \cite{graves2011practical} shows \maxcom{one or more authors?} that this can be solved by data sub-sampling which is also called stochastic optimization. Another one is the need of the derivatives of $ELBO$ w.r.t. the approximate parameters $\theta$. Since the model parameters are samples from the approximate distribution, a good estimator for the derivatives is required which are introduced in the next subsection. 
+However, there are still some difficulties solving this optimization with the objective. The first one is to deal with large size datasets, which induce large computations in the expected log likelihood term. \cite{graves2011practical} shows
+%\maxcom{one or more authors?} 
+that this can be solved by data sub-sampling which is also called stochastic optimization. Another one is the need of the derivatives of $ELBO$ w.r.t. the approximate parameters $\theta$. Since the model parameters are samples from the approximate distribution, a good estimator for the derivatives is required which are introduced in the next subsection. 
 
 \subsubsection{Dropout variational inference}
-<<<<<<< HEAD
-\paragraph{Dropout\cite{srivastava2014dropout}} is originally introduced as regularization approach in training deep neural network which can improve the generalization performance. Although the author said this idea is inspired from human beings sexual reproduction, there are different interpretations trying to explain why it can work such as ensemble perspective and Bayesian perspective. In this subsection, the Bayesian interpretation of dropout is introduced and used for improving the uncertainty estimation of neural network. 
+
+\paragraph{Dropout\cite{srivastava2014dropout}} is originally introduced as regularization approach in training DNN which can improve the generalization performance. Although the author said this idea is inspired from human beings sexual reproduction, there are different interpretations trying to explain why it can work such as ensemble perspective and Bayesian perspective. In this subsection, the Bayesian interpretation of dropout is introduced and used for improving the uncertainty estimation of neural network. 
 
 The mechanism of dropout is straightforward, each units of specific layer is multiplied by a random variable under Bernoulli distribution with $1-p$ as its parameter, where $p$ is the so-called dropout rate. In each iteration of training, dropout is turned on, which means each unit is multiplied by the sample drawn from Bernoulli distribution in forward propagation which is kept in derivatives back propagation during current iteration. In testing, the sampling phase is turned off, only one forward propagation is needed to obtain predictions. Normally, in order to avoid rescaling weights in testing, which is used to keep the output magnitudes in the same scale when dropout is off, rescaling of the output of dropout is always done in training. In Fig.\ref{fig:dropout}, there are two figures showing how dropout is turned on and off. 
-=======
-\paragraph{Dropout}~\cite{srivastava2014dropout} is originally introduced as regularization approach in training deep neural network \maxcom{abbreviation?!} which can improve the generalization performance. 
-Although the authors state that this idea is inspired by the sexual reproduction of human beings, there are different interpretations trying to explain why this can work such as ensemble perspective and Bayesian perspective. \maxcom{this sentence I don't understand}
-In this subsection, the Bayesian interpretation of dropout is introduced and used for improving the uncertainty estimation of a neural network. 
 
-As can be seen in figure \ref{fig:dropout}, the general idea of dropout for a neural network is to switch off a randomly selected subset of units of a specific layer (the layer where the dropout is applied to) in every training iteration.
-More specifically, in each iteration of training, each unit of the layer is multiplied by a random variable under a Bernoulli distribution with $1-p$ as its parameter, where $p$ is the so-called dropout rate in forward propagation, which is kept in the derivatives back propagating during the current iteration.
-During testing, the sampling phase is turned off and only one forward propagation is applied to obtain the prediction. 
-Normally, in order to avoid rescaling weights in testing, which is used to keep the output magnitudes in the same scale when dropout is off, the rescaling of the output of dropout is always done in training. \maxcom{this sentence is a bit complicated to read}
-%The mechanism of dropout is simple, each units of specific layer is multiplied by a random variable under Bernoulli distribution with $1-p$ as its parameter, where $p$ is dropout rate. In each iteration of training, dropout is turned on, which means each unit is multiplied by the sample drawn from Bernoulli distribution in forward propagation which is kept in  derivatives back propagtion during current iteration. In testing, the sampling phase is turned off, only one forward propagation is needed to obtain predictions. Normally, in order to avoid rescaling weights in testing, which is used to keep the output magnitudes in the same scale when dropout is off, rescaling of the output of dropout is always done in training. In figure \ref{fig:dropout}, there are two figures about that dropout is on and off. 
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=7cm, width=13cm]{dropout}
@@ -170,40 +124,26 @@ Normally, in order to avoid rescaling weights in testing, which is used to keep 
 
 
 \paragraph{Bayesian interpretation of dropout:}
-<<<<<<< HEAD
-In VI, the goal is to minimize the KL divergence between approximate distribution and the real posterior distribution over the model parameters. This objective is equivalent to maximization of evidence lower bound($ELBO$). When dropout is interpreted in Bayesian way, the distribution over hidden units is reformulated as distribution over weight matrices. The training objectives of neural network with dropout is proved to be similar as the $ELBO$ of Bayesian neural network with Bernoulli distribution factorized over the input dimension of weight matrix. In the following, we will explain this interpretation including following key factors: \textbf{approximate distribution}, \textbf{training objective}, \textbf{marginalization in testing} by using one simple example in {classification} case in Fig.\ref{fig:dropout_inference}, in which we define the hidden layer as the first layer and output layer as the second layer and assume a fully factorized Gaussian prior over parameters.
+In VI, the goal is to minimize the KL-div between approximate distribution and the real posterior distribution over the model parameters. This objective is equivalent to maximization of evidence lower bound($ELBO$). When dropout is interpreted in Bayesian way, the distribution over hidden units is reformulated as distribution over weight matrices. The training objectives of neural network with dropout is proved to be similar as the $ELBO$ of Bayesian neural network with Bernoulli distribution factorized over the input dimension of weight matrix. In the following, we will explain this interpretation including following key factors: \textbf{approximate distribution}, \textbf{training objective}, \textbf{marginalization in testing} by using one simple example in {classification} case in Fig.\ref{fig:dropout_inference}, in which we define the hidden layer as the first layer and output layer as the second layer and assume a fully factorized Gaussian prior over parameters.
 
-=======
-As is mentioned in the last subsection, in variational inference \maxcom{abbreviation}, the KL divergence between the approximate distribution and the real posterior distribution over the model parameters should be minimized, which turns out to be the maximization of the $ELBO$. When dropout is interpreted in the Bayesian way, the distribution over hidden units is reformulated as a distribution over the weight matrices. The training objectives of a neural network with dropout is proved to be similar to the $ELBO$ of a Bayesian neural network with Bernoulli distribution factorized over the input dimension of the weight matrix. In the following, this interpretation including following key factors is explained: \textbf{approximate distribution}, \textbf{training objective}, \textbf{marginalization in testing}. 
-%Figure~\ref{fig:dropout_inference} shows a simple example of the {classification} case, in which the hidden layer is defined as the first and output layer as the second layer. Furthermore it is assumed that a L2 regularization is used and a prior distribution of a fully factorized Gaussian over weights is initially put, which can be generalized to multi-layer neural network easily. 
-\maxcom{i do not understand what you want to show with the figure here? perhaps you could explain it more or is it for the following explanation? then perhaps it makes more sense to mention/reference it below?}
-\maxcom{well now I see that you talk about the figure below. so I put the reference below. change it back if you do not like it likes this ;)}
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 
 \begin{figure}[h!]
 	%\begin{center}
 	\centering
 	\includegraphics[height=8cm, width=11cm]{dropout_inference}
-<<<<<<< HEAD
-	\caption{An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}		
-=======
-	\caption{A two-layer neural network example of dropout inference, a Bernoulli random variable is imposed on each unit of the input layer and the hidden layer.}		
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
+	\caption{An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}	
 	\label{fig:dropout_inference}
 	%\end{center}
 \end{figure}
 
-<<<<<<< HEAD
 
-=======
-\newpage %why newpage?!
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 \subparagraph{Approximate distribution:}
-Figure~\ref{fig:dropout_inference} shows a simple example of the {classification} case, in which the following variables are defined: %in which the hidden layer is defined as the first and output layer as the second layer. 
+Fig.\ref{fig:dropout_inference} shows a simple example of the {classification} case, in which the following variables are defined: %in which the hidden layer is defined as the first and output layer as the second layer. 
  $\bld y\in \mathbb R ^{m \times D_{2}}$ as the output layer, $\bld x \in \mathbb R^{m \times D_{0}}$ as the input, $\bld h_{1} \in \mathbb R^{D_{1}}$ as the response of the hidden layer, where $m$ represents the number of data instances, and $D_{i}$ is the dimensionality of the $i$-th layer, where $0$-th layer represents input layer and $i \in \{1,..,L\}$, $L=2$. Further $\bld \omega = \{ (\bld W_{i})_{i=1}^{L}  \}$ is defined as model parameters, and $\bld \epsilon_{i} \in \mathbb R^{D_{i-1}}$ as the Bernoulli distributed random vector parameterized by $\bld p_{i} \in \mathbb R^{D_{i-1}}$, for $i$-th layer. 
-It is also assumed that a L2 regularization is applied and a prior distribution of a fully factorized Gaussian over the weights is initially set. These assumptions can easily be generalized and transfered to a multi-layer neural network easily. 
+It is assumed that a fully factorized Gaussian prior distribution is placed over the weights. These assumptions can easily be generalized and transfered to a multi-layer neural network easily. 
 
-In the normal dropout, the elements of the vector $\bld p_{i}$ have the same dropout values $p_{i}$, which means that there is one keep rate or ($1-$dropout rate) for each layer. In the following, if there is no further specification is given, $\bld p_{i}$ and $p_{i}$ are used interchangeably depending on the context. To note that since the weight matrix is treated as random variable, $\bld M_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ is used to denote position of non-zero element in Bernoulli distribution for $\bld W_{i}$ \maxcom{something at the beginning of the sentence is strange}. Additionally, the bias $\bld b_{i} \in \mathbb R^{D_{i}}$ is absorbed into $W_{i}$ by appending a new row at the end of weight matrix and 1 at the end of each data input vector, also called homogeneous coordinate. Another assumption is that the approximate weight distribution is factorized over the layer, which yields
+In the normal dropout, the elements of the vector $\bld p_{i}$ have the same dropout values $p_{i}$, which means that there is one keep rate or ($1-$dropout rate) for each layer. In the following, if there is no further specification is given, $\bld p_{i}$ and $p_{i}$ are used interchangeably depending on the context. Because the weight matrix is treated as random variable, $\bld M_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ is used to denote position of non-zero element in Bernoulli distribution for $\bld W_{i}$ % \maxcom{something at the beginning of the sentence is strange}
+. Additionally, the bias $\bld b_{i} \in \mathbb R^{D_{i}}$ is absorbed into $W_{i}$ by appending a new row at the end of weight matrix and 1 at the end of each data input vector, also called homogeneous coordinate. Another assumption is that the approximate weight distribution is factorized over the layer, which yields
 \[
 q_{\theta}(\bld \omega) = \prod_{i=1}^{L}q_{\theta}(\bld W_{i}). 
 \]
@@ -219,7 +159,9 @@ p(\bld y| \bld x, \bld \omega) & = \sigma((\bld h_{1} \odot \bld \epsilon_{2}) \
 \end{aligned}
 \end{equation}
 
-where $\odot$ is Hadamard product(element-wise product), $\sigma(a_{j}) = \frac{exp({a_{j}})}{\sum_{k}exp({a^{k}})}$ \maxcom{the k should be down right?} the softmax function, and $\phi(\cdot)$ the element-wise non-linear activation function such as the rectified unit function.
+where $\odot$ is Hadamard product(element-wise product), $\sigma(a_{j}) = \frac{exp({a_{j}})}{\sum_{k}exp({a_{k}})}$ 
+%\maxcom{the k should be down right?} 
+the softmax function, and $\phi(\cdot)$ the element-wise non-linear activation function such as the rectified unit function.
 
 From the equation above, it can be derived:
 
@@ -230,13 +172,8 @@ From the equation above, it can be derived:
 \text{ with } \bld \epsilon_{i} \sim p(\bld \epsilon_{i}) = Bernoulli(\bld p_{i}) 
 \]
 
-<<<<<<< HEAD
-which means weight matrix $\bld W_{i}$ is a random variable whose probability density function is parameterized by $\bld p_{i}$ and $\bld M_{i}$, which are denoted by $\theta = \{ (\bld M_{i}, \bld p_{i})_{i=1}^{L} \}$ in Eq.\ref{2.8}, where $i = {1,..,L}$ denotes $i$-th layer of the network, and $L = 2$ in this example. 
+which means that weight matrix $\bld W_{i}$ is a matrix of random variable whose probability density function is parameterized by $\bld p_{i}$ and $\bld M_{i}$, which are denoted by $\theta = \{ (\bld M_{i}, \bld p_{i})_{i=1}^{L} \}$ in Eq.\ref{2.8}, where $i = {1,..,L}$ denotes $i$-th layer of the network, and $L = 2$ in this example. 
 The expression of approximate posterior distribution is not obvious, but we can define the its form as 
-=======
-which means that the weight matrix $\bld W_{i}$ is a random variable whose probability density function is parameterized by $\bld p_{i}$ and $\bld M_{i}$, which are denoted by $\theta = \{ (\bld M_{i}, \bld p_{i})_{i=1}^{L} \}$ in equation \ref{2.8}, where $i = {1,..,L}$ denotes $i$-th layer of the network, (here: $L = 2$).
-The expression of the approximate posterior distribution is not obvious, but it can be defined as 
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 
 \begin{equation}
 \begin{aligned} \label{appro_dist_form}
@@ -275,15 +212,11 @@ where
 \[ j = l*D_{i-1} + q,\]
 \[ k = m*D_{i-1} + n,\]
 which is the linear mapping between the element index before and after the matrix vectorization. The element of the $l$-th row and the $q$-th column in matrix $\bld M_{i}$ is defined as $m^{i}_{lq}$, which applies to $m^{i}_{mn}$ as well. 
-The indicator function is denoted as $\mathbbm 1 \big[i=j\big]$, which is equal to 1 only when $i$ is equal to $j$ and otherwise 0. Because $vec(\cdot)$ operation converts matrix $\bld W_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ into a column vector $ vec(\bld W_{i}) \in \mathbb R^{D_{i-1}D_{i} \times 1}$ by stacking the columns of matrix on top of each other. Then it is easy to see that the covariance matrix $Cov_{q_{\theta}}(vec(\bld W_{i})) \in \mathbb R^{D_{i-1}D_{i} \times D_{i-1}D_{i}} $ \maxcom{missing the end of the sentence ;)}
+The indicator function is denoted as $\mathbbm 1 \big[i=j\big]$, which is equal to 1 only when $i$ is equal to $j$ and otherwise 0. Because $vec(\cdot)$ operation converts matrix $\bld W_{i} \in \mathbb R^{D_{i-1} \times D_{i}}$ into a column vector $ vec(\bld W_{i}) \in \mathbb R^{D_{i-1}D_{i} \times 1}$ by stacking the columns of matrix on top of each other. Then it is easy to obtain covariance matrix $Cov_{q_{\theta}}(vec(\bld W_{i})) \in \mathbb R^{D_{i-1}D_{i} \times D_{i-1}D_{i}} $. 
+%\maxcom{missing the end of the sentence ;)}
 
-<<<<<<< HEAD
 From Eq.\ref{appr_covariance}, we can see that the entire covariance matrix is consisting of $D_{i} \ast D_{i}$ diagonal sub-matrices whose dimensionality are $D_{i-1} \times D_{i-1}$.
 When observing covariance matrix of parameter matrix $\bld W_{i}$ w.r.t. approximate posterior distribution $q_{\theta}({\bld W_{i}})$, we know that samples of row vectors in weight matrix are drawn independently and thus covariance between rows are zero. On the other hand, samples for different weights in the same row are drawn at the same time because they are multiplied by the same realization of $\epsilon_{i}$, from which covariances between weights within the same row are induced. Therefore, by fitting this approximate distribution to the real posterior distribution weights within the same row can be learned. This means that the approximate distribution family have more flexibility to approximate the real posterior distribution when compared with other common approximate posterior distribution family that assumes distribution for each parameter is independent such as fully factorized Gaussian.
-=======
-From equation \ref{appr_covariance}, one can see that the entire covariance matrix consists of $D_{i} \ast D_{i}$ diagonal sub-matrices whose dimensionality are $D_{i-1} \times D_{i-1}$.
-When observing the covariance matrix of the parameter matrix $\bld W_{i}$ w.r.t. the approximate posterior distribution $q_{\theta}({\bld W_{i}})$, it is known that the samples of the row vectors in the weight matrix are drawn independently and thus the covariance between the rows are zero. On the other hand, samples for different weights in the same row are drawn at the same time because they are multiplied by the same realization of $\epsilon_{i}$, from which covariances between weights within the same row are induced. Therefore, by fitting this approximate distribution to the real posterior distribution weights within the same row can be learned. This means that the approximate distribution family have more flexibility to approximate the real posterior distribution when compared with other common approximate posterior distribution families that assume the distribution for each parameter is independent such as fully factorized Gaussian.
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 
 
 \subparagraph{Training objective:} Up to now, only the approximate distribution of dropout inference is analyzed. 
@@ -298,15 +231,10 @@ L_{dropout}   = \sum_{i=1}^{N}\big[-log(p(\bld y_{i}| \bld x_{i}, \bld \omega))\
 \end{aligned}
 \end{equation}
 
-<<<<<<< HEAD
 where $N$ represents the size of entire dataset, $\lambda$ is L2 regularization coefficient. We want to maximize the likelihood over the entire dataset w.r.t. the model parameter $\bld \omega$, which is known as maximum likelihood estimation. Equipped with L2 regularization and Gaussian prior over parameters, we can obtain a max-a-posterior estimation by minimizing Eq.\ref{dropout_loss}. 
 
 Normally we use gradient descent to tune our parameters in training, which requires first derivative of objective w.r.t. model parameters $\bld \omega$. Since nowadays large size of dataset is ubiquitous, which means $N$ in Eq.\ref{dropout_loss} is too large, we could not obtain exact gradient of entire batch with efficient computation. Therefore we use data of mini-batch to estimate gradient, which is so called stochastic gradient descent(SGD). Apart from making computation tractable, noise of gradient estimation in each mini-batch is helpful for optimization procedure to escape the poor local minimum. The expression of gradients required in each iteration of SGD is given in the following:
-=======
-where $N$ represents the size of the entire dataset, and $\lambda$ is the L2 regularization coefficient. The goal is to maximize the likelihood over the entire dataset w.r.t. the model parameters $\bld \omega$, which is known as maximum likelihood estimation. Equipped with L2 regularization and Gaussian prior over parameters, a max-a-posterior estimation by minimizing equation \ref{dropout_loss} can be obtained. 
 
-Normally a gradient descent is used in order to tune the parameters in training, which requires the first derivative of the objective w.r.t. the model parameters $\bld \omega$. Since nowadays the large size of dataset is ubiquitous, which means $N$ in equation \ref{dropout_loss} is too large, one could not obtain the exact gradient of the entire batch with an efficient computation. Therefore the data of mini-batch is used to estimate the gradient, which is the so-called stochastic gradient descent (SGD). Apart from making computations tractable, the noise of the gradient estimation in each mini-batch is helpful for the optimization procedure to escape the poor local minimum. The expression of the gradients required in each iteration of SGD is given in the following:
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 
 \begin{equation}
 \begin{aligned} \label{dropout_grad}
@@ -316,12 +244,7 @@ Normally a gradient descent is used in order to tune the parameters in training,
 
 where $S$ is a random subset of the entire dataset, and $|S| = K$.
 
-<<<<<<< HEAD
-On the other hand, let's have a look at $ELBO$ in Eq.\ref{2.6}, if we want to maximize $ELBO$, which is equivalent to minimize negative $ELBO$ w.r.t. the variational parameter $\theta$, with SGD. The gradients are computed with the following expression:
-=======
-On the other hand, looking at the $ELBO$ in equation \ref{2.6}, if we want to maximize $ELBO$, which is equivalent to minimize negative $ELBO$ w.r.t. the variational parameter $\theta$, with SGD. \maxcom{again here the end of the sentence is missing :D}
-The gradients are computed with the following expression:
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
+On the other hand, let's have a look at $ELBO$ in Eq.\ref{2.6}, if we want to maximize $ELBO$, which is equivalent to minimize negative $ELBO$ with SGD w.r.t. the variational parameter $\theta$. The gradients are computed with the following expression:
 
 \begin{equation}
 \begin{aligned} \label{elbo_grad}
@@ -329,16 +252,9 @@ The gradients are computed with the following expression:
 \end{aligned}
 \end{equation}
 
-<<<<<<< HEAD
 In order to calculate two terms in Eq.\ref{elbo_grad}, we need to introduce one technique called re-parameterization trick\cite{kingma2013auto} for the first term and one condition called KL condition\cite{gal2016uncertainty} for the second term in the following.
 
 \subparagraph{Re-parameterization trick:} when we take a close look at the first term in Eq.\ref{elbo_grad}, we know that we need to compute the gradients of expectation w.r.t. the parameters of distribution to which this expectation is subject. That means, we need to estimate the gradients of those parameters because our objective is generated from these parameters randomly. Fortunately, there are different approaches to estimate the gradients of this kind of parameters such as score function or REINFORCE estimator\cite{williams1992simple}, re-parameterization trick \cite{kingma2013auto} and so on. As is stated in \cite{kingma2013auto}, re-parameterization trick has lower variance than score function estimator and is also unbiased. Let's have a quick recap of this technique and see it's already a built-in part in neural network with dropout.
-=======
-In order to calculate the two terms in equation \ref{elbo_grad}, a technique called re-parameterization trick\cite{kingma2013auto} for the first term and one condition called KL condition\cite{gal2016uncertainty} for the second term has to be introduced.
-
-\subparagraph{Re-parameterization trick:} Taking a closer look at the first term in equation \ref{elbo_grad}, the gradients of expectation w.r.t. the parameters of distribution to which this expectation is subject has to be computed. That means, the gradients of those parameters have to be estimated because the objective is generated from these parameters randomly. Fortunately, there are different approaches to estimate the gradients of this kind of parameters such as a score function, REINFORCE \maxcom{make it bold instead of upper-cases?!} estimator\cite{williams1992simple}, re-parameterization trick \cite{kingma2013auto}, and so on. As stated in \cite{kingma2013auto}, the re-parameterization trick has lower variance than the score function estimator and is also unbiased. 
-By looking at this technique and one can see that it is already a built-in part in a neural network with dropout.
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
 
 To identify the problem, one can write a more general form of the calculus which should be solved in the following:
 
@@ -368,13 +284,7 @@ I'(\theta) &= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx \\
 \end{aligned}
 \end{equation} 
 <<<<<<< HEAD
-From practical point of view, the expectation of last line in expression Eq.\ref{repa1} can be approximated with Monte Carlo integration. In dropout inference, we know that if we fix the dropout rate to $1- p_{i}$ in Eq.\ref{appro_cond_dist_form} during training. Then $\bld \epsilon_{i}$ in Eq.\ref{appro_cond_dist_form} is a parameter free random variable and $g(\cdot)$ is a differentiable function w.r.t. its input argument $\bld M_{i}$. Now the variational parameter $\theta$ only contains $\{(\bld M_{i})_{i=1}^{L} \}$, which are exactly the weights to be learned in training neural network with dropout. As a consequence, if we estimate the gradient of $ELBO$ w.r.t. $\{(\bld M_{i})_{i=1}^{L}\}$, which is the first term in Eq.\ref{elbo_grad}, it's equivalent to calculate the gradient of dropout loss w.r.t. model parameters $\bld \omega$ which is the first term in Eq.\ref{dropout_grad}.
-=======
-
-From the practical point of view, the expectation of the last line in expression \ref{repa1} can be approximated with a Monte Carlo integration. 
-In the dropout inference, we know that if we fix the dropout rate to $1- p_{i}$ in equation \ref{appro_cond_dist_form} during training \maxcom{missing: what happens if the dropout rate is fixed. and change the we here ;)}. 
-Then $\bld \epsilon_{i}$ in equation \ref{appro_cond_dist_form} is a parameter free random variable and $g(\cdot)$ is a differentiable function w.r.t. its input argument\maxcom{s} $\bld M_{i}$. Now the variational parameter $\theta$ only contains $\{(\bld M_{i})_{i=1}^{L} \}$, which are exactly the weights to be learned in the training of the neural network with dropout. As a consequence, if the gradient of $ELBO$ w.r.t. $\{(\bld M_{i})_{i=1}^{L}\}$ is estimated, which is the first term in equation \ref{elbo_grad}, it is equivalent to calculate the gradient of the dropout loss w.r.t. the model parameters $\bld \omega$ which is the first term in equation \ref{dropout_grad}.
->>>>>>> 7cbcb89a62caa7198db79c05b1e172ecbfb40e52
+From practical point of view, the expectation of last line in expression Eq.\ref{repa1} can be approximated with Monte Carlo integration. In dropout inference, we know that if we fix the dropout rate to $1- p_{i}$ in Eq.\ref{appro_cond_dist_form} during training, $\bld \epsilon_{i}$ in Eq.\ref{appro_cond_dist_form} is a parameter free random variable and $g(\cdot)$ is a differentiable function w.r.t. its input arguments $\bld M_{i}$. Now the variational parameter $\theta$ only contains $\{(\bld M_{i})_{i=1}^{L} \}$, which are exactly the weights to be learned in training neural network with dropout. As a consequence, if we estimate the gradient of $ELBO$ w.r.t. $\{(\bld M_{i})_{i=1}^{L}\}$, which is the first term in Eq.\ref{elbo_grad}, it's equivalent to calculate the gradient of dropout loss w.r.t. model parameters $\bld \omega$ which is the first term in Eq.\ref{dropout_grad}.
 
 \subparagraph{KL condition:} The second term in Eq.\ref{elbo_grad} is proved to be equivalent to the second term in Eq.\ref{dropout_grad}
 for a large enough number of hidden units when we specify the model prior to be a product of independent Gaussian distributions over each weight with prior length scale $l$, that is:
@@ -460,7 +370,7 @@ Then we obtain one sample from this discrete distribution and the probability fo
 	\end{center}
 \end{figure}
 
-As observed in Gumbel-Max trick, the sampling step is re-paramterized by one function with distribution parameters and parameter-free random variable as arguments. This function is component-wise addition of two input arguments followed by $argmax$ operation. However, $argmax$ operation is not differential w.r.t. distribution parameter $\alpha_i$. 
+As observed in Gumbel-Max trick, the sampling step is re-parameterized by one function with distribution parameters and parameter-free random variable as arguments. This function is component-wise addition of two input arguments followed by $argmax$ operation. However, $argmax$ operation is not differential w.r.t. distribution parameter $\alpha_i$. 
 
 With a little abuse of notation, we denote temperature by $\lambda$ here. Fortunately, the $argmax$ operation can be approximated by a continuous function, $softmax$ function with $\lambda$ as temperature parameter, which is differential w.r.t. distribution parameters. With this replacement, we can obtain a continuous approximation to one-hot encoding vector $\bld d$ on the simplex $\triangle^{n-1} = \{\bld x \in \mathbb R^n | x_k \in [0,1], \sum_{i=1}^{n} x_i = 1 \}$:
 
@@ -523,7 +433,7 @@ Because keep rate of dropout is being optimized, the parameters of approximate d
 \end{equation}
 
 where $\lambda$ and $\beta$ are coefficients for L2 regularization and dropout regularization, respectively. They are hyper-parameters which can be tuned based on performance on validation set.
-From the equation above, we can see that this term maximize the entropy of Bernoulli distribution, which means this term pushes $\bld p_i$ to 0.5. The coefficient of the dropout regularisation term means that large models will push the dropout probability towards 0.5 much more than smaller models, but as the amount of data N increases the dropout probability will be pushed towards 1 because of the expected log likelihood in the first term. One of reasons behind could be pushing $\bld p_i$ to 0.5 would decrease the capacity of the model which will decrease the expected log-likelihood. 
+From the equation above, we can see that this term maximize the entropy of Bernoulli distribution, which means this term pushes $\bld p_i$ to 0.5. The coefficient of the dropout regularization term means that large models will push the dropout probability towards 0.5 much more than smaller models, but as the amount of data N increases the dropout probability will be pushed towards 1 because of the expected log likelihood in the first term. One of reasons behind could be pushing $\bld p_i$ to 0.5 would decrease the capacity of the model which will decrease the expected log-likelihood. 
 
 
 \subsection{Laplace approximation}

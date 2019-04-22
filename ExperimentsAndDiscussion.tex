@@ -175,7 +175,7 @@ In addition to uncertainty histogram, we plot the calibration curve of each mode
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm, width=15cm]{uncertainty_estimation/exp1/exp1_histo}
+		\includegraphics[height=8cm, width=15cm]{uncertainty_estimation/exp1/exp1_histo}
 		\caption{Uncertainty(confidence, predictive entropy, mutual information) histograms of original ResNet50, ResNet50 with concrete dropout and ResNet50 with multi-dropout.}		
 		\label{exp1_histo}
 	\end{center}
@@ -214,27 +214,27 @@ When it comes to the separability metrics in Fig.\ref{exp2_roc_pr}, as stated be
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=11cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
+		\includegraphics[height=10.5cm, width=16cm]{uncertainty_estimation/hist_seed3_ensemble}
 		\caption{Uncertainty histograms of confidence, predictive entropy, mutual information for ori, cdp, mdp, ensemble of cdp, ensemble of mdp in one of three runs.}		
 		\label{exp2_histo}
 	\end{center}
 \end{figure}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[height=9cm, width=16cm]{uncertainty_estimation/roc_pr_seed3_ensemble}
-		\caption{ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble in one of three runs.}		
-		\label{exp2_roc_pr}
-	\end{center} 
-\end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5.5cm, width=16cm]{uncertainty_estimation/reliability_seed3_ensemble_}
+		\includegraphics[height=6cm, width=16cm]{uncertainty_estimation/reliability_seed3_ensemble_}
 		\caption{Calibration curve for ori, cdp, mdp, ensemble of cdp, ensemble of mdp in one of three runs.}		
 		\label{exp2_reliability}
 	\end{center}
 \end{figure}
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[height=9.5cm, width=16cm]{uncertainty_estimation/roc_pr_seed3_ensemble}
+		\caption{ROC and PR curve of ori, cdp, mdp, ensemble of cdp, ensemble in one of three runs.}		
+		\label{exp2_roc_pr}
+	\end{center} 
+\end{figure}
 
 Before we only show the visual metrics for evaluation, it's better to quantify the performance quantitatively. We adopt different aforementioned metrics to achieve this which are presented in the following table \ref{table:compareWithEnsemble}. In order to exclude the influence of random initialization, we train three models of different random seeds and report the mean and standard deviation for each metric. We can see the improvements by cdp, mdp and their ensemble versions along all the metrics. The phenomenon that mdp does not work well with OOD and this effect enlarged by ensemble is also expressed in the table. Based on these experiment results, we can draw the conclusion that, concrete dropout and multiple dropout can improve both accuracy and calibration performance compared with original ResNet50. While the ensemble of concrete dropout and multiple dropout work even better without OOD data, the ensemble of multiple dropout work worse than that of concrete dropout when considering OOD data in this work. When comparing concrete dropout and multiple dropout, concrete dropout is more robust than multiple dropout because the latter one does not work well with OOD data.
 
@@ -275,25 +275,26 @@ Different visual metrics such histograms, calibration curves, ROC curve and PR c
 
 If we compare the Laplace approximation between cdp and mdp, we can see that the result of Laplace approximation is similar to the their dropout versions. This can be observed through that the percentage of OOD prediction with high confidence of Laplace approximation for network trained with mdp is higher than that of Laplace approximation for network trained with cdp in the histogram. Besides, in ROC curve/PR curve on correct prediction vs. OOD data prediction of mdp and cdp, the area under curve of Laplace approximation of mdp is obviously lower than that of cdp. This phenomenon also exists in the histogram and ROC as well as PR curve of mdp and cdp. In the table of quantitative results (cf. \ref{table:lap}), the quantities of different metrics corresponding to the visual metrics. To summarize this, although Laplace can achieve similar results as concrete dropout and multiple dropout do, their performance is highly related to the point estimate of parameter obtained during training.
 
+\begin{figure}[H]		
+	\centering
+	\includegraphics[height=10cm, width=15cm]{uncertainty_estimation/laplace/histo_ood_seed3.eps}
+	\caption{Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}
+	\label{figure:lap_hist}	
+\end{figure}
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5.5cm, width=16cm]{uncertainty_estimation/laplace/reliabilty_seed3_.eps}
+		\includegraphics[height=6cm, width=16cm]{uncertainty_estimation/laplace/reliabilty_seed3_.eps}
 		\caption{Calibration curve of cdp, mdp and their Laplace approximation versions in one of three runs.}		
 		\label{lap_calibration}
 	\end{center}
 \end{figure}
 
-\begin{figure}[H]		
-	\centering
-	\includegraphics[height=9.5cm, width=14.5cm]{uncertainty_estimation/laplace/histo_ood_seed3.eps}
-	\caption{Uncertainty histogram of cdp, mdp and their Laplace approximation versions with confidence, predictive entropy and mutual information as uncertainty measure in one of three runs.}
-	\label{figure:lap_hist}	
-\end{figure}
 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=8.3cm, width=15cm]{uncertainty_estimation/laplace/roc_pr_seed3.eps}
+		\includegraphics[height=9cm, width=15cm]{uncertainty_estimation/laplace/roc_pr_seed3.eps}
 		\caption{ROC and PR curve of cdp, mdp and their Laplace approximation versions in one of three runs.}		
 		\label{lap_roc_pr}
 	\end{center}
@@ -342,7 +343,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=7cm,width=15cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
+		\includegraphics[height=8cm,width=15cm]{uncertainty_estimation/ablation_study/histo_froFeat_ori_cdp_mdp_ood_seed3.eps}
 		\caption{Uncertainty histograms of ori, cdp, mdp trained with frozen features in one of three runs.}		
 		\label{ab_reliability}
 	\end{center}
@@ -350,7 +351,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=5cm, width=15cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
+		\includegraphics[height=6cm, width=15cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
 		\caption{Calibration curves of ori, cdp, mdp trained with frozen features one of three runs.}		
 		\label{ab_calibration}
 	\end{center}
@@ -359,7 +360,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=9cm, width=15cm]{uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3.eps}
+		\includegraphics[height=9.5cm, width=15cm]{uncertainty_estimation/ablation_study/roc_pr_froFeat_ori_cdp_mdp_combined_seed3.eps}
 		\caption{ROC and PR curves of ori, cdp, mdp trained with frozen features one of three runs.}		
 		\label{ab_roc_pr}
 	\end{center}
@@ -425,23 +426,22 @@ For C, D, E, F, G, we conduct the following steps:
 \end{itemize}
 To note that, the accuracy of automatically labeled data in C, E, F, G is around 96\%, which means not all labels of them are correct. And "\textbf{randomly}" in this context means that we randomly choose the data of each class with number computed based on the difference between current number of data samples of each class and the average number of data samples of each class. We assume that we have manually labeled all the predictions after automatic labeling and conduct a \textit{proof-of-concept} experiment with \textbf{as balanced as possible} dataset in F and G.    
 
-
-	\begin{table}[h!]
-		\centering
-		\label{table:fine_tuning}
-		\caption{Results of fine-tuned network with different settings}
-		\begin{tabular}{|l|c|}
-			\hline
-			Settings of dataset for fine-tuning                                                                                                                                                                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Accuracy\\ (average over 3\\ random seeds)\end{tabular}} \\ \hline
-			A: 0\% (no fine-tuning)                                                                                                                                                                                                  & 66.9\%                                                                                                  \\ \hline
-			\begin{tabular}[c]{@{}l@{}}B: 3\% manually labeled data randomly \\   (\textbf{balanced})\end{tabular}                                                                                                                               & 91.7\%                                                                                                  \\ \hline
-			\begin{tabular}[c]{@{}l@{}}C: 3\% automatically labeled data \\ (\textbf{imbalanced})\end{tabular}                                                                                                                        & 79.0\%                                                                                                  \\ \hline
-			\begin{tabular}[c]{@{}l@{}}D: 3\% manually labeled data with least confidence\\ (\textbf{imbalanced})\end{tabular}                                                                                                       & 83.3\%                                                                                                  \\ \hline
-			\begin{tabular}[c]{@{}l@{}}E: 2\% automatically labeled data and \\ 1\% manually labeled data with least confidence, \\ augmentation for balance (\textbf{balanced})\end{tabular}                                     & 83.8\%                                                                                                  \\ \hline
-			\begin{tabular}[c]{@{}l@{}}F: 2\% automatically labeled data and \\ 0.5\% manually labeled data with least confidence and \\ 0.5\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular} & 88.3\%                                                                                                  \\ \hline
-			\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
-		\end{tabular}
-	\end{table}
+\begin{table}[H]
+	\label{table:fine_tuning}
+	\centering
+	\caption{Results of fine-tuned network with different settings}
+	\begin{tabular}{|l|c|}
+		\hline
+		Settings of dataset for fine-tuning                                                                                                                                                                                   & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Accuracy\\ (average over 3\\ random seeds)\end{tabular}} \\ \hline
+		A: 0\% (no fine-tuning)                                                                                                                                                                                                  & 66.9\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}B: 3\% manually labeled data randomly \\   (\textbf{balanced})\end{tabular}                                                                                                                               & 91.7\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}C: 3\% automatically labeled data \\ (\textbf{imbalanced})\end{tabular}                                                                                                                        & 79.0\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}D: 3\% manually labeled data with least confidence\\ (\textbf{imbalanced})\end{tabular}                                                                                                       & 83.3\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}E: 2\% automatically labeled data and \\ 1\% manually labeled data with least confidence, \\ augmentation for balance (\textbf{balanced})\end{tabular}                                     & 83.8\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}F: 2\% automatically labeled data and \\ 0.5\% manually labeled data with least confidence and \\ 0.5\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular} & 88.3\%                                                                                                  \\ \hline
+		\begin{tabular}[c]{@{}l@{}}G: 2\% automatically labeled data and \\ 1\% manually labeled data randomly,\\ augmentation for balance (\textbf{balanced})\end{tabular}                                                            & 89.6\%                                                                                                  \\ \hline
+	\end{tabular}
+\end{table}
 
 
 \paragraph{Fine-tuning:} After collecting the dataset with different settings, we show the results of BNN fine-tuned with those dataset on the final test set which contains only objects of $45^{\circ}$ from UniHB data in the table \ref{table:fine_tuning}. We can draw the following observations from this table:
@@ -464,13 +464,14 @@ We show the comparisons of uncertainty estimation in term of different evaluatio
 
 With the same procedure of selecting automatically labeled data, the size of dataset is around $\sim$1.05K with only 93\% accuracy using original ResNet50, but around $\sim$1.6K with 96\% accuracy using BNN. Because original ResNet50 produces less automatically labeled data with lower quality, the dataset for fine-tuning is collected with BNN.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=7cm,width=12cm]{autoLa/exp2/syn_cdp_trn_uncer_hist.eps}
 		\caption{Uncertainty histograms of original ResNet50 (top) and BNN (down).}		
 		\label{autoLa_exp2_hist}
 	\end{center}
 \end{figure}
+
 
 However, as found in experiment \RNum{1}, the problem of imbalance in number of data samples of each class still appears on this dataset and has a large influence on the performance. The horizontal histogram in Fig.\ref{hist_class} reveals this problem, in which most of confident predictions cluster in few classes which are class 6, 7, 28 and so on. To mitigate this problem, two simple ways are adopted here:
 \begin{itemize}
@@ -486,7 +487,6 @@ The balance of dataset with/without manually labeled data after augmentations ar
 		\label{autoLa_exp2_cali}
 	\end{center}
 \end{figure}
-
 
 %\begin{figure}[H]
 %	\centering
@@ -517,7 +517,7 @@ The balance of dataset with/without manually labeled data after augmentations ar
 \begin{figure}[H]
 	\centering
 	\begin{center}
-		\includegraphics[height=8cm,width=15cm]{autoLa/exp2/class_balance_NoMa_3percMa.eps}
+		\includegraphics[height=9cm,width=15cm]{autoLa/exp2/class_balance_NoMa_3percMa.eps}
 		\caption{Horizontal histograms of automatically labeled data with/without 3\% manually labeled data before/after augmentations.}		
 		\label{hist_class}
 	\end{center}
@@ -526,7 +526,7 @@ The balance of dataset with/without manually labeled data after augmentations ar
 \begin{figure}[H]
 	\centering
 	\begin{center}
-		\includegraphics[height=16cm,width=13.5cm]{autoLa/exp2/AutoLaWithMa3perc&NoMa_CFM.eps}
+		\includegraphics[height=15.5cm,width=13cm]{autoLa/exp2/AutoLaWithMa3perc&NoMa_CFM.eps}
 		\caption{Confusion matrices of BNN fine-tuned with dataset with/without small portion of manually labeled data.}		
 		\label{cfm_fine_tune_bnn}
 	\end{center}
