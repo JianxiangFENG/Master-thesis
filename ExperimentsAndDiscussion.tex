@@ -239,18 +239,37 @@ To note that, the correct predictions are treated as positive samples in the two
 
 
 \section{Uncertainty estimation experiments}
-In this part, we evaluate performance of accuracy and uncertainty estimation as well as their summarized performance of different inference techniques for BNN on WRGB and UniHB dataset. Before that, the shorthands of different techniques should be explained. We use "\textbf{ori}" for original ResNet50, "\textbf{cdp}" for ResNet50 with concrete dropout, "\textbf{mdp}" for ResNet50 with multiple dropout without specifications.
+In this part, the performance of accuracy and uncertainty estimation as well as the summarized performance of different inference techniques for BNN on WRGB and UniHB dataset is evaluated.
+Before that, the shorthands of different techniques should be explained.
+In the following the original ResNet50 is depicted as "\textbf{ori}", ResNet50 with concrete dropout as "\textbf{cdp}",and ResNet50 with multiple dropout without specifications as "\textbf{mdp}".
 
-In the first experiment, we evaluate them on a relatively simple task, instance recognition. However, our main focus is in the second experiment, where different techniques including dropout, Laplace approximation and ensembles are evaluated and compared on a more difficult task, category recognition. Besides comparing them, we also conduct a ablation study to investigate how feature extractor influences the predictive uncertainty.
+In the first experiment, they are evaluated on a relatively simple task, namely instance recognition.
+However, the main focus is in the second experiment, where different techniques including dropout, Laplace approximation and ensembles are evaluated and compared on a more difficult task, namely category recognition.
+Besides comparing them, an ablation study is conducted to investigate how the feature extractor influences the predictive uncertainty.
 
 \subsection{Experiments \RNum{1}: uncertainty estimation on instance recognition}
-In this experiment, we want to evaluate our model on a relatively easy task which is instance recognition at first. The appearances of different classes as well as the out-of-distribution data are highly discriminable. To this end, we separate WRGBD dataset into two subsets based on the instance class. Subset \RNum{1} contains objects with instance class from 0 to 199 (assuming that here we use index to denote the instance label) and Subset \RNum{2} contains objects with instance class from 200 to 299. 
+The appearances of different classes as well as the out-of-distribution data are highly discriminable.
+To this end, the WRGBD dataset is separated into two subsets based on the instance classes.
+The Subset \RNum{1} contains objects with the instance classes from 0 to 199 (assuming that here the index denotes the instance label) and the Subset \RNum{2} contains objects with the instance classes from 200 to 299. 
 
-We train our model with objects captured in elevation $30^\circ$ and $60^\circ$ of Subset \RNum{1} (in which we split off 20\% of training set as validation set for model selection in training). The size of training set and validation set is around $\sim$71.0K. Then we test the model on objects captured in elevation $45^\circ$ of both Subset \RNum{1} and Subset \RNum{2}. In this experiment, the objects in Subset \RNum{2} serve as out-of-distribution samples because they are not present during training. The size of test set is around $\sim$35.6K and that of OOD dataset is around $\sim$17.8K. 
+The model is trained with objects captured in the elevation $30^\circ$ and $60^\circ$ of the Subset \RNum{1} (in which 20\% are split off as validation set for model selection in the training).
+The size of the training set and validation set is around $\sim$71.0K.
+Then the model is tested on objects captured in the elevation $45^\circ$ of both Subset \RNum{1} and Subset \RNum{2}.
+In this experiment, the objects in Subset \RNum{2} serve as out-of-distribution samples because they are not present during training.
+The size of the test set is around $\sim$35.6K and that of the OOD dataset is around $\sim$17.8K. 
 
-In this experiment, we just want to test and compare the performance of different approaches. Because the OOD data is highly different to the training set. The model should express high uncertainty when facing these data. Nevertheless, the miss-classifications should have higher uncertainty than the correct predictions because the model should be confident when it makes predictions correctly. Otherwise the model is overconfident when it's confident with its incorrect predictions, which can induce hazardous consequence in some safety-critical applications. As we can see in the Fig.\ref{exp1_histo}, the original ResNet50 model is highly overconfident, which assigns high confidence to nearly $50\%$ of miss-classification and nearly $30\%$ of OOD data in the highest bin. While the model with concrete dropout and multi-drop can significantly decrease these two proportions. As we can see, different uncertainty show similar trend in this experiment.
+In this experiment, the performance of different approaches should be evaluated relatively.
+Since the OOD data is highly different to the training set, the model should express high uncertainties when facing these data.
+Nevertheless, the miss-classifications should have higher uncertainty than the correct predictions because the model should be confident when it makes predictions correctly.
+Otherwise the model is overconfident when it is confident with its incorrect predictions, which can induce hazardous consequence in some safety-critical applications.
+As can be seen in the Fig.\ref{exp1_histo}, the original ResNet50 model is highly overconfident, which assigns high confidence to nearly $50\%$ of miss-classification and nearly $30\%$ of OOD data in the highest bin.
+While the model with concrete dropout and multi-drop can significantly decrease these two proportions.
+As can be seen, different uncertainties show similar a trend in this experiment.
 
-In addition to uncertainty histogram, we plot the calibration curve of each model evaluated on both test set and OOD dataset in Fig.\ref{exp1_reliability}. As expected, the calibration performance of original model is much worse than those of the other two models. This result is corresponding to the results in \cite{guo2017calibration}, that the original ResNet50 is highly overconfident. And the concrete dropout and multi-dropout can mitigate the undesired problem significantly.
+In addition to the uncertainty histogram, the calibration curve of each model evaluated on both test set and OOD dataset in Fig.\ref{exp1_reliability} is shown.
+As expected, the calibration performance of the original model is much worse than those of the other two models.
+This result corresponds to the results in \cite{guo2017calibration}, that the original ResNet50 is highly overconfident.
+The concrete dropout and multi-dropout can mitigate the undesired problem significantly.
 
 \begin{figure}[H]
 	\begin{center}
