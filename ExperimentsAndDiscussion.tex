@@ -107,7 +107,9 @@ More than that, the relationships between objects in one scene can be utilized b
 
 
 \subsection{Uncertainty measure}
-For each prediction, we can obtain one predictive probability distribution from our model with equation \ref{marginalization_test}. In order to quantify uncertainty of the prediction, there are different measures for uncertainty of prediction, which are introduced in the following. We define $x^\star$ as one test data sample and $\mathcal D$ as our training set. 
+For each prediction, a predictive probability distribution from the model based on the equation \ref{marginalization_test} is obtained.
+In order to quantify the uncertainty of the prediction, there are different measures for uncertainty of a prediction, which are introduced in the following.
+A test data sample is defined by $x^\star$ and $\mathcal D$ as the training set. 
 \paragraph{Confidence} is defined as the maximum probability of the output predictive distribution, whose index is the class prediction.
 
 \begin{equation}\label{confidence}	
@@ -115,9 +117,10 @@ For each prediction, we can obtain one predictive probability distribution from 
 conf = \max_c \big[ p(y=c|x^\star, \mathcal D) \big]
 \end{aligned}
 \end{equation}
-where $conf \in [0,1]$, $c \in \mathcal L = \{0,...,|\mathcal L|-1\}$, and $\mathcal L$ represents output space in which label is expressed as number index which is transformed into one-hot representation in computation of objective function. The larger this quantity is, the less uncertain the prediction is. 
+where $conf \in [0,1]$, $c \in \mathcal L = \{0,...,|\mathcal L|-1\}$, and $\mathcal L$ represents the output space in which the label is expressed as the number index which is transformed into a one-hot representation in computation of the objective function.
+The larger this quantity is, the less uncertain the prediction is. 
 
-\paragraph{Predictive entropy} is quantity that captures the average amount information contained in predictive distribution\cite{shannon1948mathematical}: 
+\paragraph{Predictive entropy} is the quantity that captures the average amount of information contained in predictive distribution\cite{shannon1948mathematical}: 
 \begin{equation}\label{entropy}	
 \begin{aligned}
 \mathcal H[p(y|x^\star, \mathcal D)] = -\sum_{c}p(y=c|x^\star, \mathcal D)\text{log}p(y=c|x^\star, \mathcal D)
@@ -125,7 +128,9 @@ where $conf \in [0,1]$, $c \in \mathcal L = \{0,...,|\mathcal L|-1\}$, and $\mat
 \end{equation}
 where $c$ is the possible class $y$ can take, $\mathcal H(\cdot) \in [0, \text{log}{|\mathcal P|}]$, the larger this quantity is, the more uncertain the prediction is.
 
-\paragraph{Mutual information} between the prediction $y$ and the weights posterior offers a different uncertainty measure when compared with the aforementioned ones. This measure is widely used in active learning tasks\cite{houlsby2011bayesian}, which is also called Bayesian active learning disagreement(BALD). The definition of this measure is as follows:
+\paragraph{Mutual information} between the prediction $y$ and the weights posterior offers a different uncertainty measure when compared with the aforementioned ones.
+This measure is widely used in active learning tasks\cite{houlsby2011bayesian}, which is also called Bayesian active learning disagreement(BALD).
+The definition of this measure is as follows:
 \begin{equation}\label{mi}	
 \begin{aligned}
 \mathcal I[y,\bld \omega|x^\star, \mathcal D] &= \mathcal H[y|x^\star, \mathcal D] - \mathbb E_{p(\bld \omega| \mathcal D)}\big[\mathcal H[y|x^\star, \bld \omega] \big] \\
@@ -134,29 +139,50 @@ where $c$ is the possible class $y$ can take, $\mathcal H(\cdot) \in [0, \text{l
 \end{aligned}
 \end{equation}
 where $\mathcal I(\cdot) \in [0,\text{log}{|\mathcal P|}]$.
-This quantity considers the effect of approximate posterior distribution more directly. Compared with aforementioned uncertainty measures, this one should be able to capture the model uncertainty more accurately. To think about it intuitively, this quantity measures the information gain between the entropy of predictive output distribution and the expected entropy of output distribution wr.t. weights posterior. It will be low only if the predictive distribution agrees with most of possible models(weights realizations), which means that the model is sure about its prediction. Otherwise, it will be high because most of possible models do not agree with the other models and thus the predictive distribution will be more uniform and thus has higher entropy.
+This quantity considers the effect of an approximate posterior distribution more directly.
+Compared with aforementioned uncertainty measures, this one should be able to capture the model uncertainty more accurately.
+To think about it intuitively, this quantity measures the information gain between the entropy of predictive output distribution and the expected entropy of output distribution w.r.t. the weights posterior.
+It is only low if the predictive distribution agrees with most of the possible models (weights realizations), which means that the model is sure about its prediction.
+Otherwise, it is high because most of the possible models do not agree with the other models and thus the predictive distribution is more uniform and thus has a higher entropy.
 
 \subsection{Evaluation metric}
-As is stated in \cite{gneiting2007probabilistic}, the goal of probabilistic prediction is to maximize the sharpness of predictive distribution subject to calibration. Calibration refers to the statistical consistency between the predictive probability and the occurrence of observations, which is the frequency of the event. Therefore we employ different metrics including both the accuracy and other quantities related to calibration as well as summary of accuracy and calibration. Additionally, we also employ histogram and diagram to express the results visually. While the visual one can show us the results more intuitively, the quantitative one can allow us to evaluate the results more objectively. The comparison between them may help us to examine if visual metrics are corresponding to the numerical metrics, which may provide more insights in evaluating uncertainty estimation. 
+As stated in \cite{gneiting2007probabilistic}, the goal of the probabilistic prediction is to maximize the sharpness of the predictive distribution subject to calibration.
+Calibration refers to the statistical consistency between the predictive probability and the occurrence of observations, which is the frequency of the event.
+Therefore different metrics including both the accuracy and other quantities related to calibration as well as summary of accuracy and calibration are employed.
+Additionally, a histogram and diagram to express the results visually are applied.
+While the visual one can show the results more intuitively, the quantitative one allows to evaluate the results more objectively.
+The comparison between them may help to examine if the visual metrics correspond to the numerical metrics, which may provide more insights in evaluating uncertainty estimation. 
 
-\paragraph{Uncertainty histogram} is a intuitive visual tool for analyzing the statistics of the uncertainty estimation. Compared with normal histogram, there is one difference to stress on. In order to make visual effect more clear and hence the analysis easier, \textbf{normalizer} of each type of prediction is the size of this type of predictions instead of size of all predictions. In detail, we have three types of prediction for plotting the histogram, which are:
+\paragraph{Uncertainty histogram} is an intuitive visual tool for analyzing the statistics of the uncertainty estimation.
+Compared with normal histograms, there is one difference to stress on.
+In order to make the visual effect more clear and hence the analysis easier, the \textbf{normalizer} of each type of prediction is the size of this type of predictions instead of size of all predictions.
+In detail, there are three types of predictions for plotting the histogram, which are:
  \begin{itemize}
  	\item \textbf{correct prediction}
  	\item \textbf{miss-classification}
  	\item \textbf{out-of-distribution(OOD)}
- \end{itemize}The range of y axis is $[0,1]$ because we normalize the number in each bin, and range of x axis is set by the range of corresponding type of uncertainty measure.
+ \end{itemize}The range of y axis is $[0,1]$ since the bins are normalized, and the range of x axis is set by the range of the corresponding type of the uncertainty measure.
 
-\paragraph{Reliability diagram(Calibration curve)} is another visual tool for expressing \textbf{calibration} performance of the model\cite{guo2017calibration}, which plots the frequency of success(accuracy of predictions in specific bin) as a function of confidence, which is predictive likelihood of prediction. If the model is perfectly calibrated, this function should be overlapping with the diagonal line exactly. The closer this curve is to diagonal curve, the better the calibration performance is. In order to draw the curve, we firstly group the predictions into $M$ interval bins w.r.t. confidence and then calculate the accuracy of predictions in each bin. We use $M=20$ in this work. To quantify the proximity to the diagonal curve, we use two metrics:
+\paragraph{Reliability diagram(Calibration curve)} is another visual tool for expressing the \textbf{calibration} performance of the model\cite{guo2017calibration}, which plots the frequency of the success(accuracy of predictions in specific bin) as a function of confidence, which is the predictive likelihood of the prediction.
+If the model is perfectly calibrated, this function should be exactly overlapping with the diagonal line.
+The closer this curve is to diagonal curve, the better the calibration performance is.
+In order to draw the curve, firstly the predictions are grouped into $M$ (here: $M=20$) interval bins w.r.t. the confidence.
+Next, the accuracy of predictions in each bin is calculated.
+To quantify the proximity to the diagonal curve, two metrics are used:
 \begin{itemize}
-	\item \textbf{Expectation calibration error(ECE)}: In order to obtain a more objective measure of calibration quality, we can compute the \textbf{expected calibration error} by computing the weighted average of difference between accuracy and confidence:
+	\item \textbf{Expectation calibration error(ECE)}: In order to obtain a more objective measure of the calibration quality, the ECE is obtained by computing the weighted average of the difference between the accuracy and the confidence:
 	
 	\begin{equation}
 	ECE = \sum_{m=1}^{M}\frac{|B_m|}{n}|acc(B_m) - conf(B_m)|
 	\end{equation}
-	where $n$ is the number of samples, and $acc(B_m)$ represents the accuracy of samples, $conf(B_m)$ the average predicted confidence of samples in $m$-th bin. We can see that this metric measures the inconsistency between the statistics and predictive distribution. To note that this metric only considers the calibration quality instead of accuracy. One drawback of this metric is that, because the weights are computed based on number of samples in each bin, the metric would bias if most of predictions are clustering in few bins. Then the weights of these bins are much larger than other bins and other bins with large error would be ignored. 
+	where $n$ is the number of samples, $acc(B_m)$ represents the accuracy of the samples, and $conf(B_m)$ the average predicted confidence of samples in the $m$-th bin.
+	One can see that this metric measures the inconsistency between the statistics and predictive distribution.
+	To note that this metric only considers the calibration quality instead of the accuracy.
+	One drawback of this metric is that, because the weights are computed based on number of samples in each bin, the metric would be bias if most of predictions are clustering in few bins.
+	Then the weights of these bins are much larger than other bins and other bins with large error would be ignored. 
 	
 	\item \textbf{Maximal calibration error(MCE)}:
-	Considering the drawback mentioned in ECE, we make use of this metric. Additionally, in high risk applications where reliable confidence measures are absolutely necessary, we may wish to take the worst case into account. It is defined as follows:
+	Considering the drawback mentioned in ECE, this metric is used. Additionally, in high risk applications where reliable confidence measures are absolutely necessary, one might take into account the worst case. The MCE is defined as follows:
 	
 	\begin{equation}
 	MCE = \max_m|acc(B_m) - conf(B_m)|
@@ -165,9 +191,12 @@ As is stated in \cite{gneiting2007probabilistic}, the goal of probabilistic pred
 
 
 \paragraph{Proper scoring rules:} 
-Scoring rules provides a \textbf{summary} measure in the evaluation of probabilistic forecasts. It assigns a numerical score based on the difference between predictive distribution and real distribution. 
+Scoring rules provides a \textbf{summary} measure in the evaluation of probabilistic forecasts.
+It assigns a numerical score based on the difference between the predictive distribution and real one. 
 
-Because we want to make predictions for the future and also have a suitable measure of the uncertainty associated with them (see \cite{gneiting2007strictly} for a review). We can define the scoring rule as a function $\mathcal S(p(y|\bld x), (y|\bld x))$ that evaluates the quality of predictive distribution $p(y|\bld x)$ relative to an event $y|\bld x \sim q(y|\bld x)$ where $q(y|\bld x)$ represents the true distribution over $(y|\bld x)$. Consequently, the expected scoring rule is:
+Because we want to make predictions for the future and also have a suitable measure of the uncertainty associated with them (see \cite{gneiting2007strictly} for a review). \todo[inline]{this sentence I do not understand :/}
+The scoring rule can be defined as a function $\mathcal S(p(y|\bld x), (y|\bld x))$ that evaluates the quality of the predictive distribution $p(y|\bld x)$ relative to an event $y|\bld x \sim q(y|\bld x)$ where $q(y|\bld x)$ represents the true distribution over $(y|\bld x)$.
+Consequently, the expected scoring rule is:
 
 \begin{equation}\label{scoring rule}
 	\mathcal S(p, q) = \int q(y| \bld x) \mathcal S(p,(y|\bld x))dy
@@ -175,13 +204,15 @@ Because we want to make predictions for the future and also have a suitable meas
 
 $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality holds if and only if $p(y|\bld x) = q(y|\bld x)$. Here we adopt two simple and famous proper scoring rules in which the less it is, the better the performance is:
 \begin{itemize}
-	\item \textbf{averaged negative log likelihood(NLL)} is a popular metric for evaluating predictive uncertainty	\cite{quinonero2005evaluating}. This metric considers aforementioned confidence as likelihood. The smaller this metric is, the better the predictive distribution is.
+	\item \textbf{averaged negative log likelihood(NLL)} is a popular metric for evaluating the predictive uncertainty~\cite{quinonero2005evaluating}.
+	This metric considers the aforementioned confidence as a likelihood.
+	The smaller this metric is, the better the predictive distribution is.
 	
 	\begin{equation} \label{nll}
 		NLL = -\frac{1}{|\mathcal D_{test}|}\sum_{i=1}^{|\mathcal D_{test}|}\text{log}(p(y_i = c_i|\bld x_i))
 	\end{equation}
 	where $c_i$ is the ground truth label for $\bld x_i$.	
-	\item \textbf{Brier score} is the mean squared error between the target distribution(one-hot encoding label) and predictive distribution:
+	\item \textbf{Brier score} is the mean squared error between the target distribution(one-hot encoding label) and the predictive distribution:
 	
 	\begin{equation} \label{bs}
 	BS = -\frac{1}{|\mathcal D_{test}|}\sum_{i=1}^{|\mathcal D_{test}|}(\bld y^{gt}_i - p(\bld y_i|\bld x_i))^2
@@ -190,11 +221,20 @@ $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality hold
 	
 \end{itemize}
 
-\paragraph{Separability metrics:} In addition to the summary metrics of predictive probability. We are also interested in the separability between different types of predictions, which can assist the down-stream tasks if they are highly separable (e.g. separate correct predictions and false predictions or out-of-distribution data to improve robustness of system and provide more safety guarantee). To note that, we treat the correct predictions as positive samples in the two following metrics.
+\paragraph{Separability metrics:} In addition to the summary metrics of predictive probability.
+It is also interesting to see the separability between different types of predictions, which can assist the down-stream tasks if they are highly separable (e.g. separate correct predictions and false predictions or out-of-distribution data to improve robustness of system and provide more safety guarantee).
+To note that, the correct predictions are treated as positive samples in the two following metrics.
 \begin{itemize}
-	\item \textbf{Area under Receiver Operating Characteristic curve(AUROC)}: Since one of our goals is to choose automatically labeled data based on uncertainty estimation, it's necessary to evaluate the separability between correct predictions and false predictions or out-of distribution data predictions. ROC curve describes the relationship between true positive rate($tpr=\frac{tp}{tp+fn}$) and false positive rate($fpr=\frac{fp}{fp+tn}$). Moreover, AUROC can be interpreted as the probability that a positive samples has a greater score than a negative samples. However, the drawback of AUROC is that, the normalizers of two kinds of rate in ROC curve are independent to each other. When these two normalizers differs too much. AUROC can provide misleading conclusion. For example, if the number of negative predictions is much higher than positive one, the AUROC could still achieve a relatively high value, while in fact there are already many false positives. 
+	\item \textbf{Area under Receiver Operating Characteristic curve(AUROC)}: Since one of the goals is to choose automatically labeled data based on the uncertainty estimation, it is necessary to evaluate the separability between correct predictions and false predictions or out-of-distribution data predictions.
+	The ROC curve describes the relationship between the true positive rate($tpr=\frac{tp}{tp+fn}$) and the false positive rate($fpr=\frac{fp}{fp+tn}$).
+	Moreover, AUROC can be interpreted as the probability that a positive samples has a greater score than a negative samples.
+	However, the drawback of AUROC is that, the normalizers of two kinds of rates in the ROC curve are independent to each other.
+	When these two normalizers differs too much, AUROC can provide misleading conclusion.
+	For example, if the number of negative predictions is much higher than the positive one, the AUROC could still achieve a relatively high value although there are already many false positives. 
 	
-	\item \textbf{Area under Precision Recall curve(AUPR)}: Considering the downside of AUROC, another evaluation metric is employed, that is AUPR. AUPR describes the relationship between precision($pr = \frac{tp}{tp+fp}$) and recall($tpr=\frac{tp}{tp+fn}$), which resolves the problem of different base number. In the previously mentioned case, though the AUROC is high, the AUPR will be low because the precision is low. 
+	\item \textbf{Area under Precision Recall curve(AUPR)}: Considering the downside of AUROC, another evaluation metric is AUPR.
+	This metric describes the relationship between the precision($pr = \frac{tp}{tp+fp}$) and the recall($tpr=\frac{tp}{tp+fn}$), which resolves the problem of different base numbers.
+	In the previously mentioned case, though the AUROC is high, the AUPR will be low because the precision is low. 
 \end{itemize}
 
 
