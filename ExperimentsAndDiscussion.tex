@@ -287,17 +287,25 @@ The concrete dropout and multi-dropout can mitigate the undesired problem signif
 \end{figure}
 
 \subsection{Experiments \RNum{2}: uncertainty estimation on category recognition}
-In this experiment, we evaluate our model on a category recognition task. The difficulties are expressed in two-fold. Firstly, in this task, the model is confronted with classes with more overlapping. Second, because we want to simulate situation of deploying robots in real world scenario and facing data in real world, the UniHB dataset with domain gap(cf. Fig.\ref{fig:wrgbd2}) to WRGBD is used to achieve this goal. This means, the uncertainty estimation should not only be able to perform well on dataset with exactly same distribution to training set, but also to generalize well to dataset with domain gap which may decrease the accuracy significantly.
+In this experiment, the model is evaluated on a category recognition task.
+The difficulties are expressed in two-fold.
+First, in this task, the model is confronted with classes which overlap more.
+Second, in order to simulate the situation of deploying robots in real world scenario and facing data in real world, the UniHB dataset with a domain gap(cf. Fig.\ref{fig:wrgbd2}) to WRGBD is used to achieve this goal.
+This means, the uncertainty estimation should not only be able to perform well on the dataset with the exactly same distribution to training set, but also to generalize well to the dataset with domain gap which may decrease the accuracy significantly.
 
-Accordingly, we use the entire WRGBD dataset including all view points, whose size is around $\sim$160.9K, to train our model (in which we split off training set for validation set with ratio 2:8). When it comes to UniHB dataset, we treat objects captured in elevation $30^\circ$ and $60^\circ$ in this dataset as \textbf{adaptation set}, whose size is around $\sim$17.1K. We test performance of uncertainty estimation on this adaptation dataset. The images of $45^\circ$, whose size is around $\sim$8.6K , are used for final evaluation after we fine-tune the model with subset of adaptation set to obtain a domain specific model. The latter part will be experimented in next section. Besides, we also evaluate the uncertainty estimation on OOD dataset(cf. Fig.\ref{fig:not_in_wrgbd}) whose size is around $\sim$6.0K. 
+Accordingly, the entire WRGBD dataset is used including all view points, whose size is around $\sim$160.9K, to train the model (in which the ratio between training and validation set is 2:8). When it comes to UniHB dataset, objects captured in elevation $30^\circ$ and $60^\circ$ are treated as \textbf{adaptation set}, whose size is around $\sim$17.1K.
+The performance of uncertainty estimation is tested on this adaptation dataset.
+The images of $45^\circ$, whose size is around $\sim$8.6K , are used for the final evaluation after being fine-tuned with a subset of the adaptation set to obtain a domain specific model.
+The latter part will be experimented in next section.
+Besides, the uncertainty estimation on OOD dataset(cf. Fig.\ref{fig:not_in_wrgbd}) whose size is around $\sim$6.0K is also evaluated. 
 
-We firstly explain protocols in the following for different kinds of metric, which can help understanding the plots and extracting useful information more easily and quickly.  
+In the following, firstly the protocols for different kinds of metric are explained, which can help understanding the plots and extracting useful information more easily and quickly.  
 \begin{itemize}
-	\item The following visual metrics are chosen in one of three runs of different random seeds. The average quantitative results are given in tables following the visual metrics.
-	\item The calibration curve with title "Classification" on the left is plotted \textbf{only} on predictions of test set. The one with title "OOD detection" on the right is plotted on predictions of \textbf{both} OOD dataset and test dataset.
-	\item The ROC curve and PR curve measure the separability between two types of prediction.
-	The ones with title "classification" on the left measure the separability between \textbf{correct prediction} and \textbf{miss-classification}. The ones with title "OOD detection" on the right measure the separability between \textbf{correct prediction} and \textbf{OOD prediction}. In all ROC curve and PR curve, correct prediction is always chosen to be positive.
-	\item As is shown in uncertainty histogram, we have used three uncertainty measures. Each one has its own ROC curve and PR curve of correct prediction versus miss-classification or OOD prediction. In the following plots of ROC curve and PR curve, we only show the one with highest area under curve. In detail, \textbf{Confidence} is chosen in case of correct prediction versus miss-classification. \textbf{Mutual information} is chosen in case of correct prediction versus OOD prediction.
+	\item The following visual metrics are chosen in one of the three runs of different random seeds. The average quantitative results are given in tables following the visual metrics.
+	\item The calibration curve with the title "Classification" on the left is plotted \textbf{only} on the predictions of the test set. The one with the title "OOD detection" on the right is plotted on the predictions of \textbf{both} OOD dataset and test dataset.
+	\item The ROC curve and the PR curve measure the separability between the two types of prediction.
+	The ones with the title "classification" on the left measure the separability between \textbf{correct predictions} and \textbf{miss-classifications}. The ones with title "OOD detection" on the right measure the separability between \textbf{correct predictions} and \textbf{OOD predictions}. In all the ROC and PR curves, correct predictions are always chosen to be positive.
+	\item As shown in the uncertainty histogram, three uncertainty measures are applied. Each one has its own ROC curve and PR curve of the correct predictions versus the miss-classifications or OOD predictions. In the following plots of the ROC curve and the PR curve, only the one with highest area under curve is depicted. In detail, the \textbf{Confidence} is chosen in case of the correct predictions versus the miss-classifications. The \textbf{Mutual information} is chosen in case of the correct predictions versus the OOD predictions.
 \end{itemize}   
 
 \subsubsection{Comparison with Ensemble}
