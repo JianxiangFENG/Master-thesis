@@ -2,19 +2,23 @@
 \chapter{Experiment and Discussion}
 
 \section{Background}
-In this chapter, we perform different experiments for the following purposes:
+In this chapter, different experiments with the following purposes are conducted:
 \begin{itemize}
-	\item to evaluate the performance of uncertainty estimation of dropout variational inference and its variants as well as Laplace approximation. Comparisons and analysis towards the results of these two kinds of approach are given.
+	\item to evaluate the performance of uncertainty estimation of the dropout variational inference and its variants as well as the Laplace approximation. Comparisons and analysis towards the results of these two kind of approaches are given.
 	
-	\item to evaluate performance of training a domain specific classifier, with different strategies for collecting training data including manual labeling and automatic labeling, where the latter one is chosen based on uncertainty estimation.
+	\item to evaluate the performance of training a domain specific classifier, with different strategies for collecting training data including manual and automatic labeling, where the latter one is chosen based on the uncertainty estimation.
 	
-	\item to evaluate performance of classifier including context information via CRF.
+	\item to evaluate performance of classifier including context information via a CRF.
 \end{itemize}
 
-Before looking into the results, we need to specify some details of experiments such as the dataset, evaluation metrics. Models of deep neural nets are implemented in Tensorflow\cite{abadi2016tensorflow}, and optimization was performed using RMSprop with initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well dropout regularization with coefficient of $1.0e^{-5}$. We used early stopping with all methods, where the amount of epochs to run was determined based on performance on a validation set. We set the number of maximum epoch as 20. 
+Before looking into the results, some details of experiments such as the dataset and evaluation metrics have to be specified.
+The models of deep neural nets are implemented in Tensorflow\cite{abadi2016tensorflow}, and the optimization is performed using RMSprop with an initial learning rate of $1e^{-5}$ and L2 regularization with coefficient of $3.5e^{-6}$ as well as the dropout regularization with coefficient of $1.0e^{-5}$.
+The concept of early stopping is applied to all methods, where the amount of epochs to run is determined based on performance on a validation set.
+The number of maximum epoch is set to 20. 
 
-
-Regarding implementation of conditional random field, we employ C++ library from \cite{Ruiz-Sarmiento-REACTS-2015}. However, the weights there are assumed to be category-independent, which means that the weights are defined as weight matrix to build a linear mapping from feature function to potential function. Therefore we modify the type of weights in this library in order to incorporate different types of weight defined in Eq. \ref{crf_used}, which serve as coefficients of different potential functions instead of a linear mapping inside the potential functions. To note that the messages are initialized uniformly during loopy belief propagation and parameter are initialized with Gaussian prior with small standard deviation (0.01) around 0. Besides, we perform optimization with stochastic gradient descent(SGD) with momentum and set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. Loopy belief propagation(LBP) is used for inference both during training and testing. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$.
+Regarding the implementation of CRF, the C++ library from \cite{Ruiz-Sarmiento-REACTS-2015} is employed.
+However, the weights there are assumed to be category-independent, which means that the weights are defined as a weight matrix to build a linear mapping from the feature function to the potential function.
+Therefore we modify the type of weights in this library in order to incorporate different types of weight defined in Eq. \ref{crf_used}, which serve as coefficients of different potential functions instead of a linear mapping inside the potential functions. To note that the messages are initialized uniformly during loopy belief propagation and parameter are initialized with Gaussian prior with small standard deviation (0.01) around 0. Besides, we perform optimization with stochastic gradient descent(SGD) with momentum and set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. Loopy belief propagation(LBP) is used for inference both during training and testing. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$.
 
 \subsection{Dataset}
 \subsubsection{WRGBD\cite{lai2011large}} This dataset is a public large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories and 300 instance classes in hierarchical structure. There are multiple instances in different categories. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. Fig.\ref{fig:wrgbd2}). The total size of entire dataset is around $\sim$160.9K. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping in features space between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition.  
