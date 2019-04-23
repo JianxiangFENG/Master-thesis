@@ -2,19 +2,18 @@
 \providecommand\hyper@newdestlabel[2]{}
 \citation{gal2016dropout}
 \citation{ritter2018scalable}
-\citation{gal2017concrete}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Theoretical Background}{7}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Bayesian neural network}{7}{section.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Introduction}{7}{subsection.2.1.1}\protected@file@percent }
-\newlabel{2.1}{{2.1}{8}{Introduction}{equation.2.1.1}{}}
+\newlabel{2.1}{{2.1}{7}{Introduction}{equation.2.1.1}{}}
 \newlabel{2.2}{{2.2}{8}{Introduction}{equation.2.1.2}{}}
 \newlabel{2.3}{{2.3}{8}{Introduction}{equation.2.1.3}{}}
 \newlabel{2.4}{{2.4}{8}{Introduction}{equation.2.1.4}{}}
 \newlabel{2.5}{{2.5}{8}{Introduction}{equation.2.1.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Difference between parameter estimation of deterministic neural network and Bayesian neural network. Solid point denotes deterministic variable, and circle denotes random variable, while the shaded circle denotes observed random variable. Plate notation denotes $N$ observed data pairs $(\boldsymbol  x, \boldsymbol  y)$.}}{9}{figure.2.1}\protected@file@percent }
-\newlabel{fig:dnn_bnn}{{2.1}{9}{Difference between parameter estimation of deterministic neural network and Bayesian neural network. Solid point denotes deterministic variable, and circle denotes random variable, while the shaded circle denotes observed random variable. Plate notation denotes $N$ observed data pairs $(\bld x, \bld y)$}{figure.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Differences between parameter estimation of the deterministic neural network and the \gls {BNN}. The solid point denotes deterministic variable, and the circle denotes random variable, while the shaded circle denotes observed random variable. The plate notation denotes $N$ observed data pairs $(\boldsymbol  x, \boldsymbol  y)$.}}{9}{figure.2.1}\protected@file@percent }
+\newlabel{fig:dnn_bnn}{{2.1}{9}{Differences between parameter estimation of the deterministic neural network and the \gls {BNN}. The solid point denotes deterministic variable, and the circle denotes random variable, while the shaded circle denotes observed random variable. The plate notation denotes $N$ observed data pairs $(\bld x, \bld y)$}{figure.2.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Dropout variational inference}{9}{subsection.2.1.2}\protected@file@percent }
 \citation{graves2011practical}
 \newlabel{2.6}{{2.6}{10}{Dropout variational inference}{equation.2.1.6}{}}
@@ -24,20 +23,20 @@
 \citation{srivastava2014dropout}
 \citation{srivastava2014dropout}
 \citation{srivastava2014dropout}
-\@writefile{toc}{\contentsline {subsubsection}{Dropout variational inference}{11}{section*.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Dropout\cite  {srivastava2014dropout}}{11}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Dropout variational inference}{11}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dropout\cite  {srivastava2014dropout}}{11}{section*.6}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Schematic illustration of dropout in a three-layer fully connected neural network. (a) the standard neural network with all neurons switched on. (b) after applying dropout only a subset of neurons are used\cite  {srivastava2014dropout}.}}{11}{figure.2.2}\protected@file@percent }
 \newlabel{fig:dropout}{{2.2}{11}{Schematic illustration of dropout in a three-layer fully connected neural network. (a) the standard neural network with all neurons switched on. (b) after applying dropout only a subset of neurons are used\cite {srivastava2014dropout}}{figure.2.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Bayesian interpretation of dropout:}{12}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bayesian interpretation of dropout:}{12}{section*.7}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer.}}{12}{figure.2.3}\protected@file@percent }
 \newlabel{fig:dropout_inference}{{2.3}{12}{An example of two layer neural network with dropout, a Bernoulli random variable is imposed on each unit of input layer and hidden layer}{figure.2.3}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Approximate distribution:}{12}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Approximate distribution:}{12}{section*.8}\protected@file@percent }
 \newlabel{dropout_form}{{2.10}{13}{Approximate distribution:}{equation.2.1.10}{}}
 \newlabel{appro_dist_form}{{2.11}{13}{Approximate distribution:}{equation.2.1.11}{}}
 \newlabel{appro_cond_dist_form}{{2.12}{14}{Approximate distribution:}{equation.2.1.12}{}}
 \newlabel{appr_expectation}{{2.13}{14}{Approximate distribution:}{equation.2.1.13}{}}
 \newlabel{appr_covariance}{{2.14}{14}{Approximate distribution:}{equation.2.1.14}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Training objective:}{15}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Training objective:}{15}{section*.9}\protected@file@percent }
 \newlabel{dropout_loss}{{2.15}{15}{Training objective:}{equation.2.1.15}{}}
 \newlabel{dropout_grad}{{2.16}{15}{Training objective:}{equation.2.1.16}{}}
 \citation{kingma2013auto}
@@ -46,85 +45,84 @@
 \citation{kingma2013auto}
 \citation{kingma2013auto}
 \newlabel{elbo_grad}{{2.17}{16}{Training objective:}{equation.2.1.17}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization trick:}{16}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization trick:}{16}{section*.10}\protected@file@percent }
 \newlabel{repa}{{2.18}{16}{Re-parameterization trick:}{equation.2.1.18}{}}
-\newlabel{repa1}{{2.19}{17}{Re-parameterization trick:}{equation.2.1.19}{}}
-\@writefile{toc}{\contentsline {subparagraph}{KL condition:}{17}{section*.9}\protected@file@percent }
+\newlabel{repa1}{{2.19}{16}{Re-parameterization trick:}{equation.2.1.19}{}}
 \citation{gal2016uncertainty}
-\newlabel{appro_dist_guassian}{{2.20}{18}{KL condition:}{equation.2.1.20}{}}
-\newlabel{kl_condition}{{2.21}{18}{KL condition:}{equation.2.1.21}{}}
+\@writefile{toc}{\contentsline {subparagraph}{KL condition:}{17}{section*.11}\protected@file@percent }
+\newlabel{appro_dist_guassian}{{2.20}{17}{KL condition:}{equation.2.1.20}{}}
+\newlabel{kl_condition}{{2.21}{17}{KL condition:}{equation.2.1.21}{}}
 \newlabel{KL_grad}{{2.22}{18}{KL condition:}{equation.2.1.22}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Marginalization in testing:}{18}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{Marginalization in testing:}{18}{section*.12}\protected@file@percent }
+\newlabel{marginalization_test}{{2.23}{18}{Marginalization in testing:}{equation.2.1.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Concrete dropout}{18}{section*.13}\protected@file@percent }
 \citation{srivastava2014dropout}
 \citation{gal2017concrete}
 \citation{kingma2013auto}
 \citation{maddison2016concrete}
-\newlabel{marginalization_test}{{2.23}{19}{Marginalization in testing:}{equation.2.1.23}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Concrete dropout}{19}{section*.11}\protected@file@percent }
 \citation{jang2016categorical}
 \citation{maddison2016concrete}
 \citation{maddison2014sampling}
+\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization for Bernoulli distribution:}{19}{section*.14}\protected@file@percent }
 \citation{maddison2016concrete}
 \citation{maddison2016concrete}
-\@writefile{toc}{\contentsline {subparagraph}{Re-parameterization for Bernoulli distribution:}{20}{section*.12}\protected@file@percent }
-\newlabel{gumbel_max}{{2.1.2}{20}{Re-parameterization for Bernoulli distribution:}{section*.12}{}}
+\citation{maddison2016concrete}
+\citation{maddison2016concrete}
+\newlabel{gumbel_max}{{2.1.2}{20}{Re-parameterization for Bernoulli distribution:}{section*.14}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite  {maddison2016concrete}.}}{20}{figure.2.4}\protected@file@percent }
 \newlabel{fig:gumbel_max}{{2.4}{20}{Example of Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$ \cite {maddison2016concrete}}{figure.2.4}{}}
-\citation{maddison2016concrete}
-\citation{maddison2016concrete}
-\newlabel{gumbel_softmax}{{2.24}{21}{Re-parameterization for Bernoulli distribution:}{equation.2.1.24}{}}
+\newlabel{gumbel_softmax}{{2.24}{20}{Re-parameterization for Bernoulli distribution:}{equation.2.1.24}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite  {maddison2016concrete}.}}{21}{figure.2.5}\protected@file@percent }
 \newlabel{fig:gumbel_softmax}{{2.5}{21}{Example of continuous approximation to Gumbel-max trick for drawing samples from a discrete distribution whose random variable has 3 states and $\{\alpha _{i}\}_{i=1,2,3}$ as class parameters representing the possibility of occurrence of that class. $\{G_{i}\}_{i=1,2,3}$ are i.i.d Gumbel$(0,1)$\cite {maddison2016concrete}}{figure.2.5}{}}
-\newlabel{bern_repa}{{2.25}{22}{Re-parameterization for Bernoulli distribution:}{equation.2.1.25}{}}
+\newlabel{bern_repa}{{2.25}{21}{Re-parameterization for Bernoulli distribution:}{equation.2.1.25}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Dropout regularization:}{21}{section*.15}\protected@file@percent }
+\citation{bishop2006pattern}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$.}}{22}{figure.2.6}\protected@file@percent }
 \newlabel{fig:bern_repa}{{2.6}{22}{One sample and average value of 100 samples drawn from continuous approximation of Bernoulli distribution with parameter $p = [0.1, 0.2, ..., 1.0]$ and temperature $ \lambda =0.1$}{figure.2.6}{}}
-\@writefile{toc}{\contentsline {subparagraph}{Dropout regularization:}{22}{section*.13}\protected@file@percent }
-\citation{bishop2006pattern}
-\newlabel{KL_grad_concrete}{{2.26}{23}{Dropout regularization:}{equation.2.1.26}{}}
+\newlabel{KL_grad_concrete}{{2.26}{22}{Dropout regularization:}{equation.2.1.26}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Laplace approximation}{23}{subsection.2.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Introduction}{23}{section*.14}\protected@file@percent }
-\newlabel{point estimate}{{2.27}{24}{Introduction}{equation.2.1.27}{}}
-\newlabel{taylor expansion}{{2.28}{24}{Introduction}{equation.2.1.28}{}}
-\newlabel{gaussian form}{{2.29}{24}{Introduction}{equation.2.1.29}{}}
-\newlabel{expected hessian}{{2.30}{25}{Introduction}{equation.2.1.30}{}}
-\@writefile{toc}{\contentsline {paragraph}{Fisher information matrix}{25}{section*.15}\protected@file@percent }
-\newlabel{Fisher}{{2.31}{25}{Fisher information matrix}{equation.2.1.31}{}}
-\newlabel{fisher hessian}{{2.32}{25}{Fisher information matrix}{equation.2.1.32}{}}
-\newlabel{fisher hessian_with_prior}{{2.33}{25}{Fisher information matrix}{equation.2.1.33}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Introduction}{23}{section*.16}\protected@file@percent }
+\newlabel{point estimate}{{2.27}{23}{Introduction}{equation.2.1.27}{}}
+\newlabel{gaussian form}{{2.28}{24}{Introduction}{equation.2.1.28}{}}
+\newlabel{expected hessian}{{2.29}{24}{Introduction}{equation.2.1.29}{}}
+\@writefile{toc}{\contentsline {paragraph}{Fisher information matrix}{24}{section*.17}\protected@file@percent }
+\newlabel{Fisher}{{2.30}{24}{Fisher information matrix}{equation.2.1.30}{}}
 \citation{martens2015optimizing}
 \citation{ritter2018scalable}
-\@writefile{toc}{\contentsline {subsubsection}{Scalable Laplace approximation for neural network}{26}{section*.16}\protected@file@percent }
+\newlabel{fisher hessian}{{2.31}{25}{Fisher information matrix}{equation.2.1.31}{}}
+\newlabel{fisher hessian_with_prior}{{2.32}{25}{Fisher information matrix}{equation.2.1.32}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Scalable Laplace approximation for neural network}{25}{section*.18}\protected@file@percent }
 \citation{gupta1999matrix}
-\newlabel{fisher_appr}{{2.36}{27}{Scalable Laplace approximation for neural network}{equation.2.1.36}{}}
-\newlabel{mvg}{{2.37}{27}{Scalable Laplace approximation for neural network}{equation.2.1.37}{}}
-\newlabel{mvg_prior}{{2.38}{27}{Scalable Laplace approximation for neural network}{equation.2.1.38}{}}
+\newlabel{fisher_appr}{{2.35}{26}{Scalable Laplace approximation for neural network}{equation.2.1.35}{}}
 \citation{koller2009probabilistic}
 \citation{lafferty2001conditional}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Conditional random field}{28}{section.2.2}\protected@file@percent }
+\newlabel{mvg}{{2.36}{27}{Scalable Laplace approximation for neural network}{equation.2.1.36}{}}
+\newlabel{mvg_prior}{{2.37}{27}{Scalable Laplace approximation for neural network}{equation.2.1.37}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Conditional random field}{27}{section.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Definition}{28}{subsection.2.2.1}\protected@file@percent }
 \newlabel{crf_def}{{2.2.1}{28}{Definition}{subsection.2.2.1}{}}
-\newlabel{crf}{{2.39}{29}{Definition}{equation.2.2.39}{}}
+\newlabel{crf}{{2.38}{28}{Definition}{equation.2.2.38}{}}
 \citation{hammersley1968markov}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Simple example of conditional random field.}}{30}{figure.2.7}\protected@file@percent }
-\newlabel{crf}{{2.7}{30}{Simple example of conditional random field}{figure.2.7}{}}
-\newlabel{crf_potential}{{2.40}{30}{Definition}{equation.2.2.40}{}}
-\@writefile{toc}{\contentsline {paragraph}{Parametrization}{30}{section*.17}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Pairwise feature}{31}{section*.18}\protected@file@percent }
-\newlabel{crf_used}{{2.41}{31}{Pairwise feature}{equation.2.2.41}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Learning}{31}{subsection.2.2.2}\protected@file@percent }
-\newlabel{crf_obj}{{2.42}{31}{Learning}{equation.2.2.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Simple example of conditional random field.}}{29}{figure.2.7}\protected@file@percent }
+\newlabel{crf}{{2.7}{29}{Simple example of conditional random field}{figure.2.7}{}}
+\newlabel{crf_potential}{{2.39}{29}{Definition}{equation.2.2.39}{}}
+\@writefile{toc}{\contentsline {paragraph}{Parametrization}{30}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pairwise feature}{30}{section*.20}\protected@file@percent }
+\newlabel{crf_used}{{2.40}{30}{Pairwise feature}{equation.2.2.40}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Learning}{30}{subsection.2.2.2}\protected@file@percent }
 \citation{koller2009probabilistic}
+\newlabel{crf_obj}{{2.41}{31}{Learning}{equation.2.2.41}{}}
+\newlabel{log_partition_func}{{2.42}{31}{Learning}{equation.2.2.42}{}}
+\newlabel{crf_nll_opt}{{2.43}{31}{Learning}{equation.2.2.43}{}}
+\newlabel{crf_grad}{{2.44}{31}{Learning}{equation.2.2.44}{}}
+\newlabel{exp_log_part}{{2.45}{31}{Learning}{equation.2.2.45}{}}
 \citation{pearl2014probabilistic}
-\newlabel{log_partition_func}{{2.43}{32}{Learning}{equation.2.2.43}{}}
-\newlabel{crf_nll_opt}{{2.44}{32}{Learning}{equation.2.2.44}{}}
-\newlabel{crf_grad}{{2.45}{32}{Learning}{equation.2.2.45}{}}
-\newlabel{exp_log_part}{{2.46}{32}{Learning}{equation.2.2.46}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Inference}{33}{subsection.2.2.3}\protected@file@percent }
-\newlabel{message}{{2.47}{33}{Inference}{equation.2.2.47}{}}
-\newlabel{belief}{{2.48}{33}{Inference}{equation.2.2.48}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Inference}{32}{subsection.2.2.3}\protected@file@percent }
+\newlabel{message}{{2.46}{32}{Inference}{equation.2.2.46}{}}
+\newlabel{belief}{{2.47}{32}{Inference}{equation.2.2.47}{}}
 \@setckpt{TheoreticalBackground}{
-\setcounter{page}{34}
-\setcounter{equation}{48}
+\setcounter{page}{33}
+\setcounter{equation}{47}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -147,6 +145,9 @@
 \setcounter{bookmark@seq@number}{15}
 \setcounter{NAT@ctr}{0}
 \setcounter{parentequation}{0}
+\setcounter{su@anzahl}{0}
+\setcounter{LT@tables}{1}
+\setcounter{LT@chunks}{1}
 \setcounter{float@type}{4}
 \setcounter{@todonotes@numberoftodonotes}{0}
 \setcounter{section@level}{2}

@@ -1,0 +1,330 @@
+\ifglsentryexists{BNN}{}%
+{%
+\gls@defglossaryentry{BNN}%
+{%
+name={BNN},%
+sort={BNN},%
+type={main},%
+first={Bayesian Neural Network (BNN)},%
+firstplural={Bayesian Neural Network (BNN)s},%
+text={BNN},%
+plural={BNNs},%
+description={Bayesian Neural Network},%
+descriptionplural={Bayesian Neural Network},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{DNN}{}%
+{%
+\gls@defglossaryentry{DNN}%
+{%
+name={DNN},%
+sort={DNN},%
+type={main},%
+first={Deep Neural Network (DNN)},%
+firstplural={Deep Neural Network (DNN)s},%
+text={DNN},%
+plural={DNNs},%
+description={Deep Neural Network},%
+descriptionplural={Deep Neural Network},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{CRF}{}%
+{%
+\gls@defglossaryentry{CRF}%
+{%
+name={CRF},%
+sort={CRF},%
+type={main},%
+first={Conditional Random Field(CRF)},%
+firstplural={Conditional Random Field(CRF)s},%
+text={CRF},%
+plural={CRFs},%
+description={Conditional Random Field},%
+descriptionplural={Conditional Random Field},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SGLD}{}%
+{%
+\gls@defglossaryentry{SGLD}%
+{%
+name={SGLD},%
+sort={SGLD},%
+type={main},%
+first={Stochastic Gradient Langevin Dynamics(SGLD)},%
+firstplural={Stochastic Gradient Langevin Dynamics(SGLD)s},%
+text={SGLD},%
+plural={SGLDs},%
+description={Stochastic Gradient Langevin Dynamics},%
+descriptionplural={Stochastic Gradient Langevin Dynamics},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{MCMC}{}%
+{%
+\gls@defglossaryentry{MCMC}%
+{%
+name={MCMC},%
+sort={MCMC},%
+type={main},%
+first={Markov Chain Monte Carlo (MCMC)},%
+firstplural={Markov Chain Monte Carlo (MCMC)s},%
+text={MCMC},%
+plural={MCMCs},%
+description={Markov Chain Monte Carlo},%
+descriptionplural={Markov Chain Monte Carlo},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{KL-div}{}%
+{%
+\gls@defglossaryentry{KL-div}%
+{%
+name={KL-div},%
+sort={KL-div},%
+type={main},%
+first={Kullbach-Leibler divergence (KL-div)},%
+firstplural={Kullbach-Leibler divergence (KL-div)s},%
+text={KL-div},%
+plural={KL-divs},%
+description={Kullbach-Leibler divergence},%
+descriptionplural={Kullbach-Leibler divergence},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{VI}{}%
+{%
+\gls@defglossaryentry{VI}%
+{%
+name={VI},%
+sort={VI},%
+type={main},%
+first={Variational Inference(VI)},%
+firstplural={Variational Inference(VI)s},%
+text={VI},%
+plural={VIs},%
+description={Variational Inference},%
+descriptionplural={Variational Inference},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{MAP}{}%
+{%
+\gls@defglossaryentry{MAP}%
+{%
+name={MAP},%
+sort={MAP},%
+type={main},%
+first={Maximum a posterior (MAP)},%
+firstplural={Maximum a posterior (MAP)s},%
+text={MAP},%
+plural={MAPs},%
+description={Maximum a posterior},%
+descriptionplural={Maximum a posterior},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{MLE}{}%
+{%
+\gls@defglossaryentry{MLE}%
+{%
+name={MLE},%
+sort={MLE},%
+type={main},%
+first={Maximum Likelhood Esitmation (MLE)},%
+firstplural={Maximum Likelhood Esitmation (MLE)s},%
+text={MLE},%
+plural={MLEs},%
+description={Maximum Likelihood Estimation},%
+descriptionplural={Maximum Likelihood Estimation},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{OOD}{}%
+{%
+\gls@defglossaryentry{OOD}%
+{%
+name={OOD},%
+sort={OOD},%
+type={main},%
+first={Out-of-distribution (OOD)},%
+firstplural={Out-of-distribution (OOD)s},%
+text={OOD},%
+plural={OODs},%
+description={Out-of-distribution},%
+descriptionplural={Out-of-distribution},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SGD}{}%
+{%
+\gls@defglossaryentry{SGD}%
+{%
+name={SGD},%
+sort={SGD},%
+type={main},%
+first={Stochastic Gradient Descent (SGD)},%
+firstplural={Stochastic Gradient Descent (SGD)s},%
+text={SGD},%
+plural={SGDs},%
+description={Stochastic Gradient Descent},%
+descriptionplural={Stochastic Gradient Descent},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%

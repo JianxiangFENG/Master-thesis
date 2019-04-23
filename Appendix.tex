@@ -120,6 +120,34 @@ which gives us the required result.
  	$\square$
  \end{flushright}
  
+\section{Derivation of Re-parameterization Trick}\label{d_repa}
+Then the estimator of the gradients w.r.t. the distribution parameters $\theta$ with $p(x|\epsilon) = \delta(x-g(\theta,\epsilon))$ can be derived as:
+\begin{equation}
+\begin{aligned}
+I'(\theta) &= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx \\
+&= \frac{\partial}{\partial \theta} \int f(x)(\int p_{\theta}(x|\epsilon)p(\epsilon)d\epsilon) dx \\
+&= \frac{\partial}{\partial \theta} \int (\int f(x) p_{\theta}(x|\epsilon)dx) p(\epsilon) d\epsilon \\
+&= \frac{\partial}{\partial \theta} \int (\int f(x)\delta(x-g(\theta,\epsilon))dx) p(\epsilon) d\epsilon \\ 
+&= \frac{\partial}{\partial \theta} \int f(g(\epsilon, \theta)) p(\epsilon) d\epsilon \\
+&= \int \frac{\partial}{\partial \theta} f(g(\epsilon, \theta)) p(\epsilon) d\epsilon \\
+&= \int f'(g(\epsilon, \theta))\frac{\partial}{\partial \theta}g(\theta, \epsilon) p(\epsilon) d\epsilon \\
+&= \mathbb E_{p(\epsilon)}\big[ f'(g(\epsilon, \theta))\frac{\partial}{\partial \theta}g(\theta, \epsilon)\big] 
+\end{aligned}
+\end{equation} 
+
+\section{Derivation of Hessian of Log Posterior}\label{d_second_Hessian}
+ \begin{equation}
+\begin{aligned} 
+\text{log} p(\bld \omega| \bld Y, \bld X) &\approx 
+\text{log}p(\bld \omega^\star|\bld Y, \bld X) + \\
+&(\bld \omega - \bld \omega^\star)^T\frac{\partial \text{log} p(\bld \omega| \bld Y, \bld X)}{\partial \bld \omega} + \\
+&\frac{1}{2}(\bld \omega - \bld \omega^\star)^T\frac{\partial^2\text{log} p(\bld \omega |\bld Y, \bld X)}{\partial \bld \omega^2}(\bld \omega - \bld \omega^\star)\\
+&= \text{log}p(\bld \omega^\star|\bld Y, \bld X) - \frac{1}{2}(\bld \omega - \bld \omega^\star)^T\bld H(\bld \omega - \bld \omega^\star)
+\end{aligned}
+\end{equation}
+
+
+where 
 %\section{Implementation details}
 
 

@@ -48,6 +48,9 @@
 \graphicspath{{figures/}}
 \newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
+\usepackage{glossaries}
+\makeglossaries
+% \makenoidxglossaries
 \usepackage{float}
 \floatstyle{plaintop}
 % \restylefloat{table}
@@ -82,16 +85,35 @@
 
 \begin{document}%****************************************************
 \makemtgtitle
+\newglossaryentry{BNN}{name=BNN, description={Bayesian Neural Network},first={Bayesian Neural Network (BNN)}}
+\newglossaryentry{DNN}{name=DNN, description={Deep Neural Network},first={Deep Neural Network (DNN)}}
+\newglossaryentry{CRF}{name=CRF, description={Conditional Random Field},first={Conditional Random Field(CRF)}}
+\newglossaryentry{SGLD}{name=SGLD, description={Stochastic Gradient Langevin Dynamics},first={Stochastic Gradient Langevin Dynamics(SGLD)}}
+
+\newglossaryentry{MCMC}{name=MCMC, description={Markov Chain Monte Carlo},first={Markov Chain Monte Carlo (MCMC)}}
+\newglossaryentry{KL-div}{name=KL-div, description={Kullbach-Leibler divergence},first={Kullbach-Leibler divergence (KL-div)}}
+
+\newglossaryentry{VI}{name=VI, description={Variational Inference},first={Variational Inference(VI)}}
+
+\newglossaryentry{MAP}{name=MAP, description={Maximum a posterior },first={Maximum a posterior (MAP)}}
+
+\newglossaryentry{MLE}{name=MLE, description={Maximum Likelihood Estimation},first={Maximum Likelhood Esitmation (MLE)}}
+
+\newglossaryentry{OOD}{name=OOD, description={Out-of-distribution},first={Out-of-distribution (OOD)}}
+
+\newglossaryentry{SGD}{name=SGD, description={Stochastic Gradient Descent},first={Stochastic Gradient Descent (SGD)}}
+
 
 % MAIN PART:
 \pagenumbering{roman}
 % German abstract:
 % \include{Kurzfassung}
 % English abstract:
+	
 \include{Abstract}
 % Table of contents:
+\printglossary[type=main, style=long,nonumberlist, title=List of Abbreviations]
 \tableofcontents 
-
 % Introduction (Einleitung):
 \include{Introduction}
 
