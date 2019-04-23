@@ -1,18 +1,18 @@
-\select@language {ngerman}
-\select@language {american}
-\select@language {american}
-\select@language {american}
+\babel@toc {ngerman}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
+\babel@toc {american}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{55}{table.4.1}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{58}{table.4.2}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Quantitative results averaged from 3 random seeds.}}{61}{table.4.3}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Results of fine-tuned network with different settings}}{63}{table.4.4}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Results of BNN trained with different dataset (size of dataset before augmentations is showed in the bracket).}}{67}{table.4.5}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Results of CRF trained with unary feature from different versions of ResNet50}}{69}{table.4.6}
-\contentsline {table}{\numberline {4.7}{\ignorespaces Learned weights of CRF trained with unary feature from different versions of ResNet50}}{70}{table.4.7}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Results of CRF with different type of potentials}}{70}{table.4.8}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{55}{table.4.1}% 
+\contentsline {table}{\numberline {4.2}{\ignorespaces Quantitative results of acc, bs, nll, ece, mce, auroc, aupr averaged from 3 different random seeds}}{58}{table.4.2}% 
+\contentsline {table}{\numberline {4.3}{\ignorespaces Quantitative results averaged from 3 random seeds.}}{61}{table.4.3}% 
+\contentsline {table}{\numberline {4.4}{\ignorespaces Results of fine-tuned network with different settings}}{63}{table.4.4}% 
+\contentsline {table}{\numberline {4.5}{\ignorespaces Results of BNN trained with different dataset (size of dataset before augmentations is showed in the bracket).}}{67}{table.4.5}% 
+\contentsline {table}{\numberline {4.6}{\ignorespaces Results of CRF trained with unary feature from different versions of ResNet50}}{69}{table.4.6}% 
+\contentsline {table}{\numberline {4.7}{\ignorespaces Learned weights of CRF trained with unary feature from different versions of ResNet50}}{70}{table.4.7}% 
+\contentsline {table}{\numberline {4.8}{\ignorespaces Results of CRF with different type of potentials}}{70}{table.4.8}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

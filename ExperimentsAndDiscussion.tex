@@ -1,7 +1,7 @@
 
 \chapter{Experiment and Discussion}
 
-\section{Preliminaries}
+\section{Background}
 In this chapter, we perform different experiments for the following purposes:
 \begin{itemize}
 	\item to evaluate the performance of uncertainty estimation of dropout variational inference and its variants as well as Laplace approximation. Comparisons and analysis towards the results of these two kinds of approach are given.
@@ -68,7 +68,7 @@ For this end, we create a synthetic T-LESS dataset which contains multi-view ima
 
 
 \subsection{Uncertainty measure}
-For each prediction, we can obtain one predictive probability distribution from our model with equation \ref{marginalization_test}. In order to quantify uncertainty of the prediction, there are different metrics to measure the uncertainty of prediction, which are introduced in the following. We define $x^\star$ as one test data sample and $\mathcal D$ as our training set. 
+For each prediction, we can obtain one predictive probability distribution from our model with equation \ref{marginalization_test}. In order to quantify uncertainty of the prediction, there are different measures for uncertainty of prediction, which are introduced in the following. We define $x^\star$ as one test data sample and $\mathcal D$ as our training set. 
 \paragraph{Confidence} is defined as the maximum probability of the output predictive distribution, whose index is the class prediction.
 
 \begin{equation}\label{confidence}	
@@ -160,7 +160,7 @@ $\mathcal S(p,q)$ is proper if $\mathcal S(p,q) \leq S(q,q)$, with equality hold
 
 
 \section{Uncertainty estimation experiments}
-In this part, we evaluate performance of accuracy and uncertainty estimation as well as their summarized performance of different inference techniques for BNN on WRGB and UniHB dataset. Before that, the shorthands of different techniques should be explained. We call original ResNet50 "ori", ResNet50 with concrete dropout "cdp", ResNet50 with multiple dropout "mdp" without specifications.
+In this part, we evaluate performance of accuracy and uncertainty estimation as well as their summarized performance of different inference techniques for BNN on WRGB and UniHB dataset. Before that, the shorthands of different techniques should be explained. We use "\textbf{ori}" for original ResNet50, "\textbf{cdp}" for ResNet50 with concrete dropout, "\textbf{mdp}" for ResNet50 with multiple dropout without specifications.
 
 In the first experiment, we evaluate them on a relatively simple task, instance recognition. However, our main focus is in the second experiment, where different techniques including dropout, Laplace approximation and ensembles are evaluated and compared on a more difficult task, category recognition. Besides comparing them, we also conduct a ablation study to investigate how feature extractor influences the predictive uncertainty.
 
@@ -351,7 +351,7 @@ Based on these observations, we know that the underperformance of mdp on OOD dat
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=6cm, width=15cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
+		\includegraphics[height=5.5cm, width=15cm]{uncertainty_estimation/ablation_study/reliability_froFeat_ori_cdp_mdp_combined_seed3_.eps}
 		\caption{Calibration curves of ori, cdp, mdp trained with frozen features one of three runs.}		
 		\label{ab_calibration}
 	\end{center}

@@ -1,6 +1,6 @@
 \chapter{Summary and Conclusion}
 \section{Summary}
-In this work, different approaches for continuous learning related to uncertainty have been investigated.
+In this work, different approaches for improvement of a classification system related to uncertainty have been investigated.
  
 Firstly, in order to enable classifier to adapt itself in test environment which has domain gap with its training set, dataset for fine-tuning should be collected with as little human efforts as possible. We propose to gather automatically labeled data based on uncertainty estimation of the classifier. Considering the overconfident behavior of deep learning classifier, we employ Bayesian neural network to improve the uncertainty estimation. For easy compatibility with existing neural network architectures, dropout variational inference and scalable Laplace approximation chosen for this task. In addition to the naive version, advanced variants of them such as concrete dropout, multiple dropout and ensemble of them are taken into account. We modify ResNet50 to incorporate these techniques and keep the ability of extracting powerful features at the same time. Extensive experiments on WRGBD and UniHb dataset are performed to evaluate the performance of uncertainty estimation of different approaches in terms of different metrics including accuracy, proper scoring rules, calibration metrics, separability metrics. The results show that Bayesian neural network can improve the performance of both accuracy and calibration as well as uncertainty estimation when compared with the original ResNet50. 
 
@@ -23,13 +23,13 @@ Although experiments results show that these approaches can achieve better perfo
 
 \section{Conclusion}
 \begin{itemize}
-	\item Bayesian neural network can improve uncertainty estimation in terms of different evaluation metrics including accuracy, proper scoring rule, calibration and separability between correct predictions versus miss-classification or OOD predictions, while ensemble of them can achieve even better performance.
+	\item Bayesian neural network can improve uncertainty estimation in terms of different evaluation metrics including accuracy, proper scoring rule, calibration and separability between correct prediction versus miss-classification or OOD prediction, while ensemble of them can achieve even better performance.
 	
 	\item Multiple dropout can work better without considering OOD data, while concrete dropout can offer more stable performance on separating correct predictions and miss-classifications.
 	
-	\item Laplace approximation can achieve similar performance as concrete dropout and multiple dropout, while their performance is highly related to the point estimate obtained during training.
+	\item Scalable Laplace approximation with Kronecker-factored approximation can achieve similar performance as concrete dropout and multiple dropout, indicating that the performance is highly related to the point estimate obtained during training.
 	
-	\item Collecting dataset with as little manual efforts as possible for fine-tuning based on better uncertainty estimation can enable classifier to adapt itself in test environment. Nevertheless, imbalance of collected dataset has a negative effect on fine-tuning, which can be mitigated by data augmentation and adding little manual labeling.
+	\item Manual efforts in collecting dataset for fine-tuning to enable classifier to adapt itself in test environment can be reduced with the help of better uncertainty estimation. Nevertheless, imbalance of collected dataset has a negative effect on fine-tuning, which can be mitigated by data augmentation and adding little manual labeling.
 	
 	\item Conditional random field can improve performance further by utilizing information brought by better uncertainty estimation and exploiting contextual information between objects in the same scene.
 	
