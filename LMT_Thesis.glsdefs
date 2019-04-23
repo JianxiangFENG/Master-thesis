@@ -328,3 +328,63 @@ parent={},%
 %
 }%
 }%
+\ifglsentryexists{LBP}{}%
+{%
+\gls@defglossaryentry{LBP}%
+{%
+name={LBP},%
+sort={LBP},%
+type={main},%
+first={Loopy Belief Propagation (LBP)},%
+firstplural={Loopy Belief Propagation (LBP)s},%
+text={LBP},%
+plural={LBPs},%
+description={Loopy Belief Propagation},%
+descriptionplural={Loopy Belief Propagation},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{WRGBD}{}%
+{%
+\gls@defglossaryentry{WRGBD}%
+{%
+name={WRGBD},%
+sort={WRGBD},%
+type={main},%
+first={Waschington RGBD Dataset (WRGBD)\protect \cite {lai2011large}},%
+firstplural={Waschington RGBD Dataset (WRGBD)\protect \cite {lai2011large}s},%
+text={WRGBD},%
+plural={WRGBDs},%
+description={Waschington RGBD Dataset\cite {lai2011large}},%
+descriptionplural={Waschington RGBD Dataset\cite {lai2011large}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%

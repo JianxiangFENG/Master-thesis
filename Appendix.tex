@@ -121,7 +121,7 @@ which gives us the required result.
  \end{flushright}
  
 \section{Derivation of Re-parameterization Trick}\label{d_repa}
-Then the estimator of the gradients w.r.t. the distribution parameters $\theta$ with $p(x|\epsilon) = \delta(x-g(\theta,\epsilon))$ can be derived as:
+Let $p_\theta(\bld x)$ denote the density function of $\bld x$ parameterized by $\theta$, $g(\cdot)$ is a differential function, $\epsilon$ is a random variable with parameter-free density function $p(\epsilon)$. The estimator of the gradients w.r.t. $\theta$ with $p(x|\epsilon) = \delta(x-g(\theta,\epsilon))$ can be derived as:
 \begin{equation}
 \begin{aligned}
 I'(\theta) &= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx \\
@@ -134,20 +134,32 @@ I'(\theta) &= \frac{\partial}{\partial \theta} \int f(x) p_{\theta}(x) dx \\
 &= \mathbb E_{p(\epsilon)}\big[ f'(g(\epsilon, \theta))\frac{\partial}{\partial \theta}g(\theta, \epsilon)\big] 
 \end{aligned}
 \end{equation} 
-
-\section{Derivation of Hessian of Log Posterior}\label{d_second_Hessian}
+ \begin{flushright}
+	$\square$
+\end{flushright}
+\section{Second Order Taylor Expansion of Log Posterior}\label{d_second_Hessian}
+$p(\bld \omega| \bld Y, \bld X)$ denotes the posterior over model parameters $\bld \omega$. $\bld \omega^\star$ is one optimizer obtained after training. Then the second order Taylor expansion of posterior distribution around $\bld \omega^\star$ is defined as follows:
  \begin{equation}
 \begin{aligned} 
-\text{log} p(\bld \omega| \bld Y, \bld X) &\approx 
+\text{log} p(\bld \omega| \bld Y, \bld X) \approx & 
 \text{log}p(\bld \omega^\star|\bld Y, \bld X) + \\
 &(\bld \omega - \bld \omega^\star)^T\frac{\partial \text{log} p(\bld \omega| \bld Y, \bld X)}{\partial \bld \omega} + \\
 &\frac{1}{2}(\bld \omega - \bld \omega^\star)^T\frac{\partial^2\text{log} p(\bld \omega |\bld Y, \bld X)}{\partial \bld \omega^2}(\bld \omega - \bld \omega^\star)\\
-&= \text{log}p(\bld \omega^\star|\bld Y, \bld X) - \frac{1}{2}(\bld \omega - \bld \omega^\star)^T\bld H(\bld \omega - \bld \omega^\star)
+= &\text{log}p(\bld \omega^\star|\bld Y, \bld X) - \frac{1}{2}(\bld \omega - \bld \omega^\star)^T\bld H(\bld \omega - \bld \omega^\star)
 \end{aligned}
 \end{equation}
+where the term of first derivatives vanishes because the gradients around an optimizer is zero and 
+\[
+\begin{aligned}
+\bld H &= -\frac{\partial^2\text{log} p(\bld \omega|\bld Y, \bld X)}{\partial \bld \omega^2}\\
+&=-\frac{\partial^2\text{log}\big(p(\bld Y|\bld X, \bld \omega)\big)}{\partial \bld \omega^2} - \frac{\partial^2p(\bld \omega)}{\partial\bld \omega^2}
+\end{aligned}
+\]
 
-
-where 
+, where $p(\bld Y | \bld X, \bld \omega)$ is the likelihood function, $p(\bld \omega)$ is the prior distribution over model parameters.
+ \begin{flushright}
+	$\square$
+\end{flushright}
 %\section{Implementation details}
 
 

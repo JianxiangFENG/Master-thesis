@@ -1,15 +1,16 @@
 \chapter{Technical Approach}
 In this chapter, the approaches employed in this work are explained.
 Firstly, confronted with the limitations of concrete dropout, an adapted version of concrete dropout is proposed called multiple dropout (multi-drop).
-Secondly, a modified architecture of ResNet50 is introduced in order to incorporate different inference techniques for BNN with this powerful feature extraction network.
-Thirdly, a pipeline which combines BNN and CRF is presented.
-Thereby, The CRF works as a post-processor to capture the relationship between random variables.
+Secondly, a modified architecture of ResNet50 is introduced in order to incorporate different inference techniques for \gls{BNN} with this powerful feature extraction network.
+Thirdly, a pipeline which combines \gls{BNN} and \gls{CRF} is presented.
+Thereby, The \gls{CRF} works as a post-processor to capture the relationship between random variables.
 Last but not least, the approach combining aforementioned techniques for continuous learning is introduced.
 
 
 \section{Multiple dropout}
-Based on Fig.\ref{fig:dropout} and the expression of the approximate distribution in equation \ref{appro_dist_form}, only one probability of Bernoulli distributed random variable for each layer is chosen, therefore random vector $\bld p_i = [p_i]^{D_{i-1}}$ for $i$-th layer, which stacks same value into a vector. %\todo{this sentence I do not understand...is there something missing?}
-While the dropout regularization term pushes the probability of Bernoulli to 0.5 to maximize its entropy, the expected likelihood term tries to increase the probability since a decreasing probability will lead to a different model with lower capacity and thus lower performance.
+Based on Fig.\ref{fig:dropout} and the expression of the approximate distribution in equation \ref{appro_dist_form}, only one probability of Bernoulli distributed random variable for each layer is chosen. Each element of random vector $\bld p_i = [p_i]^{D_{i-1}}$ for $i$-th layer is the same.
+%\todo{this sentence I do not understand...is there something missing?}
+While the dropout regularization term pushes the probability of Bernoulli to 0.5 to maximize the entropy, the expected likelihood term tries to increase the probability since a decreasing probability will lead to a different model with lower capacity and thus lower performance.
 Thus, an equilibrium state between them should be achieved in training.
 With the concrete dropout introduced above, this approach can be extended for each hidden unit instead of each layer(cf. Fig.\ref{fig:multi-drop}), which results in the random vector $\bld p_i = [p_i^k]_{k=1}^{D_{i-1}}$.
 The difference between multiple dropout and concrete dropout can be easily seen by comparing the figures Fig.~\ref{fig:multi-drop} and Fig.~\ref{fig:dropout_inference}.
@@ -24,22 +25,15 @@ While the first term in the gradients computation stays the same, the second ter
 
 The reasons for multi-drop are as following:
 \begin{itemize}
-	\item to increase flexibility in tuning variational parameters. The tunability of the parameter of the Bernoulli random variable in the likelihood term is low since there is only a single parameter controlling the entire layer. As observed in the experiments(cf. Fig.\ref{fig:cdp_dropout2}), these parameters are always increased for each layer.\todo[inline]{in the sentence before you talk about one single parameter and in this sentence it is plural. is this correct?} The reason for this is probably that reducing it would lead to low capacity and thus low likelihood. 
+	\item to increase flexibility in tuning variational parameters. The tunability of the parameter of the Bernoulli random variable in the likelihood term is low since there is only one single parameter controlling the entire layer. As observed in the experiments(cf. Fig.\ref{fig:cdp_dropout1}), the parameter is always increased for each layer.
+	% \todo[inline]{in the sentence before you talk about one single parameter and in this sentence it is plural. is this correct?} 
+	The reason for this is probably that reducing it would lead to low capacity and thus low likelihood. 
 	
 	\item the solution space of concrete dropout should be a subset of the solution space of multi-drop if all of them are reachable. Because if it is optimal to assign the same probability for each hidden unit, this can be recovered in training with the multi-drop. Otherwise, other optimal solutions of assigning different probabilities to different hidden units could be considered.
 	
 	\item multi-drop can extend the flexibility and diversity of the dropout approximate distribution family by adding more parameters. Hence the truth posterior can be approximated better by the approximate posterior.
 	
 \end{itemize}
-
-\begin{figure}
-	\begin{center}
-		\centering
-		\includegraphics[width=11cm]{multi-drop}
-		\caption{Different dropout rates for different hidden units in multi-drop.}		
-		\label{fig:multi-drop}
-	\end{center}
-\end{figure}
 
 \begin{figure}[H]
 	\begin{center}
@@ -48,14 +42,25 @@ The reasons for multi-drop are as following:
 		\label{fig:cdp_dropout1}
 	\end{center}
 \end{figure}
-\todo[inline]{this figure is not referenced/used}
+%\begin{figure}[H]
+%	\label{fig:cdp_dropout2}
+%	\begin{center}
+%		\includegraphics[height=4cm, width=11cm]{cdp_dropout2}	
+%		\caption{Changes of keep probability of the last two concrete dropout layers during training.}
+%	\end{center}
+%\end{figure}
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=4cm, width=11cm]{cdp_dropout2}	
-		\label{fig:cdp_dropout2}
-		\caption{Changes of keep probability of the last two concrete dropout layers during training.}
+		\centering
+		\includegraphics[width=11cm]{multi-drop}
+		\caption{Different dropout rates for different hidden units in multi-drop.}		
+		\label{fig:multi-drop}
 	\end{center}
 \end{figure}
+
+
+%\todo[inline]{this figure is not referenced/used}
 
 
 
@@ -98,28 +103,27 @@ But this surpass the scope of this work.
 \end{figure}
 
 \section{Combination with CRF}\label{com_crf}
-After employing Bayesian neural network, the model can provide more reliable uncertainty estimation in a probabilistic manner.
+After employing \gls{BNN}, the model can provide more reliable uncertainty estimation in a probabilistic manner.
 In other words, the predicted probability distribution contains more valuable information than before.
 In order to make use of this information another probabilistic model is applied.
-The idea is to combine the output from BNN and relationships between the objects in a scene via a CRF.
-In detail, the output distribution from BNN is used as unary feature and a binary co-occurrence matrix for pairwise feature (introduced in \ref{crf_def}). 
-Fig.\ref{fig:combined_crf} demonstrates the flow chart how BNN and CRF are combined together.
-As can be seen, objects in one scene are firstly fed into BNN and their output distributions are fed into the CRF as unary feature for each node.
-In the scene, their contextual relationship is represented by the binary co-occurrence matrix which is forwarded to the CRF as pairwise feature.
-Then loopy belief propagation is applied to infer the marginal distribution of each node.
+The idea is to combine the output from \gls{BNN} and relationships between the objects in a scene via a \gls{CRF}.
+In detail, the output distribution from \gls{BNN} is used as unary feature and a binary co-occurrence matrix for pairwise feature (introduced in \ref{crf_def}). 
+Fig.\ref{fig:combined_crf} demonstrates the flow chart how \gls{BNN} and \gls{CRF} are combined together.
+As can be seen, objects in one scene are firstly fed into \gls{BNN} and their output distributions are fed into the \gls{CRF} as unary feature for each node.
+In the scene, their contextual relationship is represented by the binary co-occurrence matrix which is forwarded to the \gls{CRF} as pairwise feature.
+Then \gls{LBP} is applied to infer the marginal distribution of each node.
 
 One key factor in this case is that the pairwise feature is required to be designed by hand.
-The choice and design of it have significant impact on the improvement achieved by CRF.
+The choice and design of it have significant impact on the improvement achieved by \gls{CRF}.
 The information brought by pairwise feature should be complementary instead of contradictory to that of unary feature.
-Once this point is fulfilled, the more information the unary feature has, the more improvement CRF can achieve. \todo[inline]{isn't the pairwise feature meant in this sentence?}
-
-One thing worth noting, in experiment part, this approach is tested only on the T-LESS dataset, since constructing scenes for objects in the WRGBD dataset is non-trivial.
+Once this point is fulfilled, the more information the unary and pairwise feature have, the more improvement \gls{CRF} can achieve. % \todo[inline]{isn't the pairwise feature meant in this sentence?}
+One thing worth noting, in experiment part, this approach is tested only on the T-LESS dataset, since constructing scenes for objects in the \gls{WRGBD} dataset is non-trivial.
 The reason therefore is that most objects there have not only similar appearances but also similar contexts.
 Therefore it is hard to disambiguate miss-classification by incorporating their contextual information.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[height=8cm, width=15cm]{combined_crf}
-		\caption{Combination of BNN and CRF.}		
+		\caption{Combination of \gls{BNN} and \gls{CRF}.}		
 		\label{fig:combined_crf}
 	\end{center}
 \end{figure}
@@ -136,12 +140,12 @@ In this phase, the classifier should be able to adapt itself to the objects in t
 The annotations for the collected dataset are generated automatically by the initial network and manually by the user.
 In order to prevent a high amount of miss-classified training data for fine-tuning, only high confident predictions are used for the automatic labeling.
 Therefore, a reliable uncertainty estimation is essential.
-If the relationship between objects in real environment is complementary to the discriminative classifier and can be encoded well, the CRF can be employed to capture the relationship to further improve the performance (cf. section \ref{com_crf}).
+If the relationship between objects in real environment is complementary to the discriminative classifier and can be encoded well, the \gls{CRF} can be employed to capture the relationship to further improve the performance (cf. section \ref{com_crf}).
 After that, the classifier is deployed to the test data in the real environment.
-In the experiment part, this approach is evaluated on both UniHB(WRGBD) and T-LESS(synthetic T-LESS) data.
+In the experiment part, this approach is evaluated on both UniHB(\gls{WRGBD}) and T-LESS(synthetic T-LESS) data.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[height=10cm, width=16.5cm]{con_learn}
+		\includegraphics[height=9cm, width=16cm]{con_learn}
 		\caption{Approach for continuous learning.}		
 		\label{fig:con_learn}
 	\end{center}
