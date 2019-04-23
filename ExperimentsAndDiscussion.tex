@@ -18,26 +18,61 @@ The number of maximum epoch is set to 20.
 
 Regarding the implementation of CRF, the C++ library from \cite{Ruiz-Sarmiento-REACTS-2015} is employed.
 However, the weights there are assumed to be category-independent, which means that the weights are defined as a weight matrix to build a linear mapping from the feature function to the potential function.
-Therefore we modify the type of weights in this library in order to incorporate different types of weight defined in Eq. \ref{crf_used}, which serve as coefficients of different potential functions instead of a linear mapping inside the potential functions. To note that the messages are initialized uniformly during loopy belief propagation and parameter are initialized with Gaussian prior with small standard deviation (0.01) around 0. Besides, we perform optimization with stochastic gradient descent(SGD) with momentum and set size of mini-batch as 16, learning rate as $1e^-4$ and maximum number of iteration as $15\times10^3$. Loopy belief propagation(LBP) is used for inference both during training and testing. The maximum number of iteration for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$.
+Therefore the type of weights in this library are modified in order to incorporate the different type of weights defined in Eq. \ref{crf_used}.
+These weights serve as coefficients of different potential functions instead of a linear mapping inside the potential functions.
+To note that the messages are initialized uniformly during loopy belief propagation and the parameters are initialized with a Gaussian prior with a small standard deviation (0.01) around 0.
+Besides, the optimization is performed with stochastic gradient descent(SGD) with momentum and set size of mini-batch as 16.
+The learning rate is set to $1e^-4$ and the maximum number of iteration is $15\times10^3$.
+Loopy belief propagation(LBP) \todo[inline]{gls ;)} is used for inference both during training and testing.
+The maximum number of iterations for computing messages in LBP is 100, and the convergence threshold is $1e^{-4}$.
 
 \subsection{Dataset}
-\subsubsection{WRGBD\cite{lai2011large}} This dataset is a public large-scale dataset of 300 household objects captured from multi-viewpoint. The objects are organized into 51 categories and 300 instance classes in hierarchical structure. There are multiple instances in different categories. Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. Fig.\ref{fig:wrgbd2}). The total size of entire dataset is around $\sim$160.9K. To note that category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category. Therefore the overlapping in features space between classes in category recognition is larger than that in instance recognition. More abstract and semantic concepts are expected to be learned in category recognition.  
+\subsubsection{WRGBD\cite{lai2011large}}
+This dataset is a public large-scale dataset of 300 household objects captured from multi-viewpoint.
+The objects are organized into 51 categories and 300 instance classes in hierarchical structure.
+There are multiple instances in different categories.
+Each object was placed on a turn table and captured from a systematically sampled view hemisphere with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $2^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$) (cf. Fig.\ref{fig:wrgbd2}).
+The total size of entire dataset is around $\sim$160.9K.
+To note that the category level recognition involves classifying objects with similar semantic appearance such as cereal boxes with different texture into the same category, instead of just physical appearance. Instance level recognition is to classify objects with similar physical appearance to the same category.
+Therefore the overlapping in feature spaces between classes in category recognition is larger than that in instance recognition.
+More abstract and semantic concepts are expected to be learned in category recognition.  
 
-\subsubsection{UniHB} To simulate application-specific situation in deployment of robots, we recorded a similar dataset by putting objects on a turn table in front of the robot and recording partial views of objects. We follow the same methodology as \cite{lai2011large} suggests for WRGBD, but with only one object instance for each category in the dataset. This analogue of WRGBD dataset is called the IAI-ODU dataset of UniHB. In this work, we call it UniHB dataset for simplicity. The size of data with elevation $45^\circ$ is around $\sim$8.6K and that of data with elevation $30^\circ$ and $60^\circ$ is around $\sim$17.1K.
+\subsubsection{UniHB}
+To simulate application-specific situations in the deployment of robots, a similar dataset is recorded by putting objects on a turn table in front of the robot and recording partial views of the objects.
+Thereby, the same methodology as \cite{lai2011large} suggests for WRGBD is applied, but with only one object instance for each category in the dataset.
+This analogue of the WRGBD dataset is called the IAI-ODU dataset of UniHB, which in the following is called UniHB due to simplicity.
+The size of data with the elevation $45^\circ$ is around $\sim$8.6K and that of data with the elevation $30^\circ$ and $60^\circ$ is around $\sim$17.1K.
 
-While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing conditions such as different equipment and light conditions even appearances of objects, result in obvious changes in feature space, thus yielding a significant drop on classification accuracy. In addition to the existing 51 categories, there are 28 novel objects(cf. Fig.\ref{fig:not_in_wrgbd}) that do not belong to the 51 class categories and these objects are treated as out-of-distribution(OOD) data for testing uncertainty estimation of the model. To note that data of these novel classes are recorded in a slight different way, that is, their view points are sampled with $15^{\circ}$ step in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ step in azimuth (from $0^\circ$ to $360^\circ$). The size of this OOD dataset is around $\sim$6.0K.
+While the UniHB dataset's setup strives to mimic the WRGBD one, the differing capturing environments such as different equipment and light conditions even appearances of objects, result in obvious changes in the feature space, thus yielding a significant drop on the classification accuracy.
+In addition to the existing 51 categories, there are 28 novel objects(cf. Fig.\ref{fig:not_in_wrgbd}) that do not belong to the original 51 categories and are treated as out-of-distribution(OOD) data for testing the uncertainty estimation of the model.
+It has to be mentioned that the data of these novel classes are recorded in a slightly different way, that is, their view points are sampled with $15^{\circ}$ steps in elevation (from $30^{\circ}$to $60^{\circ}$) and $5^\circ$ steps in azimuth (from $0^\circ$ to $360^\circ$).
+The size of this OOD dataset is around $\sim$6.0K.
 
 % and are captured from a systematically sampled view sphere with $10^{\circ}$ step in elevation (from $85^\circ$ to $-85^\circ$) and $5^\circ$ step in azimuth
 
 %Each test scene is captured from a systematically sampled view hemisphere with $10^{\circ}$ step in elevation (from $75^{\circ}$ to $15^{\circ}$) and $5^{\circ}$ step in azimuth.
 
-\subsubsection{Original T-LESS\cite{hodan2017tless}} \label{tless} This dataset features 30 commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size. Furthermore, a unique characteristic of the objects is that some of them are parts of others. All images were captured systematically sampled from a view sphere, resulting in around $\sim$38.0K training images (cf. on the left of each thumbnail in Fig.\ref{fig:tless_ori}) and $\sim$10.0K test scene images (cf. on the right of each thumbnail in Fig.\ref{fig:tless_ori}). The training images depict objects in isolation with a black background, while the test images are from 20 table-top scenes with arbitrarily arranged objects placed on table. In this work we only consider the cropped images of objects in testing scenes, resulting a testing set with size $\sim$69.5K. Nevertheless, the context information in the scene can be exploited with conditional random field  which is showed in the experiment part.
+\subsubsection{Original T-LESS\cite{hodan2017tless}} \label{tless}
+This dataset features 30 commodity electrical parts which have no significant texture, discriminative color or distinctive reflectance properties, and often bear similarities in shape and/or size.
+Furthermore, an unique characteristic of the objects is that some of them are parts of others.
+All images were captured systematically sampled from a view sphere, resulting in around $\sim$38.0K training images (cf. on the left of each thumbnail in Fig.\ref{fig:tless_ori}) and $\sim$10.0K test scene images (cf. on the right of each thumbnail in Fig.\ref{fig:tless_ori}).
+The training images depict objects in isolation with a black background, while the test images are from 20 table-top scenes with arbitrarily arranged objects placed on table.
+In this work only the cropped images of objects in testing scenes are considered, resulting in a testing set with size $\sim$69.5K.
+Nevertheless, the context information in the scenes can be exploited with CRF  which is showed in the experiment part.
 
 \subsubsection{Synthetic T-LESS}
-Because collecting data of real objects requires too high amount of manual efforts, our idea is to first train classifier on synthetic dataset which are easily obtainable.Automatically labeled data can be collected based on improved uncertainty estimation, which can then be used to train a more accurate classifier.
-For this end, we create a synthetic T-LESS dataset which contains multi-view images of objects rendered from 3D reconstructed CAD models with similar augmentations(cf. on the oright of each thumbnail in Fig.\ref{fig:tless_aug}). There is significantly large domain gap between the synthetic objects and real objects (cf. on the left of each thumbnail in Fig.\ref{fig:tless_aug}) such as texture and geometries on the surface. This domain gap can induce large performance drop when we test the model trained with synthetic objects on the test set with real objects. 
+Since the data collection of real objects requires a high amount of manual efforts, the idea is to first train the classifier on a synthetic dataset which is easy to obtain.
+Automatically labeled data can be collected based on improved uncertainty estimation, which can then be used to train a more accurate classifier. \todo[inline]{aren't you describing the normal synthetic dataset here? so no automatic labeling...}
+For this end, a synthetic T-LESS dataset is generated which contains multi-view images of objects rendered from 3D reconstructed CAD models with similar augmentations(cf. on the right of each thumbnail in Fig.\ref{fig:tless_aug}).
+There is a significant large domain gap between the synthetic objects and real objects (cf. on the left of each thumbnail in Fig.\ref{fig:tless_aug}) such as texture and geometries on the surface.
+This domain gap can induce a large performance drop when the model trained with synthetic objects is tested on real objects.
 
-\paragraph{Augmentation} is employed for both original and synthetic T-LESS dataset. Because objects in test scenes are mostly occluded and have different backgrounds and lightness, this practical technique can improve the generalization of model and thus performance. In augmentation, the real and synthetic single objects are put onto different background images from VOC2012 dataset\cite{pascal-voc-2012}(cf. Fig.\ref{fig:tless_aug}) and augmented in different ways such as Gaussian noise, color changes, rotations and so on. One characteristic of the augmentation is that each background image can be treated as one scene, in which random number of objects are placed randomly, inducing large variety of occlusions and combinations of different objects. This tries to simulate the situation in test set, where different objects are placed randomly in each scene. More than that, the relationship between objects in one scene can be utilized by CRF for further performance gain.
+\paragraph{Augmentation} is employed for both original and synthetic T-LESS dataset.
+Because objects in the test scenes are mostly occluded and have different backgrounds and lightness, this practical technique can improve the generalization of the model and thus the performance.
+In augmentation, the real and synthetic single objects are put onto different background images from the VOC2012 dataset\cite{pascal-voc-2012}(cf. Fig.\ref{fig:tless_aug}) and augmented in different ways such as Gaussian noise, color changes, rotations and so on.
+One characteristic of the augmentation is that each background image can be treated as one scene, in which a random number of objects are placed randomly, inducing large variety of occlusions and combinations of different objects.
+This tries to simulate the situation in the test set, where different objects are placed randomly in each scene.
+More than that, the relationships between objects in one scene can be utilized by the CRF for a further performance gain.
 
  \begin{figure}[H]
  	\begin{center}
