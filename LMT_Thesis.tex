@@ -50,7 +50,6 @@
 
 \usepackage{glossaries}
 \makeglossaries
-% \makenoidxglossaries
 \usepackage{float}
 \floatstyle{plaintop}
 % \restylefloat{table}
@@ -75,16 +74,19 @@
 \dateend{25.04.2019}
 %########################################################################
 
-%\newcommand\todo[1]{\textcolor{red}{#1}}
+\newcommand\todo[1]{\textcolor{red}{#1}}
 \newcommand\maxcom[1]{\textcolor{green}{#1}}
 \newcommand{\comment}[1]
 {\par {\bfseries \color{green} #1 \par}}
 % Select what to do with todonotes: 
-% \usepackage[disable]{todonotes} % notes not showed
-\usepackage[draft]{todonotes}   % notes showed
+%\usepackage[disable]{todonotes} % notes not showed
+%\usepackage[draft]{todonotes}   % notes showed
 
 \begin{document}%****************************************************
 \makemtgtitle
+
+% \unboldmath
+
 \newglossaryentry{BNN}{name=BNN, description={Bayesian Neural Network},first={Bayesian Neural Network (BNN)}}
 \newglossaryentry{DNN}{name=DNN, description={Deep Neural Network},first={Deep Neural Network (DNN)}}
 \newglossaryentry{CRF}{name=CRF, description={Conditional Random Field},first={Conditional Random Field(CRF)}}
@@ -104,8 +106,9 @@
 \newglossaryentry{SGD}{name=SGD, description={Stochastic Gradient Descent},first={Stochastic Gradient Descent (SGD)}}
 
 \newglossaryentry{LBP}{name=LBP, description={Loopy Belief Propagation},first={Loopy Belief Propagation (LBP)}}
+\newglossaryentry{MLP}{name=MLP, description={Multi-layer Perceptron},first={Multi-layer Perceptron (MLP)}}
 
-\newglossaryentry{WRGBD}{name=WRGBD, description={Waschington RGBD Dataset\cite{lai2011large}},first={Waschington RGBD Dataset (WRGBD)\cite{lai2011large}}}
+\newglossaryentry{WRGBD}{name=WRGBD, description={RGBD Dataset from Washington University\cite{lai2011large}},first={RGBD Dataset from Washington University(WRGBD)\cite{lai2011large}}}
 
 % \newglossaryentry{UniHB}{name=UniHB, description={UniHB Dataset},first={Stochastic Gradient Descent (SGD)}}
 
@@ -151,5 +154,4 @@
 \bibliographystyle{alpha}
 % b) The File:
 \bibliography{Bibliography}
-
 \end{document} %*****************************************************

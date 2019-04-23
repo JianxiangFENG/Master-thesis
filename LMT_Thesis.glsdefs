@@ -358,6 +358,36 @@ parent={},%
 %
 }%
 }%
+\ifglsentryexists{MLP}{}%
+{%
+\gls@defglossaryentry{MLP}%
+{%
+name={MLP},%
+sort={MLP},%
+type={main},%
+first={Multi-layer Perceptron (MLP)},%
+firstplural={Multi-layer Perceptron (MLP)s},%
+text={MLP},%
+plural={MLPs},%
+description={Multi-layer Perceptron},%
+descriptionplural={Multi-layer Perceptron},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
 \ifglsentryexists{WRGBD}{}%
 {%
 \gls@defglossaryentry{WRGBD}%
@@ -365,12 +395,12 @@ parent={},%
 name={WRGBD},%
 sort={WRGBD},%
 type={main},%
-first={Waschington RGBD Dataset (WRGBD)\protect \cite {lai2011large}},%
-firstplural={Waschington RGBD Dataset (WRGBD)\protect \cite {lai2011large}s},%
+first={RGBD Dataset from Washington University(WRGBD)\protect \cite {lai2011large}},%
+firstplural={RGBD Dataset from Washington University(WRGBD)\protect \cite {lai2011large}s},%
 text={WRGBD},%
 plural={WRGBDs},%
-description={Waschington RGBD Dataset\cite {lai2011large}},%
-descriptionplural={Waschington RGBD Dataset\cite {lai2011large}},%
+description={RGBD Dataset from Washington University\cite {lai2011large}},%
+descriptionplural={RGBD Dataset from Washington University\cite {lai2011large}},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%
